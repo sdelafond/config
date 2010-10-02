@@ -1,0 +1,56 @@
+#compdef connect run
+
+_main() {
+  local curcontext="$curcontext" state line expl common tmp ret=1
+  typeset -A opt_args
+
+  case "$service" in
+    connect|ssh)
+      _arguments -C -s ':remote host name:->userhost' && ret=0 ;;
+    run)
+      _arguments -C -s '*-c[do not pop up a new window]' \
+      ':remote host name:->userhost' \
+      '*::args:->command' && ret=0 ;;
+  esac
+
+  while [[ -n "$state" ]]; do
+    lstate="$state"
+    state=''
+
+    case "$lstate" in
+      userhost)
+        if compset -P '*@'; then
+  	  _wanted hosts expl 'remote host name' _ssh_hosts && ret=0
+        elif compset -S '@*'; then
+          _wanted users expl 'login name' _ssh_users -S '' && ret=0
+        else
+          if (( $+opt_args[-l] )); then
+  	    tmp=()
+#  	  else
+#  	    tmp=( 'users:login name:_ssh_users -qS@' )
+	  else
+	    tmp=()
+  	  fi
+  	  _alternative \
+  	    'hosts:remote host name:_ssh_hosts' \
+  	    "$tmp[@]" && ret=0
+        fi
+        ;;
+      esac
+  done
+}
+
+_ssh_users () {
+  _combination -s '[:@]' my-accounts users-hosts users "$@"
+}
+
+_ssh_hosts () {
+  if [[ "$IPREFIX" == *@ ]]; then
+    _combination -s '[:@]' my-accounts users-hosts "users=${IPREFIX/@}" hosts "$@"
+  else
+    _combination -s '[:@]' my-accounts users-hosts \
+      ${opt_args[-l]:+"users=${opt_args[-l]:q}"} hosts "$@"
+  fi
+}
+
+_main "$@"

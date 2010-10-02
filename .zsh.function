@@ -1,0 +1,603 @@
+#test
+alarm() {
+  echo $@ | osd_cat -c green --delay 5 --align center --pos middle --font -b\&h-lucida-bold-r-normal-sans-34-240-100-100-p-216-iso8859-1 &
+}
+
+backupHistory() {
+  local topBackupDir=~/.zsh_hist
+  local backupDir=$topBackupDir/`hostname`
+  local backupFileBasename="zsh_history"
+  local backupFileBasePath=${backupDir}/${backupFileBasename}
+  local backupFile=${backupFileBasePath}-`date --iso-8601=seconds`
+  # save a copy
+  mkdir -p -m 0700 $topBackupDir
+  mkdir -p -m 0700 $backupDir
+  cp ~/.zsh_history ${backupFile}
+  # now remove all but latest 5
+  local -a files
+  files=(`find ${backupDir} -name "${backupFileBasename}*" | sort`)
+  rm -f $files[1,-6]
+}
+
+bak() {
+  cp -rP "${1}" "${1}.bak"
+}
+unbak() {
+  cp -rP "${1}" "${1/.bak}"
+}
+
+beep() {
+ echo -n "\a"
+ n=${1:-1}
+ if [[ $n -gt 1 ]] ; then
+   for i in {2..${n}} ; do
+     sleep .5
+     echo -n "\a"     
+   done
+ fi
+}
+
+burn() {
+  mkisofs -JR -f "$@" | s cdrecord -v -v driveropts=burnfree gracetime=2 -overburn -eject -
+}
+
+burnV() { # burn and md5sum the resulting CD (only for single files)
+  mkisofs -JR -f "$1" | s cdrecord -v -v gracetime=2 -
+  mount /cdrecorder
+  diff "`basename \"$1\"`" /cdrecorder/"$1" > /dev/null && echo "OK" || echo "failed"
+  umount /cdrecorder
+}
+
+calc() {
+  awk 'BEGIN { OFMT="%f"; print '"$*"'}'
+}
+
+cdc() {
+  mkdir -p "$1" && cd "$1"
+}
+
+conv() {
+  case $1 in
+    f2c) echo "${2}°F is `round $((5*(${2}-32)/9))`°C" ;;
+    c2f) echo "${2}°C is `round $((32+9*${2}/5.))`°F" ;;
+    p2k) echo "${2}lbs is `round $((${2}*0.454))`kgs" ;;
+    k2p) echo "${2}kgs is `round $((${2}/0.454))`lbs" ;;
+    cm2i) echo "Not implemented..." ;;
+    i2cm) echo "Not implemented..." ;;
+  esac
+}
+
+convertToU10() {
+  inFile="$1"
+  outFile=`echo $1 | sed -e 's/\.\([^\.]*\)$/.u10.avi/'`
+  mencoder "$inFile" -o "$outFile" -ovc xvid -xvidencopts bitrate=384:max_bframes=0 -oac mp3lame -lameopts mode=2:cbr:br=128 -vf scale=320:240,expand=320:240,harddup -ofps 15.0 -srate 44100 -ffourcc XVID
+}
+
+connect() { # pops an ssh windows if under x, or simple ssh if not
+  local host=$1 && shift
+  update-gpg-agent-tty
+  [[ -n "$1" ]] && local port="-p $1" && shift
+  if [[ -z "$@" ]] ; then
+    xpop "ssh -Y $port $host" "$host" -g 161x54
+  else
+    xpop "ssh -Y $port $host" "$host" "$@"
+  fi      
+}
+
+cp-other() {
+  tar cf - "$1" | (cd $2 ; tar xfp -)
+}
+
+debian-doc() {
+  zmore /usr/share/doc/$1/$2
+}
+
+debuild() {
+  command debuild --preserve-envvar MAKEFLAGS -i $@ --lintian-opts -viI
+}
+
+disable-command() {
+  local command=$1
+  shift
+  "$command"() {
+    if setopt | G -q "interactive .*on" ; then
+      print "bleh"
+    else
+      $command "$@"
+    fi
+  }
+}
+
+divx2dvd() {
+  local divxFile=$1
+  local tmpBase=tmp
+  local tmpAudio="${tmpBase}.ac3"
+  local tmpVideo="${tmpBase}.m2v"
+  transcode -y ffmpeg --export_prof dvd-ntsc --export_asr 3 -D0 -s2 -m "$tmpAudio" -J modfps=clonetype=3 --export_fps 29.97 -i "$divxFile" -o "$tmpBase"
+  mplex -f8 -o "${divxFile}.dvd.mpg" "$tmpVideo" "$tmpAudio"
+  \rm -f "$tmpVideo" "$tmpAudio"
+}
+
+dus() {
+  du -s "$@" | sort -n
+}
+
+e-clean() {
+  local dir=${1:-.}
+  local files
+  files=(${dir}/**/*~(DN) ${dir}/**/*.pyc(N) ${dir}/**/(.|)'#'*(N))
+  (( $#files > 0 )) && /bin/rm -f $files
+}
+
+eas() { # Edit And Source
+  ${EDITOR_ZSH} $@ && zreload
+}
+
+#evaluate-command() {
+#  local command=$1
+#  if what $command | grep -q "function" ; then
+#    echo "$command is a shell function, aborting..."
+#  else
+#    echo `whence $command`
+#  fi
+#}
+
+evaluate-command() { 
+  # If param is a function, returns the array:
+  #    ( "param() { actualDefinition }", param )
+  # else, return an array containing the command + options, for instance
+  #    ( ls -F --color )
+  # The result is returned via $reply
+  local command=$1
+  if whence -v $command | grep -q "function" ; then
+    # join function def. lines with ' ;'
+    functionDef=${(pj: ;:)${(f)"$(whence -f $command)"}}
+    # add a call to that function in the end
+    reply="$functionDef ; $command"
+  elif whence $command > /dev/null ; then # alias or command in PATH: put all elements in an array
+    set -A reply `whence $command`
+  elif \ls -l $command 2> /dev/null | egrep -q '^-..x' ; then # binary
+    set -A reply $command
+  else # not found
+    return 1
+  fi
+}
+
+find() { # filter out .svn
+  dir=${1:-.}
+  [ $# -gt 0 ] && shift
+  local printArg
+  [[ "$@" == *-print* ]] || printArg="-print" 
+  command find "$dir" -path '*/.svn' -prune -o -path '*/.git' -prune -o $@ $printArg
+}
+
+g() {
+  www "www.google.com/search?q=$*"
+}
+
+gg() {
+  # googlegrep
+  #
+  # gg [-c] foo bar
+  # 
+  # greps for foo in all pages that google found for bar 
+  
+  local cache="|cache"
+  if [ "$1" == "-c" ] ; then
+    cache=""
+    shift
+  fi
+  lynx -dump http://www.google.com/search?q="$2" | \
+  egrep "http.*" | egrep -iv "google$cache" | nth 2 | \
+  while read f ; do
+    echo -n "."
+    curl -s --connect-timeout 10 "$f" | grep -iq "$1" && echo -e "\n$f matches"
+  done
+}
+
+grepz() {
+  grep -H "$@" $ZSH_CONFIG_FILES .svn-*/.zsh_*(N)
+}
+
+have() {
+  whence $1 > /dev/null
+}
+
+haveNetwork() {
+  case $OSTYPE in
+    solaris*|darwin*|*bsd*) # FIXME!
+      return 0 ;;
+    linux*)
+      ifconfig | grep -A 1 -E '^(eth|tun)' | grep -q 'inet' ;;
+#      return $? ;;
+  esac
+}
+
+i() { # install package $1
+  case $OSTYPE in
+    openbsd*)
+      s pkg_add -v $@ ;;
+    linux-gnu)
+      s apt-get install $@ ;;
+    *)
+      echo "Platform $OSTYPE not supported" ;;
+  esac
+  rehash
+}
+
+keychain-init-real() {
+#  setopt localoptions xtrace
+  # cleanup
+  for e in GPG_AGENT_INFO SSH_AUTH_SOCK ; do
+    rm -fr `echo $e`
+    unset $e
+  done
+  unset SSH_AGENT_PID GPG_TTY
+  pkill keychain
+  pkill -9 keychain
+  rm -fr ~/.keychain/${HOST}-*
+  # start
+  keychain --agents gpg --nogui --quiet --nocolor `gpg --list-secret-keys | awk '/^sec/ { gsub(/.+\//, "", $2) ; print $2 }'`
+#  rename -f "s|/S.gpg|/${HOST}-S.gpg|" ~/.gnupg/S*(=)
+#  perl -i -pe "s|/S.gpg|/${HOST}-S.gpg|" "$HOME/.keychain/${HOST}-sh-gpg"
+}
+
+keychain-init() {
+#  setopt localoptions xtrace
+  local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
+  if [ -f $SH_FILE ] &&  then
+    source $SH_FILE
+    if [ -z "$SSH_AGENT_PID" ] || [ ! -d /proc/$SSH_AGENT_PID ] || grep -qv gpg-agent /proc/$SSH_AGENT_PID/cmdline ; then
+      keychain-init-real
+    fi
+  else
+    keychain-init-real
+  fi
+  source $SH_FILE
+
+  export GPG_TTY=`tty`
+  local key
+  for key in ~/.ssh/*.[dr]sa(DN) ; do
+    ssh-add -l | G $key DN || ssh-add $key
+  done
+}
+
+logparser() {
+  local option
+  case $OSTYPE in
+      *bsd*) option="-f" ;;
+      *) option="--follow=name" ;;
+  esac
+  sudo tail -n 50 $option $1 | perl -p $2
+}
+
+lsd() {
+  ll -d ${1}*(/)
+}
+
+lst() { # list files by type
+  local type=$1
+  shift
+  if [[ ${+extensions[$type]} -eq 0 ]] ; then
+    echo -n "$type is not a supported type. Valid types are: "
+    echo ${(k)extensions[@]}
+  fi
+  local p
+  if [[ ${#argv} -eq 0 ]] || [[ $argv[-1] == -** ]] ; then # no path was specified, use .
+    p=.
+  else
+    p="$argv[-1]"
+    argv=$argv[1,-2]
+  fi
+  local matches="`echo \"$p\"/*.${(s, ,)${extensions[$type]}}(.DN)`"
+  [[ -n "$matches" ]] && ls $argv "$p"/*.${(s, ,)${extensions[$type]}}(.DN)
+}
+
+mf() {
+  firefox "$1" &
+}
+
+mvc() {
+  mkdir -p "$argv[-1]" ; mv $@
+}
+
+nth () {
+  local number=$1
+  local pattern=${2:-.}
+  awk "/${pattern}/ {print \$${number}}"
+}
+
+pdb() {
+#  setopt localoptions xtrace
+  local distribution=$(dpkg-parsechangelog | awk '/^Distribution:/ {print $2}')
+  local version=$(dpkg-parsechangelog | awk '/^Version:/ { gsub(/^[0-9]:/, "", $2) ; print $2}')
+  local extraOpts=""
+  distribution=${distribution/-*} # remove -security, for instance
+  [ $# -gt 0 ] && extraOpts="--debbuildopts '$@'"
+  s pdebuild --pbuilder cowbuilder $=extraOpts --buildresult .. --auto-debsign -- --basepath /var/cache/pbuilder/${distribution}.cow
+  [ $? = 0 ] && lintian -viI $(ls ../*${version}*changes | grep -v _source.changes)
+}
+
+pydoc-html() {
+  local html=/usr/share/doc/python$(python -V |& perl -pe 's/.*? (\d\.\d).*/\1/' )-doc/html/lib/module-MODULE.html
+  www ${html/MODULE/$1}
+}
+
+preexec() {
+#  setopt localoptions xtrace
+  set $=2
+  local cmd
+
+  case $1 in
+    s|time) cmd="$2" ;;
+    *) cmd="$1" ;;
+  esac
+
+  setTerminalTitle "$cmd"
+
+  if [[ -n "$KRB5CCNAME" ]] && /usr/bin/klist -5 -s ; then
+  else
+    local -a krb5files
+    krb5files=($(ls -t /tmp/krb*(Urw^xAIE) 2> /dev/null))
+    case ${#krb5files} in
+      0) unset KRB5CCNAME 2> /dev/null ;;
+      1) export KRB5CCNAME=FILE:$krb5files[1] ;;
+      2) export KRB5CCNAME=FILE:$krb5files[1] ; rm -f $krb5files[2,-1] ;;
+    esac
+  fi
+  case $cmd in
+    (connect|cvsseb|debsign|debuild|git|gpg|rsync|run|scp|ssh|sshfs|svn|svnseb|unison))
+      have keychain && have gpg-connect-agent && keychain-init && echo UPDATESTARTUPTTY | gpg-connect-agent -q DN ;;
+  esac
+}
+
+psc() {
+  ps --cols=1000 --sort='-%cpu,uid,pgid,ppid,pid' -e \
+     -o user,pid,ppid,pgid,stime,stat,wchan,time,pcpu,pmem,vsz,rss,sz,args |
+     sed 's/^/ /' | less
+}
+
+psm() {
+  ps --cols=1000 --sort='-vsz,uid,pgid,ppid,pid' -e \
+     -o user,pid,ppid,pgid,stime,stat,wchan,time,pcpu,pmem,vsz,rss,sz,args |
+     sed 's/^/ /' | less
+}
+
+psg() {
+  psall | grep -v "grep -iE $1" | grep -iE "$1"
+}
+
+rebuild-upstream-source() {
+  setopt localoptions xtrace
+  local dir=${1:-$(basename $(pwd))}
+  local package=${dir/-*}
+  local version=${dir/*-}
+  tar czv --exclude CVS --exclude .svn --exclude '.git*' --exclude debian --exclude *stamp -f ${package}_${version}.orig.tar.gz $dir
+}
+
+removeHost() { 
+  perl -i.bak -ne 'print unless m/(ssh|connect|run) '"$1"'( |$)/' ~/.zsh_history
+}
+
+rgrep() { 
+  # recursive grep, bash-compatible (in zsh, a simple grep $1 $2/**/* does it)
+  local -a grep_opts ; grep_opts=$argv[1,-3]
+  local pattern=$argv[-2]
+  local dir=$argv[-1]
+  # define rgrepLocal if not already defined
+  whence rgrepLocal > /dev/null || case $OSTYPE in
+    solaris*) # retarded :\
+      rgrepLocal() {
+        for f in `find $d2 -type f` ; do
+	  grep -q $grep_opts "$1" "$f" && echo ${f}: `grep $grep_opts "$1" "$f"`
+        done
+      } ;;
+    openbsd*)
+      rgrepLocal() {
+        grep -R -o $grep_opts "$1" "$2"
+      } ;;
+    *) # assume GNU grep
+      rgrepLocal() {
+        grep -r -H $grep_opts "$1" "$2"
+      } ;;
+  esac
+
+  rgrepLocal "$pattern" "$dir" | grep -v \\.svn
+}
+
+rmdeb() {
+  \rm -f ${1:-.}/*.{changes,deb,orig.tar.gz,upload,dsc,build,diff.gz}(DN)
+}
+
+rmmod() {
+  lsmod | grep -E "$1" | awk '{print $1}' | xargs rmmod
+}
+
+round() {
+  echo "scale=${2:-2};${1}/1" | bc
+}
+
+run() { # remotely run
+  while getopts c OPTION ; do
+    case $OPTION in
+      c) local CONSOLE=1 ;;
+      *) echo "blah" $OPTION ; return 1 ;;
+    esac
+  done
+
+  shift $[ $OPTIND - 1 ]
+
+  local host=$1
+  local command=$2
+  shift ; shift
+
+  if [[ -n "${CONSOLE}" ]] ; then
+    ssh -X -t $host $command
+  else
+    xpop "ssh -t $host \"$command\"" "RemoteExec@$host: $command" $@
+  fi
+}
+
+s() { # smarter sudo
+  [[ $1 = -d ]] && setopt localoptions xtrace && shift
+
+  opts=()
+  if [[ $1 = -* ]] ; then
+    while [[ -n $@ ]] && [[ $1 != -- ]] ; do 
+      opts+="$1"
+      shift
+    done
+    shift
+  fi
+
+  evaluate-command $1 # result is returned in $reply  
+  if [[ $? != 0 ]] ; then
+    echo "$1 not found"
+    return 1
+  fi
+  shift
+  set -A args "\"$@\""
+#  set -A command $reply "\"$@\"" # add *quoted* args
+#  set -A expandedCommand $reply $~args # expansion on an array
+  set -A expandedCommand $reply $args
+  unset reply
+#  set -A expandedCommand $~command # expansion on an array
+
+  local -a ksuArgs
+  ksuArgs=("-q" "-e")
+
+  if [[ $OSTYPE != *bsd* ]] && grep -q krb /etc/pam.d/common-auth && klist -5 -s ADN ; then
+# && ksu $ksuArgs /bin/true ADN ; then
+    ksu $ksuArgs $SHELL -c "$expandedCommand"
+  else
+    sudo $opts $SHELL -c "$expandedCommand"
+  fi
+}
+
+se() {
+  service=$1
+  shift
+  s /etc/init.d/$service $@
+}
+
+setcpufreq() {
+  local f=${1}Ghz
+  s cpufreq-set -f $f
+  s cpufreq-set -c 1 -f $f
+}
+
+setlocale() {
+  local locale=$1
+  if locale -a | grep -q $locale ; then
+    export LANG=$locale
+    export LC_ALL=$locale
+  else
+    echo "$locale is not a valid locale. Try locale -a for available locales."
+  fi
+}
+
+ssh-authorize-key() {
+  [[ ${#argv} -lt 1 ]] && echo "$0 <host> [key>]" && return 1
+  local host=$1
+  shift
+  if [[ -z "$1" ]] ; then
+    [[ -f ~/.ssh/new-mv.rsa.pub ]] && pubKey=~/.ssh/new-mv.rsa.pub || pubKey=~/.ssh/home.rsa.pub
+  else
+    pubKey=$1
+  fi
+  shift
+  cat $pubKey | ssh "$@" $host "(mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys)"
+}
+
+ssh-remove-key() {
+#  setopt localoptions xtrace
+  local host=${1/*@}
+  ssh-keygen -R $host
+  ssh-keygen -R ($digs $host)
+}
+
+svn-showlastdiff() {
+  local log rev
+  log=$(svn log -l 1 $1)
+  rev=$(echo $log | nth 1 '^r')
+  echo $log
+  svn diff -c $rev $1
+}
+
+svnseb() {
+#  setopt localoptions xtrace
+  local d reload
+  for d in . .svn-*(N) ; do
+    echo $d
+#    pushd $d
+    if [[ $1 != commit ]] ; then
+      local f=`mktemp tmp.XXXXXXXXXX`
+      svn $@ $d | egrep -v "^\?" | tee $f
+      [[ "$@" = up* ]] && egrep -q '^[PUA] ' $f && reload=true
+      rm -f $f
+    else
+      svn $@ $d
+    fi
+#    popd
+  done
+  [ -z "$reload" ] || zreload
+}
+
+svnseb-bootstrap() {
+#  setopt localoptions xtrace
+  if [ ! -d ~/.svn ] && true ; then # FIXME: have svn
+    local svn_host=weshyo.mine.nu
+    local module=seb  # FIXME: $username
+    local branch=trunk
+    svn_repository=svn+ssh://seb@weshyo.mine.nu/var/lib/svn/${module}/${branch} # FIXME: $username
+
+    tmp=`mktemp -d tmp.XXXXXXXXXX`
+    cd ${tmp}
+    svn co $svn_repository
+    rsync -a ${branch}/ ~/
+    cd
+    rm -rf ${tmp}
+  fi
+  #  haveSVN && svnseb up -dP | grep -v \?
+}
+
+www() {
+  for browser in links2 links elinks w3m lynx ; do
+    if have $browser ; then
+      $browser $1
+      return 0
+    fi
+  done
+  echo "No text-based browser found" && return 1
+}
+
+xpop() { # my precious :)
+  set -A commandAndArgs ${=1} # split $1 as if SH_WORD_SPLIT was set
+  shift
+
+  local c=$commandAndArgs[1]
+  shift 1 commandAndArgs
+
+  evaluate-command $c # result is returned in $reply
+  if [[ $? != 0 ]] ; then
+    echo "$c not found"
+    return 1
+  fi
+  set -A command $reply "$commandAndArgs[@]" # add args
+  set -A expandedCommand $~command # nice trick to do expansion on an array
+  unset reply
+
+  local name=$1
+  shift
+
+  if [ -n "${DISPLAY}" ] ; then
+    ${=XTERM/&/} $@ -T "$name" -e zsh -c "$expandedCommand" &
+  else
+    zsh -c "$expandedCommand"
+  fi
+}
+
+zbootstrap() {
+  [[ ! ${#argv} -eq 1 ]] && echo "$0 <host>" && return 1
+  scp -r .screenrc $ZSH_CONFIG_FILES $1:
+}

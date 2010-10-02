@@ -1,0 +1,14 @@
+# $Id: .inputrc,v 1.1 2007-12-11 22:48:17 seb Exp $
+
+set show-all-if-ambiguous on
+set visible-stats on
+set match-hidden-files off
+set bell-style visible
+set page-completions off
+set completion-ignore-case on
+#set expand-tilde on
+$if Bash
+  Space: magic-space
+$endif
+"^p": previous-history
+"^n": next-history

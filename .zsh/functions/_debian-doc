@@ -1,0 +1,23 @@
+#compdef debian-doc
+
+docDir=/usr/share/doc
+
+_debian-doc() {
+  if (( CURRENT > 2 )); then
+    # Remember the package name
+    local package=${words[2]}
+    # Set the context
+    curcontext="${curcontext%:*:*}:debian-doc-$package"
+    # Narrow the range of words we are looking at
+    (( CURRENT-- ))
+    shift words
+    # Run the doc completion
+    _files -W $docDir/$package -g '*(x)'
+  else # list all available packages from $docDir
+    local myPackages
+    myPackages=( $docDir )
+    _files -W myPackages -g '*(x)'
+  fi
+}
+
+_debian-doc "$@"

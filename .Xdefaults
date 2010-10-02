@@ -1,0 +1,27 @@
+Aterm.cutchars: `"'()*,;<>[]{|}
+Rxvt.cutchars: `"'()*,;<>[]{|}
+XTerm.cutchars: `"'()*,;<>[]{|}
+URxvt.cutchars: `"'()*,;<>[]{|}
+
+URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=13:antialias=true
+URxvt.boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=13:antialias=true
+URxvt.italicFont: xft:Bitstream Vera Sans Mono:italic:pixelsize=13:antialias=true
+URxvt.boldItalicFont: xft:Bitstream Vera Sans Mono:italic:bold:pixelsize=13:antialias=true
+URxvt.background: black
+URxvt.foreground: lightgrey
+URxvt.urgentOnBell: true
+URxvt.termName: rxvt-unicode
+URxvt.saveLines: 100000
+URxvt.scrollBar: false
+URxvt.externalBorder: 0
+URxvt.fading: 40
+URxvt.fadeColor: blue 
+URxvt.tintColor: pink
+URxvt.shading: 35
+URxvt.transparent: true
+URxvt.perl-ext-common: default,-selection
+URxvt.pointerColor: yellow
+URxvt.pointerColor2: blue
+
+Emacs.geometry: 90x60
+Speebar.geometry: 35x60

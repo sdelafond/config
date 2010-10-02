@@ -1,0 +1,11 @@
+#compdef lst
+
+_lst() {
+  if (( CURRENT > 2 )); then
+    _ls
+  else
+    compadd -- ${(k)extensions[@]}
+  fi
+}
+
+_lst "$@"

@@ -1,0 +1,117 @@
+#debug		on
+
+escape		"^zz"	# the command character
+
+bell_msg 	"Beep in window %"
+startup_message	off
+
+vbell 		off
+
+defscrollback	20000
+msgwait		2
+
+#caption 	always 	"%{yK}   -=%H=- | $LOGNAME | %{yK}%c |  %{yK}%-Lw%{yK}%50>%{Ky}%n%f* %t%{-}%+Lw%<%{- Wk}"
+#caption 	always 	"%c Flags:%f hardstatus:%h %H Load:%l %w"
+#caption 	always 	"%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+#caption 	always	"%?%F%{.R.}%?%3n %t%? [%h]%?"
+caption 	always	"%?%F%{=b RW}%:%{=b dw}%?%3n%f %t %? [%h]%?"
+
+#hardstatus 	string "%h%? users: %u%?"
+#hardstatus 	alwayslastline "%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%= %{mk} <at>  %H %{ck}%Y%{wk}-%{ck}%m%{wk}-%{ck}%d %{yk}%D %{gk}%c"
+#hardstatus	alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+#hardstatus	alwayslastline "%{= wk}%-Lw%{= BW}%n%f %t%{-}%{= wk} %+Lw${= wk}%="
+#hardstatus	alwayslastline "%{= dw}%-Lw%{= BW}%n%f %t%{-}%{= dw} %+Lw${= dw}%="
+hardstatus	alwayslastline "%{= wK}%-Lw%{=b RW}%n%f %t%{-}%{= wK}%+Lw%{-} %= %-=|%{=b yK} %H (%l) |%{=b mW} %D %d %M %Y %c|%{-}"
+
+shell		-$SHELL
+
+activity	"Activity in window %n^G"
+
+###########################################################################
+# layouts
+###########################################################################
+layout save Desktop1
+layout autosave on
+
+###########################################################################
+# startup; now done in .zlogin
+###########################################################################
+#screen 0 zsh
+#screen 1 mutt
+#screen 2 slrn
+#screen 3 centericq
+#screen 4 irssi
+#screen 5 ssh ob1
+#screen 6 zsh
+
+###########################################################################
+# Bindings
+###########################################################################
+bind ^k
+#bind L
+bind ^\
+# Make them better
+bind	\\	quit
+bind 	I 	login on
+bind 	O 	login off
+bind 	} 	history
+bind 	= 	resize =
+bind 	+ 	resize +1
+bind 	- 	resize -1
+bind 	_ 	silence
+bind 	j 	focus down
+bind 	k 	focus up
+bind	o	focus
+bind 	K 	kill
+bind 	( 	copy
+bind 	) 	paste .
+
+###########################################################################
+# Copy-mode
+###########################################################################
+# always copy the paste buffer to the X selection
+bindkey -m " " eval "stuff ' '" writebuf "exec sh -c 'xsel < /tmp/screen-exchange ; /bin/rm -f /tmp/screen-exchange'"
+#bindkey -m ^M eval "stuff ' '" writebuf "exec sh -c 'if [ "$DISPLAY" = :0.0 ] ; then xsel < /tmp/screen-exchange ; /bin/rm -f /tmp/screen-exchange ; fi'"
+#bindkey -m ^@ eval "stuff ' '" writebuf "exec sh -c 'xsel < /tmp/screen-exchange'"
+
+# emacs keybindings for navigation
+markkeys ^B=Y:^F=V:h=^B:l=^F:0=^A:$=^E
+
+# # C-g and other keys quit copy mode. Esc does nothing.
+# markkeys \033=\015=^G=^D=h=j=k=l=H=M=L=G=g=y=c=v=a=x=b=e=B=E=w
+# markkeys @=\033
+
+# special hack for C-e, since it should go *past* the last char.
+# (-m means this is for copy mode only.)
+bindkey -m ^e stuff "\$^f"
+
+# page up and page down
+bindkey -m -k kP stuff Y
+bindkey -m -k kN stuff V
+
+# control arrows move by words. (set B, e, and w to F keys so that i can use
+# them to move by words, but they themselves still quit copy mode.)
+markkeys B=[:E=]:b={:e=}:w=>
+bindkey -m ^[Od stuff {  #"[[}"
+bindkey -m ^[Oc stuff ]  #"}]^f"
+
+###########################################################################
+# termcap info
+###########################################################################
+# termcapinfo 	vt100 dl=5\E[M
+# # title bar
+# termcapinfo 	xterm*|*rxvt*|kterm*|Eterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
+# # optimal terminals
+# termcapinfo	xterm*|linux*|*rxvt*|Eterm* OP
+# # those terminals use screen scrollback buffer
+# termcapinfo 	xterm|xterms|xs|*rxvt*|Eterm ti@:te@
+
+term 		"screen-256color"
+terminfo	* smso=\E[7m:rmso=\E[27m:sitm=\E[3m:ritm=\E[23m
+#termcapinfo	* so=\E[7m:se=\E[27m:ZH=\E[3m:ZR=\E[23m
+
+# termcapinfo 	xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+# termcapinfo 	*rxvt* 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+# #termcapinfo 	Eterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+
+defutf8         on

@@ -1,0 +1,40 @@
+PROMPT='${PSEXTRA}%{$fg_no_bold[green]%}%80<...<%~%{$fg_no_bold[default]%} %(?..%{$fg_bold[red]%}!%?!%{$fg_no_bold[default]%} )# '
+
+REGULAR_RPROMPT="%{[$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]"
+VT_RPROMPT="[%{$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]"
+
+case $TERM in
+  rxvt*|xterm*)
+    RPROMPT=$REGULAR_RPROMPT 
+    TITLE_ESCAPE_BEGIN="\e]0;"
+    TITLE_ESCAPE_END="\a" ;;
+  sun*|vt*|screen*|linux)
+    RPROMPT=$VT_RPROMPT
+    TITLE_ESCAPE_BEGIN="\ek"
+    TITLE_ESCAPE_END="\e\\" ;;
+  *)
+    RPROMPT=$REGULAR_RPROMPT ;;
+esac
+
+setTerminalTitle() {
+  case $TERM in
+    rxvt*|xterm*|screen*)
+      title="$1 "
+      if [[ $HOST_SHORT != $(hostname -s) ]] ; then
+        title="$title(${hostnicks[$HOST_SHORT]:-$HOST_SHORT})"
+      fi
+      if [[ $TERM != screen* ]] ; then
+        title="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
+      fi
+
+      print -Pn "${TITLE_ESCAPE_BEGIN}${title}${TITLE_ESCAPE_END}"
+  esac
+}
+
+precmd() {
+  setTerminalTitle
+  # for the next line to work, check out the *vcs stuff in .zshrc
+  vcs_stuff 2> /dev/null
+}
+
+[[ $EUID -eq 0 ]] && RPROMPT="%S${RPROMPT}%s"

@@ -1,0 +1,84 @@
+alias -g DN='> /dev/null'
+alias -g 2DN='2> /dev/null'
+alias -g ADN='&> /dev/null'
+alias -g 2nd='DISPLAY=:0.1'
+
+alias C='curl -O'
+alias F='find'
+alias G='grep -E'
+alias H='head'
+alias M='more'
+alias RG='rgrep'
+alias S='sort'
+alias T='tail -F'
+alias Z='zmore'
+
+alias add='awk "{s=s+\$1} END {print s}"'
+alias al='xautolock -time 5 -resetsaver -corners ++++ -cornerdelay 5 -cornerredelay &'
+alias aptp='apt-cache policy'
+alias aptsh='apt-cache show'
+alias aptshp='apt-cache showpkg'
+alias c='cd ..'
+alias cp='cp -i'
+alias d='dirs -v'
+alias decodebase64='python -c "import base64, sys ; print base64.decodestring(sys.argv[1])"'
+alias dict='dict.sh'
+alias diff='diff -u'
+alias digs='dig +short'
+alias dos2unix="perl -i -pe 's/\r$//'"
+alias feh='feh -Z -F -p'
+alias geoip='python ~/bin/ip2city.py'
+alias kb='setxkbmap -layout us ; xset m 2 100 ; xkbset m ; xkbset exp =m ; xmodmap ~/.xmodmaprc'
+alias la='ls -a'
+alias ll='ls -hl'
+alias ls='ls -F'
+alias m='mount'
+alias more=$PAGER
+#alias mutt='xpop /usr/bin/mutt "mutt@`hostname`"'
+alias mv='mv -i'
+alias perlx='perl -Dtls'
+alias psall='ps aux -w -w'
+alias qiv='qiv --scale_down'
+#alias r='s apt-get remove'
+alias rk='r|keep'
+alias rp='s apt-get purge'
+alias rm='rm -i'
+alias rmdir='/bin/rm -fr'
+alias sc='screen -R -D -A -r main'
+alias up='s apt-get update'
+alias update-gpg-agent-tty='echo UPDATESTARTUPTTY | gpg-connect-agent -q DN'
+alias tee='tee -a'
+alias top='top -s 1' # for non-linux
+alias wget-mirror='wget -r -nv -nH --no-parent'
+alias x='exit'
+alias xterm="${XTERM}"
+alias xterm-screen="${XTERM/&} -g 161x54 -e screen -R main -D -A & ; zreload"
+alias wai='who am i'
+alias what="whence -f"
+alias zman='run-help'
+alias zmore='zless'
+alias zreload='pgrep -u $USER zsh | xargs kill -USR1' # Thx Robert !
+
+# logging
+alias apachelogparser='logparser /var/www/logs/access_log ~/bin/apachelogparser.pl'
+alias apachelog='xpop apachelogparser apachelog -geometry 140x15 -sh 100'
+alias syslog2='xpop "logparser /var/log/syslog ~/bin/syslogparser.pl" syslog -geometry 140x6+0-0 -sh 100 -tint white'
+alias syslog='xpop "sudo ~/bin/syslog.sh" syslog -fade 0 -geometry 140x25+0-0 -sh 100 -tint white'
+
+case $OSTYPE in
+  linux*)
+    apts() { apt-cache search -- $@ | sort }
+    [[ -x /usr/bin/aptitude ]] && alias apt-get=aptitude
+    alias ls='ls --color=auto -F'
+#    alias r='s apt-get remove --purge'
+    alias top='top -d 1' ;;
+  openbsd*)
+    pkgFile=~/openbsd-packages-`machine`-`uname -r`.txt
+#    [ -f $pkgFile ] || ( curl -o $pkgFile ftp://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine`/index.txt && perl -i -npe 's/.*i386\/(.*?gz).*/$1/' $pkgFile )
+    apts() { grep -i $1 $pkgFile } # yeah, yeah, not an alias
+    alias r='s pkg_delete' ;;
+  solaris*)
+    alias awk='gawk'
+    alias grep='/usr/xpg4/bin/grep'
+    alias psall='ps -aef' ;;
+esac

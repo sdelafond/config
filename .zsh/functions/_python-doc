@@ -1,0 +1,10 @@
+#compdef python-doc
+
+_python-doc() {
+  local pyHelpDir=/usr/share/doc/python2.3-doc/html/lib
+  local pyModuleFiles
+  pyModuleFiles=( $pyHelpDir/module-*.html ) # list all HTML files in this dir
+  compadd -- ${pyModuleFiles//($pyHelpDir\/module-|.html)} # trimming
+}
+
+_python-doc "$@"

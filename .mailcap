@@ -1,0 +1,46 @@
+text/html; /usr/bin/w3m %s; description=HTML Text; nametemplate=%s.html
+#text/html; /usr/bin/w3m -dump '%s'; copiousoutput; description=HTML Text; nametemplate=%s.html
+#text/html; /usr/bin/elinks -dump '%s'; copiousoutput; description=HTML Text; nametemplate=%s.html
+text/html; /usr/bin/links2 -html-numbered-links 1 -dump '%s'; copiousoutput; description=HTML Text; nametemplate=%s.html
+#text/html; /usr/bin/lynx -dump '%s'; copiousoutput; description=HTML Text; nametemplate=%s.html
+text/*; /usr/bin/less '%s'
+image/jpeg; qiv '%s'; nametemplate=%s.jpg; test=test "$DISPLAY" != ""
+image/pjpeg; qiv '%s'; nametemplate=%s.jpg; test=test "$DISPLAY" != ""
+
+application/vnd.oasis.opendocument.spreadsheet; unoconv -f html --stdout '%s' | elinks
+application/vnd.oasis.opendocument.spreadsheet; unoconv -f html --stdout '%s' | elinks -dump; copiousoutput
+
+application/vnd.oasis.opendocument.text; unoconv -f html --stdout '%s' | elinks
+application/vnd.oasis.opendocument.text; unoconv -f html --stdout '%s' | elinks -dump; copiousoutput
+
+# application/vnd.sun.xml.writer;/usr/bin/soffice %s
+# application/vnd.sun.xml.writer.global;/usr/bin/soffice %s
+# application/vnd.stardivision.writer;/usr/bin/soffice %s
+# application/vnd.stardivision.writer-global;/usr/bin/soffice %s
+# application/x-starwriter;/usr/bin/soffice %s
+# application/vnd.sun.xml.writer.template;/usr/bin/soffice %s
+# application/msword;/usr/bin/soffice %s
+# application/vnd.sun.xml.calc;/usr/bin/soffice %s
+# application/vnd.stardivision.calc;/usr/bin/soffice %s
+# application/x-starcalc;/usr/bin/soffice %s
+# application/vnd.sun.xml.calc.template;/usr/bin/soffice %s
+# application/excel;/usr/bin/soffice %s
+# application/msexcel;/usr/bin/soffice %s
+# application/vnd.ms-excel;/usr/bin/soffice %s
+# application/x-msexcel;/usr/bin/soffice %s
+# application/vnd.sun.xml.impress;/usr/bin/soffice %s
+# application/vnd.stardivision.impress;/usr/bin/soffice %s
+# application/vnd.stardivision.impress-packed;/usr/bin/soffice %s
+# application/x-starimpress;/usr/bin/soffice %s
+# application/vnd.sun.xml.impress.template;/usr/bin/soffice %s
+# application/powerpoint;/usr/bin/soffice %s
+# application/mspowerpoint;/usr/bin/soffice %s
+# application/vnd.ms-powerpoint;/usr/bin/soffice %s
+# application/x-mspowerpoint;/usr/bin/soffice %s
+# application/vnd.sun.xml.draw;/usr/bin/soffice %s
+# application/vnd.stardivision.draw;/usr/bin/soffice %s
+# application/x-stardraw;/usr/bin/soffice %s
+# application/vnd.sun.xml.draw.template;/usr/bin/soffice %s
+# application/vnd.sun.xml.math;/usr/bin/soffice %s
+# application/vnd.stardivision.math;/usr/bin/soffice %s
+# application/x-starmath;/usr/bin/soffice %s

@@ -1,0 +1,44 @@
+clear mod3
+clear mod4
+
+keysym q = q Q acircumflex Acircumflex
+keysym e = e E eacute Eacute
+keysym r = r R egrave Egrave
+keysym u = u U ucircumflex Ucircumflex
+keysym i = i I icircumflex Icircumflex
+keysym o = o O ocircumflex Ocircumflex
+keysym a = a A agrave Agrave
+keysym d = d D ediaeresis Ediaeresis
+keysym f = f F ecircumflex Ecircumflex
+keysym h = h H ugrave Ugrave
+keysym j = j J udiaeresis Udiaeresis
+keysym k = k K idiaeresis Idiaeresis
+keysym c = c C ccedilla Ccedilla
+keysym z = z Z guillemotleft
+keysym x = x X guillemotright
+
+keycode 22 = NoSymbol
+keycode 108 = BackSpace
+keycode 135 = Pointer_Button2
+keycode 133 = Super_L
+keycode 160 = XF86AudioMute
+keycode 174 = XF86AudioLowerVolume
+keycode 176 = XF86AudioRaiseVolume
+
+keycode 105 = Multi_key
+keycode 166 = Multi_key
+keycode 229 = XF86Search
+
+keycode 34 = parenleft braceleft
+keycode 35 = parenright braceright
+keycode 18 = 9 bracketleft
+keycode 19 = 0 bracketright
+
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Control_L = Mode_switch
+keysym Caps_Lock = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
+
+add mod4 = Super_L

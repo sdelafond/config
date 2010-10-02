@@ -1,0 +1,44 @@
+#compdef se
+
+_se() {
+  if (( CURRENT > 2 )); then
+    # Remember the subcommand name
+    local service=${words[2]}
+    # Set the context for the service.
+    curcontext="${curcontext%:*:*}:se-$service"
+    # Narrow the range of words we are looking at to exclude `se'
+    (( CURRENT-- ))
+    shift words
+    # Run the service completion
+    _se_service
+  else # list all available services
+    local myDir
+    myDir=( /etc/init.d )
+    _files -W myDir -g '*(x)'
+  fi
+}
+
+_se_service() {  
+  script=$words[1]
+  [[ $script = */* ]] || script=/etc/init.d/$script
+  
+  # If the file starts with `#!' we hope that this is a shell script
+  # and get lines looking like <space>foo|bar) with the words in $what.
+  
+  what='(st(art|op|atus)|(force-|)re(start|load)|debug_(up|down)|dump(|_stats)|add|delete|clean|list)'
+  
+  read -u0 -k2 magic < $script && [[ $magic = '#!' ]] &&
+      cmds=( ${${(j:|:s:|:)${(M)${(f)"$(< $script)"}:#[[:blank:]]#(\'|)${~what}(\|{~what})#(\'|)\)}}//[^a-z_]} )
+  
+  # This would be the pattern to use every line of the form <space>foo).
+  # Some people say this might match too many lines...
+  #
+  #    cmds=( ${${(j:|:s:|:)${(M)${(f)"$(< $script)"}:#[[:blank:]]#(\'|)[a-z_|]##\'|)\)}}//[^a-z_]} )
+  
+  (( $#cmds )) || zstyle -a ":completion:${curcontext}:commands" commands cmds ||
+      cmds=(start stop)
+  
+  _sub_commands $cmds    
+}
+
+_se "$@"
