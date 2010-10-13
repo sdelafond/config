@@ -329,7 +329,7 @@ export HOST_SHORT=${HOST/.*}
 # let's make sure
 infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}
 
-ZSH_CONFIG_FILES=(~/.z(log|sh)^(_*|*~)(.) ~/.zsh)
+ZSH_CONFIG_FILES=(~/.z(log|sh)^(_*|*~)(.,@) ~/.zsh)
 
 # ulimit
 limit coredumpsize 0 # don't allow coredumps

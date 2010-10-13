@@ -68,10 +68,10 @@ settings.layouts = { awful.layout.suit.tile,
 -- Tags
 settings.tags_defs = { { shortcut = "1", layout = awful.layout.suit.tile },
 		       {  shortcut = "2", layout = awful.layout.suit.tile }, 
-		       {  shortcut = "3", layout = awful.layout.suit.tile, name = "Untangle Dev" },
+		       {  shortcut = "3", layout = awful.layout.suit.tile, name = "Work Dev" },
 		       {  shortcut = "4", layout = awful.layout.suit.tile, name = "Home" },
-		       {  shortcut = "5", layout = awful.layout.suit.max, name = "Untangle Desktop" },
-		       {  shortcut = "6", layout = awful.layout.suit.tile, name = "Untangle Misc" }, -- nmaster = 2
+		       {  shortcut = "5", layout = awful.layout.suit.max, name = "Work Desktop" },
+		       {  shortcut = "6", layout = awful.layout.suit.tile, name = "Work Misc" }, -- nmaster = 2
 		       {  shortcut = "7", layout = awful.layout.suit.tile },
 		       {  shortcut = "8", layout = awful.layout.suit.tile.bottom, name = "Text" },
 		       {  shortcut = "9", layout = awful.layout.suit.tile, name = "VMs", mwfact = 0.2 },
@@ -154,6 +154,7 @@ awful.rules.rules = {
 
   -- local terminal
   { rule = { class = "URxvt", name = "hippie" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { class = "URxvt", name = "seb-debian" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
   { rule = { class = "Iceweasel" }, properties = { tag = getTagByShortcut("2") } },
@@ -231,6 +232,10 @@ awful.rules.rules = {
   { rule = { class = "Gimp" }, properties = { tag = getTagByShortcut("F5") }, 
     callback = function(c) awful.client.setslave(c) end },
   { rule = { class = "Gimp", name = "Toolbox" },
+    callback = function(c) c:swap(awful.client.getmaster()) end },
+  { rule = { class = "Dia" }, properties = { tag = getTagByShortcut("F5") },
+    callback = function(c) awful.client.setslave(c) end },
+  { rule = { class = "Dia", name = "Dia v" },
     callback = function(c) c:swap(awful.client.getmaster()) end },
 
   -- VMs

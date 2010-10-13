@@ -14,7 +14,7 @@ theme.border_width = "1"
 theme.border_normal = "#333333"
 theme.border_focus = "#4C7899"
 theme.border_marked = "#91231c"
-theme.wallpaper_cmd = { "feh --bg-scale /home/seb/.config/awesome/background.png" }
+theme.wallpaper_cmd = { "awsetbg -f /home/seb/.config/awesome/background.png" }
 
 theme.layout_fairh = "/usr/share/awesome/themes/default/layouts/fairhw.png"
 theme.layout_fairv = "/usr/share/awesome/themes/default/layouts/fairvw.png"
