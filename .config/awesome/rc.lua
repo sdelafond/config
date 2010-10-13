@@ -44,9 +44,9 @@ settings.keys.super_alt_control = {settings.keys.super[1], settings.keys.alt[1],
 settings.applications = { ["terminal"]        = 'xterm-screen',
 			  ["lock_screen"]     = 'xscreensaver-command -lock',
 			  ["screen_off"]      = 'sh -c "sleep 1 ; xset dpms force off"',
-			  ["selection"]       = os.getenv("HOME") .. '/bin/home/selection.rb',
-			  ["keyboard_layout"] = os.getenv("HOME") .. '/bin/home/keyboard-layout.sh',
-			  ["volume"]          = os.getenv("HOME") .. '/bin/home/thinkpad-volume.sh',
+			  ["selection"]       = os.getenv("HOME") .. '/bin/selection.rb',
+			  ["keyboard_layout"] = os.getenv("HOME") .. '/bin/keyboard-layout.sh',
+			  ["volume"]          = os.getenv("HOME") .. '/bin/volume.sh',
                           ["killgkrellm"]     = 'pkill gkrellm',
                           ["mpc_pause"]       = 'mpc toggle' }
 
