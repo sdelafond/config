@@ -65,6 +65,7 @@ bind	o	focus
 bind 	K 	kill
 bind 	( 	copy
 bind 	) 	paste .
+bind 	j 	select 3
 
 ###########################################################################
 # Copy-mode
