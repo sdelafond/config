@@ -63,7 +63,8 @@
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
 (my-autoload "id" "align" "python-mode" "multi-mode" "org" "time-stamp"
-	     "pf-mode" "ruby-mode" "ruby-electric" "gtags" "wikipedia-mode")
+	     "pf-mode" "ruby-mode" "ruby-electric" "gtags"
+             "wikipedia-mode" "outdent")
 
 (defun add-function-to-hooks (fun modes-hooks)
   "Add a call to FUN to each mode-hook listed in MODES-HOOKS."
@@ -393,19 +394,21 @@
   (setq outline-regexp " *\\(def \\|class\\|module\\|#.*Main\\)"))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
-;; (defun py-outline-level ()
-;;   (let (buffer-invisibility-spec)
-;;     (save-excursion
-;;       (skip-chars-forward "[:space:]")
-;;       (current-column))))
 (defun my-python-mode-hook ()
   (local-set-key "\r" 'newline)
   (if (featurep 'ipython) (require 'ipython))
-;;   (setq outline-regexp "[^ \t]\\|[ \t]*\\(def\\|class\\) ")
-;;   (setq outline-level 'py-outline-level)
-;;   (outline-minor-mode)
-;;   (define-key outline-minor-mode-map "\C-c\C-e" 'outline-toggle-children)
-;;   (define-key outline-minor-mode-map "\C-c\C-a" 'hide-body)
+  (require 'outdent)
+  (outdent-mode t)
+  ;; (defun py-outline-level ()
+  ;;   (let (buffer-invisibility-spec)
+  ;;     (save-excursion
+  ;;       (skip-chars-forward "[:space:]")
+  ;;       (current-column))))
+  ;; (setq outline-regexp "[^ \t]\\|[ \t]*\\(def\\|class\\) ")
+  ;; (setq outline-level 'py-outline-level)
+  ;; (outline-minor-mode)
+  ;; (define-key outline-minor-mode-map "\C-c\C-e" 'outline-toggle-children)
+  ;; (define-key outline-minor-mode-map "\C-c\C-a" 'hide-body)
 )
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 
