@@ -1,5 +1,8 @@
 #! /bin/zsh
 
+# set -x
+# exec > /tmp/keychain.log 2>&1
+
 display=$2
 
 if [[ -n "$display" && (`hostname` = mephisto || "$display" != localhost:1*) ]] ; then

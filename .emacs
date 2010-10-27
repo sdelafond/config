@@ -10,9 +10,10 @@
 (setq emacsds (directory-files my-home t "\.emacsd.*"))
 (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 (loop for emacsd in emacsds do
-      (progn
+      (progn        
         (setq load-path (cons emacsd load-path))
-        (load "run.el")))
+        (if (file-exists-p (concat emacsd "/run.el"))
+          (load "run.el"))))
 
 ;; (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 ;; (setq my-icicled (concat my-emacsd "icicles"))
