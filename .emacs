@@ -539,7 +539,7 @@
 		("wiki" 		      	      . mediawiki-mode)
 		("^/tmp/mutt"                         . my-mutt-flyspell-mode)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
-		("svn-commit\\|COMMIT_EDITMSG)"       . (lambda () (progn
+		("\\(svn-commit\\|COMMIT_EDITMSG\\)"  . (lambda () (progn
                                                                      (org-mode)
                                                                      (flyspell-mode))))
 		("\\.jsp$" 		      	      . jsp-mode)
