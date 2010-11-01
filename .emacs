@@ -159,7 +159,7 @@
 		("LATER" :foreground "light orange" :weight bold))))
 
   (setq org-link-abbrev-alist
-	'(("debian-bug"   . "http://bugs.debian.org/%s")))
+        '(("debian-bug"   . "http://bugs.debian.org/%s")))
 
   (setq org-auto-archive-required-days 21)
   (setq org-auto-archive-handler-function 'org-archive-subtree)
@@ -233,31 +233,31 @@
 	   :publishing-function org-publish-attachment)
 	  ("website" :components '("orgfiles" "other"))))
 
-  (setq org-agenda-custom-commands
-	(quote (("c" todo "DONE|LATER|CANCELED" nil)
-		("w" todo "TODO|WAITING" nil)
-		("Z" "blah" todo "WAITING")
-		("Y" "Weekly Review......." todo "TODO"
-		 ((agenda (org-agenda-ndays 7))))
-		("W" agenda "Month" ((org-agenda-ndays 30)))
-		("A" agenda "Custom"
-		 ((org-agenda-skip-function
-		   (lambda nil
-		     (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
-		  (org-agenda-ndays 1)
-		  (org-agenda-overriding-header "Today's Priority #A tasks: ")))
-		("B" agenda "No (CANCELED|DONE|LATER)"
-		 ((org-agenda-skip-function '(org-agenda-skip-subtree-if
-					      'regexp "\\* \\(CANCELED\\|LATER\\|DONE\\)")))
-		  (org-agenda-ndays 7)
-		  (org-show-hierarchy-above t)
-		  (org-agenda-overriding-header "No (CANCELED|DONE|LATER): ")))
-		("u" alltodo ""
-		 ((org-agenda-skip-function
-		   (lambda nil
-		     (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
-					       (quote regexp) "<[^>\n]+>")))
-		  (org-agenda-overriding-header "Unscheduled TODO entries: ")))))
+  ;; (setq org-agenda-custom-commands
+  ;;       (quote (("c" todo "DONE|LATER|CANCELED" nil)
+  ;;       	("w" todo "TODO|WAITING" nil)
+  ;;       	("Z" "blah" todo "WAITING")
+  ;;       	("Y" "Weekly Review......." todo "TODO"
+  ;;       	 ((agenda (org-agenda-ndays 7))))
+  ;;       	("W" agenda "Month" ((org-agenda-ndays 30)))
+  ;;       	("A" agenda "Custom"
+  ;;       	 ((org-agenda-skip-function
+  ;;       	   (lambda nil
+  ;;       	     (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
+  ;;       	  (org-agenda-ndays 1)
+  ;;       	  (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+  ;;       	("B" agenda "No (CANCELED|DONE|LATER)"
+  ;;       	 ((org-agenda-skip-function '(org-agenda-skip-subtree-if
+  ;;       				      'regexp "\\* \\(CANCELED\\|LATER\\|DONE\\)")))
+  ;;       	  (org-agenda-ndays 7)
+  ;;       	  (org-show-hierarchy-above t)
+  ;;       	  (org-agenda-overriding-header "No (CANCELED|DONE|LATER): ")))
+  ;;       	("u" alltodo ""
+  ;;       	 ((org-agenda-skip-function
+  ;;       	   (lambda nil
+  ;;       	     (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
+  ;;       				       (quote regexp) "<[^>\n]+>")))
+  ;;       	  (org-agenda-overriding-header "Unscheduled TODO entries: ")))))
 
   (require 'remember)
   (org-remember-insinuate)
