@@ -307,7 +307,7 @@ export EDITOR=$EDITOR_ZSH
 export VISUAL=$EDITOR
 
 if which less > /dev/null ; then
-  export PAGER="less -r"
+  export PAGER="less"
 #  export LESS='--RAW-CONTROL-CHARS --tabs=8 -r'
 #  export LESSOPEN='| /usr/bin/lesspipe %s'
 #  export LESSCLOSE='/usr/bin/lesspipe %s %s'
