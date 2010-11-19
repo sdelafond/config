@@ -171,6 +171,7 @@ awful.rules.rules = {
   { rule = { class = "URxvt", name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "lemmiwinks" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "clyde" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { class = "URxvt", name = "xen" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "skeeter" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "peterson" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "myers" }, properties = { tag = getTagByShortcut("3") } },
