@@ -612,7 +612,7 @@
   (if (is-buffer-already-htmlized) (server-edit))
   (if (is-buffer-to-htmlize) (htmlize-and-exit) 
     (progn 
-      (message-mode)
+      ;; (message-mode)
       (my-color-theme) ;; why ?
       (flyspell-mode)
       (choose-dict-automatically)))))
