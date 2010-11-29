@@ -92,7 +92,7 @@
 
 (defun my-message-mode-hook ()
   (setq message-beginning-of-line nil)
-  (turn-on-auto-fill))
+  (turn-off-auto-fill))
 (add-hook 'message-mode-hook 'my-message-mode-hook)
 
 (defun my-org-mode-hook ()
@@ -400,6 +400,7 @@
   (if (featurep 'ipython) (require 'ipython))
   (require 'outdent)
   (outdent-mode t)
+  (turn-off-auto-fill)
   ;; (defun py-outline-level ()
   ;;   (let (buffer-invisibility-spec)
   ;;     (save-excursion
@@ -502,6 +503,7 @@
 (setq case-fold-search t)
 (setq ids-creator-id "seb")
 (setq inhibit-startup-message t)
+(setq line-move-visual nil) 
 (setq py-indent-offset 2)
 (setq python-indent 2)
 (setq perl-indent-level 2)
