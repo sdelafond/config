@@ -16,7 +16,9 @@ if [[ -n "$display" && (`hostname` = mephisto || "$display" != localhost:1*) ]] 
     binary=/usr/bin/pinentry
   fi
 else
-  if [ -f /usr/bin/mew-pinentry ] ; then
+  if ps aux | grep -qE 'gpg.*/tmp/mutt' && [ -f /usr/bin/pinentry-curses ] ; then
+    binary=/usr/bin/pinentry-curses
+  elif [ -f /usr/bin/mew-pinentry ] ; then
     binary=/usr/bin/mew-pinentry
   elif [ -f /usr/bin/pinentry ] ; then
     binary=/usr/bin/pinentry
