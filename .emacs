@@ -647,6 +647,6 @@
  '(org-level-2 ((t (:foreground "white" :weight bold))))
  '(org-level-3 ((t (:foreground "yellow" :weight bold))))
  '(org-level-4 ((t (:foreground "brightyellow" :underline t :slant oblique))))
- '(org-link ((((class color) (background dark)) (:foreground "yellow" :inverse-video t :underline t))))
+ '(org-link ((((class color) (background dark)) (:foreground "magenta" :underline t))))
  '(org-tag ((t (:foreground "color-68" :underline nil :weight bold))))
  '(org-todo ((t (:foreground "blue" :weight bold)))))
