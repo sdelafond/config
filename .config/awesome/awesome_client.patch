@@ -1,0 +1,11 @@
+--- /usr/share/awesome/lib/awful/client.lua.bak	2010-09-09 19:35:20.000000000 +0200
++++ /usr/share/awesome/lib/awful/client.lua	2010-09-09 19:35:45.000000000 +0200
+@@ -469,7 +469,7 @@
+         end
+         if s > sc then s = 1 elseif s < 1 then s = sc end
+         sel.screen = s
+-        capi.mouse.coords(capi.screen[s].geometry)
++--        capi.mouse.coords(capi.screen[s].geometry)
+         capi.client.focus = sel
+     end
+ end
