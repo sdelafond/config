@@ -9,9 +9,12 @@ image/pjpeg; qiv '%s'; nametemplate=%s.jpg; test=test "$DISPLAY" != ""
 
 application/vnd.oasis.opendocument.spreadsheet; unoconv -f html --stdout '%s' | elinks
 application/vnd.oasis.opendocument.spreadsheet; unoconv -f html --stdout '%s' | elinks -dump; copiousoutput
-
 application/vnd.oasis.opendocument.text; unoconv -f html --stdout '%s' | elinks
 application/vnd.oasis.opendocument.text; unoconv -f html --stdout '%s' | elinks -dump; copiousoutput
+application/msword; unoconv -f html --stdout '%s' | elinks
+application/msword; unoconv -f html --stdout '%s' | elinks -dump; copiousoutput
+
+application/pdf; pdftotext -layout /dev/stdin -; copiousoutput
 
 # application/vnd.sun.xml.writer;/usr/bin/soffice %s
 # application/vnd.sun.xml.writer.global;/usr/bin/soffice %s
