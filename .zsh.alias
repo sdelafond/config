@@ -58,6 +58,7 @@ alias what="whence -f"
 alias zman='run-help'
 alias zmore='zless'
 alias zreload='pgrep -u $USER zsh | xargs kill -USR1' # Thx Robert !
+alias zreload-do='source ~/.zshenv ; source ~/.zshrc ; echo "reloaded zshrc"'
 
 # logging
 alias apachelogparser='logparser /var/www/logs/access_log ~/bin/apachelogparser.pl'

@@ -154,6 +154,7 @@ awful.rules.rules = {
 
   -- local terminal
   { rule = { class = "URxvt", name = "hippie" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { class = "URxvt", name = "hp" }, properties = { tag = getTagByShortcut("1") } },
   { rule = { class = "URxvt", name = "seb-debian" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web

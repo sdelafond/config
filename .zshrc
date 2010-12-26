@@ -323,10 +323,14 @@ if [[ ${#javas} -gt 0 ]] ; then
   path=($path $JAVA_HOME/bin)
 fi
 
+export DEBEMAIL="sdelafond@gmail.com"
+export GIT_AUTHOR_EMAIL=$DEBEMAIL
+export GIT_AUTHOR_NAME="Sébastien Delafond"
+
 # short hostname
 export HOST_SHORT=${HOST/.*}
 
-# let's make sure
+# let's make sure our TERM is known to the system
 infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}
 
 ZSH_CONFIG_FILES=(~/.z(log|sh)^(_*|*~)(.,@) ~/.zsh)
@@ -403,18 +407,15 @@ esac
 local -A hostnicks
 hostnicks[centurion]="home"
 hostnicks[proliant]="frisco"
-hostnicks[ernie]="akh"
-hostnicks[puff]="puff"
 case $HOST_SHORT in
   centurion)
+    export MAKEFLAGS="-j4"
+    [[ $TERM = screen* ]] && unset DISPLAY ;;
+  hippie|hp)
     export MAKEFLAGS="-j2" ;;
-  picon|hippie)
-    ;;
-  yo)
-    export XTERM=${XTERM/54/48} ;;
   vb)
     export TERM=cygwin ;;
-  sid)
+  *)
     [[ $TERM = screen* ]] && unset DISPLAY ;;
 esac
 
@@ -422,11 +423,37 @@ source ~/.zsh.prompt
 source ~/.zsh.alias
 source ~/.zsh.function
 
-for file in  ~/.svn-*/.z*(N) ; do
-  [[ "$file" == *dontsource* ]] || source $file
+for dir in ~/.svn-* ; do
+  [[ "$file" == *dontsource* ]] && continue
+  pushd $dir
+  for file in .z*(N) ; do
+    source $file
+  done
+
+  find . -type d | while read d ; do
+    local dest=~/$d
+    if [ -e "$dest" ] ; then
+      echo "Conflict: $dest"
+      continue
+    fi
+    echo ln -sf "$dir/$d" "$dest"
+  done
+
+  # find . -type f | while read f ; do
+  #   local dest=~/$f
+  #   if [ -e "$dest" ] ; then
+  #     echo "Conflict: $dest"
+  #     continue
+  #   fi
+  #   #ln -sf "$dir/$f" "$dest"
+  # done
+  popd
 done
 
 local hostFile=~/.zsh_$HOST
 [[ -f $hostFile ]] && source $hostFile
 
-trap 'source ~/.zshenv ; source ~/.zshrc ; echo "reloaded zshrc"' USR1
+export GIT_COMMITER_EMAIL=$GIT_AUTHOR_EMAIL
+export GIT_COMMITER_NAME=$GIT_AUTHOR_NAME
+
+trap 'zreload-do' USR1

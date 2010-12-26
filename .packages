@@ -1,0 +1,15 @@
+#! /bin/sh
+
+xargs echo sudo apt-get install --yes <<EOF 
+awesome-extra
+emacs-goodies-el
+emacs23-nox
+lua-mode
+org-mode
+ruby
+ruby-elisp
+sudo
+xclip
+zsh
+EOF
+
