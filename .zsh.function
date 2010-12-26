@@ -535,7 +535,7 @@ _setup-env() {
     dest=$(readlink -m "$baseDest/$d")
     if [ -e "$dest" ] ; then
       [ "$source" != "$dest" ] && [ ! -d "$source" ] && echo "Conflict: $dest ($source)"
-#      continue
+      continue
     fi
     ln -sf "$source" "$dest"
   done
@@ -544,7 +544,6 @@ _setup-env() {
 
 setup-env() {
   _setup-env base
-  find /tmp/meh
   _setup-env $1
 }
 
