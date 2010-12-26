@@ -424,7 +424,7 @@ source ~/.zsh.alias
 source ~/.zsh.function
 
 for dir in ~/.svn-* ; do
-  [[ "$dir" == *dontsource* ]] && continue
+  case "$dir" in *dontsource*|*base*) continue ;; esac
   for file in $dir/.z*(N) ; do
     source $file
   done

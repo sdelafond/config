@@ -525,30 +525,33 @@ svn-showlastdiff() {
 }
 
 _setup-env() {
-  local baseDest=/tmp/meh
-  pushd ~/.svn-$1
+#  setopt localoptions xtrace
+  local baseDest=~
+  local dir=~/.svn-$1
+  pushd $dir
   find . | while read d ; do
     [ "$d" = . ] && continue
-    dest=$(readlink -m "$baseDest/$d")
     source=$(readlink -m "$dir/$d")
+    dest=$(readlink -m "$baseDest/$d")
     if [ -e "$dest" ] ; then
       [ "$source" != "$dest" ] && [ ! -d "$source" ] && echo "Conflict: $dest ($source)"
-      continue
+#      continue
     fi
-    ln -s "$source" "$dest"
+    ln -sf "$source" "$dest"
   done
   popd
 }
 
 setup-env() {
   _setup-env base
+  find /tmp/meh
   _setup-env $1
 }
 
 svnseb() {
 #  setopt localoptions xtrace
   local d reload
-  for d in . .svn-*(N) ; do
+  for d in .svn-*(N) ; do
     echo $d
 #    pushd $d
     if [[ $1 != commit ]] ; then
@@ -566,19 +569,11 @@ svnseb() {
 
 svnseb-bootstrap() {
 #  setopt localoptions xtrace
-  if [ ! -d ~/.svn ] && true ; then # FIXME: have svn
-    local svn_host=weshyo.mine.nu
-    local module=seb  # FIXME: $username
-    local branch=trunk
-    svn_repository=svn+ssh://seb@weshyo.mine.nu/var/lib/svn/${module}/${branch} # FIXME: $username
-
-    tmp=`mktemp -d tmp.XXXXXXXXXX`
-    cd ${tmp}
-    svn co $svn_repository
-    rsync -a ${branch}/ ~/
-    cd
-    rm -rf ${tmp}
-  fi
+  local svn_host=weshyo.mine.nu
+  local module=seb  # FIXME: $username
+  local branch=trunk
+  svn_repository=svn+ssh://seb@weshyo.mine.nu/var/lib/svn/${module}/${branch} # FIXME: $username
+  svn co $svn_repository .svn-base
   #  haveSVN && svnseb up -dP | grep -v \?
 }
 
