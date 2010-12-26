@@ -533,8 +533,8 @@ _setup-env() {
     [ "$d" = . ] && continue
     source=$(readlink -m "$dir/$d")
     dest=$(readlink -m "$baseDest/$d")
-    if [ -e "$dest" ] && [ "$source" != "$dest" ] ; then
-      rm -fr "$dest"
+    if [ -e "$dest" ] ; then #&& [ "$source" = "$dest" ] ; then
+      continue
     fi
     ln -sf "$source" "$dest"
   done
