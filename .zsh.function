@@ -524,6 +524,27 @@ svn-showlastdiff() {
   svn diff -c $rev $1
 }
 
+_setup-env() {
+  local baseDest=/tmp/meh
+  pushd ~/.svn-$1
+  find . | while read d ; do
+    [ "$d" = . ] && continue
+    dest=$(readlink -m "$baseDest/$d")
+    source=$(readlink -m "$dir/$d")
+    if [ -e "$dest" ] ; then
+      [ "$source" != "$dest" ] && [ ! -d "$source" ] && echo "Conflict: $dest ($source)"
+      continue
+    fi
+    ln -s "$source" "$dest"
+  done
+  popd
+}
+
+setup-env() {
+  _setup-env base
+  _setup-env $1
+}
+
 svnseb() {
 #  setopt localoptions xtrace
   local d reload

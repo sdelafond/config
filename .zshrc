@@ -424,30 +424,10 @@ source ~/.zsh.alias
 source ~/.zsh.function
 
 for dir in ~/.svn-* ; do
-  [[ "$file" == *dontsource* ]] && continue
-  pushd $dir
-  for file in .z*(N) ; do
+  [[ "$dir" == *dontsource* ]] && continue
+  for file in $dir/.z*(N) ; do
     source $file
   done
-
-  find . -type d | while read d ; do
-    local dest=~/$d
-    if [ -e "$dest" ] ; then
-      echo "Conflict: $dest"
-      continue
-    fi
-    echo ln -sf "$dir/$d" "$dest"
-  done
-
-  # find . -type f | while read f ; do
-  #   local dest=~/$f
-  #   if [ -e "$dest" ] ; then
-  #     echo "Conflict: $dest"
-  #     continue
-  #   fi
-  #   #ln -sf "$dir/$f" "$dest"
-  # done
-  popd
 done
 
 local hostFile=~/.zsh_$HOST
