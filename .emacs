@@ -12,8 +12,8 @@
 (loop for emacsd in emacsds do
       (progn        
         (setq load-path (cons emacsd load-path))
-        (if (file-exists-p (concat emacsd "/run.el"))
-          (load "run.el"))))
+        (loop for file in (directory-files emacsd nil "run.*\.el") do
+              (load file))))
 
 ;; (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 ;; (setq my-icicled (concat my-emacsd "icicles"))
