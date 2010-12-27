@@ -525,17 +525,17 @@ svn-showlastdiff() {
 }
 
 _setup-env() {
-#  setopt localoptions xtrace
+  setopt localoptions xtrace
   local baseDest=~
-  local dir=~/.svn-$1
+  local dir=~/.config-$1
   pushd $dir
   find . | while read d ; do
     [ "$d" = . ] && continue
     source=$(readlink -m "$dir/$d")
     dest=$(readlink -m "$baseDest/$d")
     if [ -e "$dest" ] ; then
-      [ "$source" != "$dest" ] && [ ! -d "$source" ] && echo "Conflict: $dest ($source)"
-#      continue
+#      [ "$source" != "$dest" ] && [ ! -d "$source" ] && echo "Conflict: $dest ($source)"
+      continue
     fi
     ln -sf "$source" "$dest"
   done
@@ -551,18 +551,18 @@ setup-env() {
 svnseb() {
 #  setopt localoptions xtrace
   local d reload
-  for d in .svn-*(N) ; do
+  for d in .config-*(N) ; do
     echo $d
-#    pushd $d
+    pushd $d
     if [[ $1 != commit ]] ; then
       local f=`mktemp tmp.XXXXXXXXXX`
-      svn $@ $d | egrep -v "^\?" | tee $f
-      [[ "$@" = up* ]] && egrep -q '^[PUA] ' $f && reload=true
+      git $@ # | egrep -v "^\?" | tee $f
+      # [[ "$@" = up* ]] && egrep -q '^[PUA] ' $f && reload=true
       rm -f $f
     else
-      svn $@ $d
+      git $@
     fi
-#    popd
+    popd
   done
   [ -z "$reload" ] || zreload
 }

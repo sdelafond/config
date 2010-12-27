@@ -423,7 +423,7 @@ source ~/.zsh.prompt
 source ~/.zsh.alias
 source ~/.zsh.function
 
-for dir in ~/.svn-* ; do
+for dir in ~/.config-* ; do
   case "$dir" in *dontsource*|*base*) continue ;; esac
   for file in $dir/.z*(N) ; do
     source $file
@@ -433,7 +433,7 @@ done
 local hostFile=~/.zsh_$HOST
 [[ -f $hostFile ]] && source $hostFile
 
-export GIT_COMMITER_EMAIL=$GIT_AUTHOR_EMAIL
-export GIT_COMMITER_NAME=$GIT_AUTHOR_NAME
+export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
+export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 
 trap 'zreload-do' USR1
