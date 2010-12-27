@@ -534,8 +534,11 @@ _setup-env() {
     source=$(readlink -m "$dir/$d")
     dest=$(readlink -m "$baseDest/$d")
     if [ -e "$dest" ] ; then
-#      [ "$source" != "$dest" ] && [ ! -d "$source" ] && echo "Conflict: $dest ($source)"
-      continue
+      if [ "$source" != "$dest" ] ; then
+        rm -fr "$dest"
+      else
+        continue
+      fi
     fi
     ln -sf "$source" "$dest"
   done
