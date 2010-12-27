@@ -6,7 +6,7 @@
 ;; _____________________________________________________________________
 ;; custom path
 (setq my-home (expand-file-name (concat "~" (or (getenv "SUDO_USER") (getenv "USER")))))
-(setq my-emacsd (concat my-home "/.emacsd"))
+(setq my-emacsd (concat my-home "/.emacsd/"))
 (setq emacsds (directory-files my-home t "\.emacsd.*"))
 (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 (loop for emacsd in emacsds do
