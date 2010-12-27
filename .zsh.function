@@ -548,7 +548,7 @@ setup-env() {
   _setup-env $1
 }
 
-svnseb() {
+gitseb() {
 #  setopt localoptions xtrace
   local d reload
   for d in .config-*(N) ; do
@@ -567,14 +567,13 @@ svnseb() {
   [ -z "$reload" ] || zreload
 }
 
-svnseb-bootstrap() {
+gitseb-bootstrap() {
 #  setopt localoptions xtrace
-  local svn_host=weshyo.mine.nu
-  local module=seb  # FIXME: $username
-  local branch=trunk
-  svn_repository=svn+ssh://seb@weshyo.mine.nu/var/lib/svn/${module}/${branch} # FIXME: $username
-  svn co $svn_repository .svn-base
-  #  haveSVN && svnseb up -dP | grep -v \?
+  local git_host=weshyo.mine.nu
+  local user=seb
+  local project=$1
+  git_repository=ssh://seb@${git_host}/home/${user}/git/config-${project}.git
+  git clone $git_repository config-${project}
 }
 
 www() {
