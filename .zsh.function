@@ -573,7 +573,7 @@ gitseb-bootstrap() {
   local user=seb
   local project=$1
   git_repository=ssh://seb@${git_host}/home/${user}/git/config-${project}.git
-  git clone $git_repository config-${project}
+  git clone $git_repository .config-${project}
 }
 
 www() {
