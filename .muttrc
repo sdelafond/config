@@ -1,0 +1,68 @@
+source ~/.mutt-private/savehooks
+source ~/.mutt/bindings
+source ~/.mutt/colors
+source ~/.mutt/gnupg
+source ~/.mutt/ignores
+source ~/.mutt/sendhooks
+source ~/.mutt/folderhooks
+
+set alias_file=.mutt-private/aliases
+source ~/.mutt-private/aliases
+source ~/.mutt-private/identities
+source ~/.mutt-private/imap
+
+set autoedit=yes
+set beep_new=yes
+set bounce_delivered=no
+reset charset #="utf-8"
+set collapse_unread=yes
+set confirmappend=no
+set date_format="%b/%d"
+set fast_reply=yes
+set include=yes
+set index_format="%4C %Z %M %D  %-15.15L (%4c) %s"
+#set index_format="%4C %Z %{%b %d} %-30.30L (%?l?%4l&%4c?) %s"
+set ispell=ispell
+set mail_check=1
+set markers=no
+set mime_forward=yes
+set move=no
+set pager_context=0
+set pager_format="-%Z- %C/%m: %-20.20n   %s -- (%P)"
+set pager_index_lines=6
+set pager_stop=yes
+set print_command="muttprint"
+set quit=ask-yes
+set quit=yes
+set reply_regexp="^(re([\[0-9\]+])*|aw) ?:[ \t]*"
+set rfc2047_parameters=yes
+#set send_charset="utf-8"
+set smart_wrap=yes
+set sort=threads
+set sort_re=no
+#set sort_aux=last-date-received
+set status_format="-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b? %?l? %l?]---(%s/%S)-%>-(%P)---"
+set strict_threads=no
+set timeout=15
+#set use_8bitmime
+set write_bcc=no
+
+alternative_order text/plain text/html
+#alternative_order text/html text/plain
+auto_view text/html
+mime_lookup application/octet-stream application/octetstream
+
+# aliases for broken MUAs
+charset-hook ^us-ascii$    cp1252
+charset-hook ^iso-8859-1$  cp1252
+charset-hook ^iso-8859-15$ cp1252
+charset-hook x-unknown     cp1252
+charset-hook windows-1250  cp1250
+charset-hook windows-1251  cp1251
+charset-hook windows-1252  cp1252
+charset-hook windows-1253  cp1253
+charset-hook windows-1254  cp1254
+charset-hook windows-1255  cp1255
+charset-hook windows-1256  cp1256
+charset-hook windows-1257  cp1257
+charset-hook windows-1258  cp1258

@@ -1,0 +1,64 @@
+color attachment  white          brightcolor091
+color bold        green          default # ..
+color error       red            default # global
+color indicator   default        color024 # index
+color markers     red            default # index
+color message     black	         brightcolor29
+color signature   color213       default # pager body
+color status      white          blue
+color tilde       blue           default # pager body
+color tree        color213       default # index
+color underline   yellow         default
+
+color header      brightcolor193 default  "^From: "
+color header      brightcolor105 default  "^Subject: "
+color header      brightcolor136 default  "^To: "
+color header      brightcolor138 default  "^(Cc|Bcc): "
+color header      brightcolor106 default  "^.*Date: "
+color header      brightcolor253 default  "^Reply-to: "
+color header      brightcolor088 default  "^(User-Agent|X-Originating-IP|X-Mailer): "
+color header      brightcolor131 default  "^Organization: "
+color header      brightcolor196 default  "^X-Spam.*: "
+
+## ==================================================
+## Colorizing the body of messages (ie in the pager)
+## ==================================================
+color normal      color252       default  # pager body
+
+#  Coloring quoted text - coloring the first 7 levels:
+color quoted      color22        default
+color quoted1     color36        default
+color quoted2     color50        default
+color quoted3     color58        default
+color quoted4     color72        default
+color quoted5     color86        default
+color quoted6     color166       default
+color quoted7     color174       default
+
+#  match ftp/http addresses:
+color body 	  color190	 default   "(f|ht)tps?://[^ ]*"
+#  match email addresses:
+color body	  brightgreen	 default   "[[:alnum:]][-+.#_[:alnum:]]*@[-+.[:alnum:]]*[[:alnum:]]"
+# match smileys
+color body        yellow       default   "[;:][-]?[)/(|>\\]+"
+#color body       yellow       default   "[;:][)/(|>\\]"
+
+#  Remember:  Order counts!  The last matching rule "wins".
+#  So we'll start with some general rules first:
+color index 	  color252   	 default ~R
+color index       brightcolor154 default ~N # New
+color index       color154	 default ~O # Old
+
+color index 	  color141       default '(~L (415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
+color index 	  color034       default '(~L @.*debian)'
+color index 	  color208       default '(~L @.*(mappy\|ysance))'
+color index 	  color196       default '~((~C (security\.debian\.org\|vendor-sec\|buildd\+logs-security)) | (~s rt\.debian\.org))'
+
+color index 	  brightcolor141 default '~N (~L (415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
+color index 	  brightcolor034 default '~N (~L @.*debian)'
+color index 	  brightcolor208 default '~N (~L @.*(mappy\|ysance))'
+color index 	  brightcolor196 default '~N ~((~C (security\.debian\.org\|vendor-sec\|buildd\+logs-security)) | (~s rt\.debian\.org))'
+
+color index       brightcolor228 default  ~F # Flagged
+color index       default        color021 ~T # Tagged
+color index       color017       default  ~D # Deleted

@@ -1,0 +1,11 @@
+send-hook .              "unset pgp_autosign edit_headers fast_reply pgp_create_traditional ; set editor=jed indent_string='> ' ; unmy_hdr From: ; unmy_hdr Reply-To: "
+send-hook '~f sdelafond@gmx\.net'	         "my_hdr From: Sébastien Delafond <sdelafond@gmx.net> ; my_hdr Reply-To: Sébastien Delafond <sdelafond@gmail.com>"
+
+send-hook '~f sdelafond@gmail\.com'	         "my_hdr From: Sébastien Delafond <sdelafond@gmail.com>"
+
+send-hook '~C @.*debian\.org' "set pgp_autosign ; my_hdr From: Sébastien Delafond <seb@debian.org>"
+send-hook '~t @bugs\.debian\.org' "unset pgp_autosign"
+
+send-hook '~t buildd@ ~s build' "set pgp_autosign=yes indent_string='' edit_headers=yes editor='grab-changes.py' fast_reply=yes pgp_create_traditional=yes include=yes pgp_sign_as=seb@debian.org"
+
+send-hook '~t debian-security-announce@' "set pgp_autosign=yes pgp_create_traditional=yes pgp_sign_as=seb@debian.org"
