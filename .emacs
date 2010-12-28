@@ -6,14 +6,10 @@
 ;; _____________________________________________________________________
 ;; custom path
 (setq my-home (expand-file-name (concat "~" (or (getenv "SUDO_USER") (getenv "USER")))))
-(setq my-emacsd (concat my-home "/.emacsd/"))
-(setq emacsds (directory-files my-home t "\.emacsd.*"))
+(setq my-emacsd (concat my-home "/.emacs.d/"))
+(setq auto-save-list-file-prefix my-emacsd)
+(setq user-emacs-directory my-emacsd)
 (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
-(loop for emacsd in emacsds do
-      (progn        
-        (setq load-path (cons emacsd load-path))
-        (loop for file in (directory-files emacsd nil "run.*\.el") do
-              (load file))))
 
 ;; (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 ;; (setq my-icicled (concat my-emacsd "icicles"))
@@ -498,7 +494,6 @@
 
 ;; various variables
 (setq-default indent-tabs-mode nil)
-(setq auto-save-list-file-prefix my-emacsd)
 (setq browse-url-browser-function 'browse-url-firefox)
 (setq case-fold-search t)
 (setq ids-creator-id "seb")
