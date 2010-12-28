@@ -1,4 +1,3 @@
-source ~/.mutt-private/savehooks
 source ~/.mutt/bindings
 source ~/.mutt/colors
 source ~/.mutt/gnupg
@@ -10,6 +9,7 @@ set alias_file=.mutt-private/aliases
 source ~/.mutt-private/aliases
 source ~/.mutt-private/identities
 source ~/.mutt-private/imap
+source ~/.mutt-private/savehooks
 
 set autoedit=yes
 set beep_new=yes

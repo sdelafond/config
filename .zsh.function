@@ -195,6 +195,34 @@ gg() {
   done
 }
 
+gitseb() {
+#  setopt localoptions xtrace
+  local d reload
+  for d in .config-*(N) ; do
+    echo $d
+    pushd $d
+    if [[ $1 != commit ]] ; then
+#      local f=`mktemp tmp.XXXXXXXXXX`
+      git $@ # | egrep -v "^\?" | tee $f
+      # [[ "$@" = up* ]] && egrep -q '^[PUA] ' $f && reload=true
+#      rm -f $f
+    else
+      git $@
+    fi
+    popd
+  done
+  [ -z "$reload" ] || zreload
+}
+
+gitseb-bootstrap() {
+#  setopt localoptions xtrace
+  local git_host=weshyo.mine.nu
+  local user=seb
+  local project=$1
+  git_repository=ssh://seb@${git_host}/home/${user}/git/config-${project}.git
+  git clone $git_repository .config-${project}
+}
+
 grepz() {
   grep -H "$@" $ZSH_CONFIG_FILES .svn-*/.zsh_*(N)
 }
@@ -525,7 +553,7 @@ svn-showlastdiff() {
 }
 
 _setup-env() {
-  setopt localoptions xtrace
+#  setopt localoptions xtrace
   local baseDest=~
   local dir=~/.config-$1
   pushd $dir
@@ -533,9 +561,10 @@ _setup-env() {
     [ "$d" = . ] && continue
     source=$(readlink -m "$dir/$d")
     dest=$(readlink -m "$baseDest/$d")
-    if [ -e "$dest" ] ; then
+    if [[ -e "$dest" ]] || [[ -L "$baseDest/$d" ]] ; then
       if [ "$source" != "$dest" ] && [[ ! "$dest" == *.config-* ]] ; then
-        rm -fr "$dest"
+        rm -fr "$dest" "$baseDest/$d"
+        dest=$(readlink -m "$baseDest/$d")
       else
         continue
       fi
@@ -547,36 +576,7 @@ _setup-env() {
 
 setup-env() {
   _setup-env base
-  find /tmp/meh
   _setup-env $1
-}
-
-gitseb() {
-#  setopt localoptions xtrace
-  local d reload
-  for d in .config-*(N) ; do
-    echo $d
-    pushd $d
-    if [[ $1 != commit ]] ; then
-#      local f=`mktemp tmp.XXXXXXXXXX`
-      git $@ # | egrep -v "^\?" | tee $f
-      # [[ "$@" = up* ]] && egrep -q '^[PUA] ' $f && reload=true
-#      rm -f $f
-    else
-      git $@
-    fi
-    popd
-  done
-  [ -z "$reload" ] || zreload
-}
-
-gitseb-bootstrap() {
-#  setopt localoptions xtrace
-  local git_host=weshyo.mine.nu
-  local user=seb
-  local project=$1
-  git_repository=ssh://seb@${git_host}/home/${user}/git/config-${project}.git
-  git clone $git_repository .config-${project}
 }
 
 www() {
