@@ -1,0 +1,32 @@
+[alias]
+        bl = log --graph --abbrev-commit --pretty=oneline --decorate=full
+	co = checkout
+#        pull = pull --rebase
+	stat = status
+
+[color]
+	ui = true
+[color.diff]
+        frag = magenta bold
+        func = white
+        old = red bold
+        new = green bold
+[color.branch]
+        current = green bold
+        local = white bold
+        remote = red bold
+[color.interactive]
+        prompt = white bold
+[color.status]
+        changed = magenta bold
+        added = green bold
+        untracked = cyan bold
+
+[core]
+	excludesfile = ~/.gitignore
+
+[diff "odf"]
+        textconv=odt2txt
+
+[merge]
+	conflictstyle = diff3
