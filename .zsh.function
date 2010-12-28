@@ -553,7 +553,7 @@ svn-showlastdiff() {
 }
 
 _setup-env() {
-#  setopt localoptions xtrace
+  setopt localoptions xtrace
   local baseDest=~
   local dir=~/.config-$1
   pushd $dir
@@ -562,11 +562,11 @@ _setup-env() {
     source=$(readlink -m "$dir/$d")
     dest=$(readlink -m "$baseDest/$d")
     if [[ -e "$dest" ]] || [[ -L "$baseDest/$d" ]] ; then
-      if [ "$source" != "$dest" ] && [[ ! "$dest" == *.config-* ]] ; then
+      if [[ "$source" == "$dest" ]] ; then
+        continue
+      elif [[ "$dest" != *.$dir.* ]] && [[ ! -d "$dest" ]] ; then
         rm -fr "$dest" "$baseDest/$d"
         dest=$(readlink -m "$baseDest/$d")
-      else
-        continue
       fi
     fi
     ln -sf "$source" "$dest"
