@@ -9,6 +9,7 @@
 (setq my-emacsd (concat my-home "/.emacs.d/"))
 (setq auto-save-list-file-prefix my-emacsd)
 (setq user-emacs-directory my-emacsd)
+(setq load-path (cons my-emacsd load-path))
 (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 
 ;; (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
