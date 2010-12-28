@@ -4,7 +4,8 @@ require 'uri'
 
 urlSchemes = ['http', 'ftp', 'https']
 
-browser = "iceweasel"
+system("ps aux | grep -q '[f]irefox'")
+browser = $?.exitstatus == 0 ? "iceweasel" : "chromium-browser"
 
 rhttp = URI.regexp(urlSchemes)
 
