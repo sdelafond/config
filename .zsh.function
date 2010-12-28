@@ -553,7 +553,7 @@ svn-showlastdiff() {
 }
 
 _setup-env() {
-  setopt localoptions xtrace
+#  setopt localoptions xtrace
   local baseDest=~
   local dir=~/.config-$1
   pushd $dir
