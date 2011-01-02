@@ -374,7 +374,7 @@ preexec() {
     esac
   fi
   case $cmd in
-    (connect|cvsseb|debsign|debuild|git|gpg|rsync|run|scp|ssh|sshfs|svn|svnseb|unison))
+    (connect|debsign|debuild|git|gitseb|gpg|rsync|run|scp|ssh|sshfs|svn|unison))
       have keychain && have gpg-connect-agent && keychain-init && echo UPDATESTARTUPTTY | gpg-connect-agent -q DN ;;
   esac
 }
