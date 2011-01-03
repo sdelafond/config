@@ -415,6 +415,8 @@ case $HOST_SHORT in
     export MAKEFLAGS="-j2" ;;
   vb)
     export TERM=cygwin ;;
+  seb-debian)
+    ;;
   *)
     [[ $TERM = screen* ]] && unset DISPLAY ;;
 esac
