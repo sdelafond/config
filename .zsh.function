@@ -555,7 +555,8 @@ svn-showlastdiff() {
 _setup-env() {
 #  setopt localoptions xtrace
   local baseDest=~
-  local dir=~/.config-$1
+  local module=$1
+  local dir=~/.config-$module
   pushd $dir
   find . | while read d ; do
     [ "$d" = . ] && continue
@@ -571,6 +572,7 @@ _setup-env() {
     fi
     ln -sf "$source" "$dest"
   done
+  [[ -f .setup-$module.sh ]] && source .setup-$module.sh
   popd
 }
 
