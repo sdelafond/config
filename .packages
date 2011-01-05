@@ -1,6 +1,8 @@
 #! /bin/sh
 
 xargs echo sudo apt-get install --yes <<EOF 
+aspell-fr
+awesome
 awesome-extra
 emacs-goodies-el
 emacs23-nox
@@ -12,4 +14,3 @@ sudo
 xclip
 zsh
 EOF
-
