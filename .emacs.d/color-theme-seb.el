@@ -38,7 +38,7 @@ widget, custom, latex, ediff."
      (show-paren-match-face ((t (:foreground "black" :background "color-33"))))
      (show-paren-mismatch-face ((t (:foreground "white" :background "red"))))
      (font-lock-comment-face ((t (:foreground "color-247" :bold-italic t :bold t :italic t))))
-     (font-lock-string-face ((t (:foreground "color-203"))))
+     (font-lock-string-face ((t (:foreground "color-210"))))
      (font-lock-keyword-face ((t (:foreground "color-27"))))
      (font-lock-builtin-face ((t (:foreground "color-84"))))
      (font-lock-function-name-face ((t (:foreground "color-117" :bold t))))
