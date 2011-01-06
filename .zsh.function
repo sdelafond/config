@@ -559,7 +559,9 @@ _setup-env() {
   local dir=~/.config-$module
   pushd $dir
   find . | while read d ; do
-    [ "$d" = . ] && continue
+    if [[ "$d" == . ]] || [[ "$d" == *~ ]] ; then
+      continue
+    fi
     source=$(readlink -m "$dir/$d")
     dest=$(readlink -m "$baseDest/$d")
     if [[ -e "$dest" ]] || [[ -L "$baseDest/$d" ]] ; then
@@ -568,6 +570,8 @@ _setup-env() {
       elif [[ "$dest" != *.$dir.* ]] && [[ ! -d "$dest" ]] ; then
         rm -fr "$dest" "$baseDest/$d"
         dest=$(readlink -m "$baseDest/$d")
+      else
+        continue
       fi
     fi
     ln -sf "$source" "$dest"

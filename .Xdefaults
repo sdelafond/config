@@ -10,7 +10,7 @@ URxvt.boldItalicFont: xft:Bitstream Vera Sans Mono:italic:bold:pixelsize=13:anti
 URxvt.background: black
 URxvt.foreground: lightgrey
 URxvt.urgentOnBell: true
-URxvt.termName: rxvt-unicode
+#URxvt.termName: rxvt-unicode
 URxvt.saveLines: 100000
 URxvt.scrollBar: false
 URxvt.externalBorder: 0
