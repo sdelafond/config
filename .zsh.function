@@ -374,7 +374,7 @@ preexec() {
     esac
   fi
   case $cmd in
-    (connect|cvsseb|debsign|debuild|git|gpg|rsync|run|scp|ssh|sshfs|svn|svnseb|unison))
+    (connect|debsign|debuild|git|gitseb|gpg|rsync|run|scp|ssh|sshfs|svn|unison))
       have keychain && have gpg-connect-agent && keychain-init && echo UPDATESTARTUPTTY | gpg-connect-agent -q DN ;;
   esac
 }
@@ -555,7 +555,8 @@ svn-showlastdiff() {
 _setup-env() {
 #  setopt localoptions xtrace
   local baseDest=~
-  local dir=~/.config-$1
+  local module=$1
+  local dir=~/.config-$module
   pushd $dir
   find . | while read d ; do
     if [[ "$d" == . ]] || [[ "$d" == *~ ]] ; then
@@ -575,6 +576,7 @@ _setup-env() {
     fi
     ln -sf "$source" "$dest"
   done
+  [[ -f .setup-$module.sh ]] && source .setup-$module.sh
   popd
 }
 

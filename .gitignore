@@ -3,3 +3,4 @@
 .#*
 *.pyc
 .ssh/known_hosts
+.depend

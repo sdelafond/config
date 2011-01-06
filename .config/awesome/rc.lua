@@ -159,8 +159,10 @@ awful.rules.rules = {
 
   -- web
   { rule = { class = "Iceweasel" }, properties = { tag = getTagByShortcut("2") } },
+  { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Opera" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Konqueror" }, properties = { tag = getTagByShortcut("2") } },
+  { rule = { class = "Chromium-browser" }, properties = { tag = getTagByShortcut("2") } },
 
   -- workstation at work
   { rule = { class = "URxvt", name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
