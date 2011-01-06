@@ -59,6 +59,6 @@ color index       brightcolor154 default ~N # New
 # color index 	  brightcolor197 default '~N (~L @.*(mappy\|ysance))'
 # color index 	  brightcolor196 default '~N ~((~C (security\.debian\.org\|vendor-sec\|buildd\+logs-security)) | (~s rt\.debian\.org))'
 
-color index       brightcolor228 default  ~F # Flagged
+color index       brightcolor230 default  ~F # Flagged
 color index       default        color021 ~T # Tagged
 color index       color017       default  ~D # Deleted
