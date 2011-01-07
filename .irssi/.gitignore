@@ -1,1 +1,3 @@
-/home/seb/.config-home/.irssi/.gitignore
+config
+config.autosave
+logs
