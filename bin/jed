@@ -1,9 +1,7 @@
 #! /usr/bin/env zsh
 
-set -x
-
-# Copyright (C) 2008 Sebastien Delafond (sdelafond@gmx.net)
-# Author: Sebastien Delafond (sdelafond@gmx.net)
+# Copyright (C) 2008 Sebastien Delafond (sdelafond@gmail.com)
+# Author: Sebastien Delafond (sdelafond@gmail.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
