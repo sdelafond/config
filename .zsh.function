@@ -286,7 +286,7 @@ keychain-init() {
   export GPG_TTY=`tty`
   local key
   for key in ~/.ssh/*.[dr]sa(DN) ; do
-    ssh-add -l | G $key DN || ssh-add $key
+    ssh-add -l | G $(basename $key) DN || ssh-add $key
   done
 }
 
