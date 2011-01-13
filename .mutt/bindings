@@ -46,3 +46,8 @@ macro index   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt docum
 macro pager   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
 
 macro generic ,f "<refresh><change-folder-readonly><kill-line>=search<enter><shell-escape>mairix " "Enter Mairix search term"
+
+bind index \cv next-page
+
+macro index \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
+macro pager \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
