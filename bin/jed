@@ -1,7 +1,7 @@
 #! /usr/bin/env zsh
 
-# Copyright (C) 2008 Sebastien Delafond (sdelafond@gmx.net)
-# Author: Sebastien Delafond (sdelafond@gmx.net)
+# Copyright (C) 2008 Sebastien Delafond (sdelafond@gmail.com)
+# Author: Sebastien Delafond (sdelafond@gmail.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ isInScreen() {
 }
 
 isParentShell() {
-  [ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]
+  [[ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]]
 }
 
 runEmacsClient() {
@@ -62,14 +62,14 @@ startEmacsServer() {
                            (add-hook '\''kill-emacs-hook (lambda() (delete-file (getenv "SERVER_WINDOW_FILE")))))'
 }
 
-if [ -z "$SUDO_COMMAND" -a "$HOME" != "/root" ] && isInScreen ; then
-  if [ -f $SERVER_WINDOW_FILE ] ; then
+if [[ -z "$SUDO_COMMAND" ]] && [[ "$HOME" != "/root" || "$HOST" == marvin ]] && isInScreen ; then
+  if [[ -f $SERVER_WINDOW_FILE ]] ; then
     selectScreenWindow `cat $SERVER_WINDOW_FILE` # switch to server window
   else # gonna have to start emacs server
     startEmacsServer
     while [ ! -f $SERVER_WINDOW_FILE ] ; do sleep .1 ; done # wait for it
   fi
-  if [ $AUTO_BACKGROUND = "yes" ] && isParentShell ; then
+  if [[ $AUTO_BACKGROUND = "yes" ]] && isParentShell ; then
     runEmacsClient "$@" &
   else
     runEmacsClient "$@"
