@@ -68,11 +68,11 @@ settings.layouts = { awful.layout.suit.tile,
 -- Tags
 settings.tags_defs = { { shortcut = "1", layout = awful.layout.suit.tile },
 		       {  shortcut = "2", layout = awful.layout.suit.tile }, 
-		       {  shortcut = "3", layout = awful.layout.suit.tile, name = "Work Dev" },
+		       {  shortcut = "3", layout = awful.layout.suit.tile, name = "UT Dev" },
 		       {  shortcut = "4", layout = awful.layout.suit.tile, name = "Home" },
-		       {  shortcut = "5", layout = awful.layout.suit.max, name = "Work Desktop" },
-		       {  shortcut = "6", layout = awful.layout.suit.tile, name = "Work Misc" }, -- nmaster = 2
-		       {  shortcut = "7", layout = awful.layout.suit.tile },
+		       {  shortcut = "5", layout = awful.layout.suit.max, name = "UT Desktop" },
+		       {  shortcut = "6", layout = awful.layout.suit.tile, name = "Misc" }, -- nmaster = 2
+		       {  shortcut = "7", layout = awful.layout.suit.tile, name = "Mappy" },
 		       {  shortcut = "8", layout = awful.layout.suit.tile.bottom, name = "Text" },
 		       {  shortcut = "9", layout = awful.layout.suit.tile, name = "VMs", mwfact = 0.2 },
 		       {  shortcut = "F1", layout = awful.layout.suit.floating, name = "Pics/Video" }, -- mwfact = 0.2 },
@@ -164,20 +164,19 @@ awful.rules.rules = {
   { rule = { class = "Konqueror" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Chromium-browser" }, properties = { tag = getTagByShortcut("2") } },
 
-  -- workstation at work
+  -- workstation at UT
   { rule = { class = "URxvt", name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { class = "URxvt", name = "sid" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { class = "URxvt", name = "lemmiwinks" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "VNC:" }, properties = { tag = getTagByShortcut("5") } },
 
-  -- Work dev
+  -- UT dev
   { rule = { class = "URxvt", name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "lemmiwinks" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { class = "URxvt", name = "clyde" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "xen" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { class = "URxvt", name = "skeeter" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { class = "URxvt", name = "peterson" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { class = "URxvt", name = "myers" }, properties = { tag = getTagByShortcut("3") } },
+
+  -- M
+  { rule = { class = "URxvt", name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Home
   { rule = { class = "URxvt", name = "weshyo" }, properties = { tag = getTagByShortcut("4") }, 
