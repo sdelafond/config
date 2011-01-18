@@ -73,7 +73,7 @@ settings.tags_defs = { { shortcut = "1", layout = awful.layout.suit.tile },
 		       {  shortcut = "5", layout = awful.layout.suit.max, name = "UT Desktop" },
 		       {  shortcut = "6", layout = awful.layout.suit.tile, name = "Misc" }, -- nmaster = 2
 		       {  shortcut = "7", layout = awful.layout.suit.tile, name = "Mappy" },
-		       {  shortcut = "8", layout = awful.layout.suit.tile.bottom, name = "Text" },
+		       {  shortcut = "8", layout = awful.layout.suit.tile, name = "Text" },
 		       {  shortcut = "9", layout = awful.layout.suit.tile, name = "VMs", mwfact = 0.2 },
 		       {  shortcut = "F1", layout = awful.layout.suit.floating, name = "Pics/Video" }, -- mwfact = 0.2 },
 		       {  shortcut = "F2", layout = awful.layout.suit.max, name = "Sound" },

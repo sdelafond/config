@@ -8,6 +8,7 @@ emacs-goodies-el
 emacs23-nox
 lua-mode
 org-mode
+remember-el
 ruby
 ruby-elisp
 sudo
