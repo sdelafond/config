@@ -3,6 +3,8 @@
 (require 'cl) ;; (loop for ...)
 (require 'dired-x)
 
+;;(setq debug-on-error t)
+
 ;; _____________________________________________________________________
 ;; custom path
 (setq my-home (expand-file-name (concat "~" (or (getenv "SUDO_USER") (getenv "USER")))))
@@ -119,6 +121,7 @@
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-if-done t)
   (setq org-agenda-start-on-weekday nil)
+  (setq org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
   (setq org-combined-agenda-icalendar-file "~/org/org.ics")
   (setq org-icalendar-store-UID t)
   (setq org-icalendar-use-deadline '(event-if-todo))
@@ -642,7 +645,7 @@
  '(org-level-1 ((t (:foreground "magenta" :weight bold))))
  '(org-level-2 ((t (:foreground "white" :weight bold))))
  '(org-level-3 ((t (:foreground "yellow" :weight bold))))
- '(org-level-4 ((t (:foreground "brightyellow" :underline t :slant oblique))))
+ '(org-level-4 ((t (:foreground "color-36" :underline t :slant oblique :weight bold))))
  '(org-link ((((class color) (background dark)) (:foreground "magenta" :underline t))))
  '(org-tag ((t (:foreground "color-68" :underline nil :weight bold))))
  '(org-todo ((t (:foreground "blue" :weight bold)))))

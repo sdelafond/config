@@ -1,9 +1,9 @@
 [alias]
         bl = log --graph --abbrev-commit --pretty=oneline --decorate=full
 	co = checkout
-#        pull = pull --rebase
 	stat = status
-
+[branch]
+        autosetuprebase = always
 [color]
 	ui = true
 [color.diff]
