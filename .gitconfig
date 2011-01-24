@@ -21,12 +21,9 @@
         changed = magenta bold
         added = green bold
         untracked = cyan bold
-
 [core]
 	excludesfile = ~/.gitignore
-
 [diff "odf"]
         textconv=odt2txt
-
 [merge]
 	conflictstyle = diff3
