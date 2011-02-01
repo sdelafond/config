@@ -23,6 +23,7 @@
         untracked = cyan bold
 [core]
 	excludesfile = ~/.gitignore
+        warnambiguousrefs = false
 [diff "odf"]
         textconv=odt2txt
 [gc]
