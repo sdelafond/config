@@ -26,5 +26,7 @@
         warnambiguousrefs = false
 [diff "odf"]
         textconv=odt2txt
+[gc]
+        auto=0
 [merge]
 	conflictstyle = diff3
