@@ -19,9 +19,10 @@ esac
 setTerminalTitle() {
   case $TERM in
     rxvt*|xterm*|screen*)
-      title="$1 "
-      if [[ $HOST_SHORT != $(hostname -s) ]] ; then
-        title="$title(${hostnicks[$HOST_SHORT]:-$HOST_SHORT})"
+      title=""
+      [[ -n "$1" ]] && title="$1 "
+      if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY" ]] ; then
+        title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       fi
       if [[ $TERM != screen* ]] ; then
         title="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"

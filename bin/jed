@@ -1,5 +1,7 @@
 #! /usr/bin/env zsh
 
+set -x
+
 # Copyright (C) 2008 Sebastien Delafond (sdelafond@gmail.com)
 # Author: Sebastien Delafond (sdelafond@gmail.com)
 #
