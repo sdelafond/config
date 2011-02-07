@@ -17,10 +17,10 @@ case $TERM in
 esac
 
 setTerminalTitle() {
+#  setopt localoptions xtrace
   case $TERM in
     rxvt*|xterm*|screen*)
-      title=""
-      [[ -n "$1" ]] && title="$1 "
+      title="$1 "
       if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY" ]] ; then
         title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       fi

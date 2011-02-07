@@ -171,9 +171,9 @@ find() { # filter out .svn
   command find "$dir" -path '*/.svn' -prune -o -path '*/.git' -prune -o $@ $printArg
 }
 
-g() {
-  www "www.google.com/search?q=$*"
-}
+# g() {
+#   www "www.google.com/search?q=$*"
+# }
 
 gg() {
   # googlegrep

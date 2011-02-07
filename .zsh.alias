@@ -28,6 +28,7 @@ alias digs='dig +short'
 alias dos2unix="perl -i -pe 's/\r$//'"
 alias e='jed'
 alias feh='feh -Z -F -p'
+alias g='gitseb'
 alias geoip='python ~/bin/ip2city.py'
 alias gitup='git svn fetch --all && git svn rebase'
 alias kb='setxkbmap -layout us ; xset m 2 100 ; xkbset m ; xkbset exp =m ; xmodmap ~/.xmodmaprc'
