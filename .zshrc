@@ -406,7 +406,7 @@ esac
 # host specificities
 local -A hostnicks
 hostnicks[centurion]="home"
-hostnicks[proliant]="frisco"
+hostnicks[weshyo]="frisco"
 case $HOST_SHORT in
   centurion)
     export MAKEFLAGS="-j4"
