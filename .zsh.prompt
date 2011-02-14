@@ -23,6 +23,12 @@ setTerminalTitle() {
       title="$1 "
       if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY" ]] ; then
         title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
+      else
+        zstyle ':vcs_info:*' formats "[%r]"
+        vcs_info
+        title="$title$vcs_info_msg_0_"
+        zstyle ':vcs_info:*' formats "[%s %r/%b%c%u]"
+
       fi
       if [[ $TERM != screen* ]] ; then
         title="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
