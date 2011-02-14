@@ -86,7 +86,7 @@ abstracts = {
   nick = "%c$*%c%n";
 
   # nick host is printed
-  nickhost = "%B[%c$*%B]%n";
+  nickhost = "[%c$*%n]";
 
   # server name is printed
   server = "%b$*%n";
@@ -105,15 +105,15 @@ abstracts = {
   ##
 
   # highlighted nick/host is printed (joins)
-  channick_hilight = "%C$*%n";
-  chanhost_hilight = "{nickhost %c$*%n}";
+  channick_hilight = "%_%c$*%n%_";
+  chanhost_hilight = "%_{nickhost %c$*%n}%_";
 
   # nick/host is printed (parts, quits, etc.)
   channick = "%c$*%n";
   chanhost = "{nickhost $*}";
 
   # highlighted channel name is printed
-  channelhilight = "%c$*%n";
+  channelhilight = "%_%c$*%n%_";
 
   # ban/ban exception/invite list mask is printed
   ban = "%c$*%n";
@@ -150,8 +150,8 @@ abstracts = {
   pubnick = "$*%n";
 
   # public message in channel meant for me, $0 = nick mode, $1 = nick
-  pubmsgmenick = "{msgnick $0 $1-}%Y";
-  menick = "%Y$*%n";
+  pubmsgmenick = "%_{msgnick $0 $1-}%Y%_";
+  menick = "%_%Y$*%n%_";
 
   # public highlighted message in channel
   # $0 = highlight color, $1 = nick mode, $2 = nick
@@ -171,7 +171,7 @@ abstracts = {
   ownprivnick = "%R$*%n";
 
   # private message in query
-  privmsgnick = "{msgnick  %R$*%n}";
+  privmsgnick = "{msgnick %_%R$*%n%_}";
 
   ##
   ## Actions (/ME stuff)
@@ -264,7 +264,7 @@ abstracts = {
   # background for topicbar (same default)
   sb_topic_bg = "%0%w";
   # background for active status bar
-  sb_window_bg = "%4%W";
+  sb_window_bg = "%4%_%W";
 
   # text at the beginning of statusbars. sb-item already puts
   # space there,so we don't use anything by default.
@@ -290,15 +290,15 @@ abstracts = {
   # public message
   #  sb_act_msg = "%r$*";
   sb_act_msg = "$*";
-  # hilight
-  sb_act_hilight = "%Y$*";
+  # hilight 
+  sb_act_hilight = "%_%Y$*%n";
   # hilight with specified color, $0 = color, $1 = text
   sb_act_hilight_color = "$0$1-%n";
 
   sb_lightbar_bg = "%c";
-  lightbar_selected_item = "%W$0%n";
-  lightbar_hilighted_item = "%Y$0%n";
-  lightbar_activated_item = "%C$0%n";
+  lightbar_selected_item = "%_%R$0%n%_";
+  lightbar_hilighted_item = "%_%Y$0%n%_";
+  lightbar_activated_item = "%_%C$0%n%_";
 
 };
 formats = {
