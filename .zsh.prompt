@@ -20,7 +20,7 @@ setTerminalTitle() {
 #  setopt localoptions xtrace
   case $TERM in
     rxvt*|xterm*|screen*)
-      title="$1 "
+      title="$1"
       if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY" ]] ; then
         title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       else
@@ -28,11 +28,12 @@ setTerminalTitle() {
         vcs_info
         title="$title$vcs_info_msg_0_"
         zstyle ':vcs_info:*' formats "[%s %r/%b%c%u]"
-
       fi
       if [[ $TERM != screen* ]] ; then
         title="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       fi
+
+      [[ -z $title ]] && title=" "
 
       print -Pn "${TITLE_ESCAPE_BEGIN}${title}${TITLE_ESCAPE_END}"
   esac
