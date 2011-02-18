@@ -21,6 +21,8 @@
         changed = magenta bold
         added = green bold
         untracked = cyan bold
+[commit]
+        template = ~/.gittemplate
 [core]
 	excludesfile = ~/.gitignore
         warnambiguousrefs = false
