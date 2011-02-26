@@ -104,13 +104,12 @@
 ;;   (setq org-crypt-key "sdelafond@gmx.net")
 ;;   (add-hook 'before-save-hook 'org-encrypt-entries)
 
-;;   (require 'org-babel-init)     
-;;   (require 'org-babel-R)
-;;   (require 'org-babel-ruby)
-;;   (require 'org-babel-python)
-;;   (require 'org-babel-sh)
-;;   (require 'org-babel-sql)
-;;   (require 'org-babel-emacs-lisp)
+;;  (require 'org-babel-init)     
+  (require 'ob-ruby)
+  (require 'ob-python)
+  (require 'ob-sh)
+  (require 'ob-sql)
+  (require 'ob-emacs-lisp)
 ;;   (org-babel-load-library-of-babel)
 
   (setq diary-file "~/org/calendar.emacs")
@@ -258,6 +257,9 @@
   ;;       	     (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
   ;;       				       (quote regexp) "<[^>\n]+>")))
   ;;       	  (org-agenda-overriding-header "Unscheduled TODO entries: ")))))
+
+  (setq org-default-notes-file (concat org-directory "/org/notes"))
+  (define-key global-map "\C-cc" 'org-capture)
 
   (require 'remember)
   (org-remember-insinuate)
@@ -631,6 +633,9 @@
  '(jde-jdk-registry (quote (("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun"))))
  '(load-home-init-file t t)
  '(org-agenda-files (quote ("/home/seb/org/home.todo" "/home/seb/org/move.todo")))
+ '(org-capture-templates (quote (("w" "Work" entry (file+headline "~/org/work.todo" "Inbox") "* TODO %?
+  %U %a") ("h" "Home" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %?
+  %U %a"))))
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured)))
 
