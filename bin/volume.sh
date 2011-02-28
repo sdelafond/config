@@ -18,7 +18,7 @@ case $1 in
     amixer set $MIXER unmute > /dev/null
     [ $1 = up ] && UP="+" || UP="-"
     amixer set $MIXER ${STEP}dB$UP > /dev/null
-    STRING=`amixer get Master | perl -i -ne 'print "$1\n" if /\[(\d+%)\]/'` ;;
+    STRING=`amixer get Master | perl -i -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }'` ;;
   mute)
     amixer set $MIXER mute > /dev/null
     STRING="mute" ;;
