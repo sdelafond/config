@@ -260,6 +260,10 @@
 
   (setq org-default-notes-file (concat org-directory "/org/notes"))
   (define-key global-map "\C-cc" 'org-capture)
+  (define-key global-map "\C-c/" 'org-sparse-tree)
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
+  (setq org-refile-use-outline-path t)
+  (setq org-outline-path-complete-in-steps t)
 
   (require 'remember)
   (org-remember-insinuate)
@@ -485,6 +489,7 @@
 ;;      (setq icicle-apropos-complete-keys '())
 ;;      (setq icicle-apropos-prefix-keys '())
 ;;      (setq icicle-apropos-complete-keys '([tab] [(control ?i)]))
+      (local-unset-key "\C-c/")
       (setq icicle-menu-items-to-history-flag nil)
       (setq icicle-apropos-complete-keys '([S-tab] [S-iso-lefttab] [backtab]))
       (setq icicle-buffer-no-match-regexp "\\*")
