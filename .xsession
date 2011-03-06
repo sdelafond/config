@@ -14,6 +14,6 @@ xset dpms 400 600 0
 #xset s off
 gkrellm &
 xterm-screen &
-#pulseaudio &
+pulseaudio &
 awesome # -c /etc/xdg/awesome/rc.lua
 #sawfish
