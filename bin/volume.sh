@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 #########################################################################
 # Bring up or down sound volume with amixer, with on screen display
 # the total volume range is 58.5dB, so we change 4.5dB each run, it takes
@@ -10,15 +10,19 @@
 # Last upated: Oct. 16, 2007
 ########################################################################
 
-MIXER=Master
-STEP=4.5
+if amixer | grep -E '^Simple.*Master' ; then
+  MIXER=Master
+else
+  MIXER=Front
+fi
+STEP=5
 
 case $1 in
   up|down)
     amixer set $MIXER unmute > /dev/null
     [ $1 = up ] && UP="+" || UP="-"
     amixer set $MIXER ${STEP}dB$UP > /dev/null
-    STRING=`amixer get Master | perl -i -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }'` ;;
+    STRING=$(amixer get $MIXER | perl -i -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }') ;;
   mute)
     amixer set $MIXER mute > /dev/null
     STRING="mute" ;;

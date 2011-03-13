@@ -155,6 +155,8 @@ awful.rules.rules = {
   -- local terminal
   { rule = { class = "URxvt", name = "hippie" }, properties = { tag = getTagByShortcut("1") } },
   { rule = { class = "URxvt", name = "hp" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { class = "URxvt", name = "centurion" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { class = "URxvt", name = "home" }, properties = { tag = getTagByShortcut("1") } },
   { rule = { class = "URxvt", name = "seb-debian" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
@@ -183,10 +185,10 @@ awful.rules.rules = {
     callback = { function(c) c:swap(awful.client.getmaster()) end } },
   { rule = { class = "URxvt", name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "URxvt", name = "california" }, properties = { tag = getTagByShortcut("4") } },
-  { rule = { class = "URxvt", name = "centurion" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "URxvt", name = "puff" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "URxvt", name = "beastie" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "URxvt", name = "t400" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { class = "URxvt", name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "Vncviewer", name = "hp" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "centurion" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
