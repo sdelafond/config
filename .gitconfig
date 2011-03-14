@@ -1,9 +1,11 @@
 [alias]
         bl = log --graph --abbrev-commit --pretty=oneline --decorate=full
+#        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
 	co = checkout
 	stat = status
 [branch]
         autosetuprebase = always
+#        master.rebase = true
 [color]
 	ui = true
 [color.diff]
@@ -32,3 +34,4 @@
         auto=0
 [merge]
 	conflictstyle = diff3
+
