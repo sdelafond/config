@@ -26,7 +26,7 @@ widget, custom, latex, ediff."
      (bold ((t (:bold t))))
      (italic ((t (:slant italic :italic t))))
      (bold-italic ((t (:bold t :italic t :slant italic))))
-     (secondary-selection ((t (:background "color-172"))))
+     (secondary-selection ())
      (underline ((t (:underline t))))
      (info-node ((t (:foreground "yellow" :bold t :slant italic :italic t))))
      (info-menu-5 ((t (:underline t))))
