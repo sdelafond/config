@@ -107,9 +107,28 @@
 ;;  (require 'org-babel-init)     
   (require 'ob-ruby)
   (require 'ob-python)
+  (require 'ob-ditaa)
+  (defun my-org-confirm-babel-evaluate (lang body)
+    (not (string= lang "ditaa")))  ; don't ask for ditaa
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
   (require 'ob-sh)
   (require 'ob-sql)
   (require 'ob-emacs-lisp)
+
+  (require 'org-latex)
+  (setq org-export-latex-listings t)
+  (add-to-list 'org-export-latex-packages-alist '("" "listings"))
+  (add-to-list 'org-export-latex-packages-alist '("" "color"))
+  (setq org-export-latex-emphasis-alist
+        '(("*" "\\textbf{%s}" nil)
+          ("/" "\\emph{%s}" nil)
+          ("_" "\\underline{%s}" nil)
+          ("+" "\\st{%s}" nil)
+          ("=" "\\url{%s}" nil)
+          ;; `url' breaks lines in long strings (was `verb')
+          ("~" "\\verb~%s~" t)
+          ("@" "\\alert{%s}" nil)))
+
 ;;   (org-babel-load-library-of-babel)
 
   (setq diary-file "~/org/calendar.emacs")

@@ -76,8 +76,8 @@ is4 3 9 && autoload -Uz vcs_info && {
   zstyle ':vcs_info:*' enable cvs svn git
 
   zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' formats        "[%s %r/%b%c%u]"
-  zstyle ':vcs_info:*' actionformats  "[%s %r/%b|%a%c%u]"
+  zstyle ':vcs_info:*' formats        "[%s %b%c%u]"
+  zstyle ':vcs_info:*' actionformats  "[%s %b|%a%c%u]"
   zstyle ':vcs_info:*' stagedstr      "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr    "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
 
