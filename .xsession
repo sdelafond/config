@@ -12,7 +12,7 @@ xmodmap ~/.xmodmaprc
 xrdb -load ~/.Xdefaults
 xset dpms 400 600 0
 #xset s off
-#gkrellm &
+gkrellm &
 xterm-screen &
 pulseaudio &
 awesome # -c /etc/xdg/awesome/rc.lua

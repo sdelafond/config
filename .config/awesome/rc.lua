@@ -164,7 +164,7 @@ awful.rules.rules = {
   { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Opera" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Konqueror" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "Chromium-browser" }, properties = { tag = getTagByShortcut("2") } },
+  { rule = { class = "Chromium" }, properties = { tag = getTagByShortcut("2") } },
 
   -- workstation at UT
   { rule = { class = "URxvt", name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
@@ -179,6 +179,7 @@ awful.rules.rules = {
 
   -- M
   { rule = { class = "URxvt", name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { class = "URxvt", name = "cergy" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Home
   { rule = { class = "URxvt", name = "weshyo" }, properties = { tag = getTagByShortcut("4") }, 

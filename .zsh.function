@@ -494,7 +494,8 @@ s() { # smarter sudo
   local -a ksuArgs
   ksuArgs=("-q" "-e")
 
-  if [[ $OSTYPE != *bsd* ]] && grep -q krb /etc/pam.d/common-auth && klist -5 -s ADN ; then
+  local domain=$(awk '/default_realm/ {print $3}' /etc/krb5.conf)
+  if [[ $OSTYPE != *bsd* ]] && grep -q krb /etc/pam.d/common-auth && klist -5 -s ADN | grep -q $domain ; then
 # && ksu $ksuArgs /bin/true ADN ; then
     ksu $ksuArgs $SHELL -c "$expandedCommand"
   else
