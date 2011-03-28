@@ -215,12 +215,22 @@ gitseb() {
 }
 
 gitseb-bootstrap() {
-#  setopt localoptions xtrace
-  local git_host=weshyo.mine.nu
-  local user=seb
-  local project=$1
-  git_repository=ssh://seb@${git_host}/home/${user}/git/config-${project}.git
-  git clone $git_repository .config-${project}
+  setopt localoptions xtrace
+  local protocol host user my_path project repository
+  project=$1
+  if [ $project == base ] ; then
+    protocol=git
+    user=sdelafond
+    host=github.com
+    my_path=${user}/config.git
+  else
+    protocol=ssh
+    user=seb
+    host=${user}@weshyo.mine.nu
+    my_path=home/${user}/git/config-${project}.git
+  fi
+  repository=${protocol}://${host}/${my_path}
+  git clone $repository .config-${project}
 }
 
 grepz() {
