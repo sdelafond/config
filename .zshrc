@@ -409,10 +409,10 @@ hostnicks[centurion]="home"
 hostnicks[weshyo]="frisco"
 case $HOST_SHORT in
   centurion)
-    export MAKEFLAGS="-j4"
-    [[ $TERM = screen* ]] && unset DISPLAY ;;
+    export MAKEFLAGS="-j4" ;;
   hippie|hp)
-    export MAKEFLAGS="-j2" ;;
+    export MAKEFLAGS="-j2"
+    [[ $TERM = screen* ]] && unset DISPLAY ;;
   vb)
     export TERM=cygwin ;;
   seb-debian)
