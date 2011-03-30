@@ -36,7 +36,7 @@ isParentShell() {
 }
 
 runEmacsClient() {
-  emacsclient "$@" > /dev/null
+  emacsclient -s $STY "$@" > /dev/null
   selectScreenWindow $WINDOW
 }
 
@@ -57,7 +57,9 @@ setScreenMsgWait() {
 
 startEmacsServer() {
   screen -X setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
-  screen emacs -nw --eval '(progn (server-start)
+  screen emacs -nw --eval '(progn
+                           (setq server-name "'$STY'")
+                           (server-start)
                            (shell-command "echo $WINDOW > $SERVER_WINDOW_FILE")
                            (add-hook '\''kill-emacs-hook (lambda() (delete-file (getenv "SERVER_WINDOW_FILE")))))'
 }

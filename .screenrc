@@ -71,7 +71,7 @@ bind 	j 	select 3
 # Copy-mode
 ###########################################################################
 # always copy the paste buffer to the X selection
-bindkey -m " " eval "stuff ' '" writebuf "exec sh -c 'xsel < /tmp/screen-exchange ; /bin/rm -f /tmp/screen-exchange'"
+#bindkey -m " " eval "stuff ' '" writebuf "exec sh -c 'xsel < /tmp/screen-exchange ; /bin/rm -f /tmp/screen-exchange'"
 #bindkey -m ^M eval "stuff ' '" writebuf "exec sh -c 'if [ "$DISPLAY" = :0.0 ] ; then xsel < /tmp/screen-exchange ; /bin/rm -f /tmp/screen-exchange ; fi'"
 #bindkey -m ^@ eval "stuff ' '" writebuf "exec sh -c 'xsel < /tmp/screen-exchange'"
 

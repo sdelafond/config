@@ -513,6 +513,18 @@ s() { # smarter sudo
   fi
 }
 
+sc() {
+  name=$1
+  if [[ -z "$name" ]] ; then
+    if [[ "$HOST_SHORT" = centurion ]] ; then
+      name="main"
+    else
+      name="remote"
+    fi
+  fi
+  screen -R -D -A -S $name
+}
+
 se() {
   service=$1
   shift
