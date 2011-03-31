@@ -625,3 +625,12 @@ function manage_client(c)
   awful.client.movetoscreen(c, mouse.screen)
 end
 client.add_signal("manage", manage_client)
+client.add_signal("new", 
+                  function(c)
+                    c:add_signal("property::urgent",
+                                 function()
+                                   if client.focus == c and c.urgent then
+                                     c.urgent = false
+                                 end
+                               end)
+                  end)
