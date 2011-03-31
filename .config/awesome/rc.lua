@@ -174,6 +174,7 @@ awful.rules.rules = {
 
   -- UT dev
   { rule = { class = "URxvt", name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { class = "URxvt", name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "lemmiwinks" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "xen" }, properties = { tag = getTagByShortcut("3") } },
 
