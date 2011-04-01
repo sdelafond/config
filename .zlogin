@@ -12,5 +12,5 @@ export LOGIN_HOST=${${=wai}[5]//[()]}
 if [[ -z $LOGIN_HOST ]] || [[ $LOGIN_HOST != $HOST ]] ; then
   echo $DISPLAY >| ~/.screen-display
   # start screen if it's version 4.x only
-  whence screen > /dev/null && [[ ${$(screen -v)[3]} == 4* ]] && [[ $TERM != (screen*|vt100) ]] && [[ $HOST_SHORT != (hp|centurion) ]] && sc remote
+  whence screen > /dev/null && [[ ${$(screen -v)[3]} == 4* ]] && [[ $TERM != (screen*|vt100) ]] && [[ $HOST_SHORT != (hp|foooo) ]] && sc remote
 fi
