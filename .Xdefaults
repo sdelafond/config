@@ -3,10 +3,10 @@ Rxvt.cutchars: `"'()*,;<>[]{|}
 XTerm.cutchars: `"'()*,;<>[]{|}
 URxvt.cutchars: `"'()*,;<>[]{|}
 
-URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=13:antialias=true
-URxvt.boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=13:antialias=true
-URxvt.italicFont: xft:Bitstream Vera Sans Mono:italic:pixelsize=13:antialias=true
-URxvt.boldItalicFont: xft:Bitstream Vera Sans Mono:italic:bold:pixelsize=13:antialias=true
+URxvt.font: xft:Bitstream DejaVu Sans Mono:pixelsize=13:antialias=true
+URxvt.boldFont: xft:Bitstream DejaVu Sans Mono:bold:pixelsize=13:antialias=true
+URxvt.italicFont: xft:Bitstream DejaVu Sans Mono:italic:pixelsize=13:antialias=true
+URxvt.boldItalicFont: xft:Bitstream DejaVu Sans Mono:italic:bold:pixelsize=13:antialias=true
 URxvt.background: black
 URxvt.foreground: lightgrey
 URxvt.urgentOnBell: true

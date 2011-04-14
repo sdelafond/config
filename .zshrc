@@ -264,9 +264,9 @@ done
 if is4 ; then # use something smart to associate colors and extensions
   local -A colors
   colors=()
-  colors[backup]="02;90"
-  colors[docs]="02;37"
-  colors[archives]="01;31"
+  colors[backup]="03;90"
+  colors[docs]="03;37"
+  colors[archives]="04;31"
   colors[video]="01;33"
   colors[audio]="00;36"
   colors[pics]="00;32"
