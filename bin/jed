@@ -17,7 +17,12 @@ AUTO_BACKGROUND=yes
 
 # you shouldn't have to modify anything below this
 
-SERVER_WINDOW_FILE=/tmp/emacsserver-window-$STY
+if [[ -n "$TMUX" ]] ; then
+  MARKER=$(echo $TMUX | awk -F, '{print $2}')
+else
+  MARKER=$STY
+fi
+export SERVER_WINDOW_FILE=/tmp/emacsserver-window-${MARKER}
 DEFAULT_MSG_WAIT=2 # in seconds, if not defined in ~/.screenrc
 USER_CONFIGURED_MSG_WAIT=$(awk '/msgwait/{print $2}' ~/.screenrc 2> /dev/null)
 DEFAULT_MSG_WAIT=${USER_CONFIGURED_MSG_WAIT:-$DEFAULTMSGWAIT}
@@ -31,17 +36,29 @@ isInScreen() {
   echo $TERMCAP | grep -q -E '^SC'
 }
 
+isInTmux() {
+  [[ -n "$TMUX" ]]
+}
+
 isParentShell() {
   [[ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]]
 }
 
 runEmacsClient() {
-  emacsclient -s $STY "$@" > /dev/null
-  selectScreenWindow $WINDOW
+  emacsclient -s $MARKER "$@" > /dev/null
+  selectWindow $WINDOW
 }
 
 runRegularEmacs() {
   emacs -nw "$@"
+}
+
+selectWindow() {
+  isInScreen && selectScreenWindow $1 || selectTmuxWindow $1
+}
+
+selectTmuxWindow() {
+  tmux select-window -t $1
 }
 
 selectScreenWindow() {
@@ -56,17 +73,22 @@ setScreenMsgWait() {
 }
 
 startEmacsServer() {
-  screen -X setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
-  screen emacs -nw --eval '(progn
-                           (setq server-name "'$STY'")
-                           (server-start)
-                           (shell-command "echo $WINDOW > $SERVER_WINDOW_FILE")
-                           (add-hook '\''kill-emacs-hook (lambda() (delete-file (getenv "SERVER_WINDOW_FILE")))))'
+  if isInScreen; then 
+    screen -X setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
+    screen=screen
+  else
+    WINDOW=$(tmux list-windows | wc -l)
+    tmux setenv WINDOW $WINDOW
+    tmux setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
+    screen=(tmux new-window -t $WINDOW)
+  fi
+
+  $screen emacs-server.sh
 }
 
-if [[ -z "$SUDO_COMMAND" ]] && [[ "$HOME" != "/root" || "$HOST" == marvin ]] && isInScreen ; then
+if [[ -z "$SUDO_COMMAND" && ( "$HOME" != "/root" || "$HOST" == marvin ) && ( -n foo && -n bar ) ]] ; then
   if [[ -f $SERVER_WINDOW_FILE ]] ; then
-    selectScreenWindow `cat $SERVER_WINDOW_FILE` # switch to server window
+    selectWindow $window $(cat $SERVER_WINDOW_FILE)
   else # gonna have to start emacs server
     startEmacsServer
     while [ ! -f $SERVER_WINDOW_FILE ] ; do sleep .1 ; done # wait for it
