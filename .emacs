@@ -157,6 +157,7 @@
   (setq org-popup-calendar-for-date-prompt nil)
   (setq org-reverse-note-order nil)
   (setq org-use-fast-todo-selection t)
+  (setq org-use-sub-superscripts nil)
 
   (setq org-tag-alist '((:startgroup . nil) ("@work" . ?w)
 			                    ("@home" . ?h)
