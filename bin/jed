@@ -18,7 +18,7 @@ AUTO_BACKGROUND=yes
 # you shouldn't have to modify anything below this
 
 if [[ -n "$TMUX" ]] ; then
-  MARKER=$(echo $TMUX | awk -F, '{print $2}')
+  MARKER=$(echo $TMUX | awk -F, '{print $2$3}')
 else
   MARKER=$STY
 fi
@@ -45,8 +45,7 @@ isParentShell() {
 }
 
 runEmacsClient() {
-  emacsclient -s $MARKER "$@" > /dev/null
-  selectWindow $WINDOW
+  emacsclient -s $MARKER "$@"
 }
 
 runRegularEmacs() {
@@ -54,11 +53,11 @@ runRegularEmacs() {
 }
 
 selectWindow() {
-  isInScreen && selectScreenWindow $1 || selectTmuxWindow $1
+  isInTmux && selectTmuxWindow $1 || selectScreenWindow $1
 }
 
 selectTmuxWindow() {
-  tmux select-window -t $1
+  tmux select-window -t :$1
 }
 
 selectScreenWindow() {
@@ -87,17 +86,26 @@ startEmacsServer() {
 }
 
 if [[ -z "$SUDO_COMMAND" && ( "$HOME" != "/root" || "$HOST" == marvin ) && ( -n foo && -n bar ) ]] ; then
-  if [[ -f $SERVER_WINDOW_FILE ]] ; then
-    selectWindow $window $(cat $SERVER_WINDOW_FILE)
-  else # gonna have to start emacs server
+  if isInTmux ; then
+    oldWindow=$(tmux list-windows | awk -F: '/active/ {print $1}')
+  else
+    oldWindow=$WINDOW
+  fi
+
+  if [[ ! -f $SERVER_WINDOW_FILE ]] ; then # gonna have to start emacs server
     startEmacsServer
     while [ ! -f $SERVER_WINDOW_FILE ] ; do sleep .1 ; done # wait for it
   fi
+
+  selectWindow $(cat $SERVER_WINDOW_FILE)
+
   if [[ $AUTO_BACKGROUND = "yes" ]] && isParentShell ; then
-    runEmacsClient "$@" &
+    runEmacsClient -n "$@"
   else
     runEmacsClient "$@"
+    selectWindow $oldWindow
   fi
 else
   runRegularEmacs "$@"
 fi
+

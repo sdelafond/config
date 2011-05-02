@@ -522,7 +522,11 @@ sc() {
       name="remote"
     fi
   fi
-  screen -R -D -A -S $name
+  if false && whence tmux &> /dev/null ; then
+    tmux attach -t $name
+  elif whence screen &> /dev/null ; then
+    screen -R -D -A -S $name
+  fi
 }
 
 se() {

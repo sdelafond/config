@@ -10,7 +10,8 @@ export LOGIN_HOST=${${=wai}[5]//[()]}
 [ -f ~/alsa.settings ] && alsactl -f ~/alsa.settings restore
 
 if [[ -z $LOGIN_HOST ]] || [[ $LOGIN_HOST != $HOST ]] ; then
-  echo $DISPLAY >| ~/.screen-display
-  # start screen if it's version 4.x only
-  whence screen > /dev/null && [[ ${$(screen -v)[3]} == 4* ]] && [[ $TERM != (screen*|vt100) ]] && [[ $HOST_SHORT != (hp|foooo) ]] && sc remote
+  echo $DISPLAY >| ~/.tmux-display
+  # start tmux or screen if possible
+# [[ ($TERM != (screen*|vt100) || -z "$TMUX") && $HOST_SHORT != (hp|foooo) ]] && sc remote
+ [[ ($TERM != (screen*|vt100) || 0 == 1) && $HOST_SHORT != (hp|foooo) ]] && sc remote
 fi
