@@ -516,9 +516,9 @@ sc() {
   name=$1
   if [[ -z "$name" ]] ; then
     if [[ "$HOST_SHORT" = centurion ]] ; then
-      name="main"
-    else
       name="remote"
+    else
+      name="main"
     fi
   fi
   if false && whence tmux &> /dev/null ; then
