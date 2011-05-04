@@ -525,7 +525,7 @@ sc() {
   if false && whence tmux &> /dev/null ; then
     tmux attach -t $name
   elif whence screen &> /dev/null ; then
-    screen -R -D -A -S $name
+    screen -R $name -D -A
   fi
 }
 

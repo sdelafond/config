@@ -13,7 +13,8 @@ xrdb -load ~/.Xdefaults
 xset dpms 400 600 0
 #xset s off
 gkrellm &
-xterm-screen &
+#xterm-screen &
+urxvt &
 pulseaudio &
 awesome # -c /etc/xdg/awesome/rc.lua
 #sawfish
