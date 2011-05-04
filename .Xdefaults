@@ -3,11 +3,11 @@ Rxvt.cutchars: `"'()*,;<>[]{|}
 XTerm.cutchars: `"'()*,;<>[]{|}
 URxvt.cutchars: `"'()*,;<>[]{|}
 
-URxvt.letterSpace: -1
-URxvt.font: xft:Bitstream DejaVu Sans Mono:pixelsize=13:antialias=true
-URxvt.boldFont: xft:Bitstream DejaVu Sans Mono:bold:pixelsize=13:antialias=true
-URxvt.italicFont: xft:Bitstream DejaVu Sans Mono:italic:pixelsize=13:antialias=true
-URxvt.boldItalicFont: xft:Bitstream DejaVu Sans Mono:italic:bold:pixelsize=13:antialias=true
+! URxvt.letterSpace: -1
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=13:antialias=true
+URxvt.boldFont: xft:DejaVu Sans Mono:bold:pixelsize=13:antialias=true
+URxvt.italicFont: xft:DejaVu Sans Mono:italic:pixelsize=13:antialias=true
+URxvt.boldItalicFont: xft:DejaVu Sans Mono:italic:bold:pixelsize=13:antialias=true
 URxvt.background: black
 URxvt.foreground: lightgrey
 URxvt.urgentOnBell: true
@@ -29,11 +29,9 @@ Xft*dpi:                96
 *customization: -color
 XTerm*termName:  xterm-256color
 
-XTerm*faceName:   Bitstream DejaVu Sans Mono:pixelsize=13
-! XTerm.font: xft:Bitstream DejaVu Sans Mono:pixelsize=13:antialias=true
-! XTerm.boldFont: xft:Bitstream DejaVu Sans Mono:bold:pixelsize=13:antialias=true
-! XTerm.italicFont: xft:Bitstream DejaVu Sans Mono:italic:pixelsize=13:antialias=true
-! XTerm.boldItalicFont: xft:Bitstream DejaVu Sans Mono:italic:bold:pixelsize=13:antialias=true
+XTerm*faceName: Bitstream DejaVu Sans Mono:pixelsize=13
+XTerm*faceNameDoubleSize:   Bitstream DejaVu Sans Mono:pixelsize=13
+XTerm*faceSize: 13
 XTerm*background: black
 XTerm*foreground: lightgrey
 XTerm*bellIsUrgent: true
@@ -53,14 +51,6 @@ XTerm*on2Clicks: word
 XTerm*on3Clicks: regex [^ \n<>]+ 
 XTerm*on4Clicks: line
 XTerm*on5Clicks: all
-! XTerm.fading: 40
-! XTerm.fadeColor: blue 
-! XTerm.tintColor: pink
-! XTerm.shading: 35
-! XTerm.transparent: true
-! XTerm.perl-ext-common: default,-selection
-! XTerm.pointerColor: yellow
-! XTerm.pointerColor2: blue
 
 Emacs.geometry: 90x60
 Speebar.geometry: 35x60

@@ -313,7 +313,7 @@
 	 (change-dict "american")))
      (defun choose-dict-automatically ()
        (if (zerop (buffer-size))
-           (change-dict "american")
+           (change-dict "francais") ;; default to french
 	 (guess-dict))) ;; if non-empty, try to identify the language...
      (set-face-foreground 'flyspell-incorrect-face "yellow3")
 
