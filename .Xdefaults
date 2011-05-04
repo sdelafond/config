@@ -3,6 +3,7 @@ Rxvt.cutchars: `"'()*,;<>[]{|}
 XTerm.cutchars: `"'()*,;<>[]{|}
 URxvt.cutchars: `"'()*,;<>[]{|}
 
+URxvt.letterSpace: -1
 URxvt.font: xft:Bitstream DejaVu Sans Mono:pixelsize=13:antialias=true
 URxvt.boldFont: xft:Bitstream DejaVu Sans Mono:bold:pixelsize=13:antialias=true
 URxvt.italicFont: xft:Bitstream DejaVu Sans Mono:italic:pixelsize=13:antialias=true
@@ -10,7 +11,6 @@ URxvt.boldItalicFont: xft:Bitstream DejaVu Sans Mono:italic:bold:pixelsize=13:an
 URxvt.background: black
 URxvt.foreground: lightgrey
 URxvt.urgentOnBell: true
-#URxvt.termName: rxvt-unicode
 URxvt.saveLines: 100000
 URxvt.scrollBar: false
 URxvt.externalBorder: 0
@@ -22,6 +22,45 @@ URxvt.transparent: true
 URxvt.perl-ext-common: default,-selection
 URxvt.pointerColor: yellow
 URxvt.pointerColor2: blue
+
+Xft*antialias:          true
+Xft*dpi:                96
+
+*customization: -color
+XTerm*termName:  xterm-256color
+
+XTerm*faceName:   Bitstream DejaVu Sans Mono:pixelsize=13
+! XTerm.font: xft:Bitstream DejaVu Sans Mono:pixelsize=13:antialias=true
+! XTerm.boldFont: xft:Bitstream DejaVu Sans Mono:bold:pixelsize=13:antialias=true
+! XTerm.italicFont: xft:Bitstream DejaVu Sans Mono:italic:pixelsize=13:antialias=true
+! XTerm.boldItalicFont: xft:Bitstream DejaVu Sans Mono:italic:bold:pixelsize=13:antialias=true
+XTerm*background: black
+XTerm*foreground: lightgrey
+XTerm*bellIsUrgent: true
+XTerm*showBlinkAsBold: true
+XTerm*saveLines: 100000
+XTerm*scrollBar: false
+XTerm*externalBorder: 0
+XTerm*metaSendsEscape: true
+XTerm*altSendsEscape: false
+XTerm*omitTranslation: fullscreen
+XTerm*fullscreen: never
+XTerm*utf8: 1
+XTerm*eightBitInput: false
+XTerm*eightBitControl: false
+XTerm.eightBitOutput: false
+XTerm*on2Clicks: regex [^ \n]+ 
+XTerm*on3Clicks: line 
+XTerm*on4Clicks: regex [^*\n]+
+XTerm*on5Clicks: all
+! XTerm.fading: 40
+! XTerm.fadeColor: blue 
+! XTerm.tintColor: pink
+! XTerm.shading: 35
+! XTerm.transparent: true
+! XTerm.perl-ext-common: default,-selection
+! XTerm.pointerColor: yellow
+! XTerm.pointerColor2: blue
 
 Emacs.geometry: 90x60
 Speebar.geometry: 35x60

@@ -151,13 +151,14 @@ awful.rules.rules = {
 
   -- default for terminals
   { rule = { class = "URxvt" }, properties = { tag = getTagByShortcut("6") } },
+  { rule = { class = "XTerm" }, properties = { tag = getTagByShortcut("6") } },
 
   -- local terminal
-  { rule = { class = "URxvt", name = "hippie" }, properties = { tag = getTagByShortcut("1") } },
-  { rule = { class = "URxvt", name = "hp" }, properties = { tag = getTagByShortcut("1") } },
-  { rule = { class = "URxvt", name = "centurion" }, properties = { tag = getTagByShortcut("1") } },
-  { rule = { class = "URxvt", name = "home" }, properties = { tag = getTagByShortcut("1") } },
-  { rule = { class = "URxvt", name = "seb-debian" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "hippie" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "hp" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "centurion" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "home" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "seb-debian" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
   { rule = { class = "Iceweasel" }, properties = { tag = getTagByShortcut("2") } },
@@ -167,37 +168,37 @@ awful.rules.rules = {
   { rule = { class = "Chromium" }, properties = { tag = getTagByShortcut("2") } },
 
   -- workstation at UT
-  { rule = { class = "URxvt", name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
-  { rule = { class = "URxvt", name = "sid" }, properties = { tag = getTagByShortcut("5") } },
-  { rule = { class = "URxvt", name = "lemmiwinks" }, properties = { tag = getTagByShortcut("5") } },
+  { rule = { name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
+  { rule = { name = "sid" }, properties = { tag = getTagByShortcut("5") } },
+  { rule = { name = "lemmiwinks" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "VNC:" }, properties = { tag = getTagByShortcut("5") } },
 
   -- UT dev
-  { rule = { class = "URxvt", name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { class = "URxvt", name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { class = "URxvt", name = "lemmiwinks" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { class = "URxvt", name = "xen" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "lemmiwinks" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "xen" }, properties = { tag = getTagByShortcut("3") } },
 
   -- M
-  { rule = { class = "URxvt", name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { class = "URxvt", name = "cergy" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { name = "cergy" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Home
-  { rule = { class = "URxvt", name = "weshyo" }, properties = { tag = getTagByShortcut("4") }, 
+  { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") }, 
     callback = { function(c) c:swap(awful.client.getmaster()) end } },
-  { rule = { class = "URxvt", name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
-  { rule = { class = "URxvt", name = "california" }, properties = { tag = getTagByShortcut("4") } },
-  { rule = { class = "URxvt", name = "puff" }, properties = { tag = getTagByShortcut("4") } },
-  { rule = { class = "URxvt", name = "beastie" }, properties = { tag = getTagByShortcut("4") } },
-  { rule = { class = "URxvt", name = "t400" }, properties = { tag = getTagByShortcut("4") } },
-  { rule = { class = "URxvt", name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "california" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "puff" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "beastie" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "t400" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "Vncviewer", name = "hp" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "centurion" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
 
   -- Debian
-  { rule = { class = "URxvt", name = "lenny" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { class = "URxvt", name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { name = "lenny" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Text
   { rule = { class = "Evince" }, properties = { tag = getTagByShortcut("8") } },

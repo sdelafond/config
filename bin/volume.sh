@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 #########################################################################
 # Bring up or down sound volume with amixer, with on screen display
 # the total volume range is 58.5dB, so we change 4.5dB each run, it takes

@@ -1,5 +1,5 @@
 #xscreensaver &
-tpb &
+#tpb &
 eval `dbus-launch`
 # manual
 setxkbmap -layout us
@@ -11,9 +11,10 @@ xmodmap ~/.xmodmaprc
 #xmodmap -e 'pointer = 1 8 3 4 5 6 7 2 9'
 xrdb -load ~/.Xdefaults
 xset dpms 400 600 0
-#xset s off
-gkrellm &
-xterm-screen &
-pulseaudio &
+xset s off
+#gkrellm &
+#xterm-screen &
+urxvt &
+#pulseaudio &
 awesome # -c /etc/xdg/awesome/rc.lua
 #sawfish
