@@ -46,12 +46,12 @@ XTerm*altSendsEscape: false
 XTerm*omitTranslation: fullscreen
 XTerm*fullscreen: never
 XTerm*utf8: 1
-XTerm*eightBitInput: false
+XTerm*eightBitInput: true
 XTerm*eightBitControl: false
-XTerm.eightBitOutput: false
-XTerm*on2Clicks: regex [^ \n]+ 
-XTerm*on3Clicks: line 
-XTerm*on4Clicks: regex [^*\n]+
+XTerm.eightBitOutput: true
+XTerm*on2Clicks: word
+XTerm*on3Clicks: regex [^ \n<>]+ 
+XTerm*on4Clicks: line
 XTerm*on5Clicks: all
 ! XTerm.fading: 40
 ! XTerm.fadeColor: blue 
