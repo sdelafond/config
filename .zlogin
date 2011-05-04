@@ -13,5 +13,5 @@ if [[ -z $LOGIN_HOST ]] || [[ $LOGIN_HOST != $HOST ]] ; then
   echo $DISPLAY >| ~/.tmux-display
   # start tmux or screen if possible
 # [[ ($TERM != (screen*|vt100) || -z "$TMUX") && $HOST_SHORT != (hp|foooo) ]] && sc remote
- [[ ($TERM != (screen*|vt100) || 0 == 1) && $HOST_SHORT != (hp|foooo) ]] && sc remote
+ [[ ($TERM != (screen*|vt100) || 0 == 1) && $HOST_SHORT != (hp|foooo) ]] && sc
 fi

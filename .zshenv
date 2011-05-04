@@ -8,7 +8,7 @@ done
 manpath=(/usr/share/man /usr/local/man /usr/X11R6/man /opt/vmware/man $manpath)
 fpath=(~/.zsh/functions $fpath)
 export LD_LIBRARY_PATH=/usr.local/lib:$LD_LIBRARY_PATH
-if [[ $HOST != seb-debian ]] ; then
+if [[ ($HOST != seb-debian) && ($HOST != centurion*) ]] ; then
   export XTERM="urxvt -T $HOST &"
 else
   export XTERM="/usr/bin/xterm -T $HOST &"
