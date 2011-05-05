@@ -10,7 +10,7 @@
 	ui = true
 [color.diff]
         frag = magenta bold
-        func = white
+#        func = white
         old = red bold
         new = green bold
 [color.branch]
