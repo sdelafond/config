@@ -641,7 +641,7 @@
   (if (is-buffer-to-htmlize) (htmlize-and-exit) 
     (progn 
       ;; (message-mode)
-      (my-color-theme) ;; why ?
+;;      (my-color-theme) ;; why ?
       (flyspell-mode)
       (choose-dict-automatically)))))
 
