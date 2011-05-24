@@ -114,6 +114,7 @@
   (require 'ob-sh)
   (require 'ob-sql)
   (require 'ob-emacs-lisp)
+  (setq org-src-fontify-natively t)
 
   (require 'org-latex)
   (setq org-export-latex-listings t)
@@ -182,6 +183,17 @@
 
   (setq org-auto-archive-required-days 21)
   (setq org-auto-archive-handler-function 'org-archive-subtree)
+
+  (defun org-mode-flyspell-verify ()
+    "Don't let flyspell put overlays at active buttons, or on
+     todo/all-time/additional-option-like keywords."
+    (let ((pos (max (1- (point)) (point-min)))
+          (word (thing-at-point 'word)))
+      (and (not (get-text-property pos 'keymap))
+           (not (get-text-property pos 'org-no-flyspell))
+           (not (member word org-todo-keywords-1))
+           (not (member word org-all-time-keywords))
+           (not (member word org-additional-option-like-keywords)))))
 
   (defun org-auto-archivable-p ()
     "Determines if the current heading is auto-archivable,
@@ -299,6 +311,14 @@
 
 (eval-after-load "flyspell" ;; yeah, we wish there was a flyspell-hook...
   '(progn
+     (defun my-flyspell-ignore-uppercase (beg end &rest rest)
+       (while (and (< beg end)
+                   (let ((c (char-after beg)))
+                     (not (= c (downcase c)))))
+         (setq beg (1+ beg)))
+       (= beg end))
+     (add-hook 'flyspell-incorrect-hook 'my-flyspell-ignore-uppercase)
+
      (defun change-dict (dict)
        (interactive)
        (message (concat "Changing dict to: " dict))
@@ -670,6 +690,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
+ '(org-checkbox-statistics-todo ((t (:foreground "color-177"))) t)
  '(org-done ((t (:foreground "brightgreen" :weight bold))))
  '(org-hide ((t (:foreground "#00000000"))))
  '(org-level-1 ((t (:foreground "magenta" :weight bold))))

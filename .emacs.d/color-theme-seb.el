@@ -37,6 +37,8 @@ widget, custom, latex, ediff."
      (holiday-face ((t (:background "red"))))
      (show-paren-match-face ((t (:foreground "black" :background "color-33"))))
      (show-paren-mismatch-face ((t (:foreground "white" :background "red"))))
+     (flyspell-duplicate ((t (:foreground "color-81" :bold nil :weight normal))))
+     (flyspell-incorrect ((t (:foreground "color-81" :bold nil :weight normal))))
      (font-lock-comment-face ((t (:foreground "color-238" :bold-italic t :bold t :italic t))))
      (font-lock-string-face ((t (:foreground "color-210"))))
      (font-lock-keyword-face ((t (:foreground "color-27"))))
