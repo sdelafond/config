@@ -73,14 +73,10 @@ convertToU10() {
 }
 
 connect() { # pops an ssh windows if under x, or simple ssh if not
-  local host=$1 && shift
+#  setopt localoptions xtrace
+  local host=$argv[-1]
   update-gpg-agent-tty
-  [[ -n "$1" ]] && local port="-p $1" && shift
-  if [[ -z "$@" ]] ; then
-    xpop "ssh -Y $port $host" "$host" -g 161x54
-  else
-    xpop "ssh -Y $port $host" "$host" "$@"
-  fi      
+  xpop "ssh -Y $*" "$host"
 }
 
 cp-other() {
@@ -214,7 +210,7 @@ gitseb() {
 }
 
 gitseb-bootstrap() {
-  setopt localoptions xtrace
+#  setopt localoptions xtrace
   local protocol host user my_path project repository
   project=$1
   if [ $project == base ] ; then
@@ -405,7 +401,7 @@ psg() {
 }
 
 rebuild-upstream-source() {
-  setopt localoptions xtrace
+#  setopt localoptions xtrace
   local dir=${1:-$(basename $(pwd))}
   local package=${dir/-*}
   local version=${dir/*-}
@@ -471,7 +467,7 @@ run() { # remotely run
   if [[ -n "${CONSOLE}" ]] ; then
     ssh -X -t $host $command
   else
-    xpop "ssh -t $host \"$command\"" "RemoteExec@$host: $command" $@
+    xpop "ssh -t $@ $host \"$command\"" "RemoteExec@$host: $command"
   fi
 }
 
@@ -622,6 +618,7 @@ www() {
 }
 
 xpop() { # my precious :)
+#  setopt localoptions xtrace
   set -A commandAndArgs ${=1} # split $1 as if SH_WORD_SPLIT was set
   shift
 
