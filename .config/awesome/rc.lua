@@ -3,6 +3,7 @@ require("awful")
 require("awful.autofocus")
 require("awful.rules")
 require("beautiful") -- theme
+require("debian.menu")
 require("naughty") -- notifications
 require("vicious") -- widgets
 
@@ -475,9 +476,15 @@ datewidget = widget({ type = 'textbox' })
 --datewidget:set_color('#AECF96')
 vicious.register(datewidget, vicious.widgets.date, '<span weight="bold" color="white">%b %d, %R </span>')
 
+mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "Debian", debian.menu.Debian_menu.Debian },
+                                  } })
+mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon), menu = mymainmenu })
+
 function make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, mybatwidget, datewidget, mytasklist, systray_screen)
   wibox = awful.wibox({ position = "top", screen = s, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
-  wibox.widgets = { { datewidget,
+  wibox.widgets = { { mylauncher,
+                      datewidget,
                       mytaglist[s],
                       promptbox,
                       mylayoutbox[s],
