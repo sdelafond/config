@@ -12,6 +12,8 @@ xmodmap ~/.xmodmaprc
 xrdb -load ~/.Xdefaults
 xset dpms 400 600 0
 xset s off
+autocutsel -selection CLIPBOARD -fork
+autocutsel -selection PRIMARY -fork
 gkrellm &
 #xterm-screen &
 urxvt &
