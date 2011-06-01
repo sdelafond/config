@@ -1,4 +1,6 @@
 #! /bin/zsh
 
-source .zshrc
+source .zsh.prompt
+source .zsh.alias
+source .zsh.function
 connect $@
