@@ -1,6 +1,9 @@
 #! /bin/zsh
 
-source .zsh.prompt
-source .zsh.alias
-source .zsh.function
+# set -x
+# exec > /tmp/connect.log 2>&1
+
+source ~/.zsh.prompt
+source ~/.zsh.alias
+source ~/.zsh.function
 connect $@
