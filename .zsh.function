@@ -371,7 +371,7 @@ preexec() {
   if [[ -n "$KRB5CCNAME" ]] && /usr/bin/klist -5 -s ; then
   else
     local -a krb5files
-    krb5files=($(ls -t /tmp/krb*(NUrw^xAIE) 2> /dev/null))
+    krb5files=($(ls -t /tmp/krb*(Urw^xAIE) 2> /dev/null))
     case ${#krb5files} in
       0) unset KRB5CCNAME 2> /dev/null ;;
       1) export KRB5CCNAME=FILE:$krb5files[1] ;;
