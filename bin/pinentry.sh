@@ -5,8 +5,8 @@
 
 display=$2
 
-source ~/.zshrc
-keychain-init
+# source ~/.zshrc
+# keychain-init
 
 if [[ -n "$display" && (`hostname` = mephisto || "$display" != localhost:1*) ]] ; then
   if [ -f /usr/bin/pinentry-gtk-2 ] ; then
