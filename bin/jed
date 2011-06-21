@@ -100,7 +100,7 @@ if [[ -z "$SUDO_COMMAND" && ( "$HOME" != "/root" || "$HOST" == marvin ) && ( -n 
   selectWindow $(cat $SERVER_WINDOW_FILE)
 
   if [[ $AUTO_BACKGROUND = "yes" ]] && isParentShell ; then
-    runEmacsClient -n "$@"
+    { runEmacsClient "$@" > /dev/null 2>&1 ; selectWindow $oldWindow } &
   else
     runEmacsClient "$@"
     selectWindow $oldWindow
