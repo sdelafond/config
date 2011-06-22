@@ -164,10 +164,13 @@
 
   (setq org-tag-alist '((:startgroup . nil) ("@work" . ?w)
 			                    ("@home" . ?h)
-			                    ("@t" . ?t)
+			                    ("@tel" . ?t)
+			                    ("@buy" . ?b)
 			(:endgroup . nil)
 			(:startgroup . nil) ("laptop" . ?l)
 			                    ("pc" . ?p)
+			(:endgroup . nil)
+			(:startgroup . nil) ("net" . ?n)
 			(:endgroup . nil)))
 
   (setq org-todo-keywords
@@ -196,6 +199,17 @@
            (not (member word org-todo-keywords-1))
            (not (member word org-all-time-keywords))
            (not (member word org-additional-option-like-keywords)))))
+
+  (defun org-archive-region-default ()
+    "Archive all entries in the selected region"
+    (interactive)
+    (save-excursion
+      (let ((beg (region-beginning))
+	    (end (region-end)))
+	(goto-char beg)
+	(while (and (<= (point) end))
+	  (org-archive-subtree-default)
+          (outline-next-heading)))))
 
   (defun org-auto-archivable-p ()
     "Determines if the current heading is auto-archivable,
