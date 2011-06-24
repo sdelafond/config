@@ -155,6 +155,7 @@ awful.rules.rules = {
   { rule = { class = "XTerm" }, properties = { tag = getTagByShortcut("6") } },
 
   -- local terminal
+  { rule = { name = "urxvt" }, properties = { tag = getTagByShortcut("1") } },
   { rule = { name = "hippie" }, properties = { tag = getTagByShortcut("1") } },
   { rule = { name = "hp" }, properties = { tag = getTagByShortcut("1") } },
   { rule = { name = "centurion" }, properties = { tag = getTagByShortcut("1") } },
