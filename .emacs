@@ -611,7 +611,9 @@
 		("\\.html$" 		      	      . html-mode)
 		("\\.xml$" 		      	      . xml-mode)
 		("\\.z" 		      	      . sh-mode)
-		("\\.\\(todo\\|csv\\|org\\)$"         . org-mode))
+		("\\.\\(todo\\|csv\\|org\\)$"         . (lambda() (progn
+                                                                    (org-mode)
+                                                                    (flyspell-mode))))
               auto-mode-alist))
 
 ;; scrollwheel
