@@ -207,6 +207,7 @@ awful.rules.rules = {
   { rule = { class = "Epdfview" }, properties = { tag = getTagByShortcut("8") } },
   { rule = { name = "office" }, properties = { tag = getTagByShortcut("8") } },
   { rule = { class = "OpenOffice.org" }, properties = { tag = getTagByShortcut("8") } },
+  { rule = { class = "LibreOffice" }, properties = { tag = getTagByShortcut("8") } },
 
   -- Graphic & Video
   { rule = { name = "qiv" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
