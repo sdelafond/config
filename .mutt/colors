@@ -48,13 +48,13 @@ color body        yellow       default   "[;:][-]?[)/(|>\\]+"
 color index 	  color252   	 default ~R
 color index       color154	 default ~O # Old
 
-color index 	  color141       default '(~L (415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
+color index 	  color141       default '(~L (lbrowne\|bouchare\|stanley\|415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
 color index 	  color034       default '(~L @.*debian)'
 color index 	  color204       default '(~L @.*(mappy\|ysance))'
 color index 	  color196       default '~((~C (security\.debian\.org\|vendor-sec\|buildd\+logs-security)) | (~s rt\.debian\.org))'
 
 color index       brightcolor154 default ~N # New
-color index 	  brightcolor141 default '~N (~L (415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
+color index 	  brightcolor141 default '~N (~L (lbrowne\|bouchare\|stanley\|415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
 color index 	  brightcolor034 default '~N (~L @.*debian)'
 color index 	  brightcolor197 default '~N (~L @.*(mappy\|ysance))'
 color index 	  brightcolor196 default '~N ~((~C (security\.debian\.org\|vendor-sec\|buildd\+logs-security)) | (~s rt\.debian\.org))'
