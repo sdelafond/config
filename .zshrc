@@ -249,7 +249,7 @@ literal="RRR"
 typeset -xA extensions # this dictionary is also used by the lst() function
 extensions=()
 extensions[backup]="${literal}~ ${literal}# bak ${litteral}svn-commit.tmp"
-extensions[docs]="calendar chm doc dvi emacs html ics odf odt org pdf pps ppt ps reg rtf sub srt tex txt todo vcf xls xml"
+extensions[docs]="calendar chm csv doc docx dvi emacs html ics odf odt org pdf pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xml"
 extensions[archives]="ace apk arj bin bundle bz2 cab cdr deb dmg ear exe gz img iso jar lzh pgdump rar rpm tar taz tgz udeb udf war xpi z zip"
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm wmv xvid yuv"
 extensions[audio]="au mp3 ogg ogv wav wma"
@@ -265,7 +265,7 @@ if is4 ; then # use something smart to associate colors and extensions
   local -A colors
   colors=()
   colors[backup]="04;90"
-  colors[docs]="04;37"
+  colors[docs]="03;37"
   colors[archives]="01;31"
   colors[video]="01;33"
   colors[audio]="00;36"

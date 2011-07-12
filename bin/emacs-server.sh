@@ -13,7 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-if [[ -n "$TMUX" ]] ; then
+if [ -n "$TMUX" ] ; then
   MARKER=$(echo $TMUX | awk -F, '{print $2$3}')
 else
   MARKER=$STY
