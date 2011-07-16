@@ -1,7 +1,7 @@
 PROMPT='${PSEXTRA}%{$fg_no_bold[green]%}%80<...<%~%{$fg_no_bold[default]%} %(?..%{$fg_bold[red]%}!%?!%{$fg_no_bold[default]%} )# '
 
-REGULAR_RPROMPT="%{[$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]"
-VT_RPROMPT="[%{$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]"
+REGULAR_RPROMPT='%{[$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]'
+VT_RPROMPT='[%{$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]'
 
 case $TERM in
   rxvt*|xterm*)
@@ -21,7 +21,7 @@ setTerminalTitle() {
   case $TERM in
     rxvt*|xterm*|screen*)
       title="$1"
-      if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY" ]] ; then
+      if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY$TMUX" ]] ; then
         title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       else
         zstyle ':vcs_info:*' formats "[%r]"

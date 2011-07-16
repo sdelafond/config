@@ -5,6 +5,7 @@ set nonumber
 
 " Set syntax on
 syntax on
+highlight Comment cterm=italic
 
 " Indent automatically depending on filetype
 filetype indent on
