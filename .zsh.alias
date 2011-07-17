@@ -59,7 +59,7 @@ alias wai='who am i'
 alias what="whence -f"
 alias zman='run-help'
 alias zmore='zless'
-alias zreload="ps au | nth 2 'zsh$' | xargs kill -USR1"
+alias zreload="ps au | nth 2 '[z]sh$' | xargs kill -USR1"
 alias zreload-do='source ~/.zshenv ; source ~/.zshrc ; echo "reloaded zshrc"'
 
 # logging

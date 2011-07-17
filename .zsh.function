@@ -337,7 +337,7 @@ mvc() {
 nth () {
   local number=$1
   local pattern=${2:-.}
-  awk "/${pattern}/ {print \$${number}}"
+  awk '/'"${pattern}"'/ {print $'"${number}"'}'
 }
 
 pdb() {
