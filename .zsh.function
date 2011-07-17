@@ -511,7 +511,7 @@ s() { # smarter sudo
 sc() {
   name=$1
   if [[ -z "$name" ]] ; then
-    if [[ "$HOST_SHORT" = (centurion|proliant) ]] ; then
+    if [[ "$HOST_SHORT" = (proliant) ]] ; then
       name="remote"
     else
       name="main"
