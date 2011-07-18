@@ -615,7 +615,7 @@
 		("\\.\\(todo\\|csv\\|org\\)$"         . (lambda() (progn
                                                                     (org-mode)
                                                                     (flyspell-mode))))
-              auto-mode-alist))
+              auto-mode-alist)))
 
 ;; scrollwheel
 (defun up-slightly () (interactive) (scroll-up 5))
