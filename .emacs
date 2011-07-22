@@ -588,8 +588,10 @@
 (setq bahai-holidays nil)
 (setq oriental-holidays nil)
 
-;; grep-find
-(setq grep-find-command "find . -type d -name '.svn' -prune -or -type d -name 'dist' -prune -or -type f -not -name '*~' -not -name 'semantic.cache' -print0 | xargs -0 -e grep -I -n -e ")
+;; grep-find & friends
+; FIXME: template ?
+(setq grep-find-command "find . -type d -name '.svn' -prune -or -name '.git' -prune -or -type d -name 'dist' -prune -or -type d -name staging -prune -or -type f -name '*~' -prune -or -type f -not -name 'semantic.cache' -print0 | xargs -0 grep -I -n -P ")
+(setq grep-find-template "find <D> -type d -name 'dist' -prune -or -type d -name staging -prune -or -type f -name '*~' -prune -or -type f -not -name 'semantic.cache' -print0 | xargs -0 grep -I -n -P <R>")
 
 ;; key mappings for predefined functions
 (global-set-key "\C-cg" 'goto-line)
