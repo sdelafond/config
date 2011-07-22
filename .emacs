@@ -501,6 +501,9 @@
 (line-number-mode t)
 (column-number-mode t)
 
+;; narrowing
+(put 'narrow-to-region 'disabled nil)
+
 ;; font highlighting
 (unless (featurep 'xemacs)
   (require 'color-theme-seb)

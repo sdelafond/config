@@ -87,15 +87,15 @@ settings.layouts = { settings.default_layout,
 settings.tags_defs = { { shortcut = "1", layout = settings.default_layout },
 		       {  shortcut = "2", layout = settings.default_layout }, 
 		       {  shortcut = "3", layout = settings.default_layout, name = "UT Dev" },
-		       {  shortcut = "4", layout = settings.default_layout, name = "Home" },
-		       {  shortcut = "5", layout = awful.layout.suit.max, name = "UT Desktop" },
+		       {  shortcut = "4", layout = settings.default_layout },
+		       {  shortcut = "5", layout = awful.layout.suit.max, name = "UT" },
 		       {  shortcut = "6", layout = settings.default_layout, name = "Misc" }, -- nmaster = 2
 		       {  shortcut = "7", layout = settings.default_layout, name = "Mappy" },
-		       {  shortcut = "8", layout = settings.default_layout, name = "Text" },
+		       {  shortcut = "8", layout = settings.default_layout, name = "Txt" },
 		       {  shortcut = "9", layout = settings.default_layout, name = "VMs", mwfact = 0.2 },
-		       {  shortcut = "F1", layout = awful.layout.suit.floating, name = "Pics/Video" }, -- mwfact = 0.2 },
-		       {  shortcut = "F2", layout = awful.layout.suit.max, name = "Sound" },
-		       {  shortcut = "F3", layout = awful.layout.suit.max, name = "Media" },
+		       {  shortcut = "F1", layout = awful.layout.suit.floating, name = "Media" }, -- mwfact = 0.2 },
+		       {  shortcut = "F2", layout = awful.layout.suit.max, name = "Snd" },
+		       {  shortcut = "F3", layout = awful.layout.suit.max, name = "VNC" },
 		       {  shortcut = "F4", layout = awful.layout.suit.floating, name = "Comm" },
 		       {  shortcut = "F5", layout = settings.default_layout, name = "Gimp", mwfact = 0.2 },
 		       {  shortcut = "F6", layout = settings.default_layout, name = "P2P" }, }
@@ -334,7 +334,9 @@ function switch_screen(b)
   end
   awesome.restart()
   for s = 1, screen.count() do
-    make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, mybatwidget, datewidget, mytasklist, mouse.screen)
+    make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, 
+               mybatwidget, mycpuwidget, mycpuwidget2, mymemwidget,
+               datewidget, mytasklist, mouse.screen)
   end
 end
 
@@ -467,8 +469,6 @@ settings.bindings.root_digits = {
 mywibox = {}
 mytextbox = {}
 mylayoutbox = {}
-mybatwidget = {}
-mycpuwidget = {}
 
 promptbox = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
 
@@ -500,18 +500,56 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   } })
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon), menu = mymainmenu })
 
-function make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, mybatwidget, datewidget, mytasklist, systray_screen)
+mybatwidget = awful.widget.progressbar()
+mybatwidget:set_width(18)
+--   mybatwidget[s]:set_height(10)
+mybatwidget:set_vertical(true)
+mybatwidget:set_background_color('#111111')
+--  mybatwidget[s]:set_border_color('#000000')
+mybatwidget:set_color('#AECF96')
+mybatwidget:set_gradient_colors({ '#FF5656', '#AECF96', '#88A175' })
+vicious.register(mybatwidget, vicious.widgets.bat, '$2', 61, 'BAT0')
+
+mycpuwidget = awful.widget.graph()
+mycpuwidget:set_width(50)
+mycpuwidget:set_background_color("#111111")
+mycpuwidget:set_color("#FF5656")
+mycpuwidget:set_gradient_angle(0)
+mycpuwidget:set_gradient_colors({ "#AA0000", "#AA00AA", "#0000AA" })
+vicious.register(mycpuwidget, vicious.widgets.cpu, "$1", 1.5)
+
+-- mymemwidget = awful.widget.graph()
+-- mymemwidget:set_width(50)
+-- mymemwidget:set_background_color("#111111")
+-- mymemwidget:set_color("#FF5656")
+-- mycpuwidget:set_gradient_angle(0)
+-- mymemwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
+-- vicious.register(mymemwidget, vicious.widgets.mem, "$1", 1.5)
+
+mycpuwidget2 = widget({ type = "textbox" })
+-- mycpuwidget2:set_background_color("#111111")
+-- mycpuwidget2:set_color("#FF5656")
+vicious.register(mycpuwidget2, vicious.widgets.cpuinf,
+                 function (widget, args)
+                   return string.format("%.1f+%.1fGHz", args["{cpu0 ghz}"], args["{cpu1 ghz}"])
+                 end)
+
+function make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, 
+                    mybatwidget, mycpuwidget, mycpuwidget2, mymemwidget,
+                    datewidget, mytasklist, systray_screen)
   wibox = awful.wibox({ position = "top", screen = s, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
   wibox.widgets = { { mylauncher,
                       datewidget,
                       mytaglist[s],
                       promptbox,
                       mylayoutbox[s],
+                      mybatwidget,
+                      mycpuwidget2,
+                      mycpuwidget,
+--                      mymemwidget,
                       layout = awful.widget.layout.horizontal.leftright
                     },
                     s == systray_screen and widget({ type = "systray" }) or nil,
-                    mybatwidget[s],
-                    --                         mycpuwidget[s],
                     mytasklist[s],
                     layout = awful.widget.layout.horizontal.rightleft
                   }
@@ -528,25 +566,12 @@ for s = 1, screen.count() do
 					  return awful.widget.tasklist.label.currenttags(c, s)
 					end, mytasklist.buttons)
 
-  mybatwidget[s] = awful.widget.progressbar()
-  mybatwidget[s]:set_width(18)
-  --   mybatwidget[s]:set_height(10)
-  mybatwidget[s]:set_vertical(true)
-  mybatwidget[s]:set_background_color('#111111')
-  --  mybatwidget[s]:set_border_color('#000000')
-  mybatwidget[s]:set_color('#AECF96')
-  mybatwidget[s]:set_gradient_colors({ '#FF5656', '#AECF96', '#88A175' })
-  vicious.register(mybatwidget[s], vicious.widgets.bat, '$2', 61, 'BAT0')
-
---   mycpuwidget[s] = awful.widget.graph()
---   mycpuwidget[s]:set_width(50)
---   mycpuwidget[s]:set_background_color('#494B4F')
---   mycpuwidget[s]:set_color('#FF5656')
---   mycpuwidget[s]:set_gradient_colors({ '#FF5656', '#88A175', '#AECF96' })
---   vicious.register(mycpuwidget, vicious.widgets.cpu, '$1', 3)
-
   -- the wibox itself
-  make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, mybatwidget, datewidget, mytasklist, 1)
+  make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, mybatwidget,
+             mycpuwidget, mycpuwidget2,
+             mycpuwidget2, -- mymemwidget,
+             datewidget, 
+             mytasklist, 1)
 end
 
 -------------------------------------------------------
