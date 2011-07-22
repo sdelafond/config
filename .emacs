@@ -614,8 +614,8 @@
 		("\\.z" 		      	      . sh-mode)
 		("\\.\\(todo\\|csv\\|org\\)$"         . (lambda() (progn
                                                                     (org-mode)
-                                                                    (flyspell-mode))))
-              auto-mode-alist)))
+                                                                    (flyspell-mode)))))
+              auto-mode-alist))
 
 ;; scrollwheel
 (defun up-slightly () (interactive) (scroll-up 5))

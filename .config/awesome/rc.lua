@@ -18,6 +18,10 @@ end
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/seb.theme")
 --beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
+---- env
+env = {}
+env.host = os.getenv("HOST_SHORT")
+
 ---- Settings, in their own namespace
 settings = {}
 
@@ -55,7 +59,20 @@ settings.applications = { ["terminal"]        = 'xterm-screen',
 awful.util.spawn(settings.applications.keyboard_layout)
 
 -- Layouts
-settings.layouts = { awful.layout.suit.tile,
+if env.host == "hp" then
+  settings.default_layout = awful.layout.suit.max
+  settings.hp_tag = "1"
+  settings.centurion_tag = "4"
+elseif env.host == "centurion" then
+  settings.default_layout = awful.layout.suit.tile
+  settings.hp_tag = "4"
+  settings.centurion_tag = "1"
+else
+  settings.default_layout = awful.layout.suit.tile
+  settings.hp_tag = "4"
+  settings.centurion_tag = "4"
+end
+settings.layouts = { settings.default_layout,
 		     awful.layout.suit.fair,
 		     awful.layout.suit.tile.left,
 		     awful.layout.suit.tile.bottom,
@@ -67,21 +84,21 @@ settings.layouts = { awful.layout.suit.tile,
 		     awful.layout.suit.floating }
 
 -- Tags
-settings.tags_defs = { { shortcut = "1", layout = awful.layout.suit.tile },
-		       {  shortcut = "2", layout = awful.layout.suit.tile }, 
-		       {  shortcut = "3", layout = awful.layout.suit.tile, name = "UT Dev" },
-		       {  shortcut = "4", layout = awful.layout.suit.tile, name = "Home" },
+settings.tags_defs = { { shortcut = "1", layout = settings.default_layout },
+		       {  shortcut = "2", layout = settings.default_layout }, 
+		       {  shortcut = "3", layout = settings.default_layout, name = "UT Dev" },
+		       {  shortcut = "4", layout = settings.default_layout, name = "Home" },
 		       {  shortcut = "5", layout = awful.layout.suit.max, name = "UT Desktop" },
-		       {  shortcut = "6", layout = awful.layout.suit.tile, name = "Misc" }, -- nmaster = 2
-		       {  shortcut = "7", layout = awful.layout.suit.tile, name = "Mappy" },
-		       {  shortcut = "8", layout = awful.layout.suit.tile, name = "Text" },
-		       {  shortcut = "9", layout = awful.layout.suit.tile, name = "VMs", mwfact = 0.2 },
+		       {  shortcut = "6", layout = settings.default_layout, name = "Misc" }, -- nmaster = 2
+		       {  shortcut = "7", layout = settings.default_layout, name = "Mappy" },
+		       {  shortcut = "8", layout = settings.default_layout, name = "Text" },
+		       {  shortcut = "9", layout = settings.default_layout, name = "VMs", mwfact = 0.2 },
 		       {  shortcut = "F1", layout = awful.layout.suit.floating, name = "Pics/Video" }, -- mwfact = 0.2 },
 		       {  shortcut = "F2", layout = awful.layout.suit.max, name = "Sound" },
 		       {  shortcut = "F3", layout = awful.layout.suit.max, name = "Media" },
 		       {  shortcut = "F4", layout = awful.layout.suit.floating, name = "Comm" },
-		       {  shortcut = "F5", layout = awful.layout.suit.tile, name = "Gimp", mwfact = 0.2 },
-		       {  shortcut = "F6", layout = awful.layout.suit.tile, name = "P2P" }, }
+		       {  shortcut = "F5", layout = settings.default_layout, name = "Gimp", mwfact = 0.2 },
+		       {  shortcut = "F6", layout = settings.default_layout, name = "P2P" }, }
 
 settings.tags_names = {}
 for i, tag_def in ipairs(settings.tags_defs) do
@@ -156,10 +173,9 @@ awful.rules.rules = {
 
   -- local terminal
   { rule = { name = "urxvt" }, properties = { tag = getTagByShortcut("1") } },
-  { rule = { name = "hippie" }, properties = { tag = getTagByShortcut("1") } },
-  { rule = { name = "hp" }, properties = { tag = getTagByShortcut("1") } },
-  { rule = { name = "centurion" }, properties = { tag = getTagByShortcut("1") } },
-  { rule = { name = "home" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "hp" }, properties = { tag = getTagByShortcut(settings.hp_tag) } },
+  { rule = { name = "centurion" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
+  { rule = { name = "home" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "seb-debian" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
@@ -171,6 +187,7 @@ awful.rules.rules = {
 
   -- workstation at UT
   { rule = { name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
+  { rule = { name = "host51.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "sid" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "lemmiwinks" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "VNC:" }, properties = { tag = getTagByShortcut("5") } },
@@ -184,12 +201,13 @@ awful.rules.rules = {
   -- M
   { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { name = "cergy" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") }, 
     callback = { function(c) c:swap(awful.client.getmaster()) end } },
   { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
-  { rule = { name = "california" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "california" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "puff" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "beastie" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "t400" }, properties = { tag = getTagByShortcut("4") } },
@@ -200,7 +218,6 @@ awful.rules.rules = {
 
   -- Debian
   { rule = { name = "lenny" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Text
   { rule = { class = "Evince" }, properties = { tag = getTagByShortcut("8") } },
