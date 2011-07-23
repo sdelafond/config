@@ -355,21 +355,35 @@
      (set-face-foreground 'flyspell-incorrect-face "yellow3")
 
      (setq my-flyspell-regular-letters
-	   (split-string "abcdefghijklmnoprstuvwxyz" "" t))
-     (setq my-flyspell-regular-letters 
-	   (append my-flyspell-regular-letters
-		   (map 'list 'capitalize my-flyspell-regular-letters)))
+           (let ((l "abcdefghijklmnoprstuvwxyz"))
+             (split-string (concat l (upcase l)) "" t)))
+
+     (defun flyspell-same-class-p(c1 c2)
+       (let ((a '("a" "à" "â"))
+             (c '("c" "ç"))
+             (e '("e" "é" "è" "ê"))
+             (i '("i" "î"))
+             (o '("o" "ô"))
+             (u '("u" "û" "ù")))
+         (loop for tuple in (list a e i o u) do
+               (if (member c1 tuple) (return (member c2 tuple))))))
+
      (defun flyspell-word-distance (word1 word2)
        "Difference in length between WORD1 and WORD2."
        (abs (- (length word1) (length word2))))
+
      (defun flyspell-word-difference (word1 word2)
        "Different characters between WORD1 and WORD2."
        (if (or (= (length word1) 0) (= (length word2) 0))
 	   0
-	 (+ (if (string= (substring word1 0 1) (substring word2 0 1))
-		0
-	      1)
+	 (+ (let ((c1 (substring word1 0 1))
+                  (c2 (substring word2 0 1)))
+              (if (string= c1 c2)
+                  0
+                (if (flyspell-same-class-p c1 c2) 0
+                  1)))
 	    (flyspell-word-difference (substring word1 1) (substring word2 1)))))
+
      (defun flyspell-accent-count (word)
        (let ((count 0))
 	 (dolist (x (split-string word "" t) count)
