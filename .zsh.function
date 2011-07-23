@@ -511,13 +511,13 @@ s() { # smarter sudo
 sc() {
   name=$1
   if [[ -z "$name" ]] ; then
-    if [[ "$HOST_SHORT" = (proliant) ]] ; then
+    if [[ "$HOST_SHORT" = (proliant|centurion) ]] ; then
       name="remote"
     else
       name="main"
     fi
   fi
-  if false && whence tmux &> /dev/null ; then
+  if whence tmux &> /dev/null ; then
     tmux attach -t $name
   elif whence screen &> /dev/null ; then
     screen -R $name -D -A
