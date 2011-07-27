@@ -76,7 +76,12 @@ startEmacsServer() {
     screen -X setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
     screen=screen
   else
-    WINDOW=$(tmux list-windows | wc -l)
+    WINDOW=0
+    tmux list-windows | while read l ; do
+      j=$(echo $l | perl -pe 's/:.+//')
+      [[ $j != $WINDOW ]] && break
+      WINDOW=$(($WINDOW+1))
+    done
     tmux setenv WINDOW $WINDOW
     tmux setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
     screen=(tmux new-window -t $WINDOW)

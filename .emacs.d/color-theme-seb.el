@@ -39,7 +39,7 @@ widget, custom, latex, ediff."
      (show-paren-mismatch-face ((t (:foreground "white" :background "red"))))
      (flyspell-duplicate ((t (:foreground "color-81" :bold nil :weight normal))))
      (flyspell-incorrect ((t (:foreground "color-81" :bold nil :weight normal))))
-     (font-lock-comment-face ((t (:foreground "color-238" :italic t :bold t))))
+     (font-lock-comment-face ((t (:foreground "color-238" :inverse-video t :bold t))))
      (font-lock-string-face ((t (:foreground "color-210"))))
      (font-lock-keyword-face ((t (:foreground "color-27"))))
      (font-lock-builtin-face ((t (:foreground "color-84"))))

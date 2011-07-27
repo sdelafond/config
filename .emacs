@@ -355,42 +355,58 @@
      (set-face-foreground 'flyspell-incorrect-face "yellow3")
 
      (setq my-flyspell-regular-letters
-	   (split-string "abcdefghijklmnoprstuvwxyz" "" t))
-     (setq my-flyspell-regular-letters 
-	   (append my-flyspell-regular-letters
-		   (map 'list 'capitalize my-flyspell-regular-letters)))
+           (let ((l "abcdefghijklmnoprstuvwxyz"))
+             (split-string (concat l (upcase l)) "" t)))
+
+     (defun flyspell-same-class-p(c1 c2)
+       (let ((a '("a" "à" "â"))
+             (c '("c" "ç"))
+             (e '("e" "é" "è" "ê"))
+             (i '("i" "î"))
+             (o '("o" "ô"))
+             (u '("u" "û" "ù")))
+         (loop for tuple in (list a e i o u) do
+               (if (member c1 tuple) (return (member c2 tuple))))))
+
      (defun flyspell-word-distance (word1 word2)
        "Difference in length between WORD1 and WORD2."
        (abs (- (length word1) (length word2))))
+
      (defun flyspell-word-difference (word1 word2)
        "Different characters between WORD1 and WORD2."
        (if (or (= (length word1) 0) (= (length word2) 0))
-	   0
-	 (+ (if (string= (substring word1 0 1) (substring word2 0 1))
-		0
-	      1)
-	    (flyspell-word-difference (substring word1 1) (substring word2 1)))))
+           0
+         (+ (let ((c1 (substring word1 0 1))
+                  (c2 (substring word2 0 1)))
+              (if (string= c1 c2)
+                  0
+                (if (flyspell-same-class-p c1 c2) 0
+                  1)))
+            (flyspell-word-difference (substring word1 1) (substring word2 1)))))
+
      (defun flyspell-accent-count (word)
        (let ((count 0))
-	 (dolist (x (split-string word "" t) count)
-	   (when (not (member x my-flyspell-regular-letters))
-	     (setq count (1+ count))))))
+         (dolist (x (split-string word "" t) count)
+           (when (not (member x my-flyspell-regular-letters))
+             (setq count (1+ count))))))
+
      (defun my-flyspell-sort-corrections-function (word1 word2 word)
        "Sort WORD1 and WORD2 as corrections of WORD: favor the
         corrections having the same length as WORD, and use
-        number of 'special' characters and the closeness of the
-        corrected word to the original as additional criteria."
+        number of 'special' characters, then distance from the
+        corrected word to the original, as additional criteria."
        (let ((distance1 (flyspell-word-distance word1 word))
-	     (distance2 (flyspell-word-distance word2 word)))
-	 (if (= distance1 distance2)
-	     (let ((dif1 (flyspell-word-difference word1 word))
-		   (dif2 (flyspell-word-difference word2 word)))
-	       (if (= dif1 dif2)
-		   (let ((accents-count1 (flyspell-accent-count word1))
-			 (accents-count2 (flyspell-accent-count word2)))
-		     (>= accents-count1 accents-count2))
-		 (< dif1 dif2)))
-	   (< distance1 distance2))))
+             (distance2 (flyspell-word-distance word2 word)))
+         (if (= distance1 distance2)
+             (let ((dif1 (flyspell-word-difference word1 word))
+                   (dif2 (flyspell-word-difference word2 word)))
+               (if (= dif1 dif2)
+                   (let ((accents-count1 (flyspell-accent-count word1))
+                         (accents-count2 (flyspell-accent-count word2)))
+                     (>= accents-count1 accents-count2))
+                 (< dif1 dif2)))
+           (< distance1 distance2))))
+
      (setq flyspell-sort-corrections-function 'my-flyspell-sort-corrections-function)
      (setq flyspell-sort-corrections t)
      (global-set-key "\C-cf" (make-interactive-fun 'change-dict "francais"))
