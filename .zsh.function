@@ -368,16 +368,16 @@ preexec() {
 
   setTerminalTitle "$cmd"
 
-  if [[ -n "$KRB5CCNAME" ]] && /usr/bin/klist -5 -s ; then
-  else
-    local -a krb5files
-    krb5files=($(ls -t /tmp/krb*(Urw^xAIE) 2> /dev/null))
-    case ${#krb5files} in
-      0) unset KRB5CCNAME 2> /dev/null ;;
-      1) export KRB5CCNAME=FILE:$krb5files[1] ;;
-      2) export KRB5CCNAME=FILE:$krb5files[1] ; rm -f $krb5files[2,-1] ;;
-    esac
-  fi
+#  if [[ -n "$KRB5CCNAME" ]] && /usr/bin/klist -5 -s ; then
+#  else
+#    local -a krb5files
+#    krb5files=($(ls -t /tmp/krb*(Urw^xAIE) 2> /dev/null))
+#    case ${#krb5files} in
+#      0) unset KRB5CCNAME 2> /dev/null ;;
+#      1) export KRB5CCNAME=FILE:$krb5files[1] ;;
+#      2) export KRB5CCNAME=FILE:$krb5files[1] ; rm -f $krb5files[2,-1] ;;
+#    esac
+#  fi
   case $cmd in
     (connect|debsign|debuild|git|gitseb|gpg|rsync|run|scp|ssh|sshfs|svn|unison))
       have keychain && have gpg-connect-agent && keychain-init && echo UPDATESTARTUPTTY | gpg-connect-agent -q DN ;;
@@ -500,7 +500,7 @@ s() { # smarter sudo
   ksuArgs=("-q" "-e")
 
   local domain=$(awk '/default_realm/ {print $3}' /etc/krb5.conf 2> /dev/null)
-  if [[ $OSTYPE != *bsd* ]] && grep -q krb /etc/pam.d/common-auth && klist -5 2DN | grep -q $domain ; then
+  if [[ $OSTYPE != *bsd* ]] && grep -qE '^[^#]krb' /etc/pam.d/common-auth && klist -5 2DN | grep -q $domain ; then
 # && ksu $ksuArgs /bin/true ADN ; then
     ksu $ksuArgs $SHELL -c "$expandedCommand"
   else
