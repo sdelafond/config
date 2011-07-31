@@ -36,6 +36,9 @@ settings.no_overlap = true
 settings.no_offscreen = true
 settings.new_become_master = true
 
+lastTag = "1"
+currentTag = "1"
+
 -- Keys
 settings.keys = { none = {}, super = {"Mod4"}, alt = {"Mod1"},
 		  shift = {"Shift"}, control = {"Control"} }
@@ -363,6 +366,7 @@ settings.bindings.global = {
 
   [{settings.keys.super, "Tab"}] = function() awful.client.focus.history.previous() ; if client.focus then client.focus:raise() end end,
   [{settings.keys.super, "u"}] = awful.client.urgent.jumpto,
+  [{settings.keys.super_shift, "u"}] = function() awful.tag.viewonly(getTagByShortcut(lastTag)) end,
   
   [{settings.keys.super, "Left"}] = awful.tag.viewprev,
   [{settings.keys.super, "Right"}] = awful.tag.viewnext,
@@ -677,8 +681,10 @@ function manage_client(c)
   awful.client.movetoscreen(c, mouse.screen)
 end
 client.add_signal("manage", manage_client)
+
+
 client.add_signal("new", 
-                  function(c)
+                  function(c) -- don't mark focused client as "urgent"
                     c:add_signal("property::urgent",
                                  function()
                                    if client.focus == c and c.urgent then
@@ -686,3 +692,13 @@ client.add_signal("new",
                                  end
                                end)
                   end)
+
+awful.tag.attached_add_signal(nil, "property::selected",
+                              function(t)
+                                my_debug(string.format("Tag: '%s'", t.name))
+                                if currentTag ~= t.name then
+                                  lastTag = currentTag
+                                  currentTag = t.name
+                                end
+                              end
+                            )
