@@ -137,7 +137,7 @@
   (setq diary-file "~/org/calendar.emacs")
   (setq org-agenda-files (directory-files "~/org" t "^[^.].*\\.todo$"))
   (setq org-agenda-include-diary t)
-  (setq org-agenda-ndays 7)
+  (setq org-agenda-span 7)
   (setq org-agenda-show-all-dates t)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-if-done t)
@@ -598,11 +598,11 @@
 (setq visible-bell t)
 
 ;; impartiality is key here
-(setq christian-holidays nil)
-(setq hebrew-holidays nil)
-(setq islamic-holidays nil)
-(setq bahai-holidays nil)
-(setq oriental-holidays nil)
+(setq holiday-christian-holidays nil)
+(setq holiday-hebrew-holidays nil)
+(setq holiday-islamic-holidays nil)
+(setq holiday-bahai-holidays nil)
+(setq holiday-oriental-holidays nil)
 
 ;; grep-find & friends
 ; FIXME: template ?
@@ -629,14 +629,15 @@
 		("\\(svn-commit\\|COMMIT_EDITMSG\\)"  . (lambda () (progn
                                                                      (org-mode)
                                                                      (flyspell-mode))))
+		("\\.org$"                            . (lambda () (progn
+                                                                     (org-mode)
+                                                                     (flyspell-mode))))
+		("\\.\\(todo\\|csv\\)$"               . (org-mode))
 		("\\.jsp$" 		      	      . jsp-mode)
 		("\\.html$" 		      	      . html-mode)
 		("\\.xml$" 		      	      . xml-mode)
-		("\\.z" 		      	      . sh-mode)
-		("\\.\\(todo\\|csv\\|org\\)$"         . (lambda() (progn
-                                                                    (org-mode)
-                                                                    (flyspell-mode)))))
-              auto-mode-alist))
+		("\\.z" 		      	      . sh-mode)))
+              auto-mode-alist)
 
 ;; scrollwheel
 (defun up-slightly () (interactive) (scroll-up 5))
