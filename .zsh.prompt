@@ -1,4 +1,4 @@
-PROMPT='${PSEXTRA}%{$fg_no_bold[green]%}%80<...<%~%{$fg_no_bold[default]%} %(?..%{$fg_bold[red]%}!%?!%{$fg_no_bold[default]%} )# '
+PROMPT='${PSEXTRA}%{$fg_no_bold[green]%}%80<...<%~%{$fg_no_bold[default]%} %(?..%{$fg_bold[red]%}!%?%{$fg_no_bold[default]%} )# '
 
 REGULAR_RPROMPT='%{[$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]'
 VT_RPROMPT='[%{$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]'
@@ -45,4 +45,4 @@ precmd() {
   vcs_stuff 2> /dev/null
 }
 
-[[ $EUID -eq 0 ]] && RPROMPT="%S${RPROMPT}%s"
+[[ "$EUID" != 0 ]] || RPROMPT="%S${RPROMPT}%s"

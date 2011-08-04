@@ -194,7 +194,7 @@ gitseb() {
 #  setopt localoptions xtrace
   local d reload
   for d in .config-*(N) ; do
-    echo $d
+    echo "## $(basename ${d//.config-})"
     pushd $d
     if [[ $1 != commit ]] ; then
 #      local f=`mktemp tmp.XXXXXXXXXX`
