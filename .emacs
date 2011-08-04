@@ -586,6 +586,7 @@
 (setq ids-creator-id "seb")
 (setq inhibit-startup-message t)
 (setq line-move-visual nil) 
+(menu-bar-mode -1)
 (setq py-indent-offset 2)
 (setq python-indent 2)
 (setq perl-indent-level 2)
@@ -636,8 +637,8 @@
 		("\\.jsp$" 		      	      . jsp-mode)
 		("\\.html$" 		      	      . html-mode)
 		("\\.xml$" 		      	      . xml-mode)
-		("\\.z" 		      	      . sh-mode)))
-              auto-mode-alist)
+		("\\.z" 		      	      . sh-mode))
+              auto-mode-alist))
 
 ;; scrollwheel
 (defun up-slightly () (interactive) (scroll-up 5))

@@ -9,7 +9,7 @@ widget, custom, latex, ediff."
   (color-theme-install
    '(color-theme-console-seb
      ((foreground-color . "color-252")
-      (background-color . "transparent")
+;;      (background-color . "transparent")
       (mouse-color . "black")
       (cursor-color . "color-232")
       (border-color . "black")

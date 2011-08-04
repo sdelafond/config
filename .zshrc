@@ -99,6 +99,8 @@ is4 3 9 && autoload -Uz vcs_info && {
 # zle -C hist-complete menu-select _hist_complete
 # bindkey '^H'  hist-complete
 
+bindkey '^r' history-incremental-pattern-search-backward
+
 # complete most recent files
 zstyle ':completion:most-recent-file:*' match-original both
 zstyle ':completion:most-recent-file:*' file-sort modification
@@ -250,7 +252,7 @@ typeset -xA extensions # this dictionary is also used by the lst() function
 extensions=()
 extensions[backup]="${literal}~ ${literal}# bak ${litteral}svn-commit.tmp"
 extensions[docs]="calendar chm csv doc docx dvi emacs html ics odf ods 
-odt org pdf pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xml"
+odt org pdf pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xlsx xml"
 extensions[archives]="ace apk arj bin bundle bz2 cab cdr deb dmg ear exe gz img iso jar lzh pgdump rar rpm tar taz tgz udeb udf war xpi z zip"
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm wmv xvid yuv"
 extensions[audio]="au mp3 ogg ogv wav wma"
