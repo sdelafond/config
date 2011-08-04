@@ -633,7 +633,7 @@
 		("\\.org$"                            . (lambda () (progn
                                                                      (org-mode)
                                                                      (flyspell-mode))))
-		("\\.\\(todo\\|csv\\)$"               . (org-mode))
+		("\\.\\(todo\\|csv\\)$"               . org-mode)
 		("\\.jsp$" 		      	      . jsp-mode)
 		("\\.html$" 		      	      . html-mode)
 		("\\.xml$" 		      	      . xml-mode)
