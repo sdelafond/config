@@ -101,7 +101,7 @@ autoload -U predict-on && {
 # zle -C hist-complete menu-select _hist_complete
 # bindkey '^H'  hist-complete
 
-is4 3 10 & bindkey '^r' history-incremental-pattern-search-backward
+is4 3 10 && bindkey '^r' history-incremental-pattern-search-backward
 
 # complete most recent files
 zstyle ':completion:most-recent-file:*' match-original both
