@@ -208,6 +208,7 @@ awful.rules.rules = {
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") }, 
+  { rule = { name = "proliant" }, properties = { tag = getTagByShortcut("4") }, 
     callback = { function(c) c:swap(awful.client.getmaster()) end } },
   { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "california" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
