@@ -208,6 +208,7 @@ awful.rules.rules = {
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") }, 
+  { rule = { name = "proliant" }, properties = { tag = getTagByShortcut("4") }, 
     callback = { function(c) c:swap(awful.client.getmaster()) end } },
   { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "california" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
@@ -367,7 +368,7 @@ settings.bindings.global = {
 
   [{settings.keys.super, "Tab"}] = function() awful.client.focus.history.previous() ; if client.focus then client.focus:raise() end end,
   [{settings.keys.super, "u"}] = awful.client.urgent.jumpto,
-  [{settings.keys.super_shift, "u"}] = function() awful.tag.viewonly(getTagByShortcut(lastTag)) end,
+  [{settings.keys.super_shift, "u"}] = function() awful.tag.viewonly(lastTag) end,
   
   [{settings.keys.super, "Left"}] = awful.tag.viewprev,
   [{settings.keys.super, "Right"}] = awful.tag.viewnext,
@@ -697,9 +698,9 @@ client.add_signal("new",
 awful.tag.attached_add_signal(nil, "property::selected",
                               function(t)
                                 my_debug(string.format("Tag: '%s'", t.name))
-                                if currentTag ~= t.name then
+                                if currentTag.name ~= t.name then
                                   lastTag = currentTag
-                                  currentTag = t.name
+                                  currentTag = t
                                 end
                               end
                             )

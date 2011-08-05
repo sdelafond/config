@@ -379,7 +379,7 @@ if [[ ${#javas} -gt 0 ]] ; then
 fi
 
 # makeflags
-export MAKEFLAGS="-j$(G '^processor\s:' /proc/cpuinfo | wc -l)"
+export MAKEFLAGS="-j$(grep '^processor\s:' /proc/cpuinfo | wc -l)"
 
 # default, to be overloaded later
 export DEBEMAIL="sdelafond@gmail.com"
