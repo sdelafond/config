@@ -1,3 +1,11 @@
+is4 () {
+  [[ $ZSH_VERSION == 4.* ]] || return 1
+  local minorVersion=${1:-0}
+  [[ $(echo $ZSH_VERSION | awk -F. '{print $2}') -ge $minorVersion ]]
+  local revision=${2:-0}
+  [[ $(echo $ZSH_VERSION | awk -F. '{print $3}') -ge $revision ]]
+}
+
 ###################################
 # Modules & modes
 ###################################
@@ -93,7 +101,7 @@ autoload -U predict-on && {
 # zle -C hist-complete menu-select _hist_complete
 # bindkey '^H'  hist-complete
 
-bindkey '^r' history-incremental-pattern-search-backward
+is4 3 10 & bindkey '^r' history-incremental-pattern-search-backward
 
 # complete most recent files
 zstyle ':completion:most-recent-file:*' match-original both
