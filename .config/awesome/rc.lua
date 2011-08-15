@@ -90,7 +90,7 @@ settings.layouts = { settings.default_layout,
 settings.tags_defs = { { shortcut = "1", layout = settings.default_layout },
 		       {  shortcut = "2", layout = settings.default_layout }, 
 		       {  shortcut = "3", layout = settings.default_layout, name = "UT Dev" },
-		       {  shortcut = "4", layout = settings.default_layout },
+		       {  shortcut = "4", layout = settings.default_layout, name = "Home" },
 		       {  shortcut = "5", layout = awful.layout.suit.max, name = "UT" },
 		       {  shortcut = "6", layout = settings.default_layout, name = "Misc" }, -- nmaster = 2
 		       {  shortcut = "7", layout = settings.default_layout, name = "Mappy" },
@@ -207,7 +207,7 @@ awful.rules.rules = {
   { rule = { name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Home
-  { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") }, 
+  { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 
   { rule = { name = "proliant" }, properties = { tag = getTagByShortcut("4") }, 
     callback = { function(c) c:swap(awful.client.getmaster()) end } },
   { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
