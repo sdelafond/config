@@ -546,6 +546,13 @@ setlocale() {
   fi
 }
 
+set-git-info() {
+  export GIT_AUTHOR_EMAIL="$1"
+  export GIT_AUTHOR_NAME="$2"
+  export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
+  export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
+}
+
 ssh-authorize-key() {
   [[ ${#argv} -lt 1 ]] && echo "$0 <host> [key>]" && return 1
   local host=$1
