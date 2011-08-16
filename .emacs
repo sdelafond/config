@@ -207,7 +207,7 @@
       (let ((beg (region-beginning))
 	    (end (region-end)))
 	(goto-char beg)
-	(while (and (<= (point) end))
+	(while (<= (point) end)
 	  (org-archive-subtree-default)
           (outline-next-heading)))))
 
@@ -313,13 +313,13 @@
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps t)
 
-  (require 'remember)
-  (org-remember-insinuate)
-  (define-key global-map "\C-cr" 'org-remember)
-  (setq org-remember-store-without-prompt t)
-  (setq org-remember-templates
-        '(("Work" ?w "* TODO %?\n  %U %a" "~/org/work.todo" "Inbox")
-          ("Home" ?h "* TODO %?\n  %U %a" "~/org/home.todo" "Inbox")))
+  ;; (require 'remember)
+  ;; (org-remember-insinuate)
+  ;; (define-key global-map "\C-cr" 'org-remember)
+  ;; (setq org-remember-store-without-prompt t)
+  ;; (setq org-remember-templates
+  ;;       '(("Work" ?w "* TODO %?\n  %U %a" "~/org/work.todo" "Inbox")
+  ;;         ("Home" ?h "* TODO %?\n  %U %a" "~/org/home.todo" "Inbox")))
   (define-key org-mode-map "\C-ca" 'org-agenda)
   (define-key org-mode-map "\C-cl" 'org-store-link))
 (add-hook 'org-load-hook 'my-org-mode-hook)
