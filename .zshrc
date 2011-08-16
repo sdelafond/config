@@ -351,13 +351,13 @@ HELPDIR=~/.zsh/help
 MAILCHECK=0
 
 # editor & visual
-if [[ -n "$CYGWIN" ]] ; then
+if [[ -n "$CYGWIN" ]] || [[ ! -f $HOME/bin/jed ]] ; then
   EDITOR_ZSH="emacs"
 else
   EDITOR_ZSH=$HOME/bin/jed
 fi
 export EDITOR=$EDITOR_ZSH
-export VISUAL=$EDITOR
+export VISUAL=$EDITOR_ZSH
 
 if which less > /dev/null ; then
   export PAGER="less"
@@ -380,11 +380,6 @@ fi
 
 # makeflags
 export MAKEFLAGS="-j$(grep '^processor\s:' /proc/cpuinfo | wc -l)"
-
-# default, to be overloaded later
-export DEBEMAIL="sdelafond@gmail.com"
-export GIT_AUTHOR_EMAIL=$DEBEMAIL
-export GIT_AUTHOR_NAME="Sébastien Delafond"
 
 # short hostname
 export HOST_SHORT=${HOST/.*}
@@ -451,8 +446,5 @@ done
 
 local hostFile=~/.zsh_$HOST
 [[ -f $hostFile ]] && source $hostFile
-
-export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
-export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 
 trap 'zreload-do' USR1
