@@ -357,7 +357,7 @@ pydoc-html() {
 }
 
 preexec() {
-#  setopt localoptions xtrace
+# setopt localoptions xtrace
   set $=2
   local cmd
 
