@@ -204,12 +204,17 @@
     "Archive all entries in the selected region"
     (interactive)
     (save-excursion
-      (let ((beg (region-beginning))
-	    (end (region-end)))
-	(goto-char beg)
-	(while (<= (point) end)
+      (let ((beg (if (org-region-active-p)
+		     (region-beginning)
+		   (point-min)))
+	    (end (if (org-region-active-p)
+		     (region-end)
+		   (point-max))))
+	(goto-char end)
+	(outline-previous-heading)
+	(while (>= (point) beg)
 	  (org-archive-subtree-default)
-          (outline-next-heading)))))
+	  (outline-previous-heading)))))
 
   (defun org-auto-archivable-p ()
     "Determines if the current heading is auto-archivable,
