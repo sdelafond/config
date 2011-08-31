@@ -368,7 +368,7 @@ settings.bindings.global = {
 
   [{settings.keys.super, "Tab"}] = function() awful.client.focus.history.previous() ; if client.focus then client.focus:raise() end end,
   [{settings.keys.super, "u"}] = awful.client.urgent.jumpto,
-  [{settings.keys.super_shift, "u"}] = function() awful.tag.viewonly(lastTag) end,
+  [{settings.keys.super, "a"}] = function() awful.tag.viewonly(lastTag) end,
   
   [{settings.keys.super, "Left"}] = awful.tag.viewprev,
   [{settings.keys.super, "Right"}] = awful.tag.viewnext,
