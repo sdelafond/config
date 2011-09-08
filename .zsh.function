@@ -563,7 +563,8 @@ ssh-remove-key() {
 #  setopt localoptions xtrace
   local host=${1/*@}
   ssh-keygen -R $host
-  ssh-keygen -R $(digs $host)
+  local ip=$(digs $host)
+  [[ -z "$ip" ]] || ssh-keygen -R 
 }
 
 svn-showlastdiff() {
