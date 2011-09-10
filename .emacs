@@ -366,10 +366,10 @@
      (defun flyspell-same-class-p(c1 c2)
        (let ((a '("a" "à" "â"))
              (c '("c" "ç"))
-             (e '("e" "é" "è" "ê"))
-             (i '("i" "î"))
-             (o '("o" "ô"))
-             (u '("u" "û" "ù")))
+             (e '("e" "é" "è" "ê" "ë"))
+             (i '("i" "î" "ï"))
+             (o '("o" "ô" "ö"))
+             (u '("u" "û" "ù" "ü")))
          (loop for tuple in (list a e i o u) do
                (if (member c1 tuple) (return (member c2 tuple))))))
 

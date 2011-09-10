@@ -229,7 +229,7 @@ gitseb-bootstrap() {
 }
 
 grepz() {
-  grep -H "$@" $ZSH_CONFIG_FILES .svn-*/.zsh_*(N)
+  grep -H "$@" $ZSH_CONFIG_FILES .config-*/.zsh_*(N)
 }
 
 have() {
