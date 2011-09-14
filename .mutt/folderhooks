@@ -1,1 +1,2 @@
-folder-hook . "exec collapse-all"
+folder-hook INBOX$ "set sort=threads ; exec collapse-all"
+folder-hook !INBOX$ "set sort=date ; push *"
