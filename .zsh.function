@@ -530,6 +530,13 @@ se() {
   s /etc/init.d/$service $@
 }
 
+set-git-info() {
+  export GIT_COMMITTER_NAME="$2"
+  export GIT_AUTHOR_NAME="$2"
+  export GIT_COMMITTER_EMAIL="$1"
+  export GIT_AUTHOR_EMAIL="$1"
+}
+
 setcpufreq() {
   local f=${1}Ghz
   s cpufreq-set -f $f
