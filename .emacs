@@ -347,9 +347,10 @@
        (flyspell-buffer))
      (defun is-buffer-french ()
        "Check if the buffer contains french text."
-       (save-excursion
+       (progn
          (goto-char (point-min))
-         (re-search-forward " \\(je\\|tu\\|il\\|que\\|et\\|les?\\|des?\\) " nil t)))
+         (save-excursion
+           (re-search-forward " \\(je\\|tu\\|il\\|que\\|et\\|les?\\|des?\\) " nil t))))
      (defun guess-dict () 
        (if (is-buffer-french) (change-dict "francais")
 	 (change-dict "american")))
