@@ -330,6 +330,15 @@ mf() {
   firefox "$1" &
 }
 
+move-in-files() {
+  /bin/ls -d $ZSH_CONFIG_FILES ~/.emacs* ~/.screenrc ~/.tmux.conf ~/.git*
+}
+
+move-in() {
+  [[ ! ${#argv} -eq 1 ]] && echo "$0 <host>" && return 1
+  scp -r $(move-in-files) $1:
+}
+
 mvc() {
   mkdir -p "$argv[-1]" ; mv $@
 }
@@ -650,9 +659,4 @@ xpop() { # my precious :)
   else
     zsh -c "$expandedCommand"
   fi
-}
-
-zbootstrap() {
-  [[ ! ${#argv} -eq 1 ]] && echo "$0 <host>" && return 1
-  scp -r .screenrc $ZSH_CONFIG_FILES $1:
 }
