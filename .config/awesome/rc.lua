@@ -218,7 +218,7 @@ awful.rules.rules = {
   { rule = { name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "Vncviewer", name = "hp" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "centurion" }, properties = { tag = getTagByShortcut("F3") } },
-  { rule = { class = "Vncviewer", name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { class = "Vncviewer", name = "hippie" }, properties = { tag = getTagByShortcut("F3") } },
 
   -- Debian
   { rule = { name = "lenny" }, properties = { tag = getTagByShortcut("7") } },
