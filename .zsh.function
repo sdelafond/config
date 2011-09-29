@@ -368,7 +368,7 @@ preexec() {
 
   setTerminalTitle "$cmd"
 
-  if [[ -n "$KRB5CCNAME" ]] && /usr/bin/klist -5 -s ; then
+  if [[ -n "$KRB5CCNAME" ]] && /usr/bin/klist -5 -s 2DN ; then
   else
     local -a krb5files
     krb5files=($(ls -t /tmp/krb*(NUrw^xAIE) 2> /dev/null))

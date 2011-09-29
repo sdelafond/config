@@ -702,3 +702,5 @@
  '(org-link ((((class color) (background dark)) (:foreground "magenta" :underline t))))
  '(org-tag ((t (:foreground "color-68" :underline nil :weight bold))))
  '(org-todo ((t (:foreground "blue" :weight bold)))))
+
+(put 'downcase-region 'disabled nil)
