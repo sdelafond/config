@@ -12,14 +12,13 @@ rhttp = URI.regexp(urlSchemes)
 selection = `xclip -o`
 
 if ARGV[0] == nil then
-    selection.gsub!(/(^\+|\n)/, '')
-    selection.gsub!(/http/, ' http')  
-    case selection
-    when rhttp
-      URI::extract(selection, urlSchemes).each { |url|
-        system("#{browser} '#{url}'")
-      }
-    end
+  selection.gsub!(/^\+/m, '')
+  case selection
+  when rhttp
+    URI::extract(selection, urlSchemes).each { |url|
+      system("#{browser} '#{url}'")
+    }
+  end
 elsif ARGV[0] == 'gs' then
   system("#{browser} 'http://www.google.com/search?q=#{selection}'")
 elsif ARGV[0] == 'gi' then

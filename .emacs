@@ -137,7 +137,7 @@
   (setq diary-file "~/org/calendar.emacs")
   (setq org-agenda-files (directory-files "~/org" t "^[^.].*\\.todo$"))
   (setq org-agenda-include-diary t)
-  (setq org-agenda-ndays 7)
+  (setq org-agenda-span 7)
   (setq org-agenda-show-all-dates t)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-if-done t)
@@ -164,10 +164,13 @@
 
   (setq org-tag-alist '((:startgroup . nil) ("@work" . ?w)
 			                    ("@home" . ?h)
-			                    ("@t" . ?t)
+			                    ("@tel" . ?t)
+			                    ("@buy" . ?b)
 			(:endgroup . nil)
 			(:startgroup . nil) ("laptop" . ?l)
 			                    ("pc" . ?p)
+			(:endgroup . nil)
+			(:startgroup . nil) ("net" . ?n)
 			(:endgroup . nil)))
 
   (setq org-todo-keywords
@@ -196,6 +199,22 @@
            (not (member word org-todo-keywords-1))
            (not (member word org-all-time-keywords))
            (not (member word org-additional-option-like-keywords)))))
+
+  (defun org-archive-region-default ()
+    "Archive all entries in the selected region"
+    (interactive)
+    (save-excursion
+      (let ((beg (if (org-region-active-p)
+		     (region-beginning)
+		   (point-min)))
+	    (end (if (org-region-active-p)
+		     (region-end)
+		   (point-max))))
+	(goto-char end)
+	(outline-previous-heading)
+	(while (>= (point) beg)
+	  (org-archive-subtree-default)
+	  (outline-previous-heading)))))
 
   (defun org-auto-archivable-p ()
     "Determines if the current heading is auto-archivable,
@@ -299,13 +318,13 @@
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps t)
 
-  (require 'remember)
-  (org-remember-insinuate)
-  (define-key global-map "\C-cr" 'org-remember)
-  (setq org-remember-store-without-prompt t)
-  (setq org-remember-templates
-        '(("Work" ?w "* TODO %?\n  %U %a" "~/org/work.todo" "Inbox")
-          ("Home" ?h "* TODO %?\n  %U %a" "~/org/home.todo" "Inbox")))
+  ;; (require 'remember)
+  ;; (org-remember-insinuate)
+  ;; (define-key global-map "\C-cr" 'org-remember)
+  ;; (setq org-remember-store-without-prompt t)
+  ;; (setq org-remember-templates
+  ;;       '(("Work" ?w "* TODO %?\n  %U %a" "~/org/work.todo" "Inbox")
+  ;;         ("Home" ?h "* TODO %?\n  %U %a" "~/org/home.todo" "Inbox")))
   (define-key org-mode-map "\C-ca" 'org-agenda)
   (define-key org-mode-map "\C-cl" 'org-store-link))
 (add-hook 'org-load-hook 'my-org-mode-hook)
@@ -328,8 +347,10 @@
        (flyspell-buffer))
      (defun is-buffer-french ()
        "Check if the buffer contains french text."
-       (goto-char (point-min))
-       (re-search-forward " \\(je\\|tu\\|il\\|que\\|et\\|les?\\|des?\\) " nil t))
+       (progn
+         (goto-char (point-min))
+         (save-excursion
+           (re-search-forward " \\(je\\|tu\\|il\\|que\\|et\\|les?\\|des?\\) " nil t))))
      (defun guess-dict () 
        (if (is-buffer-french) (change-dict "francais")
 	 (change-dict "american")))
@@ -340,42 +361,58 @@
      (set-face-foreground 'flyspell-incorrect-face "yellow3")
 
      (setq my-flyspell-regular-letters
-	   (split-string "abcdefghijklmnoprstuvwxyz" "" t))
-     (setq my-flyspell-regular-letters 
-	   (append my-flyspell-regular-letters
-		   (map 'list 'capitalize my-flyspell-regular-letters)))
+           (let ((l "abcdefghijklmnoprstuvwxyz"))
+             (split-string (concat l (upcase l)) "" t)))
+
+     (defun flyspell-same-class-p(c1 c2)
+       (let ((a '("a" "à" "â"))
+             (c '("c" "ç"))
+             (e '("e" "é" "è" "ê" "ë"))
+             (i '("i" "î" "ï"))
+             (o '("o" "ô" "ö"))
+             (u '("u" "û" "ù" "ü")))
+         (loop for tuple in (list a e i o u) do
+               (if (member c1 tuple) (return (member c2 tuple))))))
+
      (defun flyspell-word-distance (word1 word2)
        "Difference in length between WORD1 and WORD2."
        (abs (- (length word1) (length word2))))
+
      (defun flyspell-word-difference (word1 word2)
        "Different characters between WORD1 and WORD2."
        (if (or (= (length word1) 0) (= (length word2) 0))
-	   0
-	 (+ (if (string= (substring word1 0 1) (substring word2 0 1))
-		0
-	      1)
-	    (flyspell-word-difference (substring word1 1) (substring word2 1)))))
+           0
+         (+ (let ((c1 (substring word1 0 1))
+                  (c2 (substring word2 0 1)))
+              (if (string= c1 c2)
+                  0
+                (if (flyspell-same-class-p c1 c2) 0
+                  1)))
+            (flyspell-word-difference (substring word1 1) (substring word2 1)))))
+
      (defun flyspell-accent-count (word)
        (let ((count 0))
-	 (dolist (x (split-string word "" t) count)
-	   (when (not (member x my-flyspell-regular-letters))
-	     (setq count (1+ count))))))
+         (dolist (x (split-string word "" t) count)
+           (when (not (member x my-flyspell-regular-letters))
+             (setq count (1+ count))))))
+
      (defun my-flyspell-sort-corrections-function (word1 word2 word)
        "Sort WORD1 and WORD2 as corrections of WORD: favor the
         corrections having the same length as WORD, and use
-        number of 'special' characters and the closeness of the
-        corrected word to the original as additional criteria."
+        number of 'special' characters, then distance from the
+        corrected word to the original, as additional criteria."
        (let ((distance1 (flyspell-word-distance word1 word))
-	     (distance2 (flyspell-word-distance word2 word)))
-	 (if (= distance1 distance2)
-	     (let ((dif1 (flyspell-word-difference word1 word))
-		   (dif2 (flyspell-word-difference word2 word)))
-	       (if (= dif1 dif2)
-		   (let ((accents-count1 (flyspell-accent-count word1))
-			 (accents-count2 (flyspell-accent-count word2)))
-		     (>= accents-count1 accents-count2))
-		 (< dif1 dif2)))
-	   (< distance1 distance2))))
+             (distance2 (flyspell-word-distance word2 word)))
+         (if (= distance1 distance2)
+             (let ((dif1 (flyspell-word-difference word1 word))
+                   (dif2 (flyspell-word-difference word2 word)))
+               (if (= dif1 dif2)
+                   (let ((accents-count1 (flyspell-accent-count word1))
+                         (accents-count2 (flyspell-accent-count word2)))
+                     (>= accents-count1 accents-count2))
+                 (< dif1 dif2)))
+           (< distance1 distance2))))
+
      (setq flyspell-sort-corrections-function 'my-flyspell-sort-corrections-function)
      (setq flyspell-sort-corrections t)
      (global-set-key "\C-cf" (make-interactive-fun 'change-dict "francais"))
@@ -486,6 +523,9 @@
 (line-number-mode t)
 (column-number-mode t)
 
+;; narrowing
+(put 'narrow-to-region 'disabled nil)
+
 ;; font highlighting
 (unless (featurep 'xemacs)
   (require 'color-theme-seb)
@@ -552,6 +592,7 @@
 (setq ids-creator-id "seb")
 (setq inhibit-startup-message t)
 (setq line-move-visual nil) 
+(menu-bar-mode -1)
 (setq py-indent-offset 2)
 (setq python-indent 2)
 (setq perl-indent-level 2)
@@ -564,14 +605,16 @@
 (setq visible-bell t)
 
 ;; impartiality is key here
-(setq christian-holidays nil)
-(setq hebrew-holidays nil)
-(setq islamic-holidays nil)
-(setq bahai-holidays nil)
-(setq oriental-holidays nil)
+(setq holiday-christian-holidays nil)
+(setq holiday-hebrew-holidays nil)
+(setq holiday-islamic-holidays nil)
+(setq holiday-bahai-holidays nil)
+(setq holiday-oriental-holidays nil)
 
-;; grep-find
-(setq grep-find-command "find . -type d -name '.svn' -prune -or -type d -name 'dist' -prune -or -type f -not -name '*~' -not -name 'semantic.cache' -print0 | xargs -0 -e grep -I -n -e ")
+;; grep-find & friends
+; FIXME: template ?
+(setq grep-find-command "find . -type d -name '.svn' -prune -or -name '.git' -prune -or -type d -name 'dist' -prune -or -type d -name staging -prune -or -type f -name '*~' -prune -or -type f -not -name 'semantic.cache' -print0 | xargs -0 grep -I -n -P ")
+(setq grep-find-template "find <D> -type d -name 'dist' -prune -or -type d -name staging -prune -or -type f -name '*~' -prune -or -type f -not -name 'semantic.cache' -print0 | xargs -0 grep -I -n -P <R>")
 
 ;; key mappings for predefined functions
 (global-set-key "\C-cg" 'goto-line)
@@ -593,11 +636,14 @@
 		("\\(svn-commit\\|COMMIT_EDITMSG\\)"  . (lambda () (progn
                                                                      (org-mode)
                                                                      (flyspell-mode))))
+		("\\.org$"                            . (lambda () (progn
+                                                                     (org-mode)
+                                                                     (flyspell-mode))))
+		("\\.\\(todo\\|csv\\)$"               . org-mode)
 		("\\.jsp$" 		      	      . jsp-mode)
 		("\\.html$" 		      	      . html-mode)
 		("\\.xml$" 		      	      . xml-mode)
-		("\\.z" 		      	      . sh-mode)
-		("\\.\\(todo\\|csv\\|org\\)$"         . org-mode))
+		("\\.z" 		      	      . sh-mode))
               auto-mode-alist))
 
 ;; scrollwheel

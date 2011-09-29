@@ -1,7 +1,8 @@
 [alias]
         bl = log --graph --abbrev-commit --pretty=oneline --decorate=full
-#        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
+        br = branch
 	co = checkout
+#        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
 	stat = status
 [branch]
         autosetuprebase = always

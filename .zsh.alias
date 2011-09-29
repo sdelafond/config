@@ -54,12 +54,12 @@ alias top='top -s 1' # for non-linux
 alias wget-mirror='wget -r -nv -nH --no-parent'
 alias x='exit'
 alias xterm="${XTERM}"
-alias xterm-screen="${XTERM/&} -g 161x54 -e screen -A -R main -D & ; zreload"
+alias xterm-screen="${XTERM/&} -g 161x54 -e sc & ; zreload"
 alias wai='who am i'
 alias what="whence -f"
 alias zman='run-help'
 alias zmore='zless'
-alias zreload='pgrep -u $USER zsh | xargs kill -USR1' # Thx Robert !
+alias zreload="ps au | nth 2 '[z]sh$' | xargs kill -USR1"
 alias zreload-do='source ~/.zshenv ; source ~/.zshrc ; echo "reloaded zshrc"'
 
 # logging

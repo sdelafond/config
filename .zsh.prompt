@@ -1,19 +1,13 @@
-PROMPT='${PSEXTRA}%{$fg_no_bold[green]%}%80<...<%~%{$fg_no_bold[default]%} %(?..%{$fg_bold[red]%}!%?!%{$fg_no_bold[default]%} )# '
-
-REGULAR_RPROMPT="%{[$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]"
-VT_RPROMPT="[%{$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]"
+PROMPT=$'${PSEXTRA}%{$fg_no_bold[green]%}%80<...<%~%{$fg_no_bold[default]%}%(?..%{$fg_bold[red]%} !%?%{$fg_no_bold[default]%}) # '
+RPROMPT=$'[%{$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]'
 
 case $TERM in
   rxvt*|xterm*)
-    RPROMPT=$REGULAR_RPROMPT 
     TITLE_ESCAPE_BEGIN="\e]0;"
     TITLE_ESCAPE_END="\a" ;;
   sun*|vt*|screen*|linux)
-    RPROMPT=$VT_RPROMPT
     TITLE_ESCAPE_BEGIN="\ek"
     TITLE_ESCAPE_END="\e\\" ;;
-  *)
-    RPROMPT=$REGULAR_RPROMPT ;;
 esac
 
 setTerminalTitle() {
@@ -21,7 +15,7 @@ setTerminalTitle() {
   case $TERM in
     rxvt*|xterm*|screen*)
       title="$1"
-      if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY" ]] ; then
+      if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY$TMUX" ]] ; then
         title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       else
         zstyle ':vcs_info:*' formats "[%r]"
@@ -45,4 +39,4 @@ precmd() {
   vcs_stuff 2> /dev/null
 }
 
-[[ $EUID -eq 0 ]] && RPROMPT="%S${RPROMPT}%s"
+[[ "$EUID" != 0 ]] || RPROMPT="%S${RPROMPT}%s"

@@ -63,7 +63,7 @@ abstracts = {
   line_start = "%B-%r!%B-%n";
 
   # timestamp styling, nothing by default
-  timestamp = "%K$*%n";
+  timestamp = "%c$*%n";
 
   # any kind of text that needs hilighting, default is to bold
   #hilight = "%W$*%n";

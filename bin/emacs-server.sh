@@ -13,7 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-if [[ -n "$TMUX" ]] ; then
+if [ -n "$TMUX" ] ; then
   MARKER=$(echo $TMUX | awk -F, '{print $2$3}')
 else
   MARKER=$STY
@@ -22,5 +22,6 @@ fi
 emacs -nw --eval '(progn
                   (setq server-name "'$MARKER'")
                   (server-start)
+                  (remove-hook '\''kill-buffer-query-functions '\''server-kill-buffer-query-function)
                   (shell-command "echo $WINDOW > $SERVER_WINDOW_FILE")
                   (add-hook '\''kill-emacs-hook (lambda() (delete-file (getenv "SERVER_WINDOW_FILE")))))'

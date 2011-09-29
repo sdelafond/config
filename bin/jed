@@ -76,7 +76,12 @@ startEmacsServer() {
     screen -X setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
     screen=screen
   else
-    WINDOW=$(tmux list-windows | wc -l)
+    WINDOW=0
+    tmux list-windows | while read l ; do
+      j=$(echo $l | perl -pe 's/:.+//')
+      [[ $j != $WINDOW ]] && break
+      WINDOW=$(($WINDOW+1))
+    done
     tmux setenv WINDOW $WINDOW
     tmux setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
     screen=(tmux new-window -t $WINDOW)
@@ -85,7 +90,7 @@ startEmacsServer() {
   $screen emacs-server.sh
 }
 
-if [[ -z "$SUDO_COMMAND" && ( "$HOME" != "/root" || "$HOST" == marvin ) && ( -n foo && -n bar ) ]] ; then
+if ( isInScreen || isInTmux ) && [[ -z "$SUDO_COMMAND" && ( "$HOME" != "/root" || "$HOST" == marvin ) ]] ; then
   if isInTmux ; then
     oldWindow=$(tmux list-windows | awk -F: '/active/ {print $1}')
   else
@@ -100,7 +105,7 @@ if [[ -z "$SUDO_COMMAND" && ( "$HOME" != "/root" || "$HOST" == marvin ) && ( -n 
   selectWindow $(cat $SERVER_WINDOW_FILE)
 
   if [[ $AUTO_BACKGROUND = "yes" ]] && isParentShell ; then
-    runEmacsClient -n "$@"
+    { runEmacsClient "$@" > /dev/null 2>&1 ; selectWindow $oldWindow } &
   else
     runEmacsClient "$@"
     selectWindow $oldWindow
