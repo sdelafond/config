@@ -350,13 +350,13 @@ nth () {
 }
 
 pdb() {
-#  setopt localoptions xtrace
+  setopt localoptions xtrace
   local distribution=$(dpkg-parsechangelog | awk '/^Distribution:/ {print $2}')
   local version=$(dpkg-parsechangelog | awk '/^Version:/ { gsub(/^[0-9]:/, "", $2) ; print $2}')
   local extraOpts=""
   distribution=${distribution/-*} # remove -security, for instance
   [ $# -gt 0 ] && extraOpts="--debbuildopts '$@'"
-  s pdebuild --pbuilder cowbuilder $=extraOpts --buildresult .. --auto-debsign -- --basepath /var/cache/pbuilder/${distribution}.cow
+  pdebuild --pbuilder cowbuilder $=extraOpts --buildresult .. --auto-debsign -- --basepath /var/cache/pbuilder/${distribution}.cow
   [ $? = 0 ] && lintian -viI $(ls ../*${version}*changes | grep -v _source.changes)
 }
 
