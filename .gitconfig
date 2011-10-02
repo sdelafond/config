@@ -2,8 +2,11 @@
         bl = log --graph --abbrev-commit --pretty=oneline --decorate=full
         br = branch
 	co = checkout
+        ca = commit --amend
+        cm = commit
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
-	stat = status
+	st = status
+        stat = status
 [branch]
         autosetuprebase = always
 #        master.rebase = true
