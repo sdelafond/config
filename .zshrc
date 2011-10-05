@@ -443,6 +443,9 @@ for dir in ~/.config-* ; do
     source $file
   done
 done
+for file in ~/.zsh_*(N) ; do
+  [[ $file == *history* ]] || source $file
+done
 
 local hostFile=~/.zsh_$HOST
 [[ -f $hostFile ]] && source $hostFile
