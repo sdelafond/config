@@ -14,6 +14,6 @@ if [[ -z $LOGIN_HOST ]] || [[ $LOGIN_HOST != $HOST ]] ; then
   # start tmux or screen if possible
 # [[ ($TERM != (screen*|vt100) || -z "$TMUX") && $HOST_SHORT != (hp|foooo) ]] && sc remote
   if [[ $TERM != (screen*|vt100) && $HOST_SHORT != (hp|foooo) ]] ; then 
-    sc
+    source ~/.zsh.function && sc
   fi
 fi
