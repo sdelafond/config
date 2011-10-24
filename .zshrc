@@ -80,8 +80,8 @@ autoload -Uz vcs_info && {
       zstyle ':vcs_info:*' formats       "[%s%b%m%c%u]" "$prompt_title"
       zstyle ':vcs_info:*' actionformats "[%s%b%m|%a%c%u]" "$prompt_title"
     else
-      zstyle ':vcs_info:*' formats       "[%s%b%m%c%u%{${fg_bold[yellow]}%}⌘%{${fg_no_bold[default]}%}]" "$prompt_title"
-      zstyle ':vcs_info:*' actionformats "[%s%b%m|%a%c%u%{${fg_bold[yellow]}%}⌘%{${fg_no_bold[default]}%}]" "$prompt_title"
+      zstyle ':vcs_info:*' formats       "[%s%b%m%c%u%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}]" "$prompt_title"
+      zstyle ':vcs_info:*' actionformats "[%s%b%m|%a%c%u%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}]" "$prompt_title"
     fi
 
     vcs_info

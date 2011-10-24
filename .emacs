@@ -65,7 +65,7 @@
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
 (my-autoload "id" "align" "python-mode" "multi-mode" "org" "time-stamp"
-	     "pf-mode" "ruby-mode" "ruby-electric" "gtags"
+             "pf-mode" "ruby-mode" "ruby-electric" "gtags"
              "mediawiki-mode" "outdent")
 
 (defun add-function-to-hooks (fun modes-hooks)
@@ -482,7 +482,17 @@
 
 (defun my-python-mode-hook ()
   (local-set-key "\r" 'newline)
-  (if (featurep 'ipython) (require 'ipython))
+  (require 'ipython)
+  (require 'anything)
+  (require 'anything-ipython)
+  (when (require 'anything-show-completion nil t)
+    (use-anything-show-completion 'anything-ipython-complete
+                                  '(length initial-pattern)))
+  ;; (require 'pymacs)
+  ;; (pymacs-load "ropemacs" "rope-")
+  ;; (ropemacs-mode)
+  ;; (define-key ropemacs-local-keymap "\C-cd" 'rope-show-doc)
+  ;; (define-key ropemacs-local-keymap "M-\?" 'rope-code-assist)
   (require 'outdent)
   (outdent-mode t)
   (turn-off-auto-fill)
