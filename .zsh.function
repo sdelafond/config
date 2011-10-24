@@ -520,8 +520,9 @@ s() { # smarter sudo
 sc() {
   name=$1
   if [[ -z "$name" ]] ; then
-    if [[ "$HOST_SHORT" = (proliant) ]] ; then
-      name="remote"
+    if [[ "$HOST" = (proliant) ]] ; then
+      screen -R main -D -A
+      return
     else
       name="main"
     fi
