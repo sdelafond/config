@@ -29,14 +29,51 @@ autoload run-help && alias run-help > /dev/null && unalias run-help
 # vcs-info
 autoload -Uz vcs_info && {
   # note that you'll also need to "setopt prompt_subst", as below
-  zstyle ':vcs_info:*' disable bzr cdv darcs mtn tla hg p4 svk
-  zstyle ':vcs_info:*' enable cvs svn git
+  zstyle ':vcs_info:*' disable bzr cdv cvs darcs mtn tla hg p4 svk
+  zstyle ':vcs_info:*' enable svn git
+
+  ### git: Show +N/-N when your local branch is ahead-of or behind remote HEAD.
+  function +vi-git-st() {
+    local ahead behind
+    local -a gitstatus
+
+    # for git prior to 1.7
+    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+    (( $ahead )) && gitstatus+=( "(+${ahead})" )
+
+    # for git prior to 1.7
+    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+    (( $behind )) && gitstatus+=( "(-${behind})" )
+
+    hook_com[misc]+=${(j:/:)gitstatus}
+  }
+
+  ### git: Show remote branch name for remote-tracking branches
+  function +vi-git-name() {
+    [[ ${hook_com[vcs_orig]} == "git" ]] && hook_com[vcs]="±"
+  }
+
+  ### git: Show remote branch name for remote-tracking branches
+  function +vi-git-remotebranch() {
+    local remote
+
+      # Are we on a remote-tracking branch?
+    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+      --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+
+    if [[ -n ${remote} ]] ; then
+      hook_com[branch]="${hook_com[branch]}->${remote}"
+    fi
+  }
 
   zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' formats        "[%s %b%c%u]"
-  zstyle ':vcs_info:*' actionformats  "[%s %b|%a%c%u]"
+  zstyle ':vcs_info:*' formats        "[%s%b%m%c%u]"
+  zstyle ':vcs_info:*' actionformats  "[%s%b%m|%a%c%u]"
   zstyle ':vcs_info:*' stagedstr      "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr    "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
+  zstyle ':vcs_info:git*+set-message:*' hooks git-st git-remotebranch git-name
 
   vcs_stuff() {
     vcs_info
