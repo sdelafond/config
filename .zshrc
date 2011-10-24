@@ -69,13 +69,21 @@ autoload -Uz vcs_info && {
   }
 
   zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' formats        "[%s%b%m%c%u]"
-  zstyle ':vcs_info:*' actionformats  "[%s%b%m|%a%c%u]"
-  zstyle ':vcs_info:*' stagedstr      "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:*' unstagedstr    "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:git*+set-message:*' hooks git-st git-remotebranch git-name
+  zstyle ':vcs_info:*' stagedstr         "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
+  zstyle ':vcs_info:*' unstagedstr       "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
+  zstyle ':vcs_info:git*+set-message:*'  hooks git-st git-remotebranch git-name
+
+  prompt_title="[%s%r]"
 
   vcs_stuff() {
+    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] ; then
+      zstyle ':vcs_info:*' formats       "[%s%b%m%c%u]" "$prompt_title"
+      zstyle ':vcs_info:*' actionformats "[%s%b%m|%a%c%u]" "$prompt_title"
+    else
+      zstyle ':vcs_info:*' formats       "[%s%b%m%c%u%{${fg_bold[yellow]}%}⌘%{${fg_no_bold[default]}%}]" "$prompt_title"
+      zstyle ':vcs_info:*' actionformats "[%s%b%m|%a%c%u%{${fg_bold[yellow]}%}⌘%{${fg_no_bold[default]}%}]" "$prompt_title"
+    fi
+
     vcs_info
     if [[ -n $vcs_info_msg_0_ ]] ; then
       PSEXTRA="%{$fg_no_bold[magenta]%}$vcs_info_msg_0_%{$fg_no_bold[default]%} "

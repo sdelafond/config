@@ -17,11 +17,8 @@ setTerminalTitle() {
       title="$1"
       if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY$TMUX" ]] ; then
         title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
-      # else
-      #   zstyle ':vcs_info:*' formats "[%r]"
-      #   vcs_info > /dev/null 2>&1
-      #   title="$title$vcs_info_msg_0_"
-      #   zstyle ':vcs_info:*' formats "[%s %b%c%u]"
+      else
+        title="$title$vcs_info_msg_1_"
       fi
       if [[ $TERM != screen* ]] ; then
         title="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
@@ -35,7 +32,7 @@ setTerminalTitle() {
 
 precmd() {
   setTerminalTitle
-  # for the next line to work, check out the *vcs stuff in .zshrc
+  # for the next line, check out the *vcs stuff in .zshrc
   vcs_stuff 2> /dev/null
 }
 
