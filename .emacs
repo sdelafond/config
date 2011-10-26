@@ -488,6 +488,8 @@
   (when (require 'anything-show-completion nil t)
     (use-anything-show-completion 'anything-ipython-complete
                                   '(length initial-pattern)))
+  (define-key py-mode-map (kbd "M-TAB") 'anything-ipython-complete)
+  (define-key py-mode-map (kbd "M-BACKTAB") 'anything-ipython-import-modules-from-buffer)
   ;; (require 'pymacs)
   ;; (pymacs-load "ropemacs" "rope-")
   ;; (ropemacs-mode)
