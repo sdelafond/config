@@ -51,8 +51,12 @@ autoload -Uz vcs_info && {
   }
 
   ### git: Show remote branch name for remote-tracking branches
-  function +vi-git-name() {
-    [[ ${hook_com[vcs_orig]} == "git" ]] && hook_com[vcs]="±"
+  function +vi-symbol() {
+    case ${hook_com[vcs_orig]} in
+      "git") hook_com[vcs]="±" ;;
+      "svn") hook_com[vcs]="®" ;;
+    esac
+    hook_com[vcs]="meh"
   }
 
   ### git: Show remote branch name for remote-tracking branches
@@ -71,7 +75,8 @@ autoload -Uz vcs_info && {
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' stagedstr         "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr       "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:git*+set-message:*'  hooks git-st git-remotebranch git-name
+  zstyle ':vcs_info:git*+set-message:*'  hooks git-st git-remotebranch
+  zstyle ':vcs_info:*+set-message:*'     hooks vi-symbol
 
   prompt_title="[%s%r]"
 
