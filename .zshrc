@@ -56,7 +56,6 @@ autoload -Uz vcs_info && {
       "git") hook_com[vcs]="±" ;;
       "svn") hook_com[vcs]="®" ;;
     esac
-    hook_com[vcs]="meh"
   }
 
   ### git: Show remote branch name for remote-tracking branches
@@ -75,8 +74,8 @@ autoload -Uz vcs_info && {
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' stagedstr         "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr       "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
+  zstyle ':vcs_info:*+set-message:*'  hooks symbol
   zstyle ':vcs_info:git*+set-message:*'  hooks git-st git-remotebranch
-  zstyle ':vcs_info:*+set-message:*'     hooks vi-symbol
 
   prompt_title="[%s%r]"
 
