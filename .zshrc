@@ -62,20 +62,21 @@ autoload -Uz vcs_info && {
   function +vi-git-remotebranch() {
     local remote
 
-      # Are we on a remote-tracking branch?
+    # Are we on a remote-tracking branch?
     remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
       --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
 
-    if [[ -n ${remote} ]] ; then
-      hook_com[branch]="${hook_com[branch]}->${remote}"
+    if [[ -n "${remote}" ]] && [[ $remote != origin/master ]]; then
+      hook_com[branch]="${hook_com[branch]}→${remote}"
     fi
   }
 
-  zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' stagedstr         "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:*' unstagedstr       "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:*+set-message:*'     hooks symbol
-  zstyle ':vcs_info:git*+set-message:*'  hooks git-st git-remotebranch symbol
+  zstyle ':vcs_info:*' check-for-changes    true
+  zstyle ':vcs_info:*' stagedstr            "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
+  zstyle ':vcs_info:*' unstagedstr          "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
+  zstyle ':vcs_info:git*+set-message:*'      hooks git-st git-remotebranch symbol
+  zstyle ':vcs_info:svn*+set-message:*'      hooks symbol
+  zstyle ':vcs_info:git-svn*+set-message:*'  hooks symbol
 
   prompt_title="[%s%r]"
 
