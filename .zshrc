@@ -74,8 +74,8 @@ autoload -Uz vcs_info && {
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' stagedstr         "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr       "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:*+set-message:*'  hooks symbol
-  zstyle ':vcs_info:git*+set-message:*'  hooks git-st git-remotebranch
+  zstyle ':vcs_info:*+set-message:*'     hooks symbol
+  zstyle ':vcs_info:git*+set-message:*'  hooks git-st git-remotebranch symbol
 
   prompt_title="[%s%r]"
 
