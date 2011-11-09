@@ -55,6 +55,7 @@ autoload -Uz vcs_info && {
     case ${hook_com[vcs_orig]} in
       "git") hook_com[vcs]="±" ;;
       "svn") hook_com[vcs]="®" ;;
+      "git-svn") hook_com[vcs]="±®" ;;
     esac
   }
 
