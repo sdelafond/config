@@ -340,8 +340,8 @@ function switch_screen(b)
   awesome.restart()
   for s = 1, screen.count() do
     make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, 
-               mybatwidget, mycpuwidget, mycpuwidget2, mymemwidget,
-               datewidget, mytasklist, mouse.screen)
+               mybatwidget, mynetwidget, mycpuwidget, mycpuwidget2,
+               mymemwidget, datewidget, mytasklist, mouse.screen)
   end
 end
 
@@ -524,12 +524,21 @@ mycpuwidget:set_gradient_angle(0)
 mycpuwidget:set_gradient_colors({ "#AA0000", "#AA00AA", "#0000AA" })
 vicious.register(mycpuwidget, vicious.widgets.cpu, "$1", 1.5)
 
--- mymemwidget = awful.widget.graph()
--- mymemwidget:set_width(50)
--- mymemwidget:set_background_color("#111111")
--- mymemwidget:set_color("#FF5656")
--- mycpuwidget:set_gradient_angle(0)
--- mymemwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
+mynetwidget = awful.widget.graph()
+mynetwidget:set_width(50)
+mynetwidget:set_background_color("#111111")
+mynetwidget:set_color("#FF5656")
+mynetwidget:set_gradient_angle(0)
+mynetwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
+mynetwidget:set_scale(true)
+vicious.register(mynetwidget, vicious.widgets.net, "${wlan0 down_b}", 1)
+
+mymemwidget = awful.widget.graph()
+mymemwidget:set_width(50)
+mymemwidget:set_background_color("#111111")
+mymemwidget:set_color("#FF5656")
+mycpuwidget:set_gradient_angle(0)
+mymemwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
 -- vicious.register(mymemwidget, vicious.widgets.mem, "$1", 1.5)
 
 mycpuwidget2 = widget({ type = "textbox" })
@@ -541,8 +550,8 @@ vicious.register(mycpuwidget2, vicious.widgets.cpuinf,
                  end)
 
 function make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, 
-                    mybatwidget, mycpuwidget, mycpuwidget2, mymemwidget,
-                    datewidget, mytasklist, systray_screen)
+                    mybatwidget, mynetwidget, mycpuwidget, mycpuwidget2, 
+                    mymemwidget, datewidget, mytasklist, systray_screen)
   wibox = awful.wibox({ position = "top", screen = s, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
   wibox.widgets = { { mylauncher,
                       datewidget,
@@ -550,6 +559,7 @@ function make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox,
                       promptbox,
                       mylayoutbox[s],
                       mybatwidget,
+                      mynetwidget,
                       mycpuwidget2,
                       mycpuwidget,
 --                      mymemwidget,
@@ -574,10 +584,8 @@ for s = 1, screen.count() do
 
   -- the wibox itself
   make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, mybatwidget,
-             mycpuwidget, mycpuwidget2,
-             mycpuwidget2, -- mymemwidget,
-             datewidget, 
-             mytasklist, 1)
+             mynetwidget, mycpuwidget, mycpuwidget2,
+             mymemwidget, datewidget, mytasklist, 1)
 end
 
 -------------------------------------------------------
