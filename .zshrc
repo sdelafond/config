@@ -79,15 +79,21 @@ autoload -Uz vcs_info && {
   zstyle ':vcs_info:svn*+set-message:*'      hooks symbol
   zstyle ':vcs_info:git-svn*+set-message:*'  hooks symbol
 
-  prompt_title="[%s%r]"
+  if is4 3 11 ; then
+    vs="%s"
+  else
+    vs=""
+  fi
+
+  prompt_title="[${vs}%r]"
 
   vcs_stuff() {
     if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] ; then
-      zstyle ':vcs_info:*' formats       "[%s%b%m%c%u]" "$prompt_title"
-      zstyle ':vcs_info:*' actionformats "[%s%b%m|%a%c%u]" "$prompt_title"
+      zstyle ':vcs_info:*' formats       "[${vs}%b%m%c%u]" "$prompt_title"
+      zstyle ':vcs_info:*' actionformats "[${vs}%b%m|%a%c%u]" "$prompt_title"
     else
-      zstyle ':vcs_info:*' formats       "[%s%b%m%c%u%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}]" "$prompt_title"
-      zstyle ':vcs_info:*' actionformats "[%s%b%m|%a%c%u%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}]" "$prompt_title"
+      zstyle ':vcs_info:*' formats       "[${vs}%b%m%c%u%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}]" "$prompt_title"
+      zstyle ':vcs_info:*' actionformats "[${vs}%b%m|%a%c%u%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}]" "$prompt_title"
     fi
 
     vcs_info
