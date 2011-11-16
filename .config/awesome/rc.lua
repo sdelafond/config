@@ -229,6 +229,7 @@ awful.rules.rules = {
   { rule = { name = "office" }, properties = { tag = getTagByShortcut("8") } },
   { rule = { name = "OpenOffice.org" }, properties = { tag = getTagByShortcut("8") } },
   { rule = { class = "OpenOffice.org" }, properties = { tag = getTagByShortcut("8") } },
+  { rule = { name = "LibreOffice" }, properties = { tag = getTagByShortcut("8") } },
   { rule = { class = "LibreOffice" }, properties = { tag = getTagByShortcut("8") } },
 
   -- Graphic & Video
