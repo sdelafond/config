@@ -66,14 +66,17 @@ if env.host == "hp" then
   settings.default_layout = awful.layout.suit.max
   settings.hp_tag = "1"
   settings.centurion_tag = "4"
+  settings.nic = "wlan0"
 elseif env.host == "centurion" then
   settings.default_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
   settings.centurion_tag = "1"
+  settings.nic = "eth3"
 else
   settings.default_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
   settings.centurion_tag = "4"
+  settings.nic = "eth0"
 end
 settings.layouts = { settings.default_layout,
 		     awful.layout.suit.fair,
