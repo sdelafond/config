@@ -41,7 +41,7 @@ isInTmux() {
 }
 
 isParentShell() {
-  [[ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]]
+  [[ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]] && [[ "$1" != /tmp/zshecl* ]]
 }
 
 runEmacsClient() {
@@ -104,7 +104,7 @@ if ( isInScreen || isInTmux ) && [[ -z "$SUDO_COMMAND" && ( "$HOME" != "/root" |
 
   selectWindow $(cat $SERVER_WINDOW_FILE)
 
-  if [[ $AUTO_BACKGROUND = "yes" ]] && isParentShell ; then
+  if [[ $AUTO_BACKGROUND = "yes" ]] && isParentShell "$@"; then
     { runEmacsClient "$@" > /dev/null 2>&1 ; selectWindow $oldWindow } &
   else
     runEmacsClient "$@"
