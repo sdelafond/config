@@ -67,16 +67,22 @@ if env.host == "hp" then
   settings.hp_tag = "1"
   settings.centurion_tag = "4"
   settings.nic = "wlan0"
+  settings.nic_unit = "b"
+  settings.nic_autoscale = true
 elseif env.host == "centurion" then
   settings.default_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
   settings.centurion_tag = "1"
   settings.nic = "eth3"
+  settings.nic_unit = "mb"
+  settings.nic_autoscale = false
 else
   settings.default_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
   settings.centurion_tag = "4"
   settings.nic = "eth0"
+  settings.nic_unit = "mb"
+  settings.nic_autoscale = false
 end
 settings.layouts = { settings.default_layout,
 		     awful.layout.suit.fair,
@@ -414,23 +420,20 @@ settings.bindings.prompt = {
 							   awful.util.getdir("cache") .. "/history_eval")
 					end,
 
-  [{settings.keys.super_control, "i"}] = function()
-					  local s = mouse.screen
-					  if mypromptbox[s].text then
-					    mypromptbox[s].text = nil
-					  else
-					    mypromptbox[s].text = nil
-					    if client.focus.class then
-					      mypromptbox[s].text = "Class: " .. client.focus.class .. " "
-					    end
-					    if client.focus.name then
-					      mypromptbox[s].text = mypromptbox[s].text .. "Name: ".. client.focus.name .. " "
-					    end
-					    if client.focus.role then
-					      mypromptbox[s].text = mypromptbox[s].text .. "Role: ".. client.focus.role
-					    end
-					  end
-					end
+  [{settings.keys.super_control, "i"}] = function() -- FIXME: not working
+                                           my_debug("meh")
+                                           local s = mouse.screen
+                                           mypromptbox[s].text = "foo"
+                                           if client.focus.class then
+                                             mypromptbox[s].text = "Class: " .. client.focus.class .. " "
+                                           end
+                                           if client.focus.name then
+                                             mypromptbox[s].text = mypromptbox[s].text .. "Name: ".. client.focus.name .. " "
+                                           end
+                                           if client.focus.role then
+                                             mypromptbox[s].text = mypromptbox[s].text .. "Role: ".. client.focus.role
+                                           end
+                                         end
 }
 
 settings.bindings.root_mouse = {
@@ -480,7 +483,7 @@ mywibox = {}
 mytextbox = {}
 mylayoutbox = {}
 
-promptbox = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+mypromptbox = {}
 
 mylayoutbox.buttons = awful.util.table.join(awful.button(settings.keys.none, 1, function() awful.layout.inc(settings.layouts, 1) end),
 			   awful.button(settings.keys.none, 3, function() awful.layout.inc(settings.layouts, -1) end),
@@ -534,8 +537,8 @@ mynetwidget:set_background_color("#111111")
 mynetwidget:set_color("#FF5656")
 mynetwidget:set_gradient_angle(0)
 mynetwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
-mynetwidget:set_scale(true)
-vicious.register(mynetwidget, vicious.widgets.net, "${wlan0 down_b}", 1)
+mynetwidget:set_scale(settings.nic_autoscale)
+vicious.register(mynetwidget, vicious.widgets.net, "${" .. settings.nic .. " down_" .. settings.nic_unit .. "b}", 1)
 
 mymemwidget = awful.widget.graph()
 mymemwidget:set_width(50)
@@ -553,14 +556,14 @@ vicious.register(mycpuwidget2, vicious.widgets.cpuinf,
                    return string.format("%.1f+%.1fGHz", args["{cpu0 ghz}"], args["{cpu1 ghz}"])
                  end)
 
-function make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, 
+function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox, 
                     mybatwidget, mynetwidget, mycpuwidget, mycpuwidget2, 
                     mymemwidget, datewidget, mytasklist, systray_screen)
   wibox = awful.wibox({ position = "top", screen = s, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
   wibox.widgets = { { mylauncher,
                       datewidget,
                       mytaglist[s],
-                      promptbox,
+                      mypromptbox[s],
                       mylayoutbox[s],
                       mybatwidget,
                       mynetwidget,
@@ -580,6 +583,8 @@ for s = 1, screen.count() do
   mylayoutbox[s] = awful.widget.layoutbox(s)
   mylayoutbox[s]:buttons(mylayoutbox.buttons)
 
+  mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+
   mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.noempty, mytaglist.buttons)
 
   mytasklist[s] = awful.widget.tasklist(function(c)
@@ -587,7 +592,7 @@ for s = 1, screen.count() do
 					end, mytasklist.buttons)
 
   -- the wibox itself
-  make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, mybatwidget,
+  make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox, mybatwidget,
              mynetwidget, mycpuwidget, mycpuwidget2,
              mymemwidget, datewidget, mytasklist, 1)
 end
@@ -709,7 +714,7 @@ client.add_signal("new",
 
 awful.tag.attached_add_signal(nil, "property::selected",
                               function(t)
-                                my_debug(string.format("Tag: '%s'", t.name))
+--                                my_debug(string.format("Tag: '%s'", t.name))
                                 if currentTag.name ~= t.name then
                                   lastTag = currentTag
                                   currentTag = t
