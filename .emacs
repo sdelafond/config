@@ -118,6 +118,8 @@
   (require 'ob-emacs-lisp)
   (setq org-src-fontify-natively t)
 
+  (require 'org-protocol)
+
   (require 'org-latex)
   (setq org-export-latex-listings t)
   (add-to-list 'org-export-latex-packages-alist '("" "listings"))
@@ -317,6 +319,11 @@
   (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps t)
+
+  (setq org-capture-templates (quote
+                               (("w" "Work" entry (file+headline "~/org/work.todo" "Inbox") "* TODO %? %U %a")
+                                ("h" "Home" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U %a")
+                                ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n\tSource: %u, %c\n  %i"))))
 
   ;; (require 'remember)
   ;; (org-remember-insinuate)
@@ -738,9 +745,6 @@
  '(jde-jdk-registry (quote (("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun"))))
  '(load-home-init-file t t)
  '(org-agenda-files (quote ("/home/seb/org/home.todo" "/home/seb/org/move.todo")))
- '(org-capture-templates (quote (("w" "Work" entry (file+headline "~/org/work.todo" "Inbox") "* TODO %?
-  %U %a") ("h" "Home" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %?
-  %U %a"))))
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured)))
 
