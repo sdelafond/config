@@ -323,7 +323,7 @@
   (setq org-capture-templates (quote
                                (("w" "Work" entry (file+headline "~/org/work.todo" "Inbox") "* TODO %? %U %a")
                                 ("h" "Home" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U %a")
-                                ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n\tSource: %u, %c\n  %i"))))
+                                ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
   ;; (require 'remember)
   ;; (org-remember-insinuate)
