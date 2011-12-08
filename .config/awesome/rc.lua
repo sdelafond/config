@@ -124,11 +124,11 @@ for i, tag_def in ipairs(settings.tags_defs) do
 end
 
 settings.tags = {}
-settings.last_selected_client_per_tag = {}
+--settings.last_selected_client_per_tag = {}
 for s = 1, screen.count() do
   -- Each screen has its own tag table.
   settings.tags[s] = awful.tag(settings.tags_names, s)  
-  settings.last_selected_client_per_tag[s] = {}
+--  settings.last_selected_client_per_tag[s] = {}
   for k, my_tag in ipairs(settings.tags[s]) do
     tag_def = settings.tags_defs[k]
     tag_shortcut = tag_def.shortcut
@@ -145,7 +145,7 @@ for s = 1, screen.count() do
     awful.tag.setmwfact(mwfact, my_tag)
     awful.tag.setnmaster(nmaster, my_tag)
     awful.tag.setncol(ncol, my_tag)
-    settings.last_selected_client_per_tag[s][k] = nil
+--    settings.last_selected_client_per_tag[s][k] = nil
   end
   settings.tags[s][1].selected = true
 end
@@ -420,19 +420,38 @@ settings.bindings.prompt = {
 							   awful.util.getdir("cache") .. "/history_eval")
 					end,
 
-  [{settings.keys.super_control, "i"}] = function() -- FIXME: not working
-                                           my_debug("meh")
-                                           local s = mouse.screen
-                                           mypromptbox[s].text = "foo"
+  [{settings.keys.super_control, "s"}] = function()
+					  awful.prompt.run({prompt = "Select window by name: "},
+							   mypromptbox[mouse.screen].widget,
+							   function(name)
+                                                             for k, c in pairs(client.get()) do
+                                                               if string.match(c.name, ".*" .. string.lower(name) .. ".*") then
+                                                                 my_debug(c.name)
+                                                                 awful.tag.viewonly(c:tags()[1])
+                                                                 client.focus = c
+                                                                 c:raise()
+                                                                 c:swap(awful.client.getmaster())
+                                                                 break
+                                                               end
+                                                             end
+                                                           end,
+                                                           nil)
+					end,
+
+  [{settings.keys.super_control, "i"}] = function()
+                                           local txt = ""
                                            if client.focus.class then
-                                             mypromptbox[s].text = "Class: " .. client.focus.class .. " "
+                                             txt = "Class: " .. client.focus.class .. " "
                                            end
                                            if client.focus.name then
-                                             mypromptbox[s].text = mypromptbox[s].text .. "Name: ".. client.focus.name .. " "
+                                             txt = txt .. "Name: ".. client.focus.name .. " "
                                            end
                                            if client.focus.role then
-                                             mypromptbox[s].text = mypromptbox[s].text .. "Role: ".. client.focus.role
+                                             txt = txt .. "Role: ".. client.focus.role
                                            end
+                                           awful.prompt.run({prompt = txt},
+                                                            mypromptbox[mouse.screen].widget,
+                                                            function() end)
                                          end
 }
 
@@ -686,7 +705,6 @@ function manage_client(c)
   if c.transient_for then
     awful.placement.centered(c, c.transient_for)
   end
-
 
   -- Prevent new windows from becoming master
   if not settings.new_become_master then awful.client.setslave(c) end
