@@ -760,7 +760,7 @@
  '(org-level-1 ((t (:foreground "magenta" :weight bold))))
  '(org-level-2 ((t (:foreground "white" :weight bold))))
  '(org-level-3 ((t (:foreground "yellow" :weight bold))))
- '(org-level-4 ((t (:foreground "color-36" :underline t :slant oblique :weight bold))))
+ '(org-level-4 ((t (:foreground "color-36" :slant oblique :weight bold))))
  '(org-link ((((class color) (background dark)) (:foreground "magenta" :underline t))))
  '(org-tag ((t (:foreground "color-68" :underline nil :weight bold))))
  '(org-todo ((t (:foreground "blue" :weight bold)))))
