@@ -23,7 +23,7 @@ caption 	always	"%?%F%{=b RW}%:%{=b dw}%?%3n%f %t %? [%h]%?"
 #hardstatus	alwayslastline "%{= dw}%-Lw%{= BW}%n%f %t%{-}%{= dw} %+Lw${= dw}%="
 hardstatus	alwayslastline "%{= wK}%-Lw%{=b RW}%n%f %t%{-}%{= wK}%+Lw%{-} %= %-=|%{=b yK} %H (%l) |%{=b mW} %D %d %M %Y %c|%{-}"
 
-shell		-$SHELL
+shell		/bin/zsh # let's hope it's there...
 
 activity	"Activity in window %n^G"
 
