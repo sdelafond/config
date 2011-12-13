@@ -212,7 +212,7 @@ gitseb() {
 gitseb-bootstrap() {
 #  setopt localoptions xtrace
   local protocol host user my_path project repository
-  project=$1
+  project=${1:-base}
   if [ $project == base ] ; then
     protocol=git
     user=sdelafond
@@ -621,7 +621,7 @@ _setup-env() {
 
 setup-env() {
   _setup-env base
-  _setup-env $1
+  [ -n "$1" ] && _setup-env $1
 }
 
 www() {
