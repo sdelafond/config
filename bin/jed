@@ -90,7 +90,7 @@ startEmacsServer() {
   $screen emacs-server.sh
 }
 
-if ( isInScreen || isInTmux ) && [[ -z "$SUDO_COMMAND" && ( "$HOME" != "/root" || "$HOST" == marvin ) ]] ; then
+if ( isInScreen || isInTmux ) && [[ -z "$SUDO_COMMAND" ]] ; then
   if isInTmux ; then
     oldWindow=$(tmux list-windows | awk -F: '/active/ {print $1}')
   else
