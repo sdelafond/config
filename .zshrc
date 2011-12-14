@@ -428,7 +428,7 @@ fi
 export CVS_RSH=ssh
 
 # JAVA_HOME
-local -a javas ; javas=(/usr/lib/jvm/java*sun*(DN) /usr/local/j2*(DN))
+local -a javas ; javas=(/usr/lib/jvm/java*sun*(DN) /usr/lib/jvm/java*openjdk*(DN) /usr/local/j2*(DN))
 if [[ ${#javas} -gt 0 ]] ; then
   export JAVA_HOME=$javas[-1]
   export JAVA=${JAVA_HOME}/bin/java
