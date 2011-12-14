@@ -196,17 +196,10 @@ gitseb() {
   for d in .config-*(N) ; do
     echo "## $(basename ${d//.config-})"
     pushd $d
-    if [[ $1 != commit ]] ; then
-#      local f=`mktemp tmp.XXXXXXXXXX`
-      git $@ # | egrep -v "^\?" | tee $f
-      # [[ "$@" = up* ]] && egrep -q '^[PUA] ' $f && reload=true
-#      rm -f $f
-    else
-      git $@
-    fi
+    git $@
     popd
   done
-  [ -z "$reload" ] || zreload
+  [[ "$1" == "pull" ]] &&  zreload
 }
 
 gitseb-bootstrap() {
