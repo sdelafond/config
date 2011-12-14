@@ -493,6 +493,9 @@ source ~/.zsh.prompt
 source ~/.zsh.alias
 source ~/.zsh.function
 
+# maybe overloaded later
+set-git-info sdelafond@gmail.com "Sébastien Delafond"
+
 # ... but only some of these
 for dir in ~/.config-* ; do
   case "$dir" in *dontsource*|*base*) continue ;; esac
