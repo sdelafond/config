@@ -9,7 +9,7 @@ export LOGIN_HOST=${${=wai}[5]//[()]}
 
 [ -f ~/alsa.settings ] && alsactl -f ~/alsa.settings restore
 
-if [[ -z $LOGIN_HOST ]] || [[ $LOGIN_HOST != $HOST ]] ; then
+if [[ -z "$LOGIN_HOST" ]] || [[ $LOGIN_HOST != $HOST ]] ; then
   echo $DISPLAY >| ~/.remote-display
   # start tmux or screen if possible
 # [[ ($TERM != (screen*|vt100) || -z "$TMUX") && $HOST_SHORT != (hp|foooo) ]] && sc remote

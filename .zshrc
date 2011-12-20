@@ -21,7 +21,7 @@ autoload -U zed
 autoload -U zmv
 autoload -U edit-command-line 
 autoload -U compinit && compinit
-autoload -U colors && colors 
+is4 3 11 && autoload -U colors && colors 
 autoload -U url-quote-magic && zle -N self-insert url-quote-magic
 autoload -U select-word-style && select-word-style bash
 autoload run-help && alias run-help > /dev/null && unalias run-help
@@ -480,12 +480,12 @@ local -A hostnicks
 hostnicks[centurion]="home"
 hostnicks[weshyo]="frisco"
 case $HOST_SHORT in
-  centurion) # no fallback to unset'ing DISPLAY
+  centurion|hp) # no fallback to unset'ing DISPLAY
     ;;
   vb)
     export TERM=cygwin ;;
   *)
-    [[ $TERM = screen* ]] && unset DISPLAY ;;
+    [[ $TERM = screen* ]] || [[ -n "$TMUX" ]] && unset DISPLAY ;;
 esac
 
 # always source these config files...
