@@ -30,6 +30,21 @@
 
 ;; _____________________________________________________________________
 ;; functions
+(defun format-mail ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (<= (point) (point-max))
+      (progn
+        (search-forward-regexp "> .")
+        (move-beginning-of-line nil)
+        (set-mark-command nil)
+        (search-forward-regexp ">\s+$")
+        (search-forward-regexp "> .")
+        (previous-line)
+        (move-beginning-of-line nil)
+        (fill-paragraph nil t)))))
+
 (defun id ()
   (interactive)
   (insert (concat "Sébastien Delafond <" my-email ">")))

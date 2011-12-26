@@ -36,4 +36,8 @@ precmd() {
   vcs_stuff 2> /dev/null
 }
 
+postcmd() {
+  setTerminalTitle
+}
+
 [[ "$EUID" != 0 ]] || RPROMPT="%S${RPROMPT}%s"
