@@ -32,7 +32,7 @@
 ;; functions
 (defun format-email-body ()
   "Format email body, respecting quote levels, using
-   fill-paragraph"
+                             fill-paragraph"
   (interactive)
   (save-excursion
     (let ((re1 "^\\(> \\)+\\w")
@@ -669,7 +669,7 @@
 		("rules" 		      	      . makefile-mode)
 		("/\.mutt/" 		      	      . muttrc-mode)
 		("wiki" 		      	      . mediawiki-mode)
-		("^/tmp/mutt"                         . my-mutt-flyspell-mode)
+		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
 		("\\(svn-commit\\|COMMIT_EDITMSG\\)"  . (lambda () (progn
                                                                      (org-mode)
@@ -725,31 +725,32 @@
   (interactive)
   (multi-mode 1 'html-mode '("<%" jde-mode) '("%>" html-mode)))
 
-(defun my-mutt-flyspell-mode ()
+(defun my-mutt-hook ()
   (flet ((make-html-mail ()
-			 (shell-command-on-region (point-min) (point-max)
-						  "python ~/bin/make-html-mail.py" t t))
+                         (shell-command-on-region (point-min) (point-max)
+                                                  "python ~/bin/make-html-mail.py" t t))
 
-	 (is-buffer-already-htmlized ()
-				     "Check if the buffer has already been HTMLized"
-				     (goto-char (point-min))
-				     (re-search-forward "src=.*/c/image" nil t))
-	 (is-buffer-to-htmlize ()
-			       "Check if the buffer is a raw email needing HTMLization."
-			       (goto-char (point-min))
-			       (re-search-forward "^From: " nil t)
-			       (and (re-search-forward "^From: " nil t) (re-search-forward "+sig+" nil t)))
-	 (htmlize-and-exit ()
-			   (make-html-mail)
-			   (save-buffer)
-			   (server-edit)))
-  (if (is-buffer-already-htmlized) (server-edit))
-  (if (is-buffer-to-htmlize) (htmlize-and-exit) 
-    (progn 
-      ;; (message-mode)
-;;      (my-color-theme) ;; why ?
-      (flyspell-mode)
-      (choose-dict-automatically)))))
+         (is-buffer-already-htmlized ()
+                                     "Check if the buffer has already been HTMLized"
+                                     (goto-char (point-min))
+                                     (re-search-forward "src=.*/c/image" nil t))
+         (is-buffer-to-htmlize ()
+                               "Check if the buffer is a raw email needing HTMLization."
+                               (goto-char (point-min))
+                               (re-search-forward "^From: " nil t)
+                               (and (re-search-forward "^From: " nil t) (re-search-forward "+sig+" nil t)))
+         (htmlize-and-exit ()
+                           (make-html-mail)
+                           (save-buffer)
+                           (server-edit)))
+    (if (is-buffer-already-htmlized) (server-edit))
+    (if (is-buffer-to-htmlize) (htmlize-and-exit) 
+      (progn 
+        ;; (message-mode)
+        ;;      (my-color-theme) ;; why ?
+        (flyspell-mode)
+        (choose-dict-automatically)
+        (local-set-key "\C-ci" 'format-email-body)))))
 
 ;; _____________________________________________________________________
 ;; Custom-set
