@@ -19,7 +19,7 @@ URxvt.fadeColor: blue
 URxvt.tintColor: pink
 URxvt.shading: 35
 URxvt.transparent: true
-URxvt.perl-ext-common: default,-selection
+URxvt.perl-ext-common: default,-selection,-searchable-scrollback
 URxvt.pointerColor: yellow
 URxvt.pointerColor2: blue
 
