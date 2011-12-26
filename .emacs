@@ -30,20 +30,24 @@
 
 ;; _____________________________________________________________________
 ;; functions
-(defun format-mail ()
+(defun format-email-body ()
+  "Format email body, respecting quote levels, using
+   fill-paragraph"
   (interactive)
   (save-excursion
-    (goto-char (point-min))
-    (while (<= (point) (point-max))
-      (progn
-        (search-forward-regexp "> .")
-        (move-beginning-of-line nil)
-        (set-mark-command nil)
-        (search-forward-regexp ">\s+$")
-        (search-forward-regexp "> .")
-        (previous-line)
-        (move-beginning-of-line nil)
-        (fill-paragraph nil t)))))
+    (let ((re1 "^\\(> \\)+\\w")
+          (re2 "^\\(> *\\)+$"))
+      (goto-char (point-min))
+      (while (<= (point) (point-max))
+        (progn
+          (search-forward-regexp re1)
+          (move-beginning-of-line nil)
+          (set-mark-command nil)
+          (search-forward-regexp re2)
+          (search-forward-regexp re1)
+          (previous-line)
+          (move-beginning-of-line nil)
+          (fill-paragraph nil t))))))
 
 (defun id ()
   (interactive)
