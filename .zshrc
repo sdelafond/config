@@ -21,7 +21,7 @@ autoload -U zed
 autoload -U zmv
 autoload -U edit-command-line 
 autoload -U compinit && compinit
-is4 3 11 && autoload -U colors && colors 
+is4 3 10 && autoload -U colors && colors 
 autoload -U url-quote-magic && zle -N self-insert url-quote-magic
 autoload -U select-word-style && select-word-style bash
 autoload run-help && alias run-help > /dev/null && unalias run-help
