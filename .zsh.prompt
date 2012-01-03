@@ -31,12 +31,13 @@ setTerminalTitle() {
 }
 
 precmd() {
-  setTerminalTitle
   # for the next line, check out the *vcs stuff in .zshrc
   vcs_stuff 2> /dev/null
+  setTerminalTitle
 }
 
 postcmd() {
+#  vcs_stuff 2> /dev/null
   setTerminalTitle
 }
 
