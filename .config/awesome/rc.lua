@@ -231,6 +231,7 @@ awful.rules.rules = {
 
   -- Debian
   { rule = { name = "lenny" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Text
   { rule = { class = "Evince" }, properties = { tag = getTagByShortcut("8") } },

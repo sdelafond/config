@@ -7,6 +7,7 @@ macro compose \cb '<esc>f^uSébastien Delafond <sdelafond@gmail.com><enter>' 'Se
 macro compose \ct '<edit-type><kill-line>text/html; charset=utf-8<Enter><edit-headers>' 'Make HTML attachement'
 #macro compose \cw '^t^utext/html; charset=iso-8859-1^jFpython make-html-mail.py^jy^j' 'Make HTML attachement'
 macro generic \c. ':source ~/.muttrc<enter>' 'Reload preferences'
+macro generic n ':source ~/.muttrc<enter>' 'Reload preferences'
 
 macro pager <F10> |urlview\n
 
