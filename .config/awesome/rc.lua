@@ -558,7 +558,7 @@ mynetwidget:set_color("#FF5656")
 mynetwidget:set_gradient_angle(0)
 mynetwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
 mynetwidget:set_scale(settings.nic_autoscale)
-vicious.register(mynetwidget, vicious.widgets.net, "${" .. settings.nic .. " down_" .. settings.nic_unit .. "b}", 1)
+vicious.register(mynetwidget, vicious.widgets.net, "${" .. settings.nic .. " down_" .. settings.nic_unit .. "}", 1)
 
 mymemwidget = awful.widget.graph()
 mymemwidget:set_width(50)
