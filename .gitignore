@@ -4,5 +4,6 @@
 .swp
 *.pyc
 .depend
+.pc
 org/*.pdf
 org/*.tex
