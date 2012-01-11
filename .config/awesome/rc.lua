@@ -82,7 +82,7 @@ else
   settings.centurion_tag = "4"
   settings.nic = "eth0"
   settings.nic_unit = "mb"
-  settings.nic_autoscale = false
+  settings.nic_autoscale = true
 end
 settings.layouts = { settings.default_layout,
 		     awful.layout.suit.fair,
