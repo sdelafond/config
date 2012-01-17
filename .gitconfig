@@ -39,5 +39,5 @@
         auto=0
 [merge]
 	conflictstyle = diff3
-[push]
-        default = upstream
+#[push]
+#        default = upstream
