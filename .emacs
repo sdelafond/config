@@ -661,14 +661,14 @@
 
 ;; associate file patterns and modes
 (setq auto-mode-alist 
-      (append '(("\\.texi" 		      	      . texi-outline)
-		("\\.[jp]y" 		      	      . python-mode)
-		("\\.rb" 		      	      . ruby-mode)
+      (append '(("\\.texi$" 		      	      . texi-outline)
+		("\\.[jp]y$" 		      	      . python-mode)
+		("\\.rb$" 		      	      . ruby-mode)
 		("Rakefile" 		      	      . ruby-mode)
 		("pf\\.conf" 		      	      . pf-mode)
 		("rules" 		      	      . makefile-mode)
 		("/\.mutt/" 		      	      . muttrc-mode)
-		("/\.vcl/" 		      	      . vcl-mode)
+		("\\.vcl$" 		      	      . vcl-mode)
 		("wiki" 		      	      . mediawiki-mode)
 		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
