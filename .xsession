@@ -1,4 +1,4 @@
-#xscreensaver &
+xscreensaver -nosplash &
 #tpb &
 eval `dbus-launch`
 # manual
