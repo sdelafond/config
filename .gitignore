@@ -7,3 +7,7 @@
 .pc
 org/*.pdf
 org/*.tex
+*.debhelper*
+*.substvars
+python-module-stampdir/
+debian/files
