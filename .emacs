@@ -53,6 +53,10 @@
   (interactive)
   (insert (concat "Sébastien Delafond <" my-email ">")))
 
+(defun insert-sig ()
+  (interactive)
+  (insert (concat "Cordialement," "\n\n" "--SD")))
+
 (defun system-short-name ()
   (car (split-string system-name "\\.")))
 
