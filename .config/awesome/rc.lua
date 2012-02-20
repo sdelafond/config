@@ -557,7 +557,7 @@ mynetwidget:set_width(50)
 mynetwidget:set_background_color("#111111")
 mynetwidget:set_color("#FF5656")
 mynetwidget:set_gradient_angle(0)
-mynetwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
+mynetwidget:set_gradient_colors({ "#00AA00", "#00AA66", "#00AAAA" })
 mynetwidget:set_scale(settings.nic_autoscale)
 vicious.register(mynetwidget, vicious.widgets.net, "${" .. settings.nic .. " down_" .. settings.nic_unit .. "}", 1)
 

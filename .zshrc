@@ -269,6 +269,9 @@ bindkey '^W' kill-region
 zstyle ':completion:*' menu yes=long-list
 zstyle ':completion:*' menu select=2
 
+# case insensitive completion for cd etc *N*
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 # completion styles
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 typeset -U otherHosts
