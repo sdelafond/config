@@ -381,6 +381,7 @@ settings.bindings.global = {
   [{settings.keys.super, "u"}] = awful.client.urgent.jumpto,
   [{settings.keys.super, "a"}] = function() awful.tag.viewonly(lastTag) end,
   [{settings.keys.super, "j"}] = function() awful.tag.viewonly(lastTag) end,
+  [{settings.keys.super, "a"}] = function() awful.tag.viewonly(lastTag) end,
   
   [{settings.keys.super, "Left"}] = awful.tag.viewprev,
   [{settings.keys.super, "Right"}] = awful.tag.viewnext,
