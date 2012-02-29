@@ -58,6 +58,7 @@ macro pager \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
 
 # mutt -> org
 macro index \eo "|~/bin/mail-to-org.py<enter>"
+macro pager \eo "|~/bin/mail-to-org.py<enter>"
 
 # inbox
 macro index i "c=<enter>"
