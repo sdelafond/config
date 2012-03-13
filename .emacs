@@ -113,7 +113,6 @@
 
 ;; _____________________________________________________________________
 ;; Hooks
-
 (defun my-message-mode-hook ()
   (setq message-beginning-of-line nil)
   (turn-off-auto-fill))
@@ -394,15 +393,20 @@
            (let ((l "abcdefghijklmnoprstuvwxyz"))
              (split-string (concat l (upcase l)) "" t)))
 
-     (defun flyspell-same-class-p(c1 c2)
-       (let ((a '("a" "à" "â"))
+     (defun flyspell-same-class-p (c1 c2)
+       "Non exhaustive function aiming at figuring out if
+characters C1 and C2 belong to the same 'class'."
+       (let ((a '("a" "â" "à" "á" "ä"))
              (c '("c" "ç"))
-             (e '("e" "é" "è" "ê" "ë"))
-             (i '("i" "î" "ï"))
-             (o '("o" "ô" "ö"))
-             (u '("u" "û" "ù" "ü")))
-         (loop for tuple in (list a e i o u) do
-               (if (member c1 tuple) (return (member c2 tuple))))))
+             (e '("e" "ê" "è" "é" "ë"))
+             (i '("i" "î" "ì" "í" "ï"))
+             (o '("o" "ô" "ò" "ó" "ö"))
+             (u '("u" "û" "ù" "ú" "ü")))
+         (loop for tuple in (list a c e i o u) do
+               (if (member c1 tuple)
+                   (return (member c2 tuple))
+                 (if (member c2 tuple)
+                     (return (member c1 tuple)))))))
 
      (defun flyspell-word-distance (word1 word2)
        "Difference in length between WORD1 and WORD2."
@@ -541,11 +545,6 @@
 )
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 
-(defun my-color-theme ()
-  (if (eq window-system nil)
-      (color-theme-console-seb)
-    (color-theme-x-seb)))
-
 (defun my-jde-mode-hook ()
   (c-add-style "my-java" '("java" (c-basic-offset . 4)))
   (c-set-style "my-java")
@@ -586,7 +585,9 @@
   ;;; For GNU Emacs 21, use our own xterm-256color.el
   (if (= 21 emacs-major-version) (load "xterm-256color"))
 
-  (my-color-theme))
+  (if (eq window-system nil)
+      (color-theme-console-seb)
+    (color-theme-x-seb)))
 
 ;; accents  
 (unless (or (featurep 'xemacs)
@@ -647,11 +648,15 @@
 (setq visible-bell t)
 
 ;; impartiality is key here
+(setq holiday-bahai-holidays nil)
 (setq holiday-christian-holidays nil)
+(setq holiday-general-holidays nil)
 (setq holiday-hebrew-holidays nil)
 (setq holiday-islamic-holidays nil)
-(setq holiday-bahai-holidays nil)
+(setq holiday-local-holidays nil)
 (setq holiday-oriental-holidays nil)
+(setq holiday-other-holidays nil)
+(setq holiday-solar-holidays nil)
 
 ;; grep-find & friends
 ; FIXME: template ?
@@ -681,7 +686,8 @@
                                                                      (flyspell-mode))))
 		("\\.org$"                            . (lambda () (progn
                                                                      (org-mode)
-                                                                     (flyspell-mode))))
+                                                                     ;(flyspell-mode)
+                                                                     )))
 		("\\.\\(todo\\|csv\\)$"               . org-mode)
 		("\\.jsp$" 		      	      . jsp-mode)
 		("\\.html$" 		      	      . html-mode)
@@ -752,7 +758,6 @@
     (if (is-buffer-to-htmlize) (htmlize-and-exit) 
       (progn 
         ;; (message-mode)
-        ;;      (my-color-theme) ;; why ?
         (flyspell-mode)
         (choose-dict-automatically)
         (local-set-key "\C-ci" 'format-email-body)))))
