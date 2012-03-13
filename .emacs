@@ -672,6 +672,7 @@ todo/all-time/additional-option-like keywords."
 		("rules" 		      	      . makefile-mode)
 		("/\.mutt/" 		      	      . muttrc-mode)
 		("\\.vcl$" 		      	      . vcl-mode)
+		("\\.clj$" 		      	      . lisp-mode)
 		("wiki" 		      	      . mediawiki-mode)
 		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
