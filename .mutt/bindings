@@ -27,8 +27,10 @@ macro  pager   ';'     'q<tag-prefix>'
 
 bind index "^" imap-fetch-mail
 
-#bind editor    "\e<delete>"    kill-word
-#bind editor    "\e<backspace>" kill-word
+bind editor    \cn      history-down
+bind editor    \cp      history-up
+bind editor    "\e<delete>"    kill-word
+bind editor    "\e<backspace>" kill-word
 #map delete-char to a sane value
 #bind editor     <delete>  delete-char
 
@@ -56,6 +58,7 @@ macro pager \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
 
 # mutt -> org
 macro index \eo "|~/bin/mail-to-org.py<enter>"
+macro pager \eo "|~/bin/mail-to-org.py<enter>"
 
 # inbox
 macro index i "c=<enter>"

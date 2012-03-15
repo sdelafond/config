@@ -31,19 +31,18 @@
 ;; _____________________________________________________________________
 ;; functions
 (defun format-email-body ()
-  "Format email body, respecting quote levels, using
-                             fill-paragraph"
+  "Format email body, respecting (or at least trying to) quote levels."
   (interactive)
   (save-excursion
     (let ((re1 "^\\(> \\)+\\w")
-          (re2 "^\\(> *\\)+$"))
+          (re2 "^\\(> *\\)*$"))
       (goto-char (point-min))
       (while (<= (point) (point-max))
         (progn
-          (search-forward-regexp re1)
+          (search-forward-regexp re1 nil t)
           (move-beginning-of-line nil)
           (set-mark-command nil)
-          (search-forward-regexp re2)
+          (search-forward-regexp re2 nil t)
           (search-forward-regexp re1)
           (previous-line)
           (move-beginning-of-line nil)
@@ -215,7 +214,7 @@
 
   (defun org-mode-flyspell-verify ()
     "Don't let flyspell put overlays at active buttons, or on
-     todo/all-time/additional-option-like keywords."
+todo/all-time/additional-option-like keywords."
     (let ((pos (max (1- (point)) (point-min)))
           (word (thing-at-point 'word)))
       (and (not (get-text-property pos 'keymap))
@@ -678,6 +677,7 @@ characters C1 and C2 belong to the same 'class'."
 		("rules" 		      	      . makefile-mode)
 		("/\.mutt/" 		      	      . muttrc-mode)
 		("\\.vcl$" 		      	      . vcl-mode)
+		("\\.clj$" 		      	      . lisp-mode)
 		("wiki" 		      	      . mediawiki-mode)
 		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)

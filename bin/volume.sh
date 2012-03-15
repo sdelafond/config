@@ -19,12 +19,12 @@ STEP=5
 
 case $1 in
   up|down)
-    amixer set $MIXER unmute > /dev/null
+    amixer -c 0 set $MIXER unmute > /dev/null
     [ $1 = up ] && UP="+" || UP="-"
-    amixer set $MIXER ${STEP}dB$UP > /dev/null
-    STRING=$(amixer get $MIXER | perl -i -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }') ;;
+    amixer -c 0 set $MIXER ${STEP}dB$UP > /dev/null
+    STRING=$(amixer -c 0 get $MIXER | perl -i -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }') ;;
   mute)
-    amixer set $MIXER mute > /dev/null
+    amixer -c 0 set $MIXER mute > /dev/null
     STRING="mute" ;;
 esac
 

@@ -9,6 +9,7 @@ set alias_file=.mutt-private/aliases
 source ~/.mutt-private/aliases
 source ~/.mutt-private/identities
 source ~/.mutt-private/imap
+source ~/.mutt-private/msghooks
 source ~/.mutt-private/savehooks
 
 set autoedit=yes

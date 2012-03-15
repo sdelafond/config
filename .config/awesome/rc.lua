@@ -214,6 +214,7 @@ awful.rules.rules = {
   { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { name = "cergy" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 
@@ -231,7 +232,6 @@ awful.rules.rules = {
 
   -- Debian
   { rule = { name = "lenny" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Text
   { rule = { class = "Evince" }, properties = { tag = getTagByShortcut("8") } },
@@ -379,7 +379,9 @@ settings.bindings.global = {
 
   [{settings.keys.super, "Tab"}] = function() awful.client.focus.history.previous() ; if client.focus then client.focus:raise() end end,
   [{settings.keys.super, "u"}] = awful.client.urgent.jumpto,
+  [{settings.keys.super, "a"}] = function() awful.tag.viewonly(lastTag) end,
   [{settings.keys.super, "j"}] = function() awful.tag.viewonly(lastTag) end,
+  [{settings.keys.super, "a"}] = function() awful.tag.viewonly(lastTag) end,
   
   [{settings.keys.super, "Left"}] = awful.tag.viewprev,
   [{settings.keys.super, "Right"}] = awful.tag.viewnext,
