@@ -647,15 +647,16 @@ characters C1 and C2 belong to the same 'class'."
 (setq visible-bell t)
 
 ;; impartiality is key here
-(setq holiday-bahai-holidays nil)
-(setq holiday-christian-holidays nil)
-(setq holiday-general-holidays nil)
-(setq holiday-hebrew-holidays nil)
-(setq holiday-islamic-holidays nil)
-(setq holiday-local-holidays nil)
-(setq holiday-oriental-holidays nil)
-(setq holiday-other-holidays nil)
-(setq holiday-solar-holidays nil)
+(loop for holiday in (list 'holiday-bahai-holidays
+                           'holiday-christian-holidays
+                           'holiday-general-holidays
+                           'holiday-hebrew-holidays
+                           'holiday-islamic-holidays
+                           'holiday-local-holidays
+                           'holiday-oriental-holidays
+                           'holiday-other-holidays
+                           'holiday-solar-holidays)
+      do (set holiday nil))
 
 ;; grep-find & friends
 ; FIXME: template ?

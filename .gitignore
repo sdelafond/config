@@ -7,6 +7,8 @@
 .pc
 org/*.pdf
 org/*.tex
+org/*.html
+org/*.mm
 *.debhelper*
 *.substvars
 python-module-stampdir/
