@@ -1,0 +1,9 @@
+d=. ; while [ ! -d $d/debian -a `readlink -e $d` != / ]; do d=$d/..; done
+if [ -d $d/debian ] && [ -z $QUILT_PATCHES ]; then
+    # if in Debian packaging tree with unset $QUILT_PATCHES
+    QUILT_PATCHES="debian/patches"
+    QUILT_PATCH_OPTS="--reject-format=unified"
+    QUILT_DIFF_ARGS="-p ab --no-timestamps --no-index --color=auto"
+    QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
+    if ! [ -d $d/debian/patches ]; then mkdir $d/debian/patches; fi
+fi
