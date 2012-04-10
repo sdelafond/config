@@ -28,7 +28,7 @@ alias dict='dict.sh'
 alias diff='diff -u'
 alias digs='dig +short'
 alias dos2unix="perl -i -pe 's/\r$//'"
-alias dquilt='quilt --quiltrc=~/.quiltrc-dpkg'
+alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 alias e='jed'
 alias feh='feh -Z -F -p'
 alias g='gitseb'
