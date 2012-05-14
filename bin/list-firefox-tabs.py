@@ -1,9 +1,16 @@
-import glob, json, os
+import glob, json, os, sys
 
-f = glob.glob(os.path.join(os.getenv('HOME'), ".mozilla/firefox/*default/sessionstore.js"))[0]
-jdata = json.load(open(f))
+sessionStoreGlobPath = ".mozilla/firefox/*default/sessionstore.js"
+homePath = os.getenv('HOME')
+try:
+  sessionStorePath = glob.glob(os.path.join(homePath, sessionStoreGlobPath))[0]
+except:
+  print >> sys.stderr, "Could not find your Firefox session store, aborting."
+  sys.exit(1)
 
-for win in jdata.get("windows"):
+sessionData = json.load(open(sessionStorePath))
+
+for win in sessionData.get("windows"):
   for tab in win.get("tabs"):
     i = tab.get("index") - 1
     print tab.get("entries")[i].get("url")
