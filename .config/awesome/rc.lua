@@ -417,29 +417,31 @@ settings.bindings.global = {
 settings.bindings.prompt = {
   [{settings.keys.super_control, "r"}] = function() mypromptbox[mouse.screen]:run() end,
 
-  [{settings.keys.super_control, "l"}] = function()
+  [{settings.keys.super_control, "s"}] = function()
 					  awful.prompt.run({prompt = "Run Lua code: "},
 							   mypromptbox[mouse.screen].widget,
 							   awful.util.eval, nil,
 							   awful.util.getdir("cache") .. "/history_eval")
 					end,
 
-  [{settings.keys.super_control, "s"}] = function()
+  [{settings.keys.super_control, "l"}] = function()
 					  awful.prompt.run({prompt = "Select window by name: "},
 							   mypromptbox[mouse.screen].widget,
 							   function(name)
                                                              for k, c in pairs(client.get()) do
-                                                               if string.match(c.name, ".*" .. string.lower(name) .. ".*") then
+--                                                               if string.find(string.lower(c.name), string.lower(name), 1, true) then
+                                                               if string.match(string.lower(c.name), string.lower(name)) then
                                                                  my_debug(c.name)
                                                                  awful.tag.viewonly(c:tags()[1])
-                                                                 client.focus = c
-                                                                 c:raise()
                                                                  c:swap(awful.client.getmaster())
+                                                                 c:raise()
+                                                                 client.focus = c
                                                                  break
                                                                end
                                                              end
                                                            end,
-                                                           nil)
+                                                           nil,
+							   awful.util.getdir("cache") .. "/windowbyname_eval")
 					end,
 
   [{settings.keys.super_control, "i"}] = function()
