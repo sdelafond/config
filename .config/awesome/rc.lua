@@ -52,7 +52,7 @@ settings.keys.super_alt_control = {settings.keys.super[1], settings.keys.alt[1],
 settings.applications = { ["terminal"]        = 'xterm-screen',
 			  ["lock_screen"]     = 'xscreensaver-command -lock',
 			  ["screen_off"]      = 'sh -c "sleep 1 ; xset dpms force off"',
-			  ["selection"]       = os.getenv("HOME") .. '/bin/selection.rb',
+			  ["selection"]       = os.getenv("HOME") .. '/bin/browser-maybe-selection.rb',
 			  ["keyboard_layout"] = os.getenv("HOME") .. '/bin/keyboard-layout.sh',
 			  ["volume"]          = os.getenv("HOME") .. '/bin/volume.sh',
                           ["killgkrellm"]     = 'pkill gkrellm',
@@ -64,6 +64,7 @@ awful.util.spawn(settings.applications.keyboard_layout)
 -- Layouts
 if env.host == "hp" then
   settings.default_layout = awful.layout.suit.max
+  settings.ut_layout = awful.layout.suit.max
   settings.hp_tag = "1"
   settings.centurion_tag = "4"
   settings.nic = "wlan0"
@@ -71,13 +72,23 @@ if env.host == "hp" then
   settings.nic_autoscale = true
 elseif env.host == "centurion" then
   settings.default_layout = awful.layout.suit.tile
+  settings.ut_layout = awful.layout.suit.max
   settings.hp_tag = "4"
   settings.centurion_tag = "1"
   settings.nic = "eth3"
   settings.nic_unit = "mb"
   settings.nic_autoscale = false
+elseif env.host == "seb-debian" then
+  settings.default_layout = awful.layout.suit.tile
+  settings.ut_layout = awful.layout.suit.tile
+  settings.hp_tag = "4"
+  settings.centurion_tag = "4"
+  settings.nic = "eth0"
+  settings.nic_unit = "mb"
+  settings.nic_autoscale = false
 else
   settings.default_layout = awful.layout.suit.tile
+  settings.ut_layout = awful.layout.suit.max
   settings.hp_tag = "4"
   settings.centurion_tag = "4"
   settings.nic = "eth0"
@@ -100,7 +111,7 @@ settings.tags_defs = { { shortcut = "1", layout = settings.default_layout },
 		       {  shortcut = "2", layout = settings.default_layout }, 
 		       {  shortcut = "3", layout = settings.default_layout, name = "UT Dev" },
 		       {  shortcut = "4", layout = settings.default_layout, name = "Home" },
-		       {  shortcut = "5", layout = awful.layout.suit.max, name = "UT" },
+		       {  shortcut = "5", layout = settings.ut_layout, name = "UT" },
 		       {  shortcut = "6", layout = settings.default_layout, name = "Misc" }, -- nmaster = 2
 		       {  shortcut = "7", layout = settings.default_layout, name = "Mappy" },
 		       {  shortcut = "8", layout = settings.default_layout, name = "Txt" },
@@ -215,7 +226,8 @@ awful.rules.rules = {
   { rule = { name = "cergy" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { class = "URxvt", name = "th2.prod" }, properties = { tag = getTagByShortcut("9") } },
+  { rule = { class = "URxvt", name = "th2.prod" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { class = "URxvt", name = "demo" }, properties = { tag = getTagByShortcut("5") } },
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 
@@ -285,6 +297,7 @@ awful.rules.rules = {
     callback = function(c) c:swap(awful.client.getmaster()) end },
 
   -- VMs
+  { rule = { class = "rdesktop" }, properties = { tag = getTagByShortcut("9") } },
   { rule = { class = "VirtualBox" }, properties = { tag = getTagByShortcut("9") }, 
     callback = function(c) awful.client.setslave(c) end },
 --   { rule = { class = "VirtualBox", name = "Sun VirtualBox" },
@@ -327,7 +340,7 @@ settings.bindings.command = {
   [{settings.keys.super, "Space"}] = settings.applications.mpc_pause,
   [{settings.keys.super, "l"}] = settings.applications.lock_screen,
   [{settings.keys.super, "o"}] = settings.applications.screen_off,
-  [{settings.keys.none, "F1"}] = settings.applications.selection,
+  [{settings.keys.none, "F1"}] = settings.applications.selection .. " default",
   [{settings.keys.super, "F1"}] = settings.applications.selection .. " gs",
   [{settings.keys.super_shift, "F1"}] = settings.applications.selection .. " gi",
   [{settings.keys.super_control, "F1"}] = settings.applications.selection .. " gm",
