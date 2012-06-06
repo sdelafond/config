@@ -50,7 +50,7 @@ autoload -Uz vcs_info && {
     hook_com[misc]+=${(j:/:)gitstatus}
   }
 
-  ### git: Show remote branch name for remote-tracking branches
+  ### Show symbol
   function +vi-symbol() {
     case ${hook_com[vcs_orig]} in
       "git") hook_com[vcs]="±" ;;
