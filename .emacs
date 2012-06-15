@@ -63,6 +63,12 @@
   (interactive)
   (shell-command "date -R" t))
 
+(defun my-browse-url-tab (url &optional new-window)
+  "Open URL"
+  (interactive (browse-url-interactive-arg "URL: "))
+  (let ((cmd "~/bin/browser-maybe-selection.rb"))
+    (start-process (concat cmd url) "*Messages*" cmd "default" url)))
+
 (defun paste-and-shift (arg)
   (interactive)
   (let ((begin (point)))
@@ -629,7 +635,7 @@ characters C1 and C2 belong to the same 'class'."
 
 ;; various variables
 (setq-default indent-tabs-mode nil)
-(setq browse-url-browser-function 'browse-url-firefox)
+(setq browse-url-browser-function 'my-browse-url-tab)
 (setq case-fold-search t)
 (setq ids-creator-id "seb")
 (setq inhibit-startup-message t)
@@ -793,7 +799,7 @@ characters C1 and C2 belong to the same 'class'."
  '(org-level-2 ((t (:foreground "white" :weight bold))))
  '(org-level-3 ((t (:foreground "yellow" :weight bold))))
  '(org-level-4 ((t (:foreground "color-36" :weight bold))))
- '(org-link ((((class color) (background dark)) (:foreground "magenta" :underline t))))
+ '(org-link ((((class color) (background dark)) (:foreground "color-69" :underline t))))
  '(org-tag ((t (:foreground "color-68" :underline nil :weight bold))))
  '(org-todo ((t (:foreground "blue" :weight bold)))))
 

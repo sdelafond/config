@@ -2,6 +2,8 @@
 
 require 'uri'
 
+ENV['DISPLAY'] = ':0'
+
 urlSchemes = ['http', 'ftp', 'https']
 
 system("ps aux | grep -q '[f]irefox'")
@@ -9,9 +11,9 @@ browser = $?.exitstatus == 0 ? "iceweasel" : "chromium-browser"
 
 rhttp = URI.regexp(urlSchemes)
 
-selection = `xclip -o`
+selection = ARGV[1] == nil ? `xclip -o` : ARGV[1]
 
-if ARGV[0] == nil then
+if ARGV[0] == nil or ARGV[0] == "default" then
   selection.gsub!(/^\+/m, '')
   case selection
   when rhttp
