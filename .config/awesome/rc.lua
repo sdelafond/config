@@ -225,9 +225,9 @@ awful.rules.rules = {
   { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { name = "cergy" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { class = "URxvt", name = "th2.prod" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { class = "URxvt", name = "demo" }, properties = { tag = getTagByShortcut("5") } },
+  { rule = { class = "URxvt", name = "th2.prod" }, properties = { tag = getTagByShortcut("6") } },
+  { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("5") } },
+  { rule = { class = "URxvt", name = "demo" }, properties = { tag = getTagByShortcut("3") } },
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 

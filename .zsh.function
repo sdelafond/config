@@ -324,7 +324,7 @@ mf() {
 }
 
 move-in-files() {
-  /bin/ls -d $ZSH_CONFIG_FILES ~/.emacs* ~/.screenrc ~/.tmux.conf ~/.inputrc ~/.git* ~/bin/jed
+  /bin/ls -d $ZSH_CONFIG_FILES ~/.emacs* ~/.screenrc ~/.tmux.conf ~/.inputrc ~/.git* ~/bin/jed ~/bin/emacs-server.sh
 }
 
 move-in() {

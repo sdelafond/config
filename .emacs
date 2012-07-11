@@ -198,6 +198,9 @@
 			(:endgroup . nil)
 			(:startgroup . nil) ("laptop" . ?l)
 			                    ("pc" . ?p)
+			(:startgroup . nil) ("jardin" . ?j)
+			                    ("maison" . ?m)
+			(:endgroup . nil)
 			(:endgroup . nil)
 			(:startgroup . nil) ("net" . ?n)
 			(:endgroup . nil)))
@@ -343,15 +346,18 @@ todo/all-time/additional-option-like keywords."
   (setq org-default-notes-file (concat org-directory "/org/notes"))
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-c/" 'org-sparse-tree)
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
-  (setq org-refile-use-outline-path t)
-  (setq org-outline-path-complete-in-steps t)
+  (define-key org-mode-map "\C-c/" 'org-sparse-tree)
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 
-  (setq org-capture-templates (quote
-                               (("w" "Work" entry (file+headline "~/org/work.todo" "Inbox") "* TODO %? %U %a")
-                                ("h" "Home" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U %a")
-                                ("l" "Link" entry (file+headline "~/org/home.todo" "Inbox") "* %? %U")
-                                ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n  Source: %u, %c\n  %i"))))
+  (setq org-refile-use-outline-path t)
+  (setq org-outline-path-complete-in-steps nil)
+
+  (setq org-capture-templates
+        (quote
+         (("4" "415" entry (file+olp "~/org/home.todo" "415 Conseil" "Inbox") "* TODO %?\n  DEADLINE: %t")
+          ("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox") "* TODO %? :home:\n  DEADLINE: %t")
+          ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox") "* %? %U")
+          ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
   ;; (require 'remember)
   ;; (org-remember-insinuate)
