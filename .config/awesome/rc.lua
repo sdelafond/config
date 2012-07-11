@@ -49,7 +49,7 @@ settings.keys.super_control = {settings.keys.super[1], settings.keys.control[1] 
 settings.keys.super_alt_control = {settings.keys.super[1], settings.keys.alt[1], settings.keys.control[1] }
 
 -- Applications
-settings.applications = { ["terminal"]        = 'xterm-screen',
+settings.applications = { ["terminal"]        = os.getenv("HOME") .. '/bin/xterm-screen',
 			  ["lock_screen"]     = 'xscreensaver-command -lock',
 			  ["screen_off"]      = 'sh -c "sleep 1 ; xset dpms force off"',
 			  ["selection"]       = os.getenv("HOME") .. '/bin/browser-maybe-selection.rb',
