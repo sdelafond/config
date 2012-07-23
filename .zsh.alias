@@ -77,7 +77,7 @@ alias syslog='xpop "sudo ~/bin/syslog.sh" syslog -fade 0 -geometry 140x25+0-0 -s
 case $OSTYPE in
   linux*)
     apts() { apt-cache search -- $@ | sort }
-    [[ -x /usr/bin/aptitude ]] && alias apt-get=aptitude
+#    [[ -x /usr/bin/aptitude ]] && alias apt-get=aptitude
     alias ls='ls --color=auto -F'
 #    alias r='s apt-get remove --purge'
     alias top='top -d 1' ;;
