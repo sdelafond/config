@@ -4,6 +4,7 @@
         br = branch
 	co = checkout
         ca = commit --verbose --amend
+        c = commit --verbose
         cm = commit --verbose
         comm = commit --verbose
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
