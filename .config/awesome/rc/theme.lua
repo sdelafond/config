@@ -1,6 +1,8 @@
 ---- Beautiful theme settings
 theme = {}
-theme.font = "Terminus 8"
+theme.font = "DejaVu Sans 8"
+theme.taglist_font = "DejaVu Sans 8"
+
 -- theme.bg_normal = #22222222
 theme.bg_normal = "#222222"
 theme.fg_normal = "#999999"
@@ -36,5 +38,10 @@ theme.menu_submenu_icon     = "/usr/share/awesome/themes/default/submenu.png"
 -- theme.taglist_squares_sel   = "/usr/share/awesome/themes/default/taglist/squarefw.png"
 -- theme.taglist_squares_unsel = "/usr/share/awesome/themes/default/taglist/squarew.png"
 
-return theme
+-- Naughty
+naughty.config.presets.normal.bg = theme.bg_widget
+for _,preset in pairs({"normal", "low", "critical"}) do
+  naughty.config.presets[preset].font = "DejaVu Sans 8"
+end
 
+return theme
