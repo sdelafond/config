@@ -355,7 +355,7 @@ todo/all-time/additional-option-like keywords."
   (setq org-capture-templates
         (quote
          (("4" "415" entry (file+olp "~/org/home.todo" "415 Conseil" "Inbox") "* TODO %?\n  DEADLINE: %t")
-          ("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox") "* TODO %? :home:\n  DEADLINE: %t")
+          ("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox") "* TODO %?\n  DEADLINE: %t")
           ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox") "* %? %U")
           ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 

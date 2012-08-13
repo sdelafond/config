@@ -6,9 +6,13 @@ alias -g 2nd='DISPLAY=:0.1'
 alias C='curl -O'
 alias F='find'
 alias G='grep -E'
+alias Gi='grep -Ei'
+alias Gv='grep -vE'
+alias Gv='grep -vEi'
 alias H='head'
 alias M='more'
-alias P='perl -i -pe'
+alias P='perl -pe'
+alias Pi='perl -i -pe'
 alias RG='rgrep'
 alias S='sort'
 alias T='tail -F'
@@ -48,9 +52,10 @@ alias psall='ps aux -w -w'
 alias qiv='qiv --scale_down'
 #alias r='s apt-get remove'
 alias rk='r|keep'
-alias rp='s apt-get purge'
+alias rp='s apt-get remove --purge'
 alias rm='rm -i'
 alias rmdir='/bin/rm -fr'
+alias save='echo ${history[$(( $(print -P '%!') - 1))]} >>| ~/.zsh.tosave'
 alias up='s apt-get update'
 alias update-gpg-agent-tty='echo UPDATESTARTUPTTY | gpg-connect-agent -q DN'
 alias tee='tee -a'
@@ -76,7 +81,7 @@ alias syslog='xpop "sudo ~/bin/syslog.sh" syslog -fade 0 -geometry 140x25+0-0 -s
 case $OSTYPE in
   linux*)
     apts() { apt-cache search -- $@ | sort }
-    [[ -x /usr/bin/aptitude ]] && alias apt-get=aptitude
+#    [[ -x /usr/bin/aptitude ]] && alias apt-get=aptitude
     alias ls='ls --color=auto -F'
 #    alias r='s apt-get remove --purge'
     alias top='top -d 1' ;;
