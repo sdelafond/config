@@ -670,6 +670,7 @@ end
 
 ---- modules
 loadrc("quake")
+loadrc("xrandr")
 
 -------------------------------------------------------
 -- You shouldn't have to edit the code after this, 
