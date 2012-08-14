@@ -433,8 +433,8 @@ settings.bindings.global = {
   [{settings.keys.super, "Left"}] = awful.tag.viewprev,
   [{settings.keys.super, "Right"}] = awful.tag.viewnext,
   
---   [{settings.keys.super, "f"}] = function() awful.screen.focus_relative(1) end,
---   [{settings.keys.super, "b"}] = function() awful.screen.focus_relative(-1) end,
+  [{settings.keys.super, "f"}] = function() awful.screen.focus_relative(1) end,
+  [{settings.keys.super, "b"}] = function() awful.screen.focus_relative(-1) end,
 
   [{settings.keys.super_alt, "z"}] = function() switch_screen(false) end,
   [{settings.keys.super_alt_shift, "z"}] = function() switch_screen(true) end,
