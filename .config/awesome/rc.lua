@@ -10,7 +10,10 @@ require("vicious") -- widgets
 ---- Beautiful theme
 beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 
----- homegrown
+---- homegrown modules & functions
+require("lib/client-seb")
+
+-- debugging to ~/.xsession-errors
 function my_debug(msg)
   if settings.debug_on then
     io.stderr:write(msg .. "\n")
@@ -57,7 +60,7 @@ env.host = os.getenv("HOST_SHORT")
 ---- Settings, in their own namespace
 settings = {}
 
--- misc
+-- Misc
 settings.debug_on = true
 settings.focus_dialogs = true
 settings.master_width_factor = 0.5
