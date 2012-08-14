@@ -10,6 +10,7 @@
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
 	st = status
         stat = status
+        pull = pull --rebase
 [branch]
         autosetuprebase = always
 #        master.rebase = true
