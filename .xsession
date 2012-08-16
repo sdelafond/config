@@ -4,7 +4,7 @@ eval `dbus-launch`
 # manual
 setxkbmap -layout us
 xset m 2 100
-xset r 108 # repeat on backspace
+#xset r 108 # repeat on backspace
 xkbset m
 xkbset exp =m
 xmodmap ~/.xmodmaprc

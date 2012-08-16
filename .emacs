@@ -133,7 +133,7 @@
 ;;   (setq org-crypt-key "sdelafond@gmx.net")
 ;;   (add-hook 'before-save-hook 'org-encrypt-entries)
 
-;;  (require 'org-babel-init)     
+;;  (require 'org-babel-init)
   (require 'ob-ruby)
   (require 'ob-python)
   (require 'ob-ditaa)
@@ -147,6 +147,7 @@
 
   (require 'org-protocol)
 
+  ;; LaTeX
   (require 'org-latex)
   (setq org-export-latex-listings t)
   (add-to-list 'org-export-latex-packages-alist '("" "listings"))
@@ -163,6 +164,7 @@
 
 ;;   (org-babel-load-library-of-babel)
 
+  ;; agenda
   (setq diary-file "~/org/calendar.emacs")
   (setq org-agenda-files (directory-files "~/org" t "^[^.].*\\.todo$"))
   (setq org-agenda-include-diary t)
@@ -190,7 +192,33 @@
   (setq org-reverse-note-order nil)
   (setq org-use-fast-todo-selection t)
   (setq org-use-sub-superscripts nil)
+  ;; (setq org-agenda-custom-commands
+  ;;       (quote (("c" todo "DONE|LATER|CANCELED" nil)
+  ;;       	("w" todo "TODO|WAITING" nil)
+  ;;       	("Z" "blah" todo "WAITING")
+  ;;       	("Y" "Weekly Review......." todo "TODO"
+  ;;       	 ((agenda (org-agenda-ndays 7))))
+  ;;       	("W" agenda "Month" ((org-agenda-ndays 30)))
+  ;;       	("A" agenda "Custom"
+  ;;       	 ((org-agenda-skip-function
+  ;;       	   (lambda nil
+  ;;       	     (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
+  ;;       	  (org-agenda-ndays 1)
+  ;;       	  (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+  ;;       	("B" agenda "No (CANCELED|DONE|LATER)"
+  ;;       	 ((org-agenda-skip-function '(org-agenda-skip-subtree-if
+  ;;       				      'regexp "\\* \\(CANCELED\\|LATER\\|DONE\\)")))
+  ;;       	  (org-agenda-ndays 7)
+  ;;       	  (org-show-hierarchy-above t)
+  ;;       	  (org-agenda-overriding-header "No (CANCELED|DONE|LATER): ")))
+  ;;       	("u" alltodo ""
+  ;;       	 ((org-agenda-skip-function
+  ;;       	   (lambda nil
+  ;;       	     (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
+  ;;       				       (quote regexp) "<[^>\n]+>")))
+  ;;       	  (org-agenda-overriding-header "Unscheduled TODO entries: ")))))
 
+  ;; tags
   (setq org-tag-alist '((:startgroup . nil) ("@work" . ?w)
 			                    ("@home" . ?h)
 			                    ("@tel" . ?t)
@@ -205,9 +233,9 @@
 			(:startgroup . nil) ("net" . ?n)
 			(:endgroup . nil)))
 
+  ;; todo
   (setq org-todo-keywords
  	'((sequence "TODO(t)" "WAITING(w@/!)" "LATER(l@)" "|" "DONE(d!/@)" "CANCELED(c@)")))
-
   (setq org-todo-keyword-faces
 	(quote (("TODO" :foreground "red" :weight bold)
 		("LATER" :foreground "dark violet" :weight bold)
@@ -215,12 +243,11 @@
 		("WAITING" :foreground "dark orange" :weight bold)
 		("LATER" :foreground "light orange" :weight bold))))
 
+  ;; links
   (setq org-link-abbrev-alist
         '(("debian-bug"   . "http://bugs.debian.org/%s")))
 
-  (setq org-auto-archive-required-days 21)
-  (setq org-auto-archive-handler-function 'org-archive-subtree)
-
+  ;; spelling
   (defun org-mode-flyspell-verify ()
     "Don't let flyspell put overlays at active buttons, or on
 todo/all-time/additional-option-like keywords."
@@ -231,6 +258,10 @@ todo/all-time/additional-option-like keywords."
            (not (member word org-todo-keywords-1))
            (not (member word org-all-time-keywords))
            (not (member word org-additional-option-like-keywords)))))
+
+  ;; archiving
+  (setq org-auto-archive-required-days 21)
+  (setq org-auto-archive-handler-function 'org-archive-subtree)
 
   (defun org-archive-region-default ()
     "Archive all entries in the selected region"
@@ -294,6 +325,7 @@ todo/all-time/additional-option-like keywords."
 	  (outline-previous-heading)))))
 ;;  (add-hook 'after-save-hook 'org-my-archive-done-tasks)
 
+  ;; publishing
   (setq org-publish-project-alist
 	'(("orgfiles"
 	   :base-directory "~/.svn-work/org/"
@@ -317,38 +349,9 @@ todo/all-time/additional-option-like keywords."
 	   :publishing-function org-publish-attachment)
 	  ("website" :components '("orgfiles" "other"))))
 
-  ;; (setq org-agenda-custom-commands
-  ;;       (quote (("c" todo "DONE|LATER|CANCELED" nil)
-  ;;       	("w" todo "TODO|WAITING" nil)
-  ;;       	("Z" "blah" todo "WAITING")
-  ;;       	("Y" "Weekly Review......." todo "TODO"
-  ;;       	 ((agenda (org-agenda-ndays 7))))
-  ;;       	("W" agenda "Month" ((org-agenda-ndays 30)))
-  ;;       	("A" agenda "Custom"
-  ;;       	 ((org-agenda-skip-function
-  ;;       	   (lambda nil
-  ;;       	     (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
-  ;;       	  (org-agenda-ndays 1)
-  ;;       	  (org-agenda-overriding-header "Today's Priority #A tasks: ")))
-  ;;       	("B" agenda "No (CANCELED|DONE|LATER)"
-  ;;       	 ((org-agenda-skip-function '(org-agenda-skip-subtree-if
-  ;;       				      'regexp "\\* \\(CANCELED\\|LATER\\|DONE\\)")))
-  ;;       	  (org-agenda-ndays 7)
-  ;;       	  (org-show-hierarchy-above t)
-  ;;       	  (org-agenda-overriding-header "No (CANCELED|DONE|LATER): ")))
-  ;;       	("u" alltodo ""
-  ;;       	 ((org-agenda-skip-function
-  ;;       	   (lambda nil
-  ;;       	     (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
-  ;;       				       (quote regexp) "<[^>\n]+>")))
-  ;;       	  (org-agenda-overriding-header "Unscheduled TODO entries: ")))))
-
-  (setq org-default-notes-file (concat org-directory "/org/notes"))
-  (define-key global-map "\C-cc" 'org-capture)
-  (define-key global-map "\C-c/" 'org-sparse-tree)
-  (define-key org-mode-map "\C-c/" 'org-sparse-tree)
+  ;; note/capture/refile
+  (setq org-default-notes-file (concat org-directory "~/org/home.todo"))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
-
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps nil)
 
@@ -359,15 +362,13 @@ todo/all-time/additional-option-like keywords."
           ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox") "* %?\n  %U")
           ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
-  ;; (require 'remember)
-  ;; (org-remember-insinuate)
-  ;; (define-key global-map "\C-cr" 'org-remember)
-  ;; (setq org-remember-store-without-prompt t)
-  ;; (setq org-remember-templates
-  ;;       '(("Work" ?w "* TODO %?\n  %U %a" "~/org/work.todo" "Inbox")
-  ;;         ("Home" ?h "* TODO %?\n  %U %a" "~/org/home.todo" "Inbox")))
+  ;; bindings
   (define-key org-mode-map "\C-ca" 'org-agenda)
-  (define-key org-mode-map "\C-cl" 'org-store-link))
+  (define-key org-mode-map "\C-cl" 'org-store-link)
+  (define-key org-mode-map "\C-c/" 'org-sparse-tree)
+  (define-key global-map "\C-cc" 'org-capture)
+  (define-key global-map "\C-c/" 'org-sparse-tree))
+
 (add-hook 'org-load-hook 'my-org-mode-hook)
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
@@ -790,7 +791,8 @@ characters C1 and C2 belong to the same 'class'."
  '(load-home-init-file t t)
  '(org-agenda-files (quote ("/home/seb/org/home.todo" "/home/seb/org/move.todo")))
  '(org-export-exclude-tags (quote ("noexport" "archive")))
- '(org-export-html-use-infojs (quote when-configured)))
+ '(org-export-html-use-infojs (quote when-configured))
+ '(safe-local-variable-values (quote ((buffer-file-coding-system-explicit utf-8-dos . utf-8-dos) (buffer-file-coding-system-explicit . utf-8-dos)))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.

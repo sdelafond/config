@@ -1,4 +1,4 @@
--- builtin
+---- builtin
 require("awful")
 require("awful.autofocus")
 require("awful.rules")
@@ -7,6 +7,10 @@ require("debian.menu")
 require("naughty") -- notifications
 require("vicious") -- widgets
 
+---- Beautiful theme
+beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
+
+---- homegrown
 function my_debug(msg)
   if settings.debug_on then
     io.stderr:write(msg .. "\n")
@@ -14,9 +18,37 @@ function my_debug(msg)
   end
 end
 
----- Beautiful theme
-beautiful.init(os.getenv("HOME") .. "/.config/awesome/seb.theme")
---beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+-- Simple function to load additional LUA files from rc/.
+function loadrc(name, mod)
+   local success
+   local result
+
+   -- Which file? In rc/ or in lib/?
+  local path = awful.util.getdir("config") .. "/" ..
+  (mod and "lib" or "rc") ..
+      "/" .. name .. ".lua"
+
+   -- If the module is already loaded, don't load it again
+   if mod and package.loaded[mod] then return package.loaded[mod] end
+
+   -- Execute the RC/module file
+   success, result = pcall(function() return dofile(path) end)
+   if not success then
+      naughty.notify({ title = "Error while loading an RC file",
+                              text = "When loading `" .. name ..
+                           "`, got the following error:\n" .. result,
+                              preset = naughty.config.presets.critical
+                     })
+      return print("E: error loading RC file '" .. name .. "': " .. result)
+    end
+
+   -- Is it a module?
+   if mod then
+     return package.loaded[mod]
+   end
+
+   return result
+end
 
 ---- env
 env = {}
@@ -49,7 +81,8 @@ settings.keys.super_control = {settings.keys.super[1], settings.keys.control[1] 
 settings.keys.super_alt_control = {settings.keys.super[1], settings.keys.alt[1], settings.keys.control[1] }
 
 -- Applications
-settings.applications = { ["terminal"]        = os.getenv("HOME") .. '/bin/xterm-screen',
+settings.applications = { ["terminal"]        = 'xterm-screen',
+                          ["terminal_without_screen"] = 'xterm',
 			  ["lock_screen"]     = 'xscreensaver-command -lock',
 			  ["screen_off"]      = 'sh -c "sleep 1 ; xset dpms force off"',
 			  ["selection"]       = os.getenv("HOME") .. '/bin/browser-maybe-selection.rb',
@@ -635,6 +668,10 @@ for s = 1, screen.count() do
              mymemwidget, datewidget, mytasklist, 1)
 end
 
+---- modules
+loadrc("quake")
+loadrc("xrandr")
+
 -------------------------------------------------------
 -- You shouldn't have to edit the code after this, 
 -- it takes care of applying the settings above.
@@ -726,7 +763,10 @@ function manage_client(c)
   end
 
   -- Prevent new windows from becoming master
-  if not settings.new_become_master then awful.client.setslave(c) end
+--  if not settings.new_become_master and not string.match(c.name, "QuakeConsoleNeedsUniqueName") then
+  if not settings.new_become_master then
+    awful.client.setslave(c)
+  end
 
   -- Create border
   c.border_width = beautiful.border_width
