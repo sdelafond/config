@@ -359,7 +359,7 @@ todo/all-time/additional-option-like keywords."
         (quote
          (("4" "415" entry (file+olp "~/org/home.todo" "415 Conseil" "Inbox") "* TODO %?\n  DEADLINE: %t")
           ("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox") "* TODO %?\n  DEADLINE: %t")
-          ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox") "* %? %U")
+          ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox") "* %?\n  %U")
           ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
   ;; bindings
@@ -809,7 +809,7 @@ characters C1 and C2 belong to the same 'class'."
  '(org-level-3 ((t (:foreground "yellow" :weight bold))))
  '(org-level-4 ((t (:foreground "color-36" :weight bold))))
  '(org-link ((((class color) (background dark)) (:foreground "color-69" :underline t))))
- '(org-tag ((t (:foreground "color-68" :underline nil :weight bold))))
+ '(org-tag ((t (:foreground "color-208" :underline nil :weight bold))))
  '(org-todo ((t (:foreground "blue" :weight bold)))))
 
 (put 'downcase-region 'disabled nil)
