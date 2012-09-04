@@ -438,6 +438,19 @@ if [[ ${#javas} -gt 0 ]] ; then
   path=($path $JAVA_HOME/bin)
 fi
 
+# EC2 API tools
+local -a ec2_apis ; ec2_apis=(/opt/ec2-api*(DN))
+if [[ ${#ec2_apis} -gt 0 ]] ; then
+  export EC2_HOME=$ec2_apis[-1]
+  path=($path $EC2_HOME/bin)
+fi
+
+# EC2 AMI tools
+local -a ec2_amis ; ec2_amis=(/opt/ec2-ami*(DN))
+if [[ ${#ec2_amis} -gt 0 ]] ; then
+  path=($path ${ec2_amis[-1]}/bin)
+fi
+
 # makeflags
 export MAKEFLAGS="-j$(grep '^processor\s:' /proc/cpuinfo | wc -l)"
 
