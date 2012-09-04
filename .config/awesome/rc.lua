@@ -7,6 +7,12 @@ require("debian.menu")
 require("naughty") -- notifications
 require("vicious") -- widgets
 
+local capi = {
+  client = client,
+  mouse = mouse,
+  screen = screen,
+}
+
 ---- Beautiful theme
 beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 
@@ -52,6 +58,22 @@ function loadrc(name, mod)
 
    return result
 end
+
+-- Focus a relative screen (similar to `awful.screen.focus_relative`)
+last_coords_per_screen = {}
+local function screen_focus(i)
+  local s = awful.util.cycle(screen.count(), mouse.screen + i)
+  local c = awful.client.focus.history.get(s, 0)
+  local coords = mouse.coords()
+  last_coords_per_screen[mouse.screen] = coords
+  my_debug(string.format("Coords: %s , %s", coords.x, coords.y))
+  mouse.screen = s
+  if last_coords_per_screen[s] then
+    mouse.coords(last_coords_per_screen[s])
+  end
+  if c then client.focus = c end
+end
+awful.screen.focus_relative = screen_focus
 
 ---- env
 env = {}
@@ -178,12 +200,6 @@ for s = 1, screen.count() do
 --  settings.last_selected_client_per_tag[s] = {}
   for k, my_tag in ipairs(settings.tags[s]) do
     tag_def = settings.tags_defs[k]
-    tag_shortcut = tag_def.shortcut
-    if tag_def.name then
-      tag_name = string.format("%s(%s)", tag_shortcut, tag_def.name)
-    else
-      tag_name = tag_shortcut
-    end
     layout = tag_def.layout or settings.layouts[1] -- if no layout, 1st defined
     mwfact = tag_def.mwfact or settings.master_width_factor -- if no mvfact, use defaut
     nmaster = tag_def.nmaster or settings.master_windows -- if no nmaster, use defaut
