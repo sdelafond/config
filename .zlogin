@@ -13,7 +13,7 @@ if [[ -z "$LOGIN_HOST" ]] || [[ $LOGIN_HOST != $HOST ]] ; then
   echo $DISPLAY >| ~/.remote-display
   # start tmux or screen if possible
 # [[ ($TERM != (screen*|vt100) || -z "$TMUX") && $HOST_SHORT != (hp|foooo) ]] && sc remote
-  if [[ -n "$TERM" && $TERM != (screen*|vt100) && $HOST_SHORT != (hp|seb-debian) ]] ; then 
+  if [[ -n "$TERM" && $TERM != (screen*|vt100) && $HOST_SHORT != (seb-debian) ]] ; then 
     source ~/.zsh.function && sc
   fi
 fi

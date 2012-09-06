@@ -369,7 +369,7 @@ typeset -xA extensions # this dictionary is also used by the lst() function
 extensions=()
 extensions[backup]="${literal}~ ${literal}# bak ${litteral}svn-commit.tmp"
 extensions[docs]="calendar chm csv doc docx dvi emacs html ics odf ods odt org pdf pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xlsx xml"
-extensions[archives]="ace apk arj bin bundle bz2 cab cdr dat deb dmg ear exe gz img iso jar lzh pgdump rar rpm tar taz tgz udeb udf war xpi z zip"
+extensions[archives]="ace apk arj bin bundle bz2 cab cdr dat deb dmg ear exe gz img iso jar lzh ova pgdump rar rpm tar taz tgz udeb udf war xpi z zip"
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm wmv xvid yuv"
 extensions[audio]="au mp3 ogg ogv wav wma"
 extensions[pics]="bmp gif jpeg jpg pbm png ppm tga tif xbm xcf xpm"
@@ -438,6 +438,19 @@ if [[ ${#javas} -gt 0 ]] ; then
   export JAVA_HOME=$javas[-1]
   export JAVA=${JAVA_HOME}/bin/java
   path=($path $JAVA_HOME/bin)
+fi
+
+# EC2 API tools
+local -a ec2_apis ; ec2_apis=(/opt/ec2-api*(DN))
+if [[ ${#ec2_apis} -gt 0 ]] ; then
+  export EC2_HOME=$ec2_apis[-1]
+  path=($path $EC2_HOME/bin)
+fi
+
+# EC2 AMI tools
+local -a ec2_amis ; ec2_amis=(/opt/ec2-ami*(DN))
+if [[ ${#ec2_amis} -gt 0 ]] ; then
+  path=($path ${ec2_amis[-1]}/bin)
 fi
 
 # makeflags

@@ -792,7 +792,7 @@ characters C1 and C2 belong to the same 'class'."
  '(org-agenda-files (quote ("/home/seb/org/home.todo" "/home/seb/org/move.todo")))
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
- '(safe-local-variable-values (quote ((buffer-file-coding-system-explicit utf-8-dos . utf-8-dos) (buffer-file-coding-system-explicit . utf-8-dos)))))
+ '(safe-local-variable-values (quote ((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos) (buffer-file-coding-system-explicit utf-8-dos . utf-8-dos) (buffer-file-coding-system-explicit . utf-8-dos)))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
