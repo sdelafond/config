@@ -109,6 +109,8 @@ autoload -Uz vcs_info && {
 # Line editing
 ###################################
 
+bindkey -e # emacs-style, please
+
 # minibuffer regex substitution
 autoload -U read-from-minibuffer
 regex-edit () {
