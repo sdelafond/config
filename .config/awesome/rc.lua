@@ -447,7 +447,6 @@ settings.bindings.global = {
   [{settings.keys.super, "u"}] = awful.client.urgent.jumpto,
   [{settings.keys.super, "a"}] = function() awful.tag.viewonly(lastTag) end,
   [{settings.keys.super, "j"}] = function() awful.tag.viewonly(lastTag) end,
-  [{settings.keys.super, "a"}] = function() awful.tag.viewonly(lastTag) end,
   
   [{settings.keys.super, "Left"}] = awful.tag.viewprev,
   [{settings.keys.super, "Right"}] = awful.tag.viewnext,
@@ -555,17 +554,18 @@ settings.bindings.client_digits = {
 }
 
 settings.bindings.root_digits = {
-  [settings.keys.control] = function(my_tag)
-			     return function()
-				      awful.tag.viewonly(my_tag)
-				    end
-			   end,
+  [settings.keys.control] = function(my_shortcut)
+                              return function()
+                                       awful.tag.viewonly(getTagByShortcut(my_shortcut))
+                                     end
+                            end,
 
-  [settings.keys.super_alt_control] = function(my_tag)
-				       return function()
-						my_tag.selected = not my_tag.selected
-					      end
-				     end
+  [settings.keys.super_alt_control] = function(my_shortcut)
+                                        return function()
+                                                 my_tag = getTagByShortcut(my_shortcut)
+                                                 my_tag.selected = not my_tag.selected
+                                               end
+                                      end
 }
 
 -- Create a wibox for each screen and add it
@@ -729,10 +729,10 @@ end
 for i, my_tag_def in pairs(settings.tags_defs) do
   shortcut = my_tag_def.shortcut
   for mod, f in pairs(settings.bindings.root_digits) do
-    globalkeys = awful.util.table.join(globalkeys, awful.key(mod, shortcut, f(getTagByShortcut(shortcut))))
+    globalkeys = awful.util.table.join(globalkeys, awful.key(mod, shortcut, f(shortcut)))
   end
   for mod, f in pairs(settings.bindings.client_digits) do
-    clientkeys = awful.util.table.join(clientkeys, awful.key(mod, shortcut, f(getTagByShortcut(shortcut))))
+    clientkeys = awful.util.table.join(clientkeys, awful.key(mod, shortcut, f(shortcut)))
   end
 end
 
