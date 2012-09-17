@@ -7,73 +7,11 @@ require("debian.menu")
 require("naughty") -- notifications
 require("vicious") -- widgets
 
-local capi = {
-  client = client,
-  mouse = mouse,
-  screen = screen,
-}
-
 ---- Beautiful theme
 beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 
 ---- homegrown modules & functions
 require("lib/client-seb")
-
--- debugging to ~/.xsession-errors
-function my_debug(msg)
-  if settings.debug_on then
-    io.stderr:write(msg .. "\n")
-    io.stderr:flush()
-  end
-end
-
--- Simple function to load additional LUA files from rc/.
-function loadrc(name, mod)
-   local success
-   local result
-
-   -- Which file? In rc/ or in lib/?
-  local path = awful.util.getdir("config") .. "/" ..
-  (mod and "lib" or "rc") ..
-      "/" .. name .. ".lua"
-
-   -- If the module is already loaded, don't load it again
-   if mod and package.loaded[mod] then return package.loaded[mod] end
-
-   -- Execute the RC/module file
-   success, result = pcall(function() return dofile(path) end)
-   if not success then
-      naughty.notify({ title = "Error while loading an RC file",
-                              text = "When loading `" .. name ..
-                           "`, got the following error:\n" .. result,
-                              preset = naughty.config.presets.critical
-                     })
-      return print("E: error loading RC file '" .. name .. "': " .. result)
-    end
-
-   -- Is it a module?
-   if mod then
-     return package.loaded[mod]
-   end
-
-   return result
-end
-
--- Focus a relative screen (similar to `awful.screen.focus_relative`)
-last_coords_per_screen = {}
-local function screen_focus(i)
-  local s = awful.util.cycle(screen.count(), mouse.screen + i)
-  local c = awful.client.focus.history.get(s, 0)
-  local coords = mouse.coords()
-  last_coords_per_screen[mouse.screen] = coords
-  my_debug(string.format("Coords: %s , %s", coords.x, coords.y))
-  mouse.screen = s
-  if last_coords_per_screen[s] then
-    mouse.coords(last_coords_per_screen[s])
-  end
-  if c then client.focus = c end
-end
-awful.screen.focus_relative = screen_focus
 
 ---- env
 env = {}
@@ -119,7 +57,7 @@ settings.applications = { ["terminal"]        = 'xterm-screen',
 -- do that right away
 awful.util.spawn(settings.applications.keyboard_layout)
 
--- Layouts
+-- layouts, depending on host
 if env.host == "hp" then
   settings.default_layout = awful.layout.suit.max
   settings.ut_layout = awful.layout.suit.max
