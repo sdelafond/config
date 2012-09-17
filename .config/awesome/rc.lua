@@ -732,6 +732,8 @@ function manage_client(c)
   c.size_hints_honor = settings.size_hints_honor
 
   awful.client.movetoscreen(c, mouse.screen)
+
+  awful.rules.apply(c)
 end
 client.add_signal("manage", manage_client)
 
