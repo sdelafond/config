@@ -539,16 +539,16 @@ settings.bindings.mouse = {
 
 settings.bindings.client_digits = {
   -- Mod+Shift+##: Move window to tag
-  [settings.keys.super_shift] = function(my_tag)
+  [settings.keys.super_shift] = function(my_shortcut)
 				 return function(c)
-					  awful.client.movetotag(my_tag, c)
+					  awful.client.movetotag(getTagByShortcut(my_shortcut), c)
 					end
 			       end,
 
   -- Mod+Control+##: Toggle window on tag
-  [settings.keys.super_control] = function(my_tag)
+  [settings.keys.super_control] = function(my_shortcut)
 				   return function(c)
-					    awful.client.toggletag(my_tag, c)
+					    awful.client.toggletag(getTagByShortcut(my_shortcut), c)
 					  end
 				 end
 }
