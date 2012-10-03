@@ -136,6 +136,7 @@
 ;;  (require 'org-babel-init)
   (require 'ob-ruby)
   (require 'ob-python)
+  (require 'ob-js)
   (require 'ob-ditaa)
   (defun my-org-confirm-babel-evaluate (lang body)
     (not (string= lang "ditaa")))  ; don't ask for ditaa
