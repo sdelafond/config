@@ -60,6 +60,7 @@ alias save='echo ${history[$(( $(print -P '%!') - 1))]} >>| ~/.zsh.tosave'
 alias up='s apt-get update'
 alias update-gpg-agent-tty='echo UPDATESTARTUPTTY | gpg-connect-agent -q DN'
 alias tee='tee -a'
+alias tmux-detach-smallest='tmux detach-client -t $(tmux list-clients | sort -n -k 3 | H -1 | perl -pe "s|:.+||")'
 alias top='top -s 1' # for non-linux
 alias wget-mirror='wget -r -nv -nH --no-parent'
 alias x='exit'
