@@ -8,6 +8,7 @@ xset m 2 100
 xkbset m
 xkbset exp =m
 xmodmap ~/.xmodmaprc
+xset r 108
 #xmodmap -e 'pointer = 1 8 3 4 5 6 7 2 9'
 xrdb -load ~/.Xdefaults
 xset dpms 0 0 0
