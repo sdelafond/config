@@ -55,6 +55,7 @@
 (defun insert-sig ()
   (interactive)
   (insert (concat "Cordialement," "\n\n" "--SD")))
+(global-set-key "\C-cs" 'insert-sig)
 
 (defun system-short-name ()
   (car (split-string system-name "\\.")))
