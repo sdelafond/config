@@ -13,6 +13,7 @@ keysym f = f F ecircumflex Ecircumflex
 keysym h = h H ugrave Ugrave
 keysym j = j J udiaeresis Udiaeresis
 keysym k = k K idiaeresis Idiaeresis
+keysym l = l L odiaeresis odiaeresis
 keysym c = c C ccedilla Ccedilla
 keysym z = z Z guillemotleft
 keysym x = x X guillemotright
