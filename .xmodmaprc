@@ -13,12 +13,12 @@ keysym f = f F ecircumflex Ecircumflex
 keysym h = h H ugrave Ugrave
 keysym j = j J udiaeresis Udiaeresis
 keysym k = k K idiaeresis Idiaeresis
+keysym l = l L odiaeresis odiaeresis
 keysym c = c C ccedilla Ccedilla
 keysym z = z Z guillemotleft
 keysym x = x X guillemotright
 
 keycode 22 = NoSymbol
-keycode 108 = BackSpace
 keycode 135 = Pointer_Button2
 keycode 133 = Super_L
 keycode 160 = XF86AudioMute
@@ -33,6 +33,9 @@ keycode 34 = parenleft braceleft
 keycode 35 = parenright braceright
 keycode 18 = 9 bracketleft
 keycode 19 = 0 bracketright
+
+remove mod1 = Alt_R
+keycode 108 = BackSpace
 
 remove Lock = Caps_Lock
 remove Control = Control_L

@@ -55,6 +55,7 @@
 (defun insert-sig ()
   (interactive)
   (insert (concat "Cordialement," "\n\n" "--SD")))
+(global-set-key "\C-cs" 'insert-sig)
 
 (defun system-short-name ()
   (car (split-string system-name "\\.")))
@@ -136,6 +137,7 @@
 ;;  (require 'org-babel-init)
   (require 'ob-ruby)
   (require 'ob-python)
+  (require 'ob-js)
   (require 'ob-ditaa)
   (defun my-org-confirm-babel-evaluate (lang body)
     (not (string= lang "ditaa")))  ; don't ask for ditaa

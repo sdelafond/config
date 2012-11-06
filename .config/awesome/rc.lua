@@ -611,7 +611,7 @@ for s = 1, screen.count() do
   mylayoutbox[s] = awful.widget.layoutbox(s)
   mylayoutbox[s]:buttons(mylayoutbox.buttons)
 
-  mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+  mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright, bg = "#00AA00" })
 
   mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.noempty, mytaglist.buttons)
 
