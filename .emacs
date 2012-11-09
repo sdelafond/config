@@ -148,6 +148,8 @@
   (setq org-src-fontify-natively t)
 
   (require 'org-protocol)
+  (require 'org-export)
+  (require 'org-e-html)
 
   ;; LaTeX
   (require 'org-latex)

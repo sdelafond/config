@@ -3,6 +3,7 @@
 .#*
 .swp
 *.pyc
+*.bak
 .depend
 .pc
 org/*.pdf
