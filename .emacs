@@ -148,6 +148,7 @@
   (setq org-src-fontify-natively t)
 
   (require 'org-protocol)
+  (require 'org-confluence)
 
   ;; LaTeX
   (require 'org-latex)
@@ -689,6 +690,7 @@ characters C1 and C2 belong to the same 'class'."
       (append '(("\\.texi$" 		      	      . texi-outline)
 		("\\.[jp]y$" 		      	      . python-mode)
 		("\\.rb$" 		      	      . ruby-mode)
+		("Capfile" 		      	      . ruby-mode)
 		("Rakefile" 		      	      . ruby-mode)
 		("pf\\.conf" 		      	      . pf-mode)
 		("rules" 		      	      . makefile-mode)
