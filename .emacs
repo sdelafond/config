@@ -149,6 +149,10 @@
 
   (require 'org-protocol)
 
+  (require 'org-export)
+  (require 'org-e-confluence)
+  (require 'org-e-html)
+
   ;; LaTeX
   (require 'org-latex)
   (setq org-export-latex-listings t)
@@ -689,6 +693,7 @@ characters C1 and C2 belong to the same 'class'."
       (append '(("\\.texi$" 		      	      . texi-outline)
 		("\\.[jp]y$" 		      	      . python-mode)
 		("\\.rb$" 		      	      . ruby-mode)
+		("Capfile" 		      	      . ruby-mode)
 		("Rakefile" 		      	      . ruby-mode)
 		("pf\\.conf" 		      	      . pf-mode)
 		("rules" 		      	      . makefile-mode)

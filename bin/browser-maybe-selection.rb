@@ -13,6 +13,9 @@ rhttp = URI.regexp(urlSchemes)
 
 selection = ARGV[1] == nil ? `xclip -o` : ARGV[1]
 
+# handle mutt wrap markers
+selection.gsub!(/\n\+/m, '')
+
 if ARGV[0] == nil or ARGV[0] == "default" then
   selection.gsub!(/^\+/m, '')
   case selection
