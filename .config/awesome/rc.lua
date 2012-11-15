@@ -206,6 +206,7 @@ awful.rules.rules = {
   { rule = { name = "VNC:" }, properties = { tag = getTagByShortcut("5") } },
 
   -- UT dev
+  { rule = { name = "seb-dev" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "lemmiwinks" }, properties = { tag = getTagByShortcut("3") } },

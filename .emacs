@@ -148,7 +148,10 @@
   (setq org-src-fontify-natively t)
 
   (require 'org-protocol)
-  (require 'org-confluence)
+
+  (require 'org-export)
+  (require 'org-e-confluence)
+  (require 'org-e-html)
 
   ;; LaTeX
   (require 'org-latex)
