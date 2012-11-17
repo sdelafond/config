@@ -3,11 +3,13 @@
         bl = log --graph --branches --pretty=format:'%C(magenta)%h%C(reset) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
         br = branch
 	co = checkout
-        ca = commit --verbose --amend
         c = commit --verbose
+        ca = commit --verbose --all
+        cam = commit --verbose --amend
         cm = commit --verbose
         comm = commit --verbose
         commit = commit --verbose
+        d = diff
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
 	st = status
         stat = status
