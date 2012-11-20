@@ -589,6 +589,7 @@ characters C1 and C2 belong to the same 'class'."
 ;; font highlighting
 (unless (featurep 'xemacs)
   (require 'color-theme-seb)
+  (require 'color-theme-solarized)
   (show-paren-mode t)
   (transient-mark-mode t)
   (global-font-lock-mode t)
@@ -605,7 +606,8 @@ characters C1 and C2 belong to the same 'class'."
   (if (= 21 emacs-major-version) (load "xterm-256color"))
 
   (if (eq window-system nil)
-      (color-theme-console-seb)
+;;      (color-theme-console-seb)
+      (color-theme-solarized-dark)
     (color-theme-x-seb)))
 
 ;; accents  
