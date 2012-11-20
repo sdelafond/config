@@ -312,18 +312,18 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              ;; info
              (info-xref ((t (,@fmt-undr ,@fg-blue))))
              (info-xref-visited ((t (,@fg-magenta :inherit info-xref))))
-             ;; org
-             (org-hide ((t (,@fg-base03))))
-             (org-todo ((t (,@fmt-bold ,@fg-base03 ,@bg-red))))
-             (org-done ((t (,@fmt-bold ,@fg-green))))
-             (org-todo-kwd-face ((t (,@fg-red ,@bg-base03))))
-             (org-done-kwd-face ((t (,@fg-green ,@bg-base03))))
-             (org-project-kwd-face ((t (,@fg-violet ,@bg-base03))))
-             (org-waiting-kwd-face ((t (,@fg-orange ,@bg-base03))))
-             (org-someday-kwd-face ((t (,@fg-blue ,@bg-base03))))
-             (org-started-kwd-face ((t (,@fg-yellow ,@bg-base03))))
-             (org-cancelled-kwd-face ((t (,@fg-green ,@bg-base03))))
-             (org-delegated-kwd-face ((t (,@fg-cyan ,@bg-base03))))
+             ;; ;; org
+             ;; (org-hide ((t (,@fg-base03))))
+             ;; (org-todo ((t (,@fmt-bold ,@fg-base03 ,@bg-red))))
+             ;; (org-done ((t (,@fmt-bold ,@fg-green))))
+             ;; (org-todo-kwd-face ((t (,@fg-red ,@bg-base03))))
+             ;; (org-done-kwd-face ((t (,@fg-green ,@bg-base03))))
+             ;; (org-project-kwd-face ((t (,@fg-violet ,@bg-base03))))
+             ;; (org-waiting-kwd-face ((t (,@fg-orange ,@bg-base03))))
+             ;; (org-someday-kwd-face ((t (,@fg-blue ,@bg-base03))))
+             ;; (org-started-kwd-face ((t (,@fg-yellow ,@bg-base03))))
+             ;; (org-cancelled-kwd-face ((t (,@fg-green ,@bg-base03))))
+             ;; (org-delegated-kwd-face ((t (,@fg-cyan ,@bg-base03))))
              ;; table
              (table-cell ((t (,@fmt-none ,@fg-base0 ,@bg-back))))
              ;; outline - pandocBlockQuoteLeader*
