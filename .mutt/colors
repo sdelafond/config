@@ -23,7 +23,7 @@ color header      brightcolor196 default  "^X-Spam.*: "
 ## ==================================================
 ## Colorizing the body of messages (ie in the pager)
 ## ==================================================
-color normal      color252       default  # pager body
+color normal      color242       default  # pager body
 
 #  Coloring quoted text - coloring the first 7 levels:
 color quoted      color22        default
@@ -45,7 +45,7 @@ color body        yellow       default   "[;:][-]?[)/(|>\\]+"
 
 #  Remember:  Order counts!  The last matching rule "wins".
 #  So we'll start with some general rules first:
-color index 	  color252   	 default ~R
+color index 	  color244   	 default ~R
 color index       color154	 default ~O # Old
 
 color index 	  color141       default '(~L (maudet\|lbrowne\|bouchare\|stanley\|415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
