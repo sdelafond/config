@@ -221,7 +221,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                               :box (:line-width 2 :style pressed-button)
                               :inherit custom-button-mouse))))
              (custom-changed ((t (,@fmt-revr ,@fg-blue ,@bg-base3))))
-             (custom-comment ((t (,@fg-base1 ,@bg-base02))))
+             (custom-comment ((t (,@fmt-bold ,@fg-base1 ,@bg-base02))))
              (custom-comment-tag ((t (,@fg-base1 ,@bg-base02))))
              (custom-documentation ((t (:inherit default))))
              (custom-group-tag ((t (,@fg-base1))))
@@ -280,7 +280,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (eshell-prompt ((t (,@fmt-bold ,@fg-green))))
              ;; font-lock
              (font-lock-builtin-face ((t (,@fmt-none ,@fg-green)))) ; Statement
-             (font-lock-comment-face ((t (,@fmt-ital ,@fg-base01)))) ; Comment
+             (font-lock-comment-face ((t (,@fmt-ital ,@fmt-bold ,@fg-base2)))) ; Comment
              (font-lock-constant-face ((t (,@fmt-none ,@fg-cyan)))) ; Constant
              (font-lock-function-name-face ; Identifier
               ((t (,@fmt-none ,@fg-blue))))
@@ -295,7 +295,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
               ((t (,@fmt-ital ,@fg-base01))))
              (font-lock-color-constant-face ((t (,@fmt-none ,@fg-green))))
              (font-lock-comment-delimiter-face ; Comment
-              ((t (,@fmt-ital ,@fg-base01))))
+              ((t (,@fmt-ital ,@fmt-bold ,@fg-base2))))
              (font-lock-preprocessor-face ; PreProc
               ((t (,@fmt-none ,@fg-orange))))
              (font-lock-reference-face ((t (,@fmt-none ,@fg-cyan))))
