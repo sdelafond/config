@@ -254,5 +254,4 @@ widget, custom, latex, ediff."
        (message-header-newsgroups-face ((t (:italic t :bold t :foreground "LightSkyBlue3"))))
        (message-header-other-face ((t (:foreground "LightSkyBlue3"))))
        (message-header-xheader-face ((t (:foreground "DodgerBlue3"))))))))
-
 (provide 'color-theme-seb)

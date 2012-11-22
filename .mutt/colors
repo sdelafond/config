@@ -23,7 +23,7 @@ color header      brightcolor196 default  "^X-Spam.*: "
 ## ==================================================
 ## Colorizing the body of messages (ie in the pager)
 ## ==================================================
-color normal      color244       default  # pager body
+color normal      color252       default  # pager body
 
 #  Coloring quoted text - coloring the first 7 levels:
 color quoted      color22        default
