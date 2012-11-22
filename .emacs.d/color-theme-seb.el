@@ -8,14 +8,14 @@ widget, custom, latex, ediff."
   (message "color-theme-console-seb")
   (color-theme-install
    '(color-theme-console-seb
-     ((foreground-color . "color-247")
+     ((foreground-color . "color-252")
 ;;      (background-color . "transparent")
       (mouse-color . "black")
       (cursor-color . "color-232")
       (border-color . "black")
       (background-mode . dark))
      (default . nil)
-     (region ((t (:background "color-142"))))
+     (region ((t (:background "color-231"))))
      (modeline ((t (:foreground "white" :background "blue"))))
      (modeline-buffer-id ((t (:foreground "black" :background "color-120"))))
      (modeline-inactive ((t (:foreground "black" :background "color-235"))))
