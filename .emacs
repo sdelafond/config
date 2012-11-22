@@ -244,11 +244,11 @@
   (setq org-todo-keywords
  	'((sequence "TODO(t)" "WAITING(w@/!)" "LATER(l@)" "|" "DONE(d!/@)" "CANCELED(c@)")))
   (setq org-todo-keyword-faces
-	(quote (("TODO" :foreground "red" :weight bold)
-		("LATER" :foreground "dark violet" :weight bold)
-		("DONE" :foreground "dark green" :weight bold)
-		("WAITING" :foreground "dark orange" :weight bold)
-		("LATER" :foreground "light orange" :weight bold))))
+        (quote (("TODO" :foreground "light grey" :weight bold :background "red")
+        	("LATER" :foreground "dark violet" :weight bold)
+        	("DONE" :foreground "dark green" :weight bold)
+        	("WAITING" :foreground "dark orange" :weight bold)
+        	("LATER" :foreground "light orange" :weight bold))))
 
   ;; links
   (setq org-link-abbrev-alist
@@ -590,7 +590,7 @@ characters C1 and C2 belong to the same 'class'."
 ;; font highlighting
 (unless (featurep 'xemacs)
   (require 'color-theme-seb)
-  (require 'color-theme-solarized)
+  ;; (require 'color-theme-solarized)
   (show-paren-mode t)
   (transient-mark-mode t)
   (global-font-lock-mode t)
@@ -607,8 +607,8 @@ characters C1 and C2 belong to the same 'class'."
   (if (= 21 emacs-major-version) (load "xterm-256color"))
 
   (if (eq window-system nil)
-;;      (color-theme-console-seb)
-      (color-theme-solarized-dark)
+      (color-theme-console-seb)
+;;      (color-theme-solarized-dark)
     (color-theme-x-seb)))
 
 ;; accents  
@@ -805,14 +805,13 @@ characters C1 and C2 belong to the same 'class'."
  '(safe-local-variable-values (quote ((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos) (buffer-file-coding-system-explicit utf-8-dos . utf-8-dos) (buffer-file-coding-system-explicit . utf-8-dos)))))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
  '(org-checkbox-statistics-todo ((t (:foreground "color-177"))) t)
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))
- '(org-done ((t (:foreground "brightgreen" :weight bold))))
  '(org-hide ((t (:foreground "#00000000"))))
  '(org-level-1 ((t (:foreground "magenta" :weight bold))))
  '(org-level-2 ((t (:foreground "white" :weight bold))))
@@ -820,6 +819,6 @@ characters C1 and C2 belong to the same 'class'."
  '(org-level-4 ((t (:foreground "color-36" :weight bold))))
  '(org-link ((((class color) (background dark)) (:foreground "color-69" :underline t))))
  '(org-tag ((t (:foreground "color-208" :underline nil :weight bold))))
- '(org-todo ((t (:foreground "blue" :weight bold)))))
+)
 
 (put 'downcase-region 'disabled nil)
