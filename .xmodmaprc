@@ -9,6 +9,7 @@ keysym i = i I icircumflex Icircumflex
 keysym o = o O ocircumflex Ocircumflex
 keysym a = a A agrave Agrave
 keysym d = d D ediaeresis Ediaeresis
+keysym s = s S adiaeresis Adiaeresis
 keysym f = f F ecircumflex Ecircumflex
 keysym h = h H ugrave Ugrave
 keysym j = j J udiaeresis Udiaeresis
