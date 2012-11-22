@@ -93,8 +93,9 @@
 (defun my-autoload (&rest modes)
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
-(my-autoload "id" "align" "python-mode" "multi-mode" "org" "time-stamp"
-             "pf-mode" "ruby-mode" "ruby-electric" "gtags"
+(my-autoload "id" "align" "git-commit-mode" "gitignore-mode"
+             "gitconfig-mode" "python-mode" "multi-mode" "org"
+             "time-stamp" "pf-mode" "ruby-mode" "ruby-electric" "gtags"
              "mediawiki-mode" "outdent" "vcl-mode")
 
 (defun add-function-to-hooks (fun modes-hooks)
