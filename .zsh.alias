@@ -6,10 +6,17 @@ alias -g 2nd='DISPLAY=:0.1'
 alias C='curl -O'
 alias CD='curl -v -o /dev/null'
 alias F='find'
-alias G='grep -P'
-alias Gi='grep -Pi'
-alias Gv='grep -vP'
-alias Gvi='grep -vPi'
+
+grep -P foo /dev/null 2> /dev/null
+if [ $? = 2 ] ; then
+  grepSwitch="E"
+else
+  grepSwitch="P"
+fi
+alias G="grep -$grepSwitch"
+alias Gi="grep -${grepSwitch}i"
+alias Gv="grep -v${grepSwitch}"
+alias Gvi="grep -v${grepSwitch}i"
 alias H='head'
 alias M='more'
 alias P='perl -pe'
