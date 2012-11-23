@@ -707,7 +707,7 @@ characters C1 and C2 belong to the same 'class'."
 		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
 		("\\(svn-commit\\|COMMIT_EDITMSG\\)"  . (lambda () (progn
-                                                                     (org-mode)
+                                                                     (git-commit-mode)
                                                                      (flyspell-mode))))
 		("\\.org$"                            . (lambda () (progn
                                                                      (org-mode)
