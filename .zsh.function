@@ -207,7 +207,7 @@ gitseb-bootstrap() {
   local protocol host user my_path project repository
   project=${1:-base}
   if [ $project == base ] ; then
-    protocol=git
+    protocol=http
     user=sdelafond
     host=github.com
     my_path=${user}/config.git
