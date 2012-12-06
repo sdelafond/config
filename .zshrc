@@ -518,11 +518,11 @@ source ~/.zsh.function
 for dir in ~/.config-* ; do
   case "$dir" in *dontsource*|*base*) continue ;; esac
   for file in $dir/.z*(N) ; do
-    source $file
+    [[ $file == *~ ]] || source $file
   done
 done
 for file in ~/.zsh_*(N) ; do
-  [[ $file == *history* ]] || source $file
+  [[ $file == *history* ]] || [[ $file == *~ ]] || source $file
 done
 
 local hostFile=~/.zsh_$HOST
