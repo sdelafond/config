@@ -512,7 +512,7 @@ source ~/.zsh.alias
 source ~/.zsh.function
 
 # maybe overloaded later
-[ $HOST == *puppet-master* ] || set-git-info sdelafond@gmail.com "Sébastien Delafond"
+[[ $HOST == *puppet-master* ]] || set-git-info sdelafond@gmail.com "Sébastien Delafond"
 
 # ... but only some of these
 for dir in ~/.config-* ; do
