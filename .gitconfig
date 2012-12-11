@@ -10,6 +10,7 @@
         cm = commit --verbose
         comm = commit --verbose
         commit = commit --verbose
+        cp = cherry-pick
         d = diff
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
 	st = status
