@@ -211,15 +211,13 @@ awful.rules.rules = {
   { rule = { name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "lemmiwinks" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { name = "xen" }, properties = { tag = getTagByShortcut("3") } },
 
   -- M
   { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { name = "cergy" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { name = "ud-bo-frontal" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { class = "URxvt", name = "th2.prod" }, properties = { tag = getTagByShortcut("6") } },
   { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { class = "URxvt", name = "demo" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { class = "URxvt", name = "qt" }, properties = { tag = getTagByShortcut("3") } },
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 
@@ -265,6 +263,7 @@ awful.rules.rules = {
   { rule = { class = "Rhythmbox" }, properties = { tag = getTagByShortcut("F2") } },
   { rule = { class = "Exaile" }, properties = { tag = getTagByShortcut("F2") } },
   { rule = { class = "Gmpc" }, properties = { tag = getTagByShortcut("F2") } },
+  { rule = { class = "Ario" }, properties = { tag = getTagByShortcut("F2") } },
 
   -- Communication
   { rule = { class = "Skype" }, properties = { tag = getTagByShortcut("F4"), floating = true } },
