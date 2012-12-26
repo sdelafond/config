@@ -190,6 +190,7 @@ awful.rules.rules = {
   { rule = { name = "centurion" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "home" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "seb-debian" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "x230" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
   { rule = { class = "Iceweasel" }, properties = { tag = getTagByShortcut("2") } },
