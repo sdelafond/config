@@ -58,7 +58,7 @@ settings.applications = { ["terminal"]        = 'xterm-screen',
 awful.util.spawn(settings.applications.keyboard_layout)
 
 -- layouts, depending on host
-if env.host == "hp" then
+if env.host == "x230" then
   settings.default_layout = awful.layout.suit.max
   settings.ut_layout = awful.layout.suit.max
   settings.hp_tag = "1"
