@@ -20,6 +20,7 @@ keysym z = z Z guillemotleft
 keysym x = x X guillemotright
 
 keycode 22 = NoSymbol
+keycode 107 = Pointer_Button2
 keycode 135 = Pointer_Button2
 keycode 133 = Super_L
 keycode 160 = XF86AudioMute
