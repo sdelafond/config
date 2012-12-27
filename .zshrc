@@ -498,7 +498,7 @@ local -A hostnicks
 hostnicks[centurion]="home"
 hostnicks[weshyo]="frisco"
 case $HOST_SHORT in
-  centurion|hp|seb-debian) # no fallback to unset'ing DISPLAY
+  centurion|x230|seb-debian) # no fallback to unset'ing DISPLAY
     ;;
   vb)
     export TERM=cygwin ;;
