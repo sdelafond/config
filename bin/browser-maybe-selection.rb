@@ -7,7 +7,7 @@ ENV['DISPLAY'] = ':0'
 urlSchemes = ['http', 'ftp', 'https']
 
 system("ps aux | grep -qE '([f]irefox|iceweasel)'")
-browser = $?.exitstatus == 0 ? "iceweasel" : "chromium-browser"
+browser = $?.exitstatus == 0 ? "iceweasel" : "chromium"
 
 rhttp = URI.regexp(urlSchemes)
 

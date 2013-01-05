@@ -289,6 +289,8 @@ awful.rules.rules = {
 
   -- VMs
   { rule = { class = "rdesktop" }, properties = { tag = getTagByShortcut("9") } },
+  { rule = { class = "qemu" }, properties = { tag = getTagByShortcut("9") } },
+  { rule = { class = "kvm" }, properties = { tag = getTagByShortcut("9") } },
   { rule = { class = "VirtualBox" }, properties = { tag = getTagByShortcut("9") }, 
     callback = function(c) awful.client.setslave(c) end },
 --   { rule = { class = "VirtualBox", name = "Sun VirtualBox" },
