@@ -1,5 +1,5 @@
 #! /bin/zsh
 
-source .zshenv
-source .zshrc
+source ~/.zshenv
+source ~/.zshrc
 xterm-screen
