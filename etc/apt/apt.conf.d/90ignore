@@ -1,0 +1,2 @@
+Dir::Ignore-Files-Silently:: ".old$";
+Dir::Ignore-Files-Silently:: ".disabled$";
