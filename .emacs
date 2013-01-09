@@ -695,6 +695,7 @@ characters C1 and C2 belong to the same 'class'."
       (append '(("\\.texi$" 		      	      . texi-outline)
 		("\\.[jp]y$" 		      	      . python-mode)
 		("\\.rb$" 		      	      . ruby-mode)
+		("\\.pp$" 		      	      . ruby-mode)
 		("Capfile" 		      	      . ruby-mode)
 		("Rakefile" 		      	      . ruby-mode)
 		("pf\\.conf" 		      	      . pf-mode)
