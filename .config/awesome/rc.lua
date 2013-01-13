@@ -60,7 +60,7 @@ awful.util.spawn(settings.applications.keyboard_layout)
 -- layouts, depending on host
 if env.host == "x230" then
   settings.default_layout = awful.layout.suit.max
-  settings.ut_layout = awful.layout.suit.max
+  settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "1"
   settings.centurion_tag = "4"
   settings.nic = "wlan0"
@@ -68,7 +68,7 @@ if env.host == "x230" then
   settings.nic_autoscale = true
 elseif env.host == "centurion" then
   settings.default_layout = awful.layout.suit.tile
-  settings.ut_layout = awful.layout.suit.max
+  settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
   settings.centurion_tag = "1"
   settings.nic = "eth3"
@@ -84,7 +84,7 @@ elseif env.host == "seb-debian" then
   settings.nic_autoscale = false
 else
   settings.default_layout = awful.layout.suit.tile
-  settings.ut_layout = awful.layout.suit.max
+  settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
   settings.centurion_tag = "4"
   settings.nic = "eth0"
@@ -203,14 +203,12 @@ awful.rules.rules = {
   { rule = { name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "host51.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "sid" }, properties = { tag = getTagByShortcut("5") } },
-  { rule = { name = "lemmiwinks" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "VNC:" }, properties = { tag = getTagByShortcut("5") } },
 
   -- UT dev
-  { rule = { name = "seb-dev" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "seb\-dev" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { name = "lemmiwinks" }, properties = { tag = getTagByShortcut("3") } },
 
   -- M
   { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
