@@ -96,7 +96,7 @@
 (my-autoload "id" "align" "git-commit-mode" "gitignore-mode"
              "gitconfig-mode" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "ruby-electric" "gtags"
-             "mediawiki-mode" "outdent" "vcl-mode")
+             "outdent" "vcl-mode")
 
 (defun add-function-to-hooks (fun modes-hooks)
   "Add a call to FUN to each mode-hook listed in MODES-HOOKS."
@@ -703,7 +703,6 @@ characters C1 and C2 belong to the same 'class'."
 		("/\.mutt/" 		      	      . muttrc-mode)
 		("\\.vcl$" 		      	      . vcl-mode)
 		("\\.clj$" 		      	      . lisp-mode)
-		("wiki" 		      	      . mediawiki-mode)
 		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
 		("\\(svn-commit\\|COMMIT_EDITMSG\\)"  . (lambda () (progn
