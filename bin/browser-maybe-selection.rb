@@ -6,12 +6,8 @@ ENV['DISPLAY'] = ':0'
 
 urlSchemes = ['http', 'ftp', 'https']
 
-system("ps aux | grep -qE '(firefox|iceweasel)' | grep -v grep")
-puts $?
-puts $?.exitstatus
+system("pgrep iceweasel")
 browser = $?.exitstatus == 0 ? "iceweasel" : "chromium"
-puts ($?.exitstatus == 0)
-puts browser
 rhttp = URI.regexp(urlSchemes)
 
 selection = ARGV[1] == nil ? `xclip -o` : ARGV[1]
