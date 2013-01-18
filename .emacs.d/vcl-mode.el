@@ -30,6 +30,10 @@
 ;;;
 ;;; $Id$
 ;;;
+;;; Based on
+;;; https://www.varnish-cache.org/trac/browser/fragmentation/varnish-tools/emacs/vcl-mode.el?rev=72322230cfe73244bcf31e008a05a9c2c3867816
+;;; Updated to work with varnish 3 a bit better; highlight more of the
+;;; variable names and functions
 
 (defgroup vcl nil
   "Customizations for vcl-mode")
@@ -63,15 +67,22 @@
      "elsif"
      "if"
      "remove"
-     "set"
      )
     'font-lock-keyword-face)
    
    ;; Types
    (generic-make-keywords-list
     (list
-     "purge_url"
+     "set"
+     "unset"
+     "ban_url"
+     "ban"
      "regsub"
+     "regsuball"
+     "hash_data"
+     "return"
+     "call"
+     "import"
      )
     'font-lock-builtin-face)
    
@@ -106,40 +117,83 @@
      "lookup"
      "pass"
      "pipe"
+     "hit_for_pass"
      )
     'font-lock-function-name-face)
 
    ;; Variables
    (generic-make-keywords-list
     (list
-     "backend.host"
-     "backend.port"
-     "bereq.proto"
-     "bereq.request"
-     "bereq.url"
-     "client.ip"
      "now"
-     "obj.cacheable"
-     "obj.lastuse"
-     "obj.proto"
-     "obj.response"
-     "obj.status"
-     "obj.ttl"
-     "obj.valid"
-     "req.backend"
-     "req.hash"
-     "req.proto"
+     ".host"
+     ".port"
+
+     "client.ip"
+     "client.identity"
+     "server.ip"
+     "server.port"
+     "server.hostname"
+     "server.identity"
+
      "req.request"
      "req.url"
+     "req.proto"
+     "req.backend"
+     "req.backend.healthy"
+     "req.hash_always_miss"
+     "req.hash_ignore_busy"
+     "req.can_gzip"
+     "req.restarts"
+     "req.esi"
+     "req.esi_level"
+     "req.grace"
+     "req.xid"
+
+
+     "bereq.request"
+     "bereq.url"
+     "bereq.proto"
+     "bereq.connect_timeout"
+     "bereq.first_byte_timeout"
+     "bereq.between_bytes_timeout"
+
+     
+     "beresp.do_stream"
+     "beresp.do_esi"
+     "beresp.do_gzip"
+     "beresp.do_gunzip"
+     "beresp.proto"
+     "beresp.status"
+     "beresp.response"
+     "beresp.ttl"
+     "beresp.grace"
+     "beresp.saintmode"
+     "beresp.backend.name"
+     "beresp.backend.ip"
+     "beresp.backend.port"
+     "beresp.storage"
+
+
+     "obj.proto"
+     "obj.status"
+     "obj.response"
+     "obj.ttl"
+     "obj.lastuse"
+     "obj.hits"
+     "obj.grace"
+     "obj.http.header"
+
+
+     "req.hash"
      "resp.proto"
-     "resp.response"
      "resp.status"
-     "server.ip"
+     "resp.response"
+     "resp.http.header"
      )
     'font-lock-variable-name-face)
 
    ;; More variables
-   '("\\(\\(be\\)?req\\|resp\\|obj\\)\.http\.[A-Za-z-]+" .
+   '("\\(\\(be\\)?\\(req\\|resp\\|obj\\)\\)\.http\.[A-Za-z-]+" .
      font-lock-variable-name-face))
   
   ;; Filenames to highlight
