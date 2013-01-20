@@ -117,7 +117,8 @@ settings.tags_defs = { { shortcut = "1", layout = settings.default_layout },
 		       {  shortcut = "F3", layout = awful.layout.suit.max, name = "VNC" },
 		       {  shortcut = "F4", layout = awful.layout.suit.floating, name = "Comm" },
 		       {  shortcut = "F5", layout = settings.default_layout, name = "Gimp", mwfact = 0.2 },
-		       {  shortcut = "F6", layout = settings.default_layout, name = "P2P" }, }
+		       {  shortcut = "F6", layout = settings.default_layout, name = "P2P" },
+		       {  shortcut = "F7", layout = settings.default_layout, name = "Photo" }, }
 
 settings.tags_names = {}
 for i, tag_def in ipairs(settings.tags_defs) do
@@ -297,6 +298,9 @@ awful.rules.rules = {
   -- Earth & P2P
   { rule = { class = "earth" }, properties = { tag = getTagByShortcut("F6") } },
   { rule = { class = "mule" }, properties = { tag = getTagByShortcut("F6") } },
+
+  -- Photo
+  { rule = { class = "Darktable" }, properties = { tag = getTagByShortcut("F7") } },
 }
 
 ---- Keybindings
