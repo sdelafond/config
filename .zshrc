@@ -372,7 +372,7 @@ extensions[docs]="calendar chm csv doc docx dvi emacs html ics odf ods odt org p
 extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg ear exe gz img iso jar lzh ova pgdump rar rpm tar taz tgz udeb udf war xpi z zip"
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm wmv xvid yuv"
 extensions[audio]="au mp3 ogg ogv wav wma"
-extensions[pics]="bmp gif jpeg jpg pbm png ppm tga tif xbm xcf xpm"
+extensions[pics]="bmp dng gif jpeg jpg pbm png ppm tga tif xbm xcf xpm"
 extensions[code]="${literal}Makefile a bash c c++ class cpp diff el elz hs jacl java js jy ko lua o out patch pl pm py pyc pyo rb sh so sql tcl zsh"
 
 # add the uppercase extensions too
