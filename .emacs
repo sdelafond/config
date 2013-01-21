@@ -54,7 +54,7 @@
 
 (defun insert-sig ()
   (interactive)
-  (insert (concat "Cordialement," "\n\n" "--SD")))
+  (insert (concat "Bien cordialement," "\n\n" "--SD")))
 (global-set-key "\C-cs" 'insert-sig)
 
 (defun system-short-name ()
