@@ -228,6 +228,7 @@ awful.rules.rules = {
   { rule = { name = "beastie" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "t400" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "t60" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "Vncviewer", name = "hp" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "centurion" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "hippie" }, properties = { tag = getTagByShortcut("F3") } },
@@ -330,6 +331,8 @@ settings.bindings.client = {
 settings.bindings.command = {
   [{settings.keys.none, "XF86AudioRaiseVolume"}] = settings.applications.volume .. " up",
   [{settings.keys.none, "XF86AudioLowerVolume"}] = settings.applications.volume .. " down",
+  [{settings.keys.super, "Up"}] = settings.applications.volume .. " up",
+  [{settings.keys.super, "Down"}] = settings.applications.volume .. " down",
   [{settings.keys.none, "XF86AudioMute"}] = settings.applications.volume .. " mute",
   [{settings.keys.super, "s"}] = settings.applications.terminal,
   [{settings.keys.super, "Space"}] = settings.applications.mpc_pause,
