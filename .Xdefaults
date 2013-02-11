@@ -15,7 +15,7 @@ URxvt.saveLines: 100000
 URxvt.scrollBar: false
 URxvt.externalBorder: 0
 URxvt.fading: 40
-URxvt.fadeColor: blue 
+URxvt.fadeColor: black
 URxvt.tintColor: pink
 URxvt.shading: 35
 URxvt.transparent: true
