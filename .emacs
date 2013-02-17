@@ -81,6 +81,13 @@
   (kill-region (point) (point-max)))
 (global-set-key "\C-ck" 'kill-to-eof)
 
+(defun show-file-name ()
+  "Show the full path file name in the minibuffer"
+  (interactive)
+  (message (buffer-file-name))
+  (kill-new (file-truename buffer-file-name)))
+(global-set-key "\C-cz" 'show-file-name)
+
 (defun my-backup-enable-predicate (filename)
   "Do not create backups for certain files."
   (when (normal-backup-enable-predicate filename)
