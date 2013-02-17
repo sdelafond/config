@@ -179,9 +179,8 @@
 ;;   (org-babel-load-library-of-babel)
 
   ;; agenda
-  (setq diary-file "~/org/calendar.emacs")
   (setq org-agenda-files (directory-files "~/org" t "^[^.].*\\.todo$"))
-  (setq org-agenda-include-diary t)
+  (setq org-agenda-include-diary nil)
   (setq org-agenda-span 7)
   (setq org-agenda-show-all-dates t)
   (setq org-agenda-skip-deadline-if-done t)
