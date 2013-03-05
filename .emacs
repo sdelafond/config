@@ -633,6 +633,10 @@ characters C1 and C2 belong to the same 'class'."
   (require 'recentf)
   (recentf-mode t))
 
+;; unique buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
+
 ;; buffer switching and more
 (if (require 'icicles nil t)
     (progn
