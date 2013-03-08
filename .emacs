@@ -633,6 +633,11 @@ characters C1 and C2 belong to the same 'class'."
   (require 'recentf)
   (recentf-mode t))
 
+;; git-gutter
+(require 'git-gutter)
+(global-git-gutter-mode t)
+(set-face-foreground 'git-gutter:modified "cyan")
+
 ;; unique buffer names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
