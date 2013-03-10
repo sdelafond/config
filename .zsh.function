@@ -512,14 +512,7 @@ s() { # smarter sudo
 
 sc() {
   name=$1
-  if [[ -z "$name" ]] ; then
-    if [[ "$HOST" = (proliant) ]] ; then
-      screen -R main -D -A
-      return
-    else
-      name="main"
-    fi
-  fi
+  [[ -z "$name" ]] && name="main"
   if whence tmux &> /dev/null ; then
     tmux attach -t $name
   elif whence screen &> /dev/null ; then
