@@ -38,7 +38,7 @@ bind editor    "\e<backspace>" kill-word
 #macro index \CW T!~s\(.*source.*\)\nWn^T~A\n "Weed out binary-only announcements"
 
 # imitate the old search-body function
-macro index \eb 'c=search'<enter><shell-escape>'mairix b:' 'Enter Mairix search term'
+macro index \es 'c=search'<enter><shell-escape>'mairix ' 'Enter Mairix search term'
 
 # simulate the old url menu
 macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
