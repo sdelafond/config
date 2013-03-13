@@ -2,10 +2,10 @@ PROMPT=$'${PSEXTRA}%{$fg_no_bold[green]%}%80<...<%~%{$fg_no_bold[default]%}%(?..
 RPROMPT=$'[%{$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]'
 
 case $TERM in
-  rxvt*|xterm*)
+  rxvt*|xterm)
     TITLE_ESCAPE_BEGIN="\e]0;"
     TITLE_ESCAPE_END="\a" ;;
-  sun*|vt*|screen*|linux)
+  sun*|vt*|screen*|xterm-256color|linux)
     TITLE_ESCAPE_BEGIN="\ek"
     TITLE_ESCAPE_END="\e\\" ;;
 esac
@@ -20,13 +20,13 @@ setTerminalTitle() {
       else
         title="$vcs_info_msg_1_ $title"
       fi
-      if [[ $TERM != screen* ]] ; then
+      if [[ $TERM != screen* ]] && [[ $TERM != xterm-256color ]] ; then
         title="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       fi
 
       [[ -z $title ]] && title=" "
 
-      print -Pn "${TITLE_ESCAPE_BEGIN}${title}${TITLE_ESCAPE_END}"
+      print -Pn "${TITLE_ESCAPE_BEGIN}${title}${TITLE_ESCAPE_END}" ;;
   esac
 }
 
