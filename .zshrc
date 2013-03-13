@@ -462,7 +462,6 @@ export HOST_SHORT=${HOST/.*}
 
 # let's make sure our TERM is known to the system
 infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}
-[[ $HOST == "proliant" ]] && [[ $TERM == "screen-256color" ]] && export TERM="xterm-256color"
 
 # to be handily copied to remote machines
 ZSH_CONFIG_FILES=(~/.z(log|sh)^(_*|*~)(.,@) ~/.zsh)
