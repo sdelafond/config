@@ -4,7 +4,7 @@
 
 ;; Author: Syohei YOSHIDA <syohex@gmail.com>
 ;; URL: https://github.com/syohex/emacs-git-gutter
-;; Version: 0.27
+;; Version: 0.35
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -47,6 +47,18 @@ character for signs of changes"
   :type 'string
   :group 'git-gutter)
 
+(defcustom git-gutter:update-hooks
+  '(after-save-hook after-revert-hook window-configuration-change-hook)
+  "hook points of updating gutter"
+  :type '(list (hook :tag "HookPoint")
+               (repeat :inline t (hook :tag "HookPoint")))
+  :group 'git-gutter)
+
+(defcustom git-gutter:separator-sign nil
+  "Separator sign"
+  :type 'string
+  :group 'git-gutter)
+
 (defcustom git-gutter:modified-sign "="
   "Modified sign"
   :type 'string
@@ -63,18 +75,23 @@ character for signs of changes"
   :group 'git-gutter)
 
 (defcustom git-gutter:unchanged-sign nil
-  "Deleted sign"
+  "Unchanged sign"
   :type 'string
   :group 'git-gutter)
 
-(defcustom git-gutter:always-show-gutter nil
-  "Always show gutter"
+(defcustom git-gutter:hide-gutter nil
+  "Hide gutter if there are no changes"
   :type 'boolean
   :group 'git-gutter)
 
 (defcustom git-gutter:lighter " GitGutter"
   "Minor mode lighter in mode-line"
   :type 'string
+  :group 'git-gutter)
+
+(defface git-gutter:separator
+    '((t (:foreground "cyan" :weight bold)))
+  "Face of separator"
   :group 'git-gutter)
 
 (defface git-gutter:modified
@@ -152,12 +169,12 @@ character for signs of changes"
           (unless (string= root "")
             (file-name-as-directory root)))))))
 
-(defun git-gutter:changes-to-number (str)
+(defsubst git-gutter:changes-to-number (str)
   (if (string= str "")
       1
     (string-to-number str)))
 
-(defun git-gutter:make-diffinfo (type content start &optional end)
+(defsubst git-gutter:make-diffinfo (type content start end)
   (list :type type :content content :start-line start :end-line end))
 
 (defun git-gutter:diff-content ()
@@ -170,8 +187,8 @@ character for signs of changes"
         (goto-char (point-max)))
       (buffer-substring curpoint (point)))))
 
-(defun git-gutter:diff-command (file)
-  (format "git --no-pager diff --no-color --no-ext-diff -U0 %s %s"
+(defsubst git-gutter:diff-command (file)
+  (format "git --no-pager diff --no-color --no-ext-diff -U0 %s \"%s\""
           git-gutter:diff-option file))
 
 (defun git-gutter:diff (curfile)
@@ -188,14 +205,11 @@ character for signs of changes"
               for new-changes = (git-gutter:changes-to-number (match-string 4))
               for end-line = (1- (+ new-line new-changes))
               for content = (git-gutter:diff-content)
+              for type = (cond ((zerop orig-changes) 'added)
+                               ((zerop new-changes) 'deleted)
+                               (t 'modified))
               collect
-              (cond ((zerop orig-changes)
-                     (git-gutter:make-diffinfo 'added content new-line end-line))
-                    ((zerop new-changes)
-                     (git-gutter:make-diffinfo 'deleted content new-line))
-                    (t
-                     (git-gutter:make-diffinfo
-                      'modified content new-line end-line))))))))
+              (git-gutter:make-diffinfo type content new-line end-line))))))
 
 (defun git-gutter:line-to-pos (line)
   (save-excursion
@@ -204,15 +218,19 @@ character for signs of changes"
     (point)))
 
 (defmacro git-gutter:before-string (sign)
-  `(propertize " " 'display `((margin left-margin) ,sign)))
+  (let* ((sep-sign git-gutter:separator-sign)
+         (sep-face 'git-gutter:separator)
+         (sep (when sep-sign (propertize sep-sign
+                                         'face sep-face))))
+    `(propertize " " 'display `((margin left-margin) ,(concat ,sign ,sep)))))
 
-(defun git-gutter:select-face (type)
+(defsubst git-gutter:select-face (type)
   (case type
     (added 'git-gutter:added)
     (modified 'git-gutter:modified)
     (deleted 'git-gutter:deleted)))
 
-(defun git-gutter:select-sign (type)
+(defsubst git-gutter:select-sign (type)
   (case type
     (added git-gutter:added-sign)
     (modified git-gutter:modified-sign)
@@ -255,34 +273,45 @@ character for signs of changes"
                      git-gutter:deleted-sign)))
     (when git-gutter:unchanged-sign
       (add-to-list 'signs git-gutter:unchanged-sign))
-    (apply 'max (mapcar 'git-gutter:sign-width signs))))
+    (+ (apply 'max (mapcar 'git-gutter:sign-width signs))
+       (git-gutter:sign-width git-gutter:separator-sign))))
 
 (defun git-gutter:view-for-unchanged ()
   (save-excursion
-    (let ((sign (propertize git-gutter:unchanged-sign
-                            'face 'git-gutter:unchanged)))
+    (let ((sign (if git-gutter:unchanged-sign
+                    (propertize git-gutter:unchanged-sign
+                                'face 'git-gutter:unchanged)
+                  " ")))
       (goto-char (point-min))
       (while (not (eobp))
         (git-gutter:view-at-pos sign (point))
         (forward-line 1)))))
 
+(defun git-gutter:set-window-margin (width)
+  (let ((curwin (get-buffer-window)))
+    (set-window-margins curwin width (cdr (window-margins curwin)))))
+
+(defsubst git-gutter:show-gutter-p (diffinfos)
+  (if git-gutter:hide-gutter
+      (or diffinfos git-gutter:unchanged-sign)
+    (or global-git-gutter-mode git-gutter:unchanged-sign diffinfos)))
+
 (defun git-gutter:view-diff-infos (diffinfos)
-  (let ((curwin (get-buffer-window))
-        (win-width (or git-gutter:window-width
+  (let ((win-width (or git-gutter:window-width
                        (git-gutter:longest-sign-width))))
-    (when git-gutter:unchanged-sign
+    (when (or git-gutter:unchanged-sign
+              git-gutter:separator-sign)
       (git-gutter:view-for-unchanged))
     (when diffinfos
       (save-excursion
         (mapc 'git-gutter:view-diff-info diffinfos)))
-    (when (or git-gutter:always-show-gutter diffinfos git-gutter:unchanged-sign)
-      (set-window-margins curwin win-width (cdr (window-margins curwin))))))
+    (when (git-gutter:show-gutter-p diffinfos)
+      (git-gutter:set-window-margin win-width))))
 
 (defun git-gutter:process-diff (curfile)
   (let ((diffinfos (git-gutter:diff curfile)))
-    (when diffinfos
-      (setq git-gutter:diffinfos diffinfos)
-      (funcall git-gutter:view-diff-function diffinfos))))
+    (setq git-gutter:diffinfos diffinfos)
+    (funcall git-gutter:view-diff-function diffinfos)))
 
 (defun git-gutter:search-near-diff-index (diffinfos is-reverse)
   (loop with current-line = (line-number-at-pos)
@@ -339,7 +368,7 @@ character for signs of changes"
   "Revert current hunk."
   (interactive)
   (git-gutter:awhen (git-gutter:search-here-diffinfo git-gutter:diffinfos)
-    (git-gutter:popup-diff it)
+    (git-gutter:popup-hunk it)
     (when (yes-or-no-p "Revert current hunk ?")
       (git-gutter:do-revert-hunk it)
       (save-buffer)
@@ -348,7 +377,7 @@ character for signs of changes"
     (delete-window (get-buffer-window (get-buffer git-gutter:popup-buffer)))))
 
 ;;;###autoload
-(defun git-gutter:popup-diff (&optional diffinfo)
+(defun git-gutter:popup-hunk (&optional diffinfo)
   "popup current diff hunk"
   (interactive)
   (git-gutter:awhen (or diffinfo
@@ -366,7 +395,8 @@ character for signs of changes"
 (defun git-gutter:next-hunk (arg)
   "Move to next diff hunk"
   (interactive "p")
-  (when git-gutter:diffinfos
+  (if (not git-gutter:diffinfos)
+      (message "There are no changes!!")
     (let* ((is-reverse (< arg 0))
            (diffinfos git-gutter:diffinfos)
            (len (length diffinfos))
@@ -380,7 +410,7 @@ character for signs of changes"
       (forward-line (1- (plist-get diffinfo :start-line)))
       (when (buffer-live-p (get-buffer git-gutter:popup-buffer))
         (save-window-excursion
-          (git-gutter:popup-diff))))))
+          (git-gutter:popup-hunk))))))
 
 ;;;###autoload
 (defun git-gutter:previous-hunk (arg)
@@ -390,6 +420,7 @@ character for signs of changes"
 
 (defalias 'git-gutter:next-diff 'git-gutter:next-hunk)
 (defalias 'git-gutter:previous-diff 'git-gutter:previous-hunk)
+(defalias 'git-gutter:popup-diff 'git-gutter:popup-hunk)
 
 (defun git-gutter:default-directory (dir curfile)
   (if (not (tramp-connectable-p curfile))
@@ -400,9 +431,9 @@ character for signs of changes"
            (host (aref vec 2)))
       (format "/%s:%s%s:%s" method (if user (concat user "@") "") host dir))))
 
-(defun git-gutter:relative-path (dir curfile)
+(defun git-gutter:file-path (dir curfile)
   (if (not (tramp-connectable-p curfile))
-      (file-relative-name curfile dir)
+      curfile
     (let ((file (aref (tramp-dissect-file-name curfile) 3)))
       (replace-regexp-in-string (concat "\\`" dir) "" curfile))))
 
@@ -416,14 +447,18 @@ character for signs of changes"
       (when (and file (file-exists-p file))
         (git-gutter:awhen (git-gutter:root-directory file)
           (let* ((default-directory (git-gutter:default-directory it file))
-                 (curfile (git-gutter:relative-path default-directory file)))
+                 (curfile (git-gutter:file-path default-directory file)))
             (git-gutter:process-diff curfile)
             (setq git-gutter:enabled t)))))))
 
+(defsubst git-gutter:reset-window-margin-p ()
+  (or git-gutter:force
+      git-gutter:hide-gutter
+      (not global-git-gutter-mode)))
+
 (defun git-gutter:reset-window-margin ()
-  (when (or git-gutter:force (not git-gutter:always-show-gutter))
-    (let ((curwin (get-buffer-window)))
-      (set-window-margins curwin 0 (cdr (window-margins curwin))))))
+  (when (git-gutter:reset-window-margin-p)
+    (git-gutter:set-window-margin 0)))
 
 ;;;###autoload
 (defun git-gutter:clear ()
@@ -435,22 +470,12 @@ character for signs of changes"
   (setq git-gutter:enabled nil
         git-gutter:diffinfos nil))
 
-;;;###autoload
-(defun git-gutter:toggle ()
-  "toggle to show diff information"
-  (interactive)
-  (let ((git-gutter:force t))
-    (if git-gutter:enabled
-        (git-gutter:clear)
-      (git-gutter)))
-  (setq git-gutter:toggle-flag git-gutter:enabled))
-
-(defun git-gutter:check-file-and-directory ()
+(defsubst git-gutter:check-file-and-directory ()
   (and (buffer-file-name)
        default-directory (file-directory-p default-directory)))
 
 ;;;###autoload
-(define-minor-mode git-gutter-mode ()
+(define-minor-mode git-gutter-mode
   "Git-Gutter mode"
   :group      'git-gutter
   :init-value nil
@@ -463,20 +488,29 @@ character for signs of changes"
             (when git-gutter:init-function
               (funcall git-gutter:init-function))
             (make-local-variable 'git-gutter:enabled)
-            (make-local-variable 'git-gutter:toggle-flag)
+            (set (make-local-variable 'git-gutter:toggle-flag) t)
             (make-local-variable 'git-gutter:diffinfos)
-            (add-hook 'after-save-hook 'git-gutter nil t)
-            (add-hook 'after-revert-hook 'git-gutter nil t)
-            (add-hook 'change-major-mode-hook 'git-gutter nil t)
-            (add-hook 'window-configuration-change-hook 'git-gutter nil t)
-            (run-with-idle-timer 0 nil 'git-gutter))
+            (dolist (hook git-gutter:update-hooks)
+              (add-hook hook 'git-gutter nil t)))
         (message "Here is not Git work tree")
         (git-gutter-mode -1))
-    (remove-hook 'after-save-hook 'git-gutter t)
-    (remove-hook 'after-revert-hook 'git-gutter t)
-    (remove-hook 'change-major-mode-hook 'git-gutter t)
-    (remove-hook 'window-configuration-change-hook 'git-gutter t)
+    (dolist (hook git-gutter:update-hooks)
+      (remove-hook hook 'git-gutter t))
     (git-gutter:clear)))
+
+;;;###autoload
+(defun git-gutter:toggle ()
+  "toggle to show diff information"
+  (interactive)
+  (let ((git-gutter:force t))
+    (if git-gutter:enabled
+        (progn
+          (git-gutter:clear)
+          (setq git-gutter-mode nil))
+      (git-gutter)
+      (setq git-gutter-mode t))
+    (setq git-gutter:toggle-flag git-gutter:enabled)
+    (force-mode-line-update)))
 
 ;;;###autoload
 (define-global-minor-mode global-git-gutter-mode
