@@ -158,7 +158,7 @@
   (require 'org-protocol)
 
   (require 'org-export)
-  (require 'org-e-confluence)
+;;  (require 'org-e-confluence)
   (require 'org-e-html)
 
   ;; LaTeX
