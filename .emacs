@@ -636,6 +636,7 @@ characters C1 and C2 belong to the same 'class'."
 ;; git-gutter
 (require 'git-gutter)
 (global-git-gutter-mode t)
+(setq git-gutter:modified-sign "⚡")
 (set-face-foreground 'git-gutter:modified "cyan")
 (setq git-gutter:separator-sign "|")
 
