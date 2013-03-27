@@ -514,7 +514,7 @@ sc() {
   name=$1
   [[ -z "$name" ]] && name="main"
   if whence tmux &> /dev/null ; then
-    tmux attach -t $name
+    tmux attach -d -t $name
   elif whence screen &> /dev/null ; then
     screen -R $name -D -A
   fi
