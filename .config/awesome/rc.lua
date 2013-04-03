@@ -207,8 +207,7 @@ awful.rules.rules = {
   { rule = { name = "VNC:" }, properties = { tag = getTagByShortcut("5") } },
 
   -- UT dev
-  { rule = { name = "seb\-dev" }, properties = { tag = getTagByShortcut("3") } },
-  { rule = { name = "marvin" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "metalof" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
 
   -- M
@@ -232,6 +231,9 @@ awful.rules.rules = {
   { rule = { class = "Vncviewer", name = "hp" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "centurion" }, properties = { tag = getTagByShortcut("F3") } },
   { rule = { class = "Vncviewer", name = "hippie" }, properties = { tag = getTagByShortcut("F3") } },
+
+  -- 
+  { rule = { name = "The page at" }, properties = { tag = getTagByShortcut("2") } },
 
   -- Debian
   { rule = { name = "lenny" }, properties = { tag = getTagByShortcut("7") } },

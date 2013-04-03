@@ -8,6 +8,7 @@ urlSchemes = ['http', 'ftp', 'https']
 
 system("pgrep -f '(iceweasel|firefox-bin)'")
 browser = $?.exitstatus == 0 ? "iceweasel" : "chromium"
+
 rhttp = URI.regexp(urlSchemes)
 
 selection = ARGV[1] == nil ? `xclip -o` : ARGV[1]
