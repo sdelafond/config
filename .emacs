@@ -667,6 +667,12 @@ characters C1 and C2 belong to the same 'class'."
       (ido-mode t)
     (iswitchb-mode t)))
 
+;; EasyPG
+(require 'epa-file)
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+(setq epg-gpg-program "/usr/bin/gpg")
+(epa-file-enable)
+
 ;; various variables
 (setq-default indent-tabs-mode nil)
 (setq browse-url-browser-function 'my-browse-url-tab)
