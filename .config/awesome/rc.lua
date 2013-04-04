@@ -46,7 +46,7 @@ settings.keys.super_alt_control = {settings.keys.super[1], settings.keys.alt[1],
 -- Applications
 settings.applications = { ["terminal"]        = 'xterm-screen',
                           ["terminal_without_screen"] = 'xterm',
-			  ["lock_screen"]     = 'xscreensaver-command -lock',
+			  ["lock_screen"]     = 'bash -c "xset dpms force off ; xscreensaver-command -lock"',
 			  ["screen_off"]      = 'sh -c "sleep 1 ; xset dpms force off"',
 			  ["selection"]       = os.getenv("HOME") .. '/bin/browser-maybe-selection.rb',
 			  ["keyboard_layout"] = os.getenv("HOME") .. '/bin/keyboard-layout.sh',
