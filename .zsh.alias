@@ -28,6 +28,7 @@ alias Z='zless'
 
 alias add='awk "{s=s+\$1} END {print s}"'
 alias al='xautolock -time 5 -resetsaver -corners ++++ -cornerdelay 5 -cornerredelay &'
+alias aptf='apt-file search'
 alias aptp='apt-cache policy'
 alias aptsh='apt-cache show'
 alias aptshp='apt-cache showpkg'
