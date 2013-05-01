@@ -12,6 +12,7 @@ beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 
 ---- homegrown modules & functions
 require("lib/client-seb")
+require("lib/battery-notification")
 
 ---- env
 env = {}
