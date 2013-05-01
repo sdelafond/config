@@ -121,7 +121,7 @@ regex-edit () {
   [[ -n $REPLY ]] && BUFFER="$words[1] $(echo $words[2,${#words}] | sed ${REPLY})"
 }
 zle -N regex-edit
-bindkey "^[e" regex-edit
+bindkey "^[E" regex-edit
 
 # keeper
 autoload -U keeper && {
