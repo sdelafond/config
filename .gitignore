@@ -14,3 +14,4 @@ org/*.mm
 *.substvars
 python-module-stampdir/
 debian/files
+fish
