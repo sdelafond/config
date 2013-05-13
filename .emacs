@@ -338,12 +338,25 @@ todo/all-time/additional-option-like keywords."
 	  (outline-previous-heading)))))
 ;;  (add-hook 'after-save-hook 'org-my-archive-done-tasks)
 
-  ;; publishing
+;; publishing
   (setq org-publish-project-alist
 	'(("orgfiles"
-	   :base-directory "~/.svn-work/org/"
+	   :base-directory "~/.config-mappy/org"
 	   :base-extension "org"
-	   :publishing-directory "/sshx:seb@sid:~/public_html/"
+	   :publishing-directory "~/public_html/"
+	   :publishing-function org-publish-org-to-html
+	   :exclude "(travel-list|home)\.org" ;; regexp
+	   :headline-levels 1
+	   :section-numbers nil
+	   :table-of-contents 
+;;	   :style "<link rel=stylesheet
+;;			 href=\"../other/mystyle.css\" type=\"text/css\">"
+	   :auto-preamble t
+	   :auto-postamble nil)
+          ("meh"
+	   :base-directory "~/org"
+	   :base-extension "org"
+	   :publishing-directory "~/public_html/"
 	   :publishing-function org-publish-org-to-html
 	   :exclude "(travel-list|home)\.org" ;; regexp
 	   :headline-levels 1
@@ -358,9 +371,9 @@ todo/all-time/additional-option-like keywords."
 	   :base-extension "js"
 ;;	   :exclude ".*"
 ;;	   :include "org-info\.js"
-	   :publishing-directory "/sshx:seb@mephisto:~/public_html/"
+	   :publishing-directory "~/public_html/"
 	   :publishing-function org-publish-attachment)
-	  ("website" :components '("orgfiles" "other"))))
+	  ("org" :components '("orgfiles" "meh" "other"))))
 
   ;; note/capture/refile
   (setq org-default-notes-file (concat org-directory "~/org/home.todo"))
