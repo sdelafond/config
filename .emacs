@@ -842,10 +842,10 @@ characters C1 and C2 belong to the same 'class'."
  '(safe-local-variable-values (quote ((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos) (buffer-file-coding-system-explicit utf-8-dos . utf-8-dos) (buffer-file-coding-system-explicit . utf-8-dos)))))
 
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
  '(org-checkbox-statistics-todo ((t (:foreground "color-177"))) t)
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))
@@ -855,7 +855,7 @@ characters C1 and C2 belong to the same 'class'."
  '(org-level-3 ((t (:foreground "yellow" :weight bold))))
  '(org-level-4 ((t (:foreground "color-36" :weight bold))))
  '(org-link ((((class color) (background dark)) (:foreground "color-69" :underline t))))
- '(org-tag ((t (:foreground "color-208" :underline nil :weight bold))))
-)
+ '(org-special-keyword ((t (:inherit font-lock-keyword-face :foreground "color-45" :weight bold))))
+ '(org-tag ((t (:foreground "color-208" :underline nil :weight bold)))))
 
 (put 'downcase-region 'disabled nil)
