@@ -460,6 +460,10 @@ export MAKEFLAGS="-j$(grep '^processor\s:' /proc/cpuinfo | wc -l)"
 # short hostname
 export HOST_SHORT=${HOST/.*}
 
+# X
+MOUSE_ACCEL=2
+MOUSE_THRESHOLD=100
+
 # let's make sure our TERM is known to the system
 infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}
 

@@ -3,7 +3,7 @@ xscreensaver -nosplash &
 eval `dbus-launch`
 # manual
 setxkbmap -layout us
-xset m 2 100
+xset m $MOUSE_ACCEL $MOUSE_THRESHOLD
 #xset r 108 # repeat on backspace
 xkbset m
 xkbset exp =m
@@ -16,8 +16,8 @@ xset s off
 autocutsel -selection CLIPBOARD -fork
 autocutsel -selection PRIMARY -fork
 gkrellm &
-#xterm-screen &
+xterm-screen &
 urxvt &
-pulseaudio &
+#pulseaudio &
 awesome # -c /etc/xdg/awesome/rc.lua
 #sawfish
