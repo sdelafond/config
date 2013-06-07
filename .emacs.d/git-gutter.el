@@ -28,8 +28,6 @@
 (eval-when-compile
   (require 'cl))
 
-(require 'tramp)
-
 (defgroup git-gutter nil
   "Port GitGutter"
   :prefix "git-gutter:"
@@ -147,9 +145,7 @@ character for signs of changes"
      (when it ,@body)))
 
 (defun git-gutter:execute-command (cmd file)
-  (if (not (tramp-connectable-p file))
-      (call-process-shell-command cmd nil t)
-    (process-file-shell-command cmd nil t)))
+  (call-process-shell-command cmd nil t))
 
 (defun git-gutter:in-git-repository-p (file)
   (with-temp-buffer
@@ -423,19 +419,10 @@ character for signs of changes"
 (defalias 'git-gutter:popup-diff 'git-gutter:popup-hunk)
 
 (defun git-gutter:default-directory (dir curfile)
-  (if (not (tramp-connectable-p curfile))
-      dir
-    (let* ((vec (tramp-dissect-file-name curfile))
-           (method (aref vec 0))
-           (user (aref vec 1))
-           (host (aref vec 2)))
-      (format "/%s:%s%s:%s" method (if user (concat user "@") "") host dir))))
+  dir)
 
 (defun git-gutter:file-path (dir curfile)
-  (if (not (tramp-connectable-p curfile))
-      curfile
-    (let ((file (aref (tramp-dissect-file-name curfile) 3)))
-      (replace-regexp-in-string (concat "\\`" dir) "" curfile))))
+  curfile)
 
 ;;;###autoload
 (defun git-gutter ()
