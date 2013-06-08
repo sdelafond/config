@@ -17,6 +17,7 @@ widget, custom, latex, ediff."
      (default . nil)
      (region ((t (:background "color-17"))))
      (modeline ((t (:foreground "white" :background "blue"))))
+     (mode-line ((t (:foreground "white" :background "blue"))))
      (modeline-buffer-id ((t (:foreground "black" :background "color-120"))))
      (modeline-inactive ((t (:foreground "black" :background "color-235"))))
      (modeline-mousable ((t (:foreground "black" :background "color-235"))))
