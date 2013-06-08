@@ -1,5 +1,3 @@
- ;; $Id: .emacs,v 1.130 2008-07-26 18:45:52 seb Exp $
-
 (require 'cl) ;; (loop for ...)
 (require 'dired-x)
 
@@ -100,7 +98,7 @@
 (defun my-autoload (&rest modes)
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
-(my-autoload "id" "align" "git-commit-mode" "gitignore-mode"
+(my-autoload "id" "align" "company-mode" "git-commit-mode" "gitignore-mode"
              "gitconfig-mode" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "ruby-electric" "gtags"
              "outdent" "vcl-mode")
