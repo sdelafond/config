@@ -1,4 +1,4 @@
-;; $Id: .emacs,v 1.130 2008-07-26 18:45:52 seb Exp $
+ ;; $Id: .emacs,v 1.130 2008-07-26 18:45:52 seb Exp $
 
 (require 'cl) ;; (loop for ...)
 (require 'dired-x)
@@ -126,13 +126,11 @@
                                           emacs-lisp-mode-hook))
 
 ;; ELPA
-(if (fboundp 'package-initialize)
-  (progn
-    (require 'package)
-    (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                             ("marmalade" . "http://marmalade-repo.org/packages/")
-                             ("melpa" . "http://melpa.milkbox.net/packages/")))
-    (package-initialize)))
+(require 'package)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
 
 ;; _____________________________________________________________________
 ;; Hooks
