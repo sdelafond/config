@@ -77,7 +77,7 @@ startEmacsServer() {
     screen=screen
   else
     WINDOW=0
-    tmux list-windows | while read l ; do
+    tmux list-windows | grep -E '^[0-9]' | while read l ; do
       j=$(echo $l | perl -pe 's/:.+//')
       [[ $j != $WINDOW ]] && break
       WINDOW=$(($WINDOW+1))
