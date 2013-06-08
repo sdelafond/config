@@ -599,6 +599,8 @@ characters C1 and C2 belong to the same 'class'."
 (add-hook 'jde-mode-hook 'my-jde-mode-hook)
 ;;(setq global-senator-minor-mode t) ; fix from Debian's BTS
 
+;; company-mode
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; _____________________________________________________________________
 ;; General preferences
