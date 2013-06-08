@@ -126,9 +126,13 @@
                                           emacs-lisp-mode-hook))
 
 ;; ELPA
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(if (fboundp 'package-initialize)
+  (progn
+    (require 'package)
+    (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                             ("marmalade" . "http://marmalade-repo.org/packages/")
+                             ("melpa" . "http://melpa.milkbox.net/packages/")))
+    (package-initialize)))
 
 ;; _____________________________________________________________________
 ;; Hooks
@@ -652,7 +656,7 @@ characters C1 and C2 belong to the same 'class'."
   (recentf-mode t))
 
 ;; git-gutter
-(require 'git-gutter)
+;;(require 'git-gutter)
 (global-git-gutter-mode t)
 (setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
 (setq git-gutter:modified-sign "⚡")
