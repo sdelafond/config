@@ -599,9 +599,6 @@ characters C1 and C2 belong to the same 'class'."
 (add-hook 'jde-mode-hook 'my-jde-mode-hook)
 ;;(setq global-senator-minor-mode t) ; fix from Debian's BTS
 
-;; company-mode
-(add-hook 'after-init-hook 'global-company-mode)
-
 ;; _____________________________________________________________________
 ;; General preferences
 
@@ -688,7 +685,7 @@ characters C1 and C2 belong to the same 'class'."
     (iswitchb-mode t)))
 
 ;; EasyPG
-(setenv "GPG_AGENT_INFO" nil)
+;; (setenv "GPG_AGENT_INFO" nil)
 (require 'epa-file)
 (setq epa-file-cache-passphrase-for-symmetric-encryption t)
 (setq epg-gpg-program "/usr/bin/gpg")
@@ -740,15 +737,25 @@ characters C1 and C2 belong to the same 'class'."
 (setq auto-mode-alist 
       (append '(("\\.texi$" 		      	      . texi-outline)
 		("\\.[jp]y$" 		      	      . python-mode)
-		("\\.rb$" 		      	      . ruby-mode)
-		("Capfile" 		      	      . ruby-mode)
-		("Rakefile" 		      	      . ruby-mode)
-		("\\.pp$" 		      	      . puppet-mode)
+		("\\.rb$" 		      	      . (lambda () (progn
+                                                                     (ruby-mode)
+                                                                     (company-mode))))
+		("Capfile" 		      	      . (lambda () (progn
+                                                                     (ruby-mode)
+                                                                     (company-mode))))
+		("Rakefile" 		      	      . (lambda () (progn
+                                                                     (ruby-mode)
+                                                                     (company-mode))))
+		("\\.pp$" 		      	      . (lambda () (progn
+                                                                     (puppet-mode)
+                                                                     (company-mode))))
 		("pf\\.conf" 		      	      . pf-mode)
 		("rules" 		      	      . makefile-mode)
 		("/\.mutt/" 		      	      . muttrc-mode)
 		("\\.vcl$" 		      	      . vcl-mode)
-		("\\.clj$" 		      	      . lisp-mode)
+		("\\.clj$" 		      	      . (lambda () (progn
+                                                                     (lisp-mode)
+                                                                     (company-mode))))
 		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
 		("\\(svn-commit\\|COMMIT_EDITMSG\\)"  . (lambda () (progn
@@ -759,10 +766,18 @@ characters C1 and C2 belong to the same 'class'."
                                                                      ;(flyspell-mode)
                                                                      )))
 		("\\.\\(todo\\|csv\\)$"               . org-mode)
-		("\\.jsp$" 		      	      . jsp-mode)
-		("\\.html$" 		      	      . html-mode)
-		("\\.xml$" 		      	      . xml-mode)
-		("\\.z" 		      	      . sh-mode))
+		("\\.jsp$" 		      	      . (lambda () (progn
+                                                                     (jsp-mode)
+                                                                     (company-mode))))
+		("\\.html$" 		      	      . (lambda () (progn
+                                                                     (html-mode)
+                                                                     (company-mode))))
+		("\\.xml$" 		      	      . (lambda () (progn
+                                                                     (xml-mode)
+                                                                     (company-mode))))
+		("\\.z" 		      	      . (lambda () (progn
+                                                                     (sh-mode)
+                                                                     (company-mode))))
               auto-mode-alist))
 
 ;; scrollwheel
