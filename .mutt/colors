@@ -43,6 +43,14 @@ color body	  brightgreen	 default   "[[:alnum:]][-+.#_[:alnum:]]*@[-+.[:alnum:]]
 color body        yellow       default   "[;:][-]?[)/(|>\\]+"
 #color body       yellow       default   "[;:][)/(|>\\]"
 
+#  diff
+color body magenta default "^@@ .* @@$"
+color body red default '^-.*'
+color body green default '^\+.*'
+color body color133 default '^--- .*'
+color body color133 default '^\+\+\+ .*'
+#color body magenta default '^[ +-](===|---|\+\+\+|@@|Index:) .*' # diff-in-diff
+
 #  Remember:  Order counts!  The last matching rule "wins".
 #  So we'll start with some general rules first:
 color index 	  color252   	 default ~R
