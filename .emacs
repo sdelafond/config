@@ -28,6 +28,13 @@
 
 ;; _____________________________________________________________________
 ;; functions
+(defun complete-or-indent ()
+  (interactive)
+  (if (company-manual-begin)
+      (company-complete-common)
+    (indent-according-to-mode)))
+(global-set-key "\C-ci" 'complete-or-indent)
+
 (defun format-email-body ()
   "Format email body, respecting (or at least trying to) quote levels."
   (interactive)
@@ -692,6 +699,7 @@ characters C1 and C2 belong to the same 'class'."
 (epa-file-enable)
 
 ;; various variables
+(setq company-begin-commands '(self-insert-command))
 (setq tramp-mode nil)
 (setq-default indent-tabs-mode nil)
 (setq browse-url-browser-function 'my-browse-url-tab)
@@ -778,7 +786,7 @@ characters C1 and C2 belong to the same 'class'."
 		("\\.z" 		      	      . (lambda () (progn
                                                                      (sh-mode)
                                                                      (company-mode))))
-              auto-mode-alist))
+              auto-mode-alist)))
 
 ;; scrollwheel
 (defun up-slightly () (interactive) (scroll-up 5))
