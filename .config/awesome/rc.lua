@@ -216,6 +216,7 @@ awful.rules.rules = {
   { rule = { class = "URxvt", name = "th2.prod" }, properties = { tag = getTagByShortcut("6") } },
   { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { class = "URxvt", name = "demo" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { class = "URxvt", name = "recette" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "qt" }, properties = { tag = getTagByShortcut("3") } },
 
   -- Home
