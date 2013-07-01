@@ -51,6 +51,9 @@ color body color133 default '^--- .*'
 color body color133 default '^\+\+\+ .*'
 #color body magenta default '^[ +-](===|---|\+\+\+|@@|Index:) .*' # diff-in-diff
 
+# signature : to override previous matches
+color body color213 default '^--.*'
+
 #  Remember:  Order counts!  The last matching rule "wins".
 #  So we'll start with some general rules first:
 color index 	  color252   	 default ~R
