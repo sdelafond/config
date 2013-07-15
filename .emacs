@@ -169,15 +169,15 @@
 
   (require 'org-protocol)
 
-  (require 'org-export)
+;;  (require 'org-export)
 ;;  (require 'org-e-confluence)
-  (require 'org-e-html)
+;;  (require 'org-e-html)
 
   ;; LaTeX
   (require 'org-latex)
   (setq org-export-latex-listings t)
-  (add-to-list 'org-export-latex-packages-alist '("" "listings"))
-  (add-to-list 'org-export-latex-packages-alist '("" "color"))
+  ;; (add-to-list 'org-export-latex-packages-alist '("" "listings"))
+  ;; (add-to-list 'org-export-latex-packages-alist '("" "color"))
   (setq org-export-latex-emphasis-alist
         '(("*" "\\textbf{%s}" nil)
           ("/" "\\emph{%s}" nil)
@@ -745,6 +745,7 @@ characters C1 and C2 belong to the same 'class'."
 (setq auto-mode-alist 
       (append '(("\\.texi$" 		      	      . texi-outline)
 		("\\.[jp]y$" 		      	      . python-mode)
+		("\\.emacs" 		      	      . lisp-mode)
 		("\\.rb$" 		      	      . (lambda () (progn
                                                                      (ruby-mode)
                                                                      (company-mode))))
