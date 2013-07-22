@@ -6,7 +6,7 @@ setxkbmap -layout us
 xset m $MOUSE_ACCEL $MOUSE_THRESHOLD
 #xset r 108 # repeat on backspace
 xkbset m
-xkbset exp =m
+#xkbset exp =m
 xmodmap ~/.xmodmaprc
 xset r 108
 #xmodmap -e 'pointer = 1 8 3 4 5 6 7 2 9'
