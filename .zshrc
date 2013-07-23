@@ -1,3 +1,12 @@
+zmodload -i zsh/pcre
+is4 () {
+  [[ $ZSH_VERSION =~ '[45].*' ]] || return 1
+  local minorVersion=${1:-0}
+  [[ $(echo $ZSH_VERSION | awk -F. '{print $2}') -ge $minorVersion ]]
+  local revision=${2:-0}
+  [[ $(echo $ZSH_VERSION | awk -F. '{print $3}') -ge $revision ]]
+}
+
 ###################################
 # Modules & modes
 ###################################
@@ -6,14 +15,13 @@ zmodload -i zsh/complist
 zmodload -i zsh/parameter
 _comp_setup+=$'\ntypeset -a userdirs'
 zmodload -i zsh/mathfunc 
-zmodload -i zsh/pcre
 
 # modes
 autoload -U zed
 autoload -U zmv
 autoload -U edit-command-line 
 autoload -U compinit && compinit
-autoload -U colors && colors 
+is4 && autoload -U colors && colors 
 autoload -U url-quote-magic && zle -N self-insert url-quote-magic
 autoload -U select-word-style && select-word-style bash
 autoload run-help && alias run-help > /dev/null && unalias run-help
