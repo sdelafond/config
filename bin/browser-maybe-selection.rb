@@ -2,7 +2,7 @@
 
 require 'uri'
 
-ENV['DISPLAY'] = ':0'
+#ENV['DISPLAY'] = ':'
 
 urlSchemes = ['http', 'ftp', 'https']
 
