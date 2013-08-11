@@ -787,8 +787,8 @@ characters C1 and C2 belong to the same 'class'."
                                                                      (company-mode))))
 		("\\.z" 		      	      . (lambda () (progn
                                                                      (sh-mode)
-                                                                     (company-mode))))
-              auto-mode-alist)))
+                                                                     (company-mode)))))
+              auto-mode-alist))
 
 ;; scrollwheel
 (defun up-slightly () (interactive) (scroll-up 5))
