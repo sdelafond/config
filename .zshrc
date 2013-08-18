@@ -451,7 +451,7 @@ if [[ ${#ec2_amis} -gt 0 ]] ; then
 fi
 
 # makeflags
-export MAKEFLAGS="-j$(grep '^processor\s:' /proc/cpuinfo | wc -l)"
+export MAKEFLAGS="-j$(grep -c '^processor\s:' /proc/cpuinfo)"
 
 # short hostname
 export HOST_SHORT=${HOST/.*}
