@@ -860,10 +860,10 @@ characters C1 and C2 belong to the same 'class'."
 ;; _____________________________________________________________________
 ;; Custom-set
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.21")
  '(jde-ant-enable-find t)
  '(jde-global-classpath (quote ("." "/usr/share/java/jde.jar" "/opt/tomcat/common/lib/servlet.jar" "/usr/share/java/junit.jar")))
@@ -875,15 +875,15 @@ characters C1 and C2 belong to the same 'class'."
  '(safe-local-variable-values (quote ((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos) (buffer-file-coding-system-explicit utf-8-dos . utf-8-dos) (buffer-file-coding-system-explicit . utf-8-dos)))))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
  '(org-checkbox-statistics-todo ((t (:foreground "color-177"))) t)
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))
  '(org-hide ((t (:foreground "#00000000"))))
- '(org-level-1 ((t (:foreground "magenta" :weight bold))))
+ '(org-level-1 ((t (:foreground "color-27" :weight bold))))
  '(org-level-2 ((t (:foreground "white" :weight bold))))
  '(org-level-3 ((t (:foreground "yellow" :weight bold))))
  '(org-level-4 ((t (:foreground "color-36" :weight bold))))
