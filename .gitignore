@@ -8,6 +8,7 @@
 .depend
 .pc
 org/*.pdf
+org/*.vrb
 org/*.tex
 org/*.html
 org/*.mm
