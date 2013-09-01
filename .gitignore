@@ -10,6 +10,7 @@
 org/*.pdf
 org/*.vrb
 org/*.tex
+org/*.log
 org/*.html
 org/*.mm
 *.debhelper*
