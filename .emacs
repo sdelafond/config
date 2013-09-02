@@ -171,6 +171,7 @@
 
  ;; (require 'org-export)
  (require 'ox-confluence)
+ (require 'ox-beamer)
 ;;  (require 'org-e-html)
 
   ;; LaTeX
