@@ -485,6 +485,7 @@ s() { # smarter sudo
     shift
   fi
 
+  local originalCommand=$1
   evaluate-command $1 # result is returned in $reply  
   if [[ $? != 0 ]] ; then
     echo "$1 not found"
@@ -495,7 +496,7 @@ s() { # smarter sudo
 #  set -A command $reply "\"$@\"" # add *quoted* args
 #  set -A expandedCommand $reply $~args # expansion on an array
   set -A expandedCommand $reply $args
-  unset reply
+#  unset reply
 #  set -A expandedCommand $~command # expansion on an array
 
   local -a ksuArgs
@@ -506,7 +507,11 @@ s() { # smarter sudo
 # && ksu $ksuArgs /bin/true ADN ; then
     ksu $ksuArgs $(what $SHELL) -c "$expandedCommand"
   else
-    sudo $opts $SHELL -c "$expandedCommand"
+    if [[ "$(basename $reply)" != "$originalCommand" ]] ; then
+      sudo $opts $SHELL -c "$expandedCommand"
+    else
+      sudo $opts $originalCommand $@
+    fi
   fi
 }
 
