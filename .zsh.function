@@ -507,7 +507,7 @@ s() { # smarter sudo
 # && ksu $ksuArgs /bin/true ADN ; then
     ksu $ksuArgs $(what $SHELL) -c "$expandedCommand"
   else
-    if [[ "$(basename $reply)" != "$originalCommand" ]] ; then
+    if [[ "$reply" != /* ]] ; then
       sudo $opts $SHELL -c "$expandedCommand"
     else
       sudo $opts $originalCommand $@
