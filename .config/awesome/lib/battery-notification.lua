@@ -1,4 +1,5 @@
 function batteryInfo(adapter)
+  local path = "/sys/class/power_supply/"..adapter.."/energy_now"
   local fcur = io.open(path)
   if fcur == nil then
     return nil
