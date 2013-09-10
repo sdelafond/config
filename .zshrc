@@ -410,10 +410,10 @@ HELPDIR=~/.zsh/help
 MAILCHECK=0
 
 # editor & visual
-if [[ -n "$CYGWIN" ]] || [[ ! -f $HOME/bin/jed ]] ; then
+if [[ -n "$CYGWIN" ]] || [[ ! -f $HOME/bin/emacs-wrapper.sh ]] ; then
   EDITOR_ZSH="emacs"
 else
-  EDITOR_ZSH=$HOME/bin/jed
+  EDITOR_ZSH=$HOME/bin/emacs-wrapper.sh
 fi
 export EDITOR=$EDITOR_ZSH
 export VISUAL=$EDITOR_ZSH

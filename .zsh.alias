@@ -42,7 +42,7 @@ alias diff='diff -u'
 alias digs='dig +short'
 alias dos2unix="perl -i -pe 's/\r$//'"
 alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
-alias e='/home/seb/bin/jed'
+alias e='emacs-wrapper.sh'
 alias feh='feh -Z -F -p'
 alias g='gitseb'
 alias geoip='python ~/bin/ip2city.py'
