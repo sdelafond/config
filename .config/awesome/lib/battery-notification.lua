@@ -1,9 +1,16 @@
 function batteryInfo(adapter)
   local path = "/sys/class/power_supply/"..adapter.."/energy_now"
   local fcur = io.open(path)
-  if fcur == nil then
+  if fcur == nil then -- no warning if there is no battery present
     return nil
   end
+
+  -- no warning if the battery is charging
+  local fstatus = "/sys/class/power_supply/"..adapter.."/status"
+  if fstatus:read() == "Charging" then
+    return nil
+  end
+
   local fcap = io.open("/sys/class/power_supply/"..adapter.."/energy_full_design")
   local cur = fcur:read()
   local cap = fcap:read()
