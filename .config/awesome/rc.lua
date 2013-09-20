@@ -483,8 +483,11 @@ settings.bindings.root_mouse = {
 
 settings.bindings.mouse = {
   [{settings.keys.super, 1}] = awful.mouse.client.move,
-  [{settings.keys.super, 2}] = function(c) c:kill() end,
-  [{settings.keys.super, 3}] = awful.mouse.client.resize
+--  [{settings.keys.super, 2}] = function(c) c:kill() end,
+  [{settings.keys.super, 3}] = awful.mouse.client.resize,
+  [{settings.keys.super, 2}] = settings.applications.volume .. " mute",
+  [{settings.keys.super, 4}] = settings.applications.volume .. " up",
+  [{settings.keys.super, 5}] = settings.applications.volume .. " down"
 }
 
 settings.bindings.client_digits = {

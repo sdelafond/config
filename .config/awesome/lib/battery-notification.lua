@@ -7,7 +7,7 @@ function batteryInfo(adapter)
 
   -- no warning if the battery is charging
   local fstatus = "/sys/class/power_supply/"..adapter.."/status"
-  if fstatus:read() == "Charging" then
+  if io.open(fstatus):read() == "Charging" then
     return nil
   end
 
