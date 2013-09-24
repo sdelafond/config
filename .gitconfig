@@ -13,6 +13,7 @@
         cp = cherry-pick
         d = diff
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
+        g = grep
 	st = status
         stat = status
         pull = pull --rebase
