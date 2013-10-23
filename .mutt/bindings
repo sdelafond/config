@@ -1,7 +1,6 @@
 macro attach d "<pipe-message> gpg --quiet --decrypt | less\n" "decrypt with GnuPG"
 
 macro compose \ca '<esc>f^uSébastien Delafond <sdelafond@gmx.net><enter>' 'Set From: #1'
-macro compose \ce '<esc>f^uBefour07 <befour07@gmx.net><enter>' 'Set From: #2'
 macro compose \cd '<esc>f^uSébastien Delafond <seb@debian.org><enter>' 'Set From: #3'
 macro compose \cb '<esc>f^uSébastien Delafond <sdelafond@gmail.com><enter>' 'Set From: #4'
 macro compose \ct '<edit-type><kill-line>text/html; charset=utf-8<Enter><edit-headers>' 'Make HTML attachement'
