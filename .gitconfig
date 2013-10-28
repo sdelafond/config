@@ -14,9 +14,10 @@
         d = diff
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
         g = grep
+        p = pull
+	pr = pull --rebase
 	st = status
-        stat = status
-        pull = pull --rebase
+        stat = status	
 [branch]
         autosetuprebase = always
 #        master.rebase = true
