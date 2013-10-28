@@ -643,6 +643,22 @@ characters C1 and C2 belong to the same 'class'."
 ;;      (color-theme-solarized-dark)
     (color-theme-x-seb)))
 
+;; mode-line
+(defvar my-mode-line-coding-format
+  '(:eval
+    (let* ((code (symbol-name buffer-file-coding-system))
+           (eol-type (coding-system-eol-type buffer-file-coding-system))
+           (eol (cond ((eq 0 eol-type) "UNIX")
+                      ((eq 1 eol-type) "DOS")
+                      ((eq 2 eol-type) "MAC")
+                      (t "???"))))
+      (concat code ":" eol " "))))
+(put 'my-mode-line-coding-format 'risky-local-variable t)
+(setq-default mode-line-format (substitute
+                                'my-mode-line-coding-format
+                                'mode-line-mule-info
+                                mode-line-format))
+
 ;; accents  
 (unless (or (featurep 'xemacs)
 	    (>= emacs-major-version 22))
@@ -835,23 +851,22 @@ characters C1 and C2 belong to the same 'class'."
   (multi-mode 1 'html-mode '("<%" jde-mode) '("%>" html-mode)))
 
 (defun my-mutt-hook ()
-  (flet ((make-html-mail ()
-                         (shell-command-on-region (point-min) (point-max)
-                                                  "python ~/bin/make-html-mail.py" t t))
-
-         (is-buffer-already-htmlized ()
-                                     "Check if the buffer has already been HTMLized"
-                                     (goto-char (point-min))
-                                     (re-search-forward "src=.*/c/image" nil t))
-         (is-buffer-to-htmlize ()
-                               "Check if the buffer is a raw email needing HTMLization."
-                               (goto-char (point-min))
-                               (re-search-forward "^From: " nil t)
-                               (and (re-search-forward "^From: " nil t) (re-search-forward "+sig+" nil t)))
-         (htmlize-and-exit ()
-                           (make-html-mail)
-                           (save-buffer)
-                           (server-edit)))
+  (cl-flet ((make-html-mail ()
+                            (shell-command-on-region (point-min) (point-max)
+                                                     "python ~/bin/make-html-mail.py" t t))
+            (is-buffer-already-htmlized ()
+                                        "Check if the buffer has already been HTMLized"
+                                        (goto-char (point-min))
+                                        (re-search-forward "src=.*/c/image" nil t))
+            (is-buffer-to-htmlize ()
+                                  "Check if the buffer is a raw email needing HTMLization."
+                                  (goto-char (point-min))
+                                  (re-search-forward "^From: " nil t)
+                                  (and (re-search-forward "^From: " nil t) (re-search-forward "+sig+" nil t)))
+            (htmlize-and-exit ()
+                              (make-html-mail)
+                              (save-buffer)
+                              (server-edit)))
     (if (is-buffer-already-htmlized) (server-edit))
     (if (is-buffer-to-htmlize) (htmlize-and-exit) 
       (progn 
