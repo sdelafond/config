@@ -72,12 +72,22 @@ autoload -Uz vcs_info && {
     fi
   }
 
+  function +vi-git-localname() {
+    local old_base_name="${hook_com[base-name]}"
+    local new_base_name="${REPOSITORIES[$old_base_name]}"
+    if [[ -n "${new_base_name}" ]] ; then
+      hook_com[base-name]="${new_base_name}"
+    else
+      hook_com[base-name]="${old_base_name}"
+    fi      
+  }
+
   zstyle ':vcs_info:*' check-for-changes    true
   zstyle ':vcs_info:*' stagedstr            "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr          "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:git*+set-message:*'      hooks git-st git-remotebranch symbol
+  zstyle ':vcs_info:git*+set-message:*'      hooks git-st git-remotebranch git-localname symbol
   zstyle ':vcs_info:svn*+set-message:*'      hooks symbol
-  zstyle ':vcs_info:git-svn*+set-message:*'  hooks symbol
+  zstyle ':vcs_info:git-svn*+set-message:*'  hooks git-st symbol
 
   vs="%s"
 
@@ -506,6 +516,9 @@ case $HOST_SHORT in
   *)
     [[ $TERM = screen* ]] || [[ -n "$TMUX" ]] && unset DISPLAY ;;
 esac
+
+# aliases for repositories
+typeset -A REPOSITORIES
 
 # always source these config files...
 source ~/.zsh.prompt
