@@ -1,5 +1,5 @@
 PROMPT=$'${PSEXTRA}%{$fg_no_bold[green]%}%80<...<%~%{$fg_no_bold[default]%}%(?..%{$fg_bold[red]%} !%?%{$fg_no_bold[default]%}) # '
-RPROMPT=$'[%{$fg_bold[blue]%}%n%{$fg_no_bold[default]%} @ %U%m%u]'
+RPROMPT=$'[%{$fg_bold[grey]%}%n%{$fg_no_bold[default]%} %S%{$fg_bold[cyan]%}'${hostnicks[$HOST_SHORT]:-$HOST_SHORT}$'%{$fg_no_bold[default]%}%s]'
 
 case $TERM in
   rxvt*|xterm*)
