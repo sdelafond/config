@@ -521,7 +521,6 @@ esac
 typeset -A REPOSITORIES
 
 # always source these config files...
-source ~/.zsh.prompt
 source ~/.zsh.alias
 source ~/.zsh.function
 
@@ -538,6 +537,9 @@ done
 for file in ~/.zsh_*(N) ; do
   [[ $file == *history* ]] || [[ $file == *~ ]] || source $file
 done
+
+# prompt may use info from context-specific files
+source ~/.zsh.prompt
 
 local hostFile=~/.zsh_$HOST
 [[ -f $hostFile ]] && source $hostFile
