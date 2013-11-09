@@ -612,6 +612,12 @@ characters C1 and C2 belong to the same 'class'."
 ;; _____________________________________________________________________
 ;; General preferences
 
+;; No more "C-x C-s C-x #'
+(define-key global-map "\C-xj" '(lambda ()
+                                  (interactive)
+                                  (save-buffer)
+                                  (server-edit)))
+
 ;; numbering
 (line-number-mode t)
 (column-number-mode t)
