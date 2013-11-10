@@ -104,7 +104,7 @@ autoload -Uz vcs_info && {
 
     vcs_info
     if [[ -n $vcs_info_msg_0_ ]] ; then
-      PSEXTRA="%{$fg_no_bold[magenta]%}$vcs_info_msg_0_%{$fg_no_bold[default]%} "
+      PSEXTRA="%F{magenta}${vcs_info_msg_0_}%f "
     else
       unset PSEXTRA
     fi
