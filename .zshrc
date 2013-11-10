@@ -117,6 +117,9 @@ autoload -Uz vcs_info && {
 
 bindkey -e # emacs-style, please
 
+# also highlight like in our emacs theme
+zle_highlight=(region:bg=17 special:standout suffix:bold,bg=136 isearch:bg=196,bold,standout)
+
 # minibuffer regex substitution
 autoload -U read-from-minibuffer
 regex-edit () {
