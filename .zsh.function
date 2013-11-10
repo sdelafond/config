@@ -422,7 +422,7 @@ resolve-binary-path() {
   readlink -f $(which $1)
 }
 
-rgrep() { 
+rgrep() {
   # recursive grep, bash-compatible (in zsh, a simple grep $1 $2/**/* does it)
   local -a grep_opts ; grep_opts=$argv[1,-3]
   local pattern=$argv[-2]
@@ -441,7 +441,7 @@ rgrep() {
       } ;;
     *) # assume GNU grep
       rgrepLocal() {
-        grep -r -H $grep_opts "$1" "$2"
+        grep -R -H $grep_opts "$1" "$2"
       } ;;
   esac
 
