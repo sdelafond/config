@@ -23,6 +23,7 @@ widget, custom, latex, ediff."
      (modeline-mousable ((t (:foreground "black" :background "color-235"))))
      (modeline-mousable-minor-mode ((t (:foreground "black" :background "color-235"))))
      (highlight ((t (:background "color-57"))))
+     (sp-show-pair-match-face ((t (:background "color-58"))))
      (isearch ((t (:background "color-196"))))
      (lazy-highlight ((t (:background "color-201"))))
      (bold ((t (:bold t))))

@@ -626,28 +626,35 @@ characters C1 and C2 belong to the same 'class'."
 (put 'narrow-to-region 'disabled nil)
 
 ;; font highlighting
-(unless (featurep 'xemacs)
-  (require 'color-theme-seb)
-  ;; (require 'color-theme-solarized)
-  (show-paren-mode t)
-  (transient-mark-mode t)
-  (global-font-lock-mode t)
-  (setq font-lock-maximum-decoration t)
+(require 'color-theme-seb)
+;; (require 'color-theme-solarized)
 
-  (defun terminal-init-screen-256color ()
-    "Terminal initialization function for screen."
-    ;; use the xterm color initialization code.
-    (load "term/xterm")
-    (xterm-register-default-colors)
-    (tty-set-up-initial-frame-faces))
-  
+;; paren matching
+(show-paren-mode nil)
+(show-smartparens-mode t)
+(require 'smartparens-config)
+
+;; region highlighting
+(transient-mark-mode t)
+
+;; font-locking
+(global-font-lock-mode t)
+(setq font-lock-maximum-decoration t)
+
+(defun terminal-init-screen-256color ()
+  "Terminal initialization function for screen."
+  ;; use the xterm color initialization code.
+  (load "term/xterm")
+  (xterm-register-default-colors)
+  (tty-set-up-initial-frame-faces))
+
   ;;; For GNU Emacs 21, use our own xterm-256color.el
-  (if (= 21 emacs-major-version) (load "xterm-256color"))
+(if (= 21 emacs-major-version) (load "xterm-256color"))
 
-  (if (eq window-system nil)
-      (color-theme-console-seb)
-;;      (color-theme-solarized-dark)
-    (color-theme-x-seb)))
+(if (eq window-system nil)
+    (color-theme-console-seb)
+  ;;      (color-theme-solarized-dark)
+  (color-theme-x-seb))
 
 ;; mode-line
 (defvar my-mode-line-coding-format
