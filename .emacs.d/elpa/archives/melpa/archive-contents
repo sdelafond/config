@@ -65,6 +65,12 @@
 	  ((json
 	    (1 2 0)))
 	  "Yet Another Emacs integration for gist.github.com [github]" single])
+ (xterm-frobs .
+	      [(20091212 55)
+	       nil "manipulate xterm when running emacs in tty mode [github]" single])
+ (xmlgen .
+	 [(20130219 1019)
+	  nil "A DSL for generating XML. [github]" single])
  (xml-rpc .
 	  [(20130423 1656)
 	   nil "An elisp implementation of clientside XML-RPC [bzr]" single])
@@ -74,6 +80,9 @@
  (writeroom-mode .
 		 [(20130315 2007)
 		  nil "Minor mode for distraction-free writing [github]" tar])
+ (writegood-mode .
+		 [(20130406 2316)
+		  nil "Polish up poor writing on the fly [github]" single])
  (wrap-region .
 	      [(20130529 728)
 	       ((dash
@@ -286,6 +295,9 @@
 	   ((sql
 	     (3 0)))
 	   "Vertica SQL mode extension [github]" single])
+ (vector-utils .
+	       [(20131106 1006)
+		nil "Vector-manipulation utility functions [github]" single])
  (vcomp .
 	[(20121231 1148)
 	 nil "compare version strings [github]" single])
@@ -393,6 +405,9 @@
  (typing .
 	 [(20121026 2118)
 	  nil "The Typing Of Emacs [wiki]" single])
+ (twittering-mode .
+		  [(20130616 1818)
+		   nil "Major mode for Twitter [github]" single])
  (twilight-theme .
 		 [(20120412 803)
 		  nil "Twilight theme for GNU Emacs 24 (deftheme) [github]" single])
@@ -487,6 +502,9 @@
  (tool-bar+ .
 	    [(20130723 2140)
 	     nil "Extensions to standard library tool-bar.el [wiki]" single])
+ (tommyh-theme .
+	       [(20131004 1018)
+		nil "A bright, bold-colored theme for emacs [github]" single])
  (toml-mode .
 	    [(20130302 748)
 	     nil "Mojor mode for editing TOML files [github]" single])
@@ -608,6 +626,9 @@
 		((tabbar
 		  (2 0 1)))
 		"Pretty tabbar, autohide, use both tabbar/ruler [github]" tar])
+ (tabbar .
+	 [(20131020 1253)
+	  nil "No description available. [github]" tar])
  (systemtap-mode .
 		 [(20121210 10)
 		  nil "A mode for SystemTap [github]" single])
@@ -839,7 +860,7 @@
 	   [(20130312 1839)
 	    nil "Support sequential operation which omitted prefix keys. [github]" single])
  (smartparens .
-	      [(20131110 1102)
+	      [(20131110 1704)
 	       ((cl-lib
 		 (0 1))
 		(dash
@@ -1845,7 +1866,7 @@
 	       [(20130310 1757)
 		nil "Imports events from iCal.app to the Emacs diary [git]" single])
  (org-journal .
-	      [(20131002 1649)
+	      [(20131110 2033)
 	       nil "a simple org-mode based journaling mode [github]" single])
  (org-jira .
 	   [(20130427 2116)
@@ -1906,7 +1927,7 @@
 	    [(20131009 232)
 	     nil "guide your eyes while scrolling [github]" single])
  (omnisharp .
-	    [(20131015 2250)
+	    [(20131110 2301)
 	     ((json
 	       (1 2))
 	      (dash
@@ -2355,7 +2376,7 @@
 			       [(20130730 1032)
 				nil "Advice for magit-log-edit-commit [github]" single])
  (magit .
-	[(20131110 253)
+	[(20131110 1943)
 	 ((cl-lib
 	   (0 3))
 	  (git-commit-mode
@@ -2652,6 +2673,11 @@
 	(js2-mode
 	 (0)))
        "An emacs interface to webkit and mozilla debuggers [github]" tar])
+ (json-snatcher .
+		[(20131110 1107)
+		 ((emacs
+		   (24)))
+		 "Grabs the path to JSON values in a JSON file [github]" single])
  (json-mode .
 	    [(20131016 1653)
 	     nil "Major mode for editing JSON files [github]" single])
@@ -5496,27 +5522,6 @@
 	     (request
 	      (0 2 0)))
 	    "Open and evaluate 4clojure.com questions [github]" single])
- (xterm-frobs .
-	      [(20091212 55)
-	       nil "manipulate xterm when running emacs in tty mode [github]" single])
- (xmlgen .
-	 [(20130219 1019)
-	  nil "A DSL for generating XML. [github]" single])
- (writegood-mode .
-		 [(20130406 2316)
-		  nil "Polish up poor writing on the fly [github]" single])
- (vector-utils .
-	       [(20131106 1006)
-		nil "Vector-manipulation utility functions [github]" single])
- (twittering-mode .
-		  [(20130616 1818)
-		   nil "Major mode for Twitter [github]" single])
- (tommyh-theme .
-	       [(20131004 1018)
-		nil "A bright, bold-colored theme for emacs [github]" single])
- (tabbar .
-	 [(20131020 1253)
-	  nil "No description available. [github]" tar])
  (find-things-fast .
 		   [(20111123 2341)
 		    nil "An emacs mode to find things fast and move around in a project quickly [github]" tar])
