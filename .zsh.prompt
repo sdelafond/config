@@ -1,7 +1,8 @@
 local terminalColors=$(echotc Co)
+
 if [[ $? == 0 ]] && [[ $terminalColors == 256 ]] ; then
   usernameColor=237
-  hostColor=45
+  hostColor=white
 else # default for older terminals
   usernameColor=grey
   hostColor=cyan
