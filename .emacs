@@ -920,6 +920,7 @@ characters C1 and C2 belong to the same 'class'."
  '(org-level-4 ((t (:foreground "color-36" :weight bold))))
  '(org-link ((((class color) (background dark)) (:foreground "color-69" :underline t))))
  '(org-special-keyword ((t (:inherit font-lock-keyword-face :foreground "color-45" :weight bold))))
- '(org-tag ((t (:foreground "color-208" :underline nil :weight bold)))))
+ '(org-tag ((t (:foreground "color-208" :underline nil :weight bold))))
+ '(org-warning ((t (:inherit font-lock-warning-face :foreground "color-250")))))
 
 (put 'downcase-region 'disabled nil)
