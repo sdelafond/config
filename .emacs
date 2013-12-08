@@ -630,9 +630,9 @@ characters C1 and C2 belong to the same 'class'."
 ;; (require 'color-theme-solarized)
 
 ;; paren matching
-(show-paren-mode nil)
-(show-smartparens-mode t)
-(require 'smartparens-config)
+(show-paren-mode t)
+;; (require 'smartparens-config)
+;; (smartparens-global-mode t)
 
 ;; region highlighting
 (transient-mark-mode t)
