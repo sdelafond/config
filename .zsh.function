@@ -514,7 +514,7 @@ s() { # smarter sudo
     ksuArgs=("-q" "-e")
     ksu $ksuArgs $(what $SHELL) -c "$expandedCommand"
   else
-    if [[ "$reply" != "/*" ]] ; then
+    if [[ "$reply" != /* ]] && [[ "$reply" != * * ]] ; then
       sudo $opts $SHELL -c "$expandedCommand"
     else
       sudo $opts $originalCommand $@
