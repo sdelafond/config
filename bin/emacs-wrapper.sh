@@ -14,6 +14,7 @@
 # GNU General Public License for more details.
 
 AUTO_BACKGROUND=yes
+TMUX_TITLE="emacs"
 
 # you shouldn't have to modify anything below this
 
@@ -84,7 +85,7 @@ startEmacsServer() {
     done
     tmux setenv WINDOW $WINDOW
     tmux setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
-    screen=(tmux new-window -t $WINDOW)
+    screen=(tmux new-window -n $TMUX_TITLE -t $WINDOW)
   fi
 
   $screen emacs-server.sh
