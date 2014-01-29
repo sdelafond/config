@@ -180,7 +180,7 @@ zstyle ':completion:most-recent-file:*' completer _files
 zle -C most-recent-file menu-complete _generic
 bindkey '^XL' most-recent-file
 
-# complete files, for when zsh is confused at to what to complete on
+# complete files, for when zsh is confused as to what to complete on
 zstyle ':completion:files:*' match-original both
 #zstyle ':completion:files:*' file-sort modification
 zstyle ':completion:files:*' file-patterns '*:all\ files'
