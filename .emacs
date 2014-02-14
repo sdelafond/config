@@ -616,7 +616,10 @@ characters C1 and C2 belong to the same 'class'."
 (define-key global-map "\C-xj" '(lambda ()
                                   (interactive)
                                   (save-buffer)
-                                  (server-edit)))
+                                  (if (and (fboundp 'server-running-p)
+                                           (server-running-p))
+                                      (server-edit)
+                                  (kill-emacs))))
 
 ;; numbering
 (line-number-mode t)
