@@ -54,6 +54,8 @@ bind index \cv next-page
 # travel2cal
 macro index \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
 macro pager \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
+macro index \cI "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
+macro pager \cI "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
 
 # mutt -> org
 macro index \eo "|~/bin/mail-to-org.py<enter>"
