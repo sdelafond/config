@@ -796,6 +796,7 @@ characters C1 and C2 belong to the same 'class'."
 		("pf\\.conf" 		      	      . pf-mode)
 		("\\.properties$" 		      . conf-mode)
 		("rules" 		      	      . makefile-mode)
+		("diff$" 		      	      . diff-mode)
 		("/\.mutt/" 		      	      . muttrc-mode)
 		("\\.vcl$" 		      	      . vcl-mode)
 		("\\.clj$" 		      	      . (lambda () (progn
