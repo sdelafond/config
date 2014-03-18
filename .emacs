@@ -887,7 +887,7 @@ characters C1 and C2 belong to the same 'class'."
     (if (is-buffer-already-htmlized) (server-edit))
     (if (is-buffer-to-htmlize) (htmlize-and-exit) 
       (progn 
-        ;; (message-mode)
+        (mail-mode)
         (flyspell-mode)
         (choose-dict-automatically)
         (local-set-key "\C-ci" 'format-email-body)))))
