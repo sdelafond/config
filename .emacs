@@ -35,6 +35,18 @@
      (kill-buffer (current-buffer))))
 (global-set-key (kbd "C-x k") 'volatile-kill-buffer)
 
+(defun save-current-kbd-macro-to-dot-emacs (name)
+  "Save the current macro as named function definition inside your
+   initialization file so you can reuse it anytime in the future."
+  (interactive "SSave Macro as: ")
+  (name-last-kbd-macro name)
+  (save-excursion 
+    (find-file-literally user-init-file)
+    (goto-char (point-max))
+    (insert "\n\n;; Saved macro\n")
+    (insert-kbd-macro name)
+    (insert "\n")))
+
 (defun complete-or-indent ()
   (interactive)
   (if (company-manual-begin)
