@@ -28,6 +28,13 @@
 
 ;; _____________________________________________________________________
 ;; functions
+(defun volatile-kill-buffer ()
+   "Kill current buffer unconditionally."
+   (interactive)
+   (let ((buffer-modified-p nil))
+     (kill-buffer (current-buffer))))
+(global-set-key (kbd "C-x k") 'volatile-kill-buffer)
+
 (defun complete-or-indent ()
   (interactive)
   (if (company-manual-begin)
