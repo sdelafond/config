@@ -722,8 +722,9 @@ characters C1 and C2 belong to the same 'class'."
 (transient-mark-mode t)
 
 ;; auto-revert
-(auto-revert-mode t)
+(global-auto-revert-mode t)
 (defalias 'auto-revert-handler 'my-auto-revert-handler)
+(setq global-auto-revert-mode-text " ARev")
 
 ;; font-locking
 (global-font-lock-mode t)
