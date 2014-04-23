@@ -892,7 +892,9 @@ characters C1 and C2 belong to the same 'class'."
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
 		("\\(svn-commit\\|COMMIT_EDITMSG\\)"  . (lambda () (progn
                                                                      (git-commit-mode)
-                                                                     (flyspell-mode))))
+                                                                     (flyspell-mode)
+                                                                     (remove-hook 'kill-buffer-query-functions
+                                                                                  'git-commit-kill-buffer-noop t))))
 		("\\.org$"                            . (lambda () (progn
                                                                      (org-mode)
                                                                      ;(flyspell-mode)
