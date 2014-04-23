@@ -47,6 +47,14 @@
     (insert-kbd-macro name)
     (insert "\n")))
 
+(defun file-change-too-close-for-comfort ()
+  (let* ((file-time-raw (nth 5 (file-attributes (buffer-file-name))))
+         (file-time (+ (lsh (nth 0 file-time-raw) 16) (nth 1 file-time-raw)))
+         (current-time (+ (lsh (nth 0 (current-time)) 16) (nth 1 (current-time)))))
+    (and (eq current-time file-time)
+         (message "%s: postpone revert" (buffer-name))
+         t)))
+
 (defun my-auto-revert-handler ()
   "Revert current buffer, if appropriate.
    This is an internal function used by Auto-Revert Mode.  We rewrite it so it
