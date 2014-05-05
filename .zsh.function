@@ -75,7 +75,6 @@ convertToU10() {
 connect() { # pops an ssh windows if under x, or simple ssh if not
 #  setopt localoptions xtrace
   local host=$argv[-1]
-  update-gpg-agent-tty
   xpop "ssh -Y $*" "$host"
 }
 
@@ -268,6 +267,17 @@ keychain-init-real() {
   rm -fr ~/.keychain/${HOST}-*
   # start
   keychain --agents gpg --nogui --quiet --nocolor `gpg --list-secret-keys | awk '/^sec/ { gsub(/.+\//, "", $2) ; print $2 }'`
+
+  local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
+  if [ -f $SH_FILE ] ; then
+    source $SH_FILE
+  fi
+
+  export GPG_TTY=`tty`
+  local key
+  for key in ~/.ssh/*.[dr]sa(DN) ; do
+    ssh-add -l | G -q $(basename $key) || ssh-add $key 2DN
+  done
 #  rename -f "s|/S.gpg|/${HOST}-S.gpg|" ~/.gnupg/S*(=)
 #  perl -i -pe "s|/S.gpg|/${HOST}-S.gpg|" "$HOME/.keychain/${HOST}-sh-gpg"
 }
@@ -275,21 +285,14 @@ keychain-init-real() {
 keychain-init() {
 #  setopt localoptions xtrace
   local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
-  if [ -f $SH_FILE ] &&  then
+  if [ -f $SH_FILE ] ; then
     source $SH_FILE
-    if [ -z "$SSH_AGENT_PID" ] || [ ! -d /proc/$SSH_AGENT_PID ] || grep -qv gpg-agent /proc/$SSH_AGENT_PID/cmdline ; then
+    if [ -z "$SSH_AGENT_PID" ] || [ ! -d /proc/$SSH_AGENT_PID ] || ! grep -q gpg-agent /proc/$SSH_AGENT_PID/cmdline ; then
       keychain-init-real
     fi
   else
     keychain-init-real
   fi
-  source $SH_FILE
-
-  export GPG_TTY=`tty`
-  local key
-  for key in ~/.ssh/*.[dr]sa(DN) ; do
-    ssh-add -l | G -q $(basename $key) || ssh-add $key 2DN
-  done
 }
 
 logparser() {
@@ -363,7 +366,7 @@ pydoc-html() {
 }
 
 preexec() {
-# setopt localoptions xtrace
+#  setopt localoptions xtrace
   set $=2
   local cmd
 
