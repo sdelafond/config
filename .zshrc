@@ -472,7 +472,6 @@ export HOST_SHORT=${HOST/.*}
 # X
 export MOUSE_ACCEL=2
 export MOUSE_THRESHOLD=100
-export XINPUT_ID=$(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/' | tail -1)
 
 # let's make sure our TERM is known to the system
 infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}

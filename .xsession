@@ -10,6 +10,7 @@ xset r 108
 
 ## mouse
 # middle-click = paste
+XINPUT_ID=$(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/' | tail -1)
 xinput set-prop $XINPUT_ID Evdev Middle Button Emulation 1
 xinput set-prop $XINPUT_ID Evdev Middle Button Timeout 50
 # accel
