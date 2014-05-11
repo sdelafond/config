@@ -246,7 +246,7 @@ i() { # install package $1
   case $OSTYPE in
     openbsd*)
       s pkg_add -v $@ ;;
-    linux-gnu)
+    linux-gnu*)
       s apt-get install $@ ;;
     *)
       echo "Platform $OSTYPE not supported" ;;
