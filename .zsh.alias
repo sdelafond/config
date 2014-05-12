@@ -5,7 +5,7 @@ alias -g 2nd='DISPLAY=:0.1'
 
 alias A='ack-grep'
 alias C='curl -O'
-alias CD='curl -v -o /dev/null'
+alias CD='curl -v -s -o /dev/null'
 alias F='find'
 
 grep -P foo /dev/null 2> /dev/null
