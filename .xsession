@@ -1,5 +1,5 @@
 #tpb &
-# eval `dbus-launch`
+eval $(dbus-launch)
 xrdb -load ~/.Xdefaults
 
 # keyboard
