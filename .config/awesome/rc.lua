@@ -367,7 +367,8 @@ function switch_screen(b)
   awesome.restart()
   for s = 1, screen.count() do
     make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, 
-               mybatwidget, mynetwidget, mycpuwidget, mycpuwidget2,
+               mybatwidget, mybatwidget2,
+               mynetwidget, mycpuwidget, mycpuwidget2,
                mymemwidget, datewidget, mytasklist, mouse.screen)
   end
 end
@@ -566,6 +567,11 @@ mybatwidget:set_color('#AECF96')
 mybatwidget:set_gradient_colors({ '#FF5656', '#AECF96', '#88A175' })
 vicious.register(mybatwidget, vicious.widgets.bat, '$2', 61, 'BAT0')
 
+mybatwidget2 = widget({ type = "textbox" })
+vicious.register(mybatwidget2, vicious.widgets.bat,
+                 function (widget, args) return args[3] end, 
+                 1, 'BAT0')
+
 mycpuwidget = awful.widget.graph()
 mycpuwidget:set_width(50)
 mycpuwidget:set_background_color("#111111")
@@ -600,7 +606,8 @@ vicious.register(mycpuwidget2, vicious.widgets.cpuinf,
                  end)
 
 function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox, 
-                    mybatwidget, mynetwidget, mycpuwidget, mycpuwidget2, 
+                    mybatwidget, mybatwidget2,
+                    mynetwidget, mycpuwidget, mycpuwidget2, 
                     mymemwidget, datewidget, mytasklist, systray_screen)
   wibox = awful.wibox({ position = "top", screen = s, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
   wibox.widgets = { { mylauncher,
@@ -609,6 +616,7 @@ function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox,
                       mypromptbox[s],
                       mylayoutbox[s],
                       mybatwidget,
+                      mybatwidget2,
                       mynetwidget,
                       mycpuwidget2,
                       mycpuwidget,
@@ -635,7 +643,8 @@ for s = 1, screen.count() do
 					end, mytasklist.buttons)
 
   -- the wibox itself
-  make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox, mybatwidget,
+  make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox, 
+             mybatwidget, mybatwidget2,
              mynetwidget, mycpuwidget, mycpuwidget2,
              mymemwidget, datewidget, mytasklist, 1)
 end
