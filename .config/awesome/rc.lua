@@ -571,8 +571,7 @@ vicious.register(mybatwidget, vicious.widgets.bat, '$2', 61, 'BAT0')
 
 mybatwidget2 = widget({ type = "textbox" })
 vicious.register(mybatwidget2, vicious.widgets.bat,
-                 function (widget, args) return args[3] end, 
-                 1, 'BAT0')
+                 "$3", 15, 'BAT0')
 
 mycpuwidget = awful.widget.graph()
 mycpuwidget:set_width(50)
