@@ -16,7 +16,9 @@ require("lib/battery-notification")
 
 ---- env
 env = {}
-env.host = os.getenv("HOST_SHORT")
+local handle = io.popen("hostname -s")
+env.host = handle:read("*a"):gsub("%s+$", "")
+handle:close()
 
 ---- Settings, in their own namespace
 settings = {}
