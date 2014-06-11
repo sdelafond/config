@@ -7,6 +7,7 @@
         c = commit --verbose
         ca = commit --verbose --all
         cam = commit --verbose --amend
+        camn = commit --verbose --amend --no-edit
         cm = commit --verbose
         comm = commit --verbose
         commit = commit --verbose
