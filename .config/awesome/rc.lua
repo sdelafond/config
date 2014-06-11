@@ -370,7 +370,8 @@ function switch_screen(b)
   for s = 1, screen.count() do
     make_wibox(s, mywibox, mytaglist, promptbox, mylayoutbox, 
                mybatwidget, mybatwidget2,
-               mynetwidget, mycpuwidget, mycpuwidget2,
+               mywifiwidget, mynetwidget,
+               mycpuwidget, mycpuwidget2,
                mymemwidget, datewidget, mytasklist, mouse.screen)
   end
 end
@@ -581,6 +582,11 @@ mycpuwidget:set_gradient_angle(0)
 mycpuwidget:set_gradient_colors({ "#AA0000", "#AA00AA", "#0000AA" })
 vicious.register(mycpuwidget, vicious.widgets.cpu, "$1", 1.5)
 
+mywifiwidget = widget({ type = "textbox" })
+vicious.register(mywifiwidget, vicious.widgets.wifi,
+                 string.format("%s(%s%%)", "${ssid}", "${linp}"),
+                 3, settings.nic)
+
 mynetwidget = awful.widget.graph()
 mynetwidget:set_width(50)
 mynetwidget:set_background_color("#111111")
@@ -608,7 +614,8 @@ vicious.register(mycpuwidget2, vicious.widgets.cpuinf,
 
 function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox, 
                     mybatwidget, mybatwidget2,
-                    mynetwidget, mycpuwidget, mycpuwidget2, 
+                    mywifiwidget, mynetwidget,
+                    mycpuwidget, mycpuwidget2, 
                     mymemwidget, datewidget, mytasklist, systray_screen)
   wibox = awful.wibox({ position = "top", screen = s, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
   wibox.widgets = { { mylauncher,
@@ -616,6 +623,7 @@ function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox,
                       mytaglist[s],
                       mypromptbox[s],
                       mylayoutbox[s],
+                      mywifiwidget,
                       mybatwidget,
                       mybatwidget2,
                       mynetwidget,
@@ -646,7 +654,8 @@ for s = 1, screen.count() do
   -- the wibox itself
   make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox, 
              mybatwidget, mybatwidget2,
-             mynetwidget, mycpuwidget, mycpuwidget2,
+             mywifiwidget, mynetwidget,
+             mycpuwidget, mycpuwidget2,
              mymemwidget, datewidget, mytasklist, 1)
 end
 
