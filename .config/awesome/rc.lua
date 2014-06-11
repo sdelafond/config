@@ -77,7 +77,7 @@ elseif env.host == "centurion" then
   settings.nic = "eth3"
   settings.nic_unit = "mb"
   settings.nic_autoscale = false
-elseif env.host == "seb-debian" then
+elseif env.host == "seb-debian" or env.host == "mp" then
   settings.default_layout = awful.layout.suit.tile
   settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
