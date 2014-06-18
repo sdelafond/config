@@ -66,6 +66,7 @@ if env.host == "x230" then
   settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "1"
   settings.centurion_tag = "4"
+  settings.mp_tag = "7"
   settings.nic = "wlan0"
   settings.nic_unit = "b"
   settings.nic_autoscale = true
@@ -73,6 +74,7 @@ elseif env.host == "centurion" then
   settings.default_layout = awful.layout.suit.tile
   settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
+  settings.mp_tag = "7"
   settings.centurion_tag = "1"
   settings.nic = "eth3"
   settings.nic_unit = "mb"
@@ -81,6 +83,7 @@ elseif env.host == "seb-debian" or env.host == "mp" then
   settings.default_layout = awful.layout.suit.tile
   settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
+  settings.mp_tag = "1"
   settings.centurion_tag = "4"
   settings.nic = "eth0"
   settings.nic_unit = "mb"
@@ -89,6 +92,7 @@ else
   settings.default_layout = awful.layout.suit.tile
   settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "4"
+  settings.mp_tag = "7"
   settings.centurion_tag = "4"
   settings.nic = "eth0"
   settings.nic_unit = "mb"
@@ -193,7 +197,8 @@ awful.rules.rules = {
   { rule = { name = "hp" }, properties = { tag = getTagByShortcut(settings.hp_tag) } },
   { rule = { name = "centurion" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "home" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
-  { rule = { name = "seb-debian" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "seb-debian" }, properties = { tag = getTagByShortcut(setting.mp_tag) } },
+  { rule = { name = "mp" }, properties = { tag = getTagByShortcut(setting.mp_tag) } },
   { rule = { name = "x230" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
