@@ -256,7 +256,13 @@ awful.rules.rules = {
   { rule = { class = "feh" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
   { rule = { class = "Geeqie" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
   { rule = { class = "Geeqie", name = "Move - Geeqie" }, properties = { tag = getTagByShortcut("F1"), floating = true, focus = true } },
-  { rule = { class = "Vlc" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true, floating = true } },
+  { rule = { class = "Vlc" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true, floating = true },
+    -- callback = function(c) 
+    --              if awful.client.focus.filter(c) then
+    --                client.focus = c
+    --              end
+    --            end
+  },
   { rule = { class = "Guvcview" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
   { rule = { class = "guvcview" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
   { rule = { class = "Xitk" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
