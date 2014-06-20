@@ -197,8 +197,8 @@ awful.rules.rules = {
   { rule = { name = "hp" }, properties = { tag = getTagByShortcut(settings.hp_tag) } },
   { rule = { name = "centurion" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "home" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
-  { rule = { name = "seb-debian" }, properties = { tag = getTagByShortcut(setting.mp_tag) } },
-  { rule = { name = "mp" }, properties = { tag = getTagByShortcut(setting.mp_tag) } },
+  { rule = { name = "seb-debian" }, properties = { tag = getTagByShortcut(settings.mp_tag) } },
+  { rule = { name = "mp" }, properties = { tag = getTagByShortcut(settings.mp_tag) } },
   { rule = { name = "x230" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
