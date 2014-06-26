@@ -57,7 +57,7 @@ end
 awful.screen.focus_relative = screen_focus -- monkey-patching
 
 -- movetoscreen that doesn't reset mouse coordinates
-function movetoscreen(c, s)
+local function movetoscreen(c, s)
     local sel = c or client.focus
     if sel then
         local sc = screen.count()
@@ -70,3 +70,23 @@ function movetoscreen(c, s)
     end
 end
 awful.client.movetoscreen = movetoscreen -- monkey-patching
+
+-- avoid automatic focus of sticky clients
+-- http://article.gmane.org/gmane.comp.window-managers.awesome/5264/
+local function check_focus(obj)
+  if not client.focus or not client.focus:isvisible() then
+    local idx = 0
+    local c = aclient.focus.history.get(obj.screen, idx)
+    local fc = c
+    while c.sticky do
+      idx = idx+1
+      c = aclient.focus.history.get(obj.screen, idx)
+    end
+    if c then
+      client.focus = c
+    elseif fc then
+      client.focus = fc
+    end
+  end
+end
+awful.autofocus.check_focus = check_focus -- monkey-patching
