@@ -4,10 +4,11 @@ XTerm.cutchars: `"'()*,;<>[]{|}
 URxvt.cutchars: `"'()*,;<>[]{|}
 
 URxvt.letterSpace: 0
-URxvt.font: xft:DejaVu Sans Mono:pixelsize=13:antialias=true
-URxvt.boldFont: xft:DejaVu Sans Mono:bold:pixelsize=13:antialias=true
-URxvt.italicFont: xft:DejaVu Sans Mono:italic:pixelsize=13:antialias=true
-URxvt.boldItalicFont: xft:DejaVu Sans Mono:italic:bold:pixelsize=13:antialias=true
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.boldFont: xft:DejaVu Sans Mono:bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.italicFont: xft:DejaVu Sans Mono:italic:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.boldItalicFont: xft:DejaVu Sans Mono:italic:bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+
 URxvt.background: black
 URxvt.foreground: lightgrey
 URxvt.urgentOnBell: true
@@ -23,7 +24,7 @@ URxvt.perl-ext-common: default,-selection,-searchable-scrollback
 URxvt.pointerColor: yellow
 URxvt.pointerColor2: blue
 
-Xft*antialias:          true
+! Xft*antialias:          true
 Xft*dpi:                96
 
 *customization: -color
