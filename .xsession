@@ -17,7 +17,7 @@ xinput set-prop $XINPUT_ID "Evdev Middle Button Timeout" 50
 xset m $MOUSE_ACCEL $MOUSE_THRESHOLD
 #xmodmap -e 'pointer = 1 8 3 4 5 6 7 2 9'
 
-# screen scleep
+# screen sleep
 xscreensaver -nosplash &
 xset dpms 0 0 0
 xset s off
