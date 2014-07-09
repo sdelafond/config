@@ -31,5 +31,5 @@ gkrellm &
 xterm-screen &
 
 # WM
-awesome # -c /etc/xdg/awesome/rc.lua
+exec awesome # -c /etc/xdg/awesome/rc.lua
 #sawfish
