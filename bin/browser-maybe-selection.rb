@@ -21,6 +21,7 @@ if ARGV[0] == nil or ARGV[0] == "default" then
   case selection
   when rhttp
     URI::extract(selection, urlSchemes).each { |url|
+      url.gsub!(/\.$/, '')
       system("#{browser} '#{url}'")
     }
   end
