@@ -203,6 +203,7 @@ zle -C hist-complete complete-word _generic
 zstyle ':completion:hist-complete:*' completer _history
 bindkey "^X^X" hist-complete
 
+# command-line navigation
 WORDCHARS=
 WORDCHARS_EXTENDED='*?_-.[]~=&;!#$%^(){}<>|:@,\\'
 WORDCHARS_EXTENDED_SPACE="$WORDCHARS_EXTENDED "
@@ -239,7 +240,7 @@ backward-big-word-space() { backward-big-word "$WORDCHARS_EXTENDED_SLASH" }
 backward-big-word-slash() { backward-big-word "$WORDCHARS_EXTENDED_SPACE" }
 forward-big-word-slash() { forward-big-word "$WORDCHARS_EXTENDED_SPACE" }
 forward-big-word-space() { forward-big-word "$WORDCHARS_EXTENDED_SLASH" }
-backward-small-word() { forward-big-word "$WORDCHARS_EXTENDED" }
+backward-small-word() { backward-big-word "$WORDCHARS_EXTENDED" }
 forward-small-word() { forward-big-word "$WORDCHARS_EXTENDED" }
 zle -N backward-big-word-space
 zle -N backward-big-word-slash
