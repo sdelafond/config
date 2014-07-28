@@ -303,8 +303,6 @@ zstyle ':completion:*' menu select=long
 
 # completion for some custom functions
 compdef _connect-run connect run
-compdef _cvs cvsseb
-compdef _svn svnseb
 compdef _hosts dig digs
 compdef '_deb_packages expl uninstalled' i
 compdef '_deb_packages expl installed' rp
