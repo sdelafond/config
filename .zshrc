@@ -546,4 +546,5 @@ source ~/.zsh.prompt
 local hostFile=~/.zsh_$HOST
 [[ -f $hostFile ]] && source $hostFile
 
+# reload config on USR1
 trap 'zreload-do' USR1
