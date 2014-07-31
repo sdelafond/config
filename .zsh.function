@@ -169,6 +169,10 @@ find() { # filter out .svn
   command find "$dir" -path '*/.svn' -prune -o -path '*/.git' -prune -o $@ $printArg
 }
 
+findN() {
+  find . -iname "*$1*"
+}
+
 # g() {
 #   www "www.google.com/search?q=$*"
 # }
