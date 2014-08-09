@@ -82,26 +82,33 @@ autoload -Uz vcs_info && {
     fi      
   }
 
-  zstyle ':vcs_info:*' check-for-changes    true
+  function +vi-git-untracked() {
+    blacklisted-vcs-dir && return 0
+    if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]] ; then
+      hook_com[unstaged]+="%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}"
+    fi
+  }
+
+  function blacklisted-vcs-dir() {
+    local d
+    local -a blacklisted_dirs
+    blacklisted_dirs=( "/dd-wrt/src/" )
+    for d in ${blacklisted_dirs}; do
+      [[ ${PWD}/ == *${d}* ]] && return 0
+    done
+    return 1
+  }
+
+  zstyle -e ':vcs_info:*' check-for-changes 'blacklisted-vcs-dir && reply=(false) || reply=(true)'
   zstyle ':vcs_info:*' stagedstr            "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr          "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:git*+set-message:*'      hooks git-st git-remotebranch git-localname symbol
+  zstyle ':vcs_info:*' formats              "[${vs}%b%m%c%u]" "[%s%r]"
+  zstyle ':vcs_info:*' actionformats        "[${vs}%b%m|%a%c%u]" "[%s%r]"
+  zstyle ':vcs_info:git+set-message:*'      hooks git-st git-remotebranch git-localname symbol git-untracked
   zstyle ':vcs_info:svn*+set-message:*'      hooks symbol
-  zstyle ':vcs_info:git-svn*+set-message:*'  hooks git-st symbol
-
-  vs="%s"
-
-  prompt_title="[${vs}%r]"
+  zstyle ':vcs_info:git-svn+set-message:*'  hooks git-st git-untracked symbol
 
   vcs_stuff() {
-    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] ; then
-      zstyle ':vcs_info:*' formats       "[${vs}%b%m%c%u]" "$prompt_title"
-      zstyle ':vcs_info:*' actionformats "[${vs}%b%m|%a%c%u]" "$prompt_title"
-    else
-      zstyle ':vcs_info:*' formats       "[${vs}%b%m%c%u%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}]" "$prompt_title"
-      zstyle ':vcs_info:*' actionformats "[${vs}%b%m|%a%c%u%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}]" "$prompt_title"
-    fi
-
     vcs_info
     if [[ -n $vcs_info_msg_0_ ]] ; then
       PSEXTRA="%F{magenta}${vcs_info_msg_0_}%f "
