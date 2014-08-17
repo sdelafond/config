@@ -92,9 +92,9 @@ autoload -Uz vcs_info && {
   function blacklisted-vcs-dir() {
     local d
     local -a blacklisted_dirs
-    blacklisted_dirs=( "/dd-wrt/src/" )
+    blacklisted_dirs=( "dd-wrt/src" )
     for d in ${blacklisted_dirs}; do
-      [[ ${PWD}/ == *${d}* ]] && return 0
+      [[ ${PWD}/ == */${d}/* ]] && return 0
     done
     return 1
   }
@@ -102,10 +102,10 @@ autoload -Uz vcs_info && {
   zstyle -e ':vcs_info:*' check-for-changes 'blacklisted-vcs-dir && reply=(false) || reply=(true)'
   zstyle ':vcs_info:*' stagedstr            "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr          "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:*' formats              "[${vs}%b%m%c%u]" "[%s%r]"
-  zstyle ':vcs_info:*' actionformats        "[${vs}%b%m|%a%c%u]" "[%s%r]"
+  zstyle ':vcs_info:*' formats              "[%s%b%m%c%u]" "[%s%r]"
+  zstyle ':vcs_info:*' actionformats        "[%s%b%m|%a%c%u]" "[%s%r]"
   zstyle ':vcs_info:git+set-message:*'      hooks git-st git-remotebranch git-localname symbol git-untracked
-  zstyle ':vcs_info:svn*+set-message:*'      hooks symbol
+  zstyle ':vcs_info:svn*+set-message:*'     hooks symbol
   zstyle ':vcs_info:git-svn+set-message:*'  hooks git-st git-untracked symbol
 
   vcs_stuff() {
