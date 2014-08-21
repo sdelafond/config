@@ -92,7 +92,7 @@ autoload -Uz vcs_info && {
   function blacklisted-vcs-dir() {
     local d
     local -a blacklisted_dirs
-    blacklisted_dirs=( "dd-wrt/src" )
+    blacklisted_dirs=( "dd-wrt/src" "src/router" )
     for d in ${blacklisted_dirs}; do
       [[ ${PWD}/ == */${d}/* ]] && return 0
     done
