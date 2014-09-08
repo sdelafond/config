@@ -36,9 +36,6 @@ bind editor    "\e<backspace>" kill-word
 # weed out binary-only announcements to -devel-changes
 #macro index \CW T!~s\(.*source.*\)\nWn^T~A\n "Weed out binary-only announcements"
 
-# imitate the old search-body function
-macro index \es 'c=search'<enter><shell-escape>'mairix ' 'Enter Mairix search term'
-
 # simulate the old url menu
 macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
 
@@ -48,6 +45,7 @@ macro index   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt docum
 macro pager   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
 
 macro generic ,f "<refresh><change-folder-readonly><kill-line>=search<enter><shell-escape>mairix " "Enter Mairix search term"
+macro index \es 'c=search<enter>' 'Go to search folder'
 
 bind index \cv next-page
 
