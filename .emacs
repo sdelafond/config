@@ -788,11 +788,12 @@ characters C1 and C2 belong to the same 'class'."
 
 ;; git-gutter
 ;;(require 'git-gutter)
-(global-git-gutter-mode t)
-(setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
-(setq git-gutter:modified-sign "⚡")
-(set-face-foreground 'git-gutter:modified "cyan")
-(setq git-gutter:separator-sign "|")
+(when (fboundp 'global-git-gutter-mode)
+  (global-git-gutter-mode t)
+  (setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
+  (setq git-gutter:modified-sign "⚡")
+  (set-face-foreground 'git-gutter:modified "cyan")
+  (setq git-gutter:separator-sign "|"))
 
 ;; unique buffer names
 (require 'uniquify)
@@ -823,9 +824,9 @@ characters C1 and C2 belong to the same 'class'."
 ;; EasyPG
 ;; (setenv "GPG_AGENT_INFO" nil)
 (require 'epa-file)
-(epa-file-enable)
-(setq epa-file-cache-passphrase-for-symmetric-encryption nil)
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
 (setq epg-gpg-program "/usr/bin/gpg")
+(epa-file-enable)
 
 ;; various variables
 (setq company-begin-commands '(self-insert-command))
