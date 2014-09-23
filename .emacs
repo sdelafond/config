@@ -862,9 +862,13 @@ characters C1 and C2 belong to the same 'class'."
       do (set holiday nil))
 
 ;; grep-find & friends
-; FIXME: template ?
-(setq grep-find-command "find . -type d -name '.svn' -prune -or -name '.git' -prune -or -type d -name 'dist' -prune -or -type d -name staging -prune -or -type f -name '*~' -prune -or -type f -not -name 'semantic.cache' -print0 | xargs -0 grep -I -n -P ")
-(setq grep-find-template "find <D> -type d -name 'dist' -prune -or -type d -name staging -prune -or -type f -name '*~' -prune -or -type f -not -name 'semantic.cache' -print0 | xargs -0 grep -I -n -P <R>")
+(eval-after-load 'grep
+  '(progn
+     (add-to-list 'grep-find-ignored-directories ".svn")
+     (add-to-list 'grep-find-ignored-directories ".git")
+     (add-to-list 'grep-find-ignored-directories "dist")
+     (add-to-list 'grep-find-ignored-directories "staging")))
+;(add-hook 'grep-mode-hook (lambda () (toggle-truncate-lines 1)))
 
 ;; key mappings for predefined functions
 (global-set-key "\C-cg" 'goto-line)
