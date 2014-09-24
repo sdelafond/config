@@ -865,8 +865,8 @@ characters C1 and C2 belong to the same 'class'."
 (eval-after-load 'grep
   '(progn
      (add-to-list 'grep-find-ignored-directories "dist")
-     (add-to-list 'grep-find-ignored-directories "staging")))
-(grep-apply-setting 'grep-find-template "find <D> <X> -type f <F> -exec grep <C> -nH -e <R> {} +")
+     (add-to-list 'grep-find-ignored-directories "staging")
+     (grep-apply-setting 'grep-find-template "find <D> <X> -type f <F> -exec grep <C> -nH -e <R> {} +")))
 ;(add-hook 'grep-mode-hook (lambda () (toggle-truncate-lines 1)))
 
 ;; key mappings for predefined functions
