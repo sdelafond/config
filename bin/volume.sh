@@ -10,6 +10,9 @@
 # Last upated: Oct. 16, 2007
 ########################################################################
 
+AMIXER_OPTS_MUTE_=""
+AMIXER_OPTS_VOLUME="-c 0"
+
 if amixer | grep -E '^Simple.*Master' ; then
   MIXER=Master
 else
@@ -19,12 +22,12 @@ STEP=5
 
 case $1 in
   up|down)
-    amixer -c 0 set $MIXER unmute > /dev/null
+    amixer $AMIXER_OPTS_MUTE set $MIXER unmute > /dev/null
     [ $1 = up ] && UP="+" || UP="-"
-    amixer -c 0 set $MIXER ${STEP}dB$UP > /dev/null
-    STRING=$(amixer -c 0 get $MIXER | perl -i -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }') ;;
+    amixer $AMIXER_OPTS_VOLUME set $MIXER ${STEP}dB$UP > /dev/null
+    STRING=$(amixer $AMIXER_OPTS_VOLUME get $MIXER | perl -i -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }') ;;
   mute)
-    amixer -c 0 set $MIXER mute > /dev/null
+    amixer $AMIXER_OPTS_MUTE set $MIXER mute > /dev/null
     STRING="mute" ;;
 esac
 
