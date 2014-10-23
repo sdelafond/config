@@ -25,7 +25,7 @@ case $1 in
     amixer $AMIXER_OPTS_MUTE set $MIXER unmute > /dev/null
     [ $1 = up ] && UP="+" || UP="-"
     amixer $AMIXER_OPTS_VOLUME set $MIXER ${STEP}dB$UP > /dev/null
-    STRING=$(amixer $AMIXER_OPTS_VOLUME get $MIXER | perl -i -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }') ;;
+    STRING=$(amixer $AMIXER_OPTS_VOLUME get $MIXER | perl -ne 'if ( /\[(\d+%)\]/ ) { print "$1\n" ; exit 0 ; }') ;;
   mute)
     amixer $AMIXER_OPTS_MUTE set $MIXER mute > /dev/null
     STRING="mute" ;;
