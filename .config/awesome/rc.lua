@@ -1,18 +1,18 @@
 ---- builtin
-require("awful")
-require("awful.autofocus")
-require("awful.rules")
-require("beautiful") -- theme
-require("debian.menu")
-require("naughty") -- notifications
-require("vicious") -- widgets
+awful = require("awful")
+autofocus = require("awful.autofocus")
+rules = require("awful.rules")
+beautiful = require("beautiful") -- theme
+menu = require("debian.menu")
+naughty = require("naughty") -- notifications
+vicious = require("vicious") -- widgets
 
 ---- Beautiful theme
 beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 
 ---- homegrown modules & functions
-require("lib/client-seb")
-require("lib/battery-notification")
+client_seb = require("lib/client-seb")
+battery_notification = require("lib/battery-notification")
 
 ---- env
 env = {}
@@ -565,6 +565,7 @@ vicious.register(datewidget, vicious.widgets.date, '<span weight="bold" color="w
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Debian", debian.menu.Debian_menu.Debian },
+                                    { "Term", settings.applications.terminal }
                                   } })
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon), menu = mymainmenu })
 
