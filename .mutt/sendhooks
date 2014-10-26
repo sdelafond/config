@@ -9,6 +9,7 @@ send-hook '~t @bugs\.debian\.org' "unset pgp_autosign"
 send-hook '~t buildd@ ~s build' "set pgp_autosign=yes indent_string='' edit_headers=yes editor='grab-changes.py' fast_reply=yes pgp_create_traditional=yes include=yes pgp_sign_as=seb@debian.org"
 
 send-hook '~t debian-security-announce@' "set pgp_autosign=yes pgp_create_traditional=yes pgp_sign_as=seb@debian.org"
+send-hook '~t debian-lts-announce@' "set pgp_autosign=yes pgp_sign_as=seb@debian.org"
 
 send-hook . "unset pgp_autoinline; unset pgp_autosign"
 send-hook rt.debian.org "set pgp_autosign; set pgp_autoinline"
