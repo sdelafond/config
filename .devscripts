@@ -316,7 +316,7 @@
 # DEBSIGN_MAINT=
 #
 # GPG keyid to use (-k option)
-DEBSIGN_KEYID=DAF6CE93
+DEBSIGN_KEYID=F3D59D64
 
 ##### debsnap
 #
