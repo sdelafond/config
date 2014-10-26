@@ -57,9 +57,6 @@ settings.applications = { ["terminal"]        = 'xterm-screen',
                           ["killgkrellm"]     = 'pkill gkrellm',
                           ["mpc_pause"]       = 'mpc toggle' }
 
--- do that right away
-awful.util.spawn(settings.applications.keyboard_layout)
-
 -- layouts, depending on host
 if env.host == "x230" then
   settings.default_layout = awful.layout.suit.max
@@ -613,7 +610,7 @@ mymemwidget:set_background_color("#111111")
 mymemwidget:set_color("#FF5656")
 mycpuwidget:set_gradient_angle(0)
 mymemwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
--- vicious.register(mymemwidget, vicious.widgets.mem, "$1", 1.5)
+vicious.register(mymemwidget, vicious.widgets.mem, "$1", 1.5)
 
 mycpuwidget2 = widget({ type = "textbox" })
 -- mycpuwidget2:set_background_color("#111111")
@@ -640,7 +637,7 @@ function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox,
                       mynetwidget,
                       mycpuwidget2,
                       mycpuwidget,
---                      mymemwidget,
+                      mymemwidget,
                       layout = awful.widget.layout.horizontal.leftright
                     },
                     s == systray_screen and widget({ type = "systray" }) or nil,
@@ -650,6 +647,7 @@ function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox,
   mywibox[s] = wibox
 end
 
+-- load taskbar
 for s = 1, screen.count() do
   mylayoutbox[s] = awful.widget.layoutbox(s)
   mylayoutbox[s]:buttons(mylayoutbox.buttons)

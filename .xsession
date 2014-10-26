@@ -1,20 +1,23 @@
-#tpb &
 eval $(dbus-launch)
 xrdb -load ~/.Xdefaults
 
-# keyboard
-setxkbmap -layout us
-xmodmap ~/.xmodmaprc
+# declare that we'll map mouse keys
 xkbset m
-xset r 108
+xkbset exp =m
 
-## mouse
-# middle-click = paste
+# emulate middle button
 XINPUT_ID=$(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/' | tail -1)
 xinput set-prop $XINPUT_ID "Evdev Middle Button Emulation" 1
 xinput set-prop $XINPUT_ID "Evdev Middle Button Timeout" 50
-# accel
+
+# mouse acceleration
 xset m $MOUSE_ACCEL $MOUSE_THRESHOLD
+
+# keyboard layout
+setxkbmap -layout us
+xmodmap ~/.xmodmaprc
+xset r 108
+
 #xmodmap -e 'pointer = 1 8 3 4 5 6 7 2 9'
 
 # screen sleep
