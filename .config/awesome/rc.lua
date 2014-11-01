@@ -214,6 +214,7 @@ awful.rules.rules = {
   -- UT dev
   { rule = { name = "metalof" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "seb.dev" }, properties = { tag = getTagByShortcut("3") } },
 
   -- M
   { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
@@ -222,9 +223,11 @@ awful.rules.rules = {
   { rule = { class = "URxvt", name = "demo-" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "recette-" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "qt-" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { class = "URxvt", name = "ca.m" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 
+  { rule = { name = "het" }, properties = { tag = getTagByShortcut("4") } }, 
   { rule = { name = "proliant" }, properties = { tag = getTagByShortcut("4") }, 
     callback = { function(c) c:swap(awful.client.getmaster()) end } },
   { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
@@ -605,13 +608,14 @@ mynetwidget:set_gradient_colors({ "#00AA00", "#00AA66", "#00AAAA" })
 mynetwidget:set_scale(settings.nic_autoscale)
 vicious.register(mynetwidget, vicious.widgets.net, "${" .. settings.nic .. " down_" .. settings.nic_unit .. "}", 1)
 
-mymemwidget = awful.widget.graph()
-mymemwidget:set_width(50)
+mymemwidget = awful.widget.progressbar()
+mymemwidget:set_width(10)
 mymemwidget:set_background_color("#111111")
 mymemwidget:set_color("#FF5656")
+mymemwidget:set_vertical(true)
 mycpuwidget:set_gradient_angle(0)
 mymemwidget:set_gradient_colors({ "#FFD700", "#ADFF2F", "#00AA00" })
-vicious.register(mymemwidget, vicious.widgets.mem, "$1", 1.5)
+vicious.register(mymemwidget, vicious.widgets.mem, "$1", 3)
 
 mycpuwidget2 = widget({ type = "textbox" })
 -- mycpuwidget2:set_background_color("#111111")
