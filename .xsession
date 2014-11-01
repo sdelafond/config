@@ -3,7 +3,7 @@ xrdb -load ~/.Xdefaults
 
 # declare that we'll map mouse keys
 xkbset m
-xkbset exp =m
+xkbset exp "=m"
 
 # emulate middle button
 XINPUT_ID=$(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/' | tail -1)
@@ -11,7 +11,7 @@ xinput set-prop $XINPUT_ID "Evdev Middle Button Emulation" 1
 xinput set-prop $XINPUT_ID "Evdev Middle Button Timeout" 50
 
 # mouse acceleration
-xset m $MOUSE_ACCEL $MOUSE_THRESHOLD
+xset m4 10
 
 # keyboard layout
 setxkbmap -layout us
