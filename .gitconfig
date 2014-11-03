@@ -20,7 +20,8 @@
 	st = status
         stat = status	
 [branch]
-        autosetuprebase = always
+        autosetupmerge = always
+#        autosetuprebase = always
 #        master.rebase = true
 [color]
 	ui = true
