@@ -381,6 +381,17 @@ prefix argument."
   (setq org-link-abbrev-alist
         '(("debian-bug"   . "http://bugs.debian.org/%s")))
 
+  ;; *** entry :tag1:tag2: -> link #tag1,tag2#
+  (defun org-convert-entry-to-irc ()
+    (interactive)
+    (let ((heading (org-element-property :raw-value
+                                         (save-excursion
+                                           (org-back-to-heading)
+                                           (org-element-at-point))))
+          (tags (mapconcat 'identity (org-get-tags) ","))
+          (delim "#"))
+    (message (concat heading " " delim tags delim))))
+
   ;; spelling
   (defun org-mode-flyspell-verify ()
     "Don't let flyspell put overlays at active buttons, or on
