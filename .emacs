@@ -852,7 +852,7 @@ characters C1 and C2 belong to the same 'class'."
 ;; EasyPG
 ;; (setenv "GPG_AGENT_INFO" nil)
 (require 'epa-file)
-(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+;; (setq epa-file-cache-passphrase-for-symmetric-encryption t)
 (setq epg-gpg-program "/usr/bin/gpg")
 (epa-file-enable)
 
