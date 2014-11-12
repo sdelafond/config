@@ -60,4 +60,4 @@ macro index \eo "|~/bin/mail-to-org.py<enter>"
 macro pager \eo "|~/bin/mail-to-org.py<enter>"
 
 # inbox
-macro index i "c=<enter>"
+macro index i "c=<enter>\eV"
