@@ -509,7 +509,7 @@ todo/all-time/additional-option-like keywords."
 
   ;; note/capture/refile
   (setq org-default-notes-file (concat org-directory "~/org/home.todo"))
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps nil)
 
