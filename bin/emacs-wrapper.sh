@@ -1,5 +1,8 @@
 #! /usr/bin/env zsh
 
+# set -x
+# exec > /tmp/ew.log 2>&1
+
 # Copyright (C) 2008 Sebastien Delafond (sdelafond@gmail.com)
 # Author: Sebastien Delafond (sdelafond@gmail.com)
 #
