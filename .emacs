@@ -280,6 +280,7 @@ prefix argument."
  ;; (require 'org-export)
  (require 'ox-confluence)
  (require 'ox-beamer)
+ (require 'ox-md)
 ;;  (require 'org-e-html)
 
   ;; LaTeX
@@ -469,43 +470,6 @@ todo/all-time/additional-option-like keywords."
 	  (org-my-archive-done)
 	  (outline-previous-heading)))))
 ;;  (add-hook 'after-save-hook 'org-my-archive-done-tasks)
-
-;; publishing
-  (setq org-publish-project-alist
-	'(("orgfiles"
-	   :base-directory "~/.config-mappy/org"
-	   :base-extension "org"
-	   :publishing-directory "~/public_html/"
-	   :publishing-function org-publish-org-to-html
-	   :exclude "(travel-list|home)\.org" ;; regexp
-	   :headline-levels 1
-	   :section-numbers nil
-	   :table-of-contents 
-;;	   :style "<link rel=stylesheet
-;;			 href=\"../other/mystyle.css\" type=\"text/css\">"
-	   :auto-preamble t
-	   :auto-postamble nil)
-          ("meh"
-	   :base-directory "~/org"
-	   :base-extension "org"
-	   :publishing-directory "~/public_html/"
-	   :publishing-function org-publish-org-to-html
-	   :exclude "(travel-list|home)\.org" ;; regexp
-	   :headline-levels 1
-	   :section-numbers nil
-	   :table-of-contents 
-;;	   :style "<link rel=stylesheet
-;;			 href=\"../other/mystyle.css\" type=\"text/css\">"
-	   :auto-preamble t
-	   :auto-postamble nil)
-	  ("other"
-	   :base-directory "~"
-	   :base-extension "js"
-;;	   :exclude ".*"
-;;	   :include "org-info\.js"
-	   :publishing-directory "~/public_html/"
-	   :publishing-function org-publish-attachment)
-	  ("org" :components '("orgfiles" "meh" "other"))))
 
   ;; note/capture/refile
   (setq org-default-notes-file (concat org-directory "~/org/home.todo"))
