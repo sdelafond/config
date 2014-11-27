@@ -894,7 +894,7 @@ characters C1 and C2 belong to the same 'class'."
                                                                      (company-mode))))
 		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
-		("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG)"  . (lambda () (progn
+		("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
                                                                      (git-commit-mode)
                                                                      (flyspell-mode)
                                                                      (remove-hook 'kill-buffer-query-functions
