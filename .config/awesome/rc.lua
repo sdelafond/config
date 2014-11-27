@@ -564,7 +564,7 @@ datewidget = widget({ type = 'textbox' })
 --datewidget:set_background_color('#0000AA')
 --datewidget:set_border_color('#000000')
 --datewidget:set_color('#AECF96')
-vicious.register(datewidget, vicious.widgets.date, '<span weight="bold" color="white">%b %d, %R </span>')
+vicious.register(datewidget, vicious.widgets.date, '<span weight="bold" color="white">%b %d, %T </span>', 1)
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Debian", debian.menu.Debian_menu.Debian },
