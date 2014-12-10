@@ -30,7 +30,7 @@ autoload run-help && alias run-help > /dev/null && unalias run-help
 autoload -Uz vcs_info && {
   # note that you'll also need to "setopt prompt_subst", as below
   zstyle ':vcs_info:*' disable bzr cdv cvs darcs mtn tla hg p4 svk
-  zstyle ':vcs_info:*' enable svn git
+  zstyle ':vcs_info:*' enable cvs svn git
 
   ### git: Show +N/-N when your local branch is ahead-of or behind remote HEAD.
   function +vi-git-st() {
@@ -54,6 +54,7 @@ autoload -Uz vcs_info && {
   function +vi-symbol() {
     case ${hook_com[vcs_orig]} in
       "git") hook_com[vcs]="±" ;;
+      "cvs") hook_com[vcs]="❌" ;;
       "svn") hook_com[vcs]="®" ;;
       "git-svn") hook_com[vcs]="±®" ;;
     esac
@@ -107,6 +108,7 @@ autoload -Uz vcs_info && {
   zstyle ':vcs_info:*' actionformats        "[%s%b%m|%a%c%u]" "[%s%r]"
   zstyle ':vcs_info:git+set-message:*'      hooks git-st git-remotebranch git-localname symbol git-untracked
   zstyle ':vcs_info:svn*+set-message:*'     hooks symbol
+  zstyle ':vcs_info:cvs*+set-message:*'     hooks symbol
   zstyle ':vcs_info:git-svn+set-message:*'  hooks git-st git-untracked symbol
 
   vcs_stuff() {
