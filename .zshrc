@@ -472,8 +472,8 @@ if [[ ${#ec2_amis} -gt 0 ]] ; then
   path=($path ${ec2_amis[-1]}/bin)
 fi
 
-# makeflags
-export MAKEFLAGS="-j$(grep -c '^processor\s:' /proc/cpuinfo)"
+# # makeflags
+# export MAKEFLAGS="-j$(grep -c '^processor\s:' /proc/cpuinfo)"
 
 # short hostname
 export HOST_SHORT=${HOST/.*}

@@ -402,8 +402,7 @@ todo/all-time/additional-option-like keywords."
       (and (not (get-text-property pos 'keymap))
            (not (get-text-property pos 'org-no-flyspell))
            (not (member word org-todo-keywords-1))
-           (not (member word org-all-time-keywords))
-           (not (member word org-additional-option-like-keywords)))))
+           (not (member word org-all-time-keywords)))))
 
   ;; archiving
   (setq org-auto-archive-required-days 21)
