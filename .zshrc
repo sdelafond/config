@@ -106,10 +106,10 @@ autoload -Uz vcs_info && {
   zstyle ':vcs_info:*' unstagedstr          "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' formats              "[%s%b%m%c%u]" "[%s%r]"
   zstyle ':vcs_info:*' actionformats        "[%s%b%m|%a%c%u]" "[%s%r]"
-  zstyle ':vcs_info:git+set-message:*'      hooks git-st git-remotebranch git-localname symbol git-untracked
   zstyle ':vcs_info:svn*+set-message:*'     hooks symbol
   zstyle ':vcs_info:cvs*+set-message:*'     hooks symbol
-  zstyle ':vcs_info:git-svn+set-message:*'  hooks git-st git-untracked symbol
+  zstyle ':vcs_info:git-svn+set-message:*'  hooks symbol git-st git-stash git-untracked
+  zstyle ':vcs_info:git+set-message:*'      hooks symbol git-st git-stash git-untracked git-remotebranch git-localname
 
   vcs_stuff() {
     vcs_info
