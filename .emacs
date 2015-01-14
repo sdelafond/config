@@ -786,6 +786,11 @@ characters C1 and C2 belong to the same 'class'."
   (set-face-foreground 'git-gutter:modified "cyan")
   (setq git-gutter:separator-sign "|"))
 
+;; git-rebase
+(defun my-git-rebase-mode-hook ()
+  (read-only-mode))
+(add-hook 'git-rebase-mode-hook 'my-git-rebase-mode-hook)
+
 ;; unique buffer names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
