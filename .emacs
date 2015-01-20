@@ -893,7 +893,7 @@ characters C1 and C2 belong to the same 'class'."
 		("diff$" 		      	      . diff-mode)
 		("/\.mutt/" 		      	      . muttrc-mode)
 		("\\.vcl$" 		      	      . vcl-mode)
-		("\\.clj$" 		      	      . (lambda () (progn
+		("\\.\\(el|clj\\)$"                   . (lambda () (progn
                                                                      (lisp-mode)
                                                                      (company-mode))))
 		("^/tmp/mutt"                         . my-mutt-hook)
