@@ -1,5 +1,3 @@
-(require 'color-theme)
-
 (defun color-theme-console-seb ()
   "Console color-theme. Based on color-theme-billw.
 Includes info, diary, font-lock, eshell, sgml, message, gnus,
@@ -198,7 +196,7 @@ widget, custom, latex, ediff."
   "X color theme. Based on color-theme-subtle-hacker."
   (interactive)
   (message "color-theme-x-seb")
-  (color-theme-gnome2)
+  ;; (color-theme-gnome2)
   (let ((color-theme-is-cumulative t))
     (color-theme-install
      '(color-theme-x-seb

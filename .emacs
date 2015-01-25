@@ -1,7 +1,7 @@
 (require 'cl) ;; (loop for ...)
 (require 'dired-x)
 
-;; (setq debug-on-error t)
+(setq debug-on-error t)
 
 ;; _____________________________________________________________________
 ;; custom path
@@ -11,7 +11,7 @@
       do (load-file (concat my-emacsd file)))
 (setq auto-save-list-file-prefix my-emacsd)
 (setq user-emacs-directory my-emacsd)
-(setq load-path (cons my-emacsd load-path))
+(setq load-path (cons (concat my-emacsd "/lisp") load-path))
 (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 
 ;; (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
@@ -277,14 +277,12 @@ prefix argument."
 
   (require 'org-protocol)
 
- ;; (require 'org-export)
- (require 'ox-confluence)
- (require 'ox-beamer)
- (require 'ox-md)
-;;  (require 'org-e-html)
+  (require 'ox-confluence)
+  (require 'ox-beamer)
+  (require 'ox-md)
 
   ;; LaTeX
-  (require 'org-latex)
+  (require 'ox-latex)
   (setq org-export-latex-listings t)
   ;; (add-to-list 'org-export-latex-packages-alist '("" "listings"))
   ;; (add-to-list 'org-export-latex-packages-alist '("" "color"))
@@ -586,25 +584,25 @@ characters C1 and C2 belong to the same 'class'."
      (global-set-key "\C-ce" (make-interactive-fun 'change-dict "american"))
      (global-set-key "\C-c," 'flyspell-goto-next-error)))
 
-(defun my-recentf-mode-hook ()
-  (setq recentf-save-file (concat my-emacsd "recentf"))
-  (setq recentf-max-saved-items 500)
-  (setq recentf-max-menu-items 60)
-  (setq recentf-exclude '("/tmp/.*"))
-  (run-with-timer 60 60 t 'recentf-save-list)
-  (defun ido-from-recentf ()
-    (interactive)
-    (find-file
-     (ido-completing-read "Recentf open: "
-			  (mapcar (lambda (path)
-				    (expand-file-name path))
-				  recentf-list)
-			  nil t)))
-  (global-set-key "\C-xr\C-f" 
-		  (if (fboundp 'icy-mode)
-		      'icicle-recent-file
-		    'ido-from-recentf)))
-(add-hook 'recentf-load-hook 'my-recentf-mode-hook)
+;; (defun my-recentf-mode-hook ()
+;;   (setq recentf-save-file (concat my-emacsd "recentf"))
+;;   (setq recentf-max-saved-items 500)
+;;   (setq recentf-max-menu-items 60)
+;;   (setq recentf-exclude '("/tmp/.*"))
+;;   (run-with-timer 60 60 t 'recentf-save-list)
+;;   (defun ido-from-recentf ()
+;;     (interactive)
+;;     (find-file
+;;      (ido-completing-read "Recentf open: "
+;; 			  (mapcar (lambda (path)
+;; 				    (expand-file-name path))
+;; 				  recentf-list)
+;; 			  nil t)))
+;;   (global-set-key "\C-xr\C-f" 
+;; 		  (if (fboundp 'icy-mode)
+;; 		      'icicle-recent-file
+;; 		    'ido-from-recentf)))
+;; (add-hook 'recentf-load-hook 'my-recentf-mode-hook)
 
 (defun my-ido-mode-hook ()
   (ido-everywhere t)
@@ -709,7 +707,9 @@ characters C1 and C2 belong to the same 'class'."
 (put 'narrow-to-region 'disabled nil)
 
 ;; font highlighting
+(require 'color-theme)
 (require 'color-theme-seb)
+(color-theme-initialize)
 ;; (require 'color-theme-solarized)
 
 ;; paren matching
@@ -742,7 +742,7 @@ characters C1 and C2 belong to the same 'class'."
 (if (eq window-system nil)
     (color-theme-console-seb)
   ;;      (color-theme-solarized-dark)
-  (color-theme-x-seb))
+  (color-theme-gnome2))
 
 ;; mode-line
 (defvar my-mode-line-coding-format
