@@ -44,7 +44,7 @@ widget, custom, latex, ediff."
      (font-lock-comment-face ((t (:foreground "color-252" :inverse-video t :bold t))))
      (py-XXX-tag-face ((t (:foreground "color-252" :inverse-video t :bold t)))) 
      (font-lock-string-face ((t (:foreground "color-210"))))
-     (font-lock-keyword-face ((t (:foreground "color-27"))))
+     (font-lock-keyword-face ((t (:foreground "color-33"))))
      (font-lock-builtin-face ((t (:foreground "color-84"))))
      (font-lock-function-name-face ((t (:foreground "color-117" :bold t))))
      (font-lock-variable-name-face ((t (:foreground "yellow"))))
