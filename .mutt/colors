@@ -1,7 +1,7 @@
 color attachment  white          brightcolor091
 color bold        green          default # ..
 color error       red            default # global
-color indicator   default        color024 # index
+color indicator   default        color030 # index
 color markers     red            default # index
 color message     black	         brightcolor29
 color signature   color213       default # pager body
@@ -12,11 +12,11 @@ color underline   yellow         default
 
 color header      brightcolor193 default  "^From: "
 color header      brightcolor105 default  "^Subject: "
-color header      brightcolor136 default  "^To: "
+color header      brightcolor113 default  "^To: "
 color header      brightcolor138 default  "^(Cc|Bcc): "
-color header      brightcolor106 default  "^.*Date: "
+color header      brightcolor136 default  "^.*Date: "
 color header      brightcolor253 default  "^Reply-to: "
-color header      brightcolor088 default  "^(User-Agent|X-Originating-IP|X-Mailer): "
+color header      brightcolor094 default  "^(User-Agent|X-Originating-IP|X-Mailer): "
 color header      brightcolor131 default  "^Organization: "
 color header      brightcolor196 default  "^X-Spam.*: "
 
@@ -26,7 +26,7 @@ color header      brightcolor196 default  "^X-Spam.*: "
 color normal      color252       default  # pager body
 
 #  Coloring quoted text - coloring the first 7 levels:
-color quoted      color22        default
+color quoted      color34        default
 color quoted1     color36        default
 color quoted2     color50        default
 color quoted3     color58        default
