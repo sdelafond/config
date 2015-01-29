@@ -40,12 +40,12 @@ autoload -Uz vcs_info && {
     # for git prior to 1.7
     # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
     ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-    (( $ahead )) && gitstatus+=( "(+${ahead})" )
+    (( $ahead )) && gitstatus+=( "(↑${ahead})" )
 
     # for git prior to 1.7
     # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
     behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
-    (( $behind )) && gitstatus+=( "(-${behind})" )
+    (( $behind )) && gitstatus+=( "(↓${behind})" )
 
     hook_com[misc]+=${(j:/:)gitstatus}
   }
