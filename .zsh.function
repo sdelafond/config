@@ -532,7 +532,7 @@ s() { # smarter sudo
 sc() {
   name=${1:-"main"}
   if whence tmux &> /dev/null ; then
-    tmux attach -d -t $name || tmux new-session -s $name
+    tmux attach -2 -d -t $name || tmux new-session -2 -s $name
   elif whence screen &> /dev/null ; then
     screen -R $name -D -A
   fi
