@@ -817,13 +817,6 @@ characters C1 and C2 belong to the same 'class'."
       (ido-mode t)
     (iswitchb-mode t)))
 
-;; ;; EasyPG
-;; ;; (setenv "GPG_AGENT_INFO" nil)
-;; (require 'epa-file)
-;; ;; (setq epa-file-cache-passphrase-for-symmetric-encryption t)
-;; (setq epg-gpg-program "/usr/bin/gpg2")
-;; (epa-file-enable)
-
 ;; various variables
 (setq company-begin-commands '(self-insert-command))
 (setq tramp-mode nil)
