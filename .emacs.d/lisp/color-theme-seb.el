@@ -13,7 +13,7 @@ widget, custom, latex, ediff."
       (border-color . "black")
       (background-mode . dark))
      (default . nil)
-     (region ((t (:background "color-17"))))
+     (region ((t (:background "color-19"))))
      (modeline ((t (:foreground "white" :background "blue"))))
      (mode-line ((t (:foreground "white" :background "blue"))))
      (modeline-buffer-id ((t (:foreground "black" :background "color-120"))))
