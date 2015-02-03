@@ -372,7 +372,7 @@ prefix argument."
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "light grey" :weight bold :background "red")
         	("LATER" :foreground "dark violet" :weight bold)
-        	("DONE" :foreground "dark green" :weight bold)
+        	("DONE" :foreground "color-36" :weight bold)
         	("WAITING" :foreground "dark orange" :weight bold)
         	("LATER" :foreground "light orange" :weight bold))))
 
@@ -1007,10 +1007,10 @@ characters C1 and C2 belong to the same 'class'."
  '(org-checkbox-statistics-todo ((t (:foreground "color-177"))) t)
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))
  '(org-hide ((t (:foreground "#00000000"))))
- '(org-level-1 ((t (:foreground "color-27" :weight bold))))
+ '(org-level-1 ((t (:foreground "color-33" :weight bold))))
  '(org-level-2 ((t (:foreground "white" :weight bold))))
  '(org-level-3 ((t (:foreground "yellow" :weight bold))))
- '(org-level-4 ((t (:foreground "color-36" :weight bold))))
+ '(org-level-4 ((t (:foreground "color-42" :weight bold))))
  '(org-link ((((class color) (background dark)) (:foreground "color-69" :underline t))))
  '(org-special-keyword ((t (:inherit font-lock-keyword-face :foreground "color-45" :weight bold))))
  '(org-tag ((t (:foreground "color-208" :underline nil :weight bold))))

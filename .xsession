@@ -37,5 +37,6 @@ gkrellm &
 xterm-screen &
 
 # WM
+export _JAVA_AWT_WM_NONREPARENTING=1 # for awesome+java
 exec awesome # -c /etc/xdg/awesome/rc.lua
 #sawfish
