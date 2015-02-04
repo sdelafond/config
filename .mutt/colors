@@ -67,7 +67,7 @@ color index 	  color196       default '~((~C (security\.debian\.org\|vendor-sec\
 color index       brightcolor154 default ~N # New
 color index 	  brightcolor141 default '~N (~L (maudet\|lbrowne\|bouchare\|stanley\|415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
 color index 	  brightcolor034 default '~N (~L @.*debian)'
-color index 	  brightcolor202 default '~N (~L @.*(mappy\|ysance))'
+color index 	  brightcolor209 default '~N (~L @.*(mappy\|ysance))'
 color index 	  brightcolor196 default '~N ~((~C (security\.debian\.org\|vendor-sec\|buildd\+logs-security)) | (~s rt\.debian\.org))'
 
 color index       brightcolor230 default  ~F # Flagged
