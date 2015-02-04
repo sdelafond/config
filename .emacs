@@ -1,7 +1,7 @@
 (require 'cl) ;; (loop for ...)
 (require 'dired-x)
 
-(setq debug-on-error t)
+;;(setq debug-on-error t)
 
 ;; _____________________________________________________________________
 ;; custom path
