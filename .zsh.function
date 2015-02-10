@@ -270,7 +270,7 @@ keychain-init-real() {
   pkill -9 keychain
   rm -fr ~/.keychain/${HOST}-*
   # start
-  keychain --agents gpg --nogui --quiet --nocolor `gpg --list-secret-keys | awk '/^sec/ { gsub(/.+\//, "", $2) ; print $2 }'`
+  keychain --agents gpg --nogui --quiet --nocolor DAF6CE93 #`gpg --list-secret-keys | awk '/^sec/ { gsub(/.+\//, "", $2) ; print $2 }'`
 
   local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
   if [ -f $SH_FILE ] ; then
