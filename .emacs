@@ -211,7 +211,7 @@ prefix argument."
 (defun my-autoload (&rest modes)
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
-(my-autoload "id" "align" "company-mode" "git-commit-mode" "gitignore-mode"
+(my-autoload "id" "ace-jump-mode" "align" "company-mode" "git-commit-mode" "gitignore-mode"
              "gitconfig-mode" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "ruby-electric" "gtags"
              "outdent" "vcl-mode")
@@ -698,6 +698,9 @@ characters C1 and C2 belong to the same 'class'."
                                            (server-running-p))
                                       (server-edit)
                                   (kill-emacs))))
+
+;; ace-jump-mode
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;; utilities to resize windows
 ;; inspired from http://www.emacswiki.org/emacs/WindowResize
