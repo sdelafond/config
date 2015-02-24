@@ -392,7 +392,7 @@ preexec() {
 #    esac
 #  fi
   case $cmd in
-    (connect|debsign|debuild|g|git|gitseb|gk|gpg|gpg2|rsync|run|scp|ssh|sshfs|svn|unison))
+    (connect|debsign|debuild|e|emacs|g|git|gitseb|gk|gpg|gpg2|mutt|rsync|run|scp|ssh|sshfs|svn|unison))
       have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty ;;
   esac
 }
