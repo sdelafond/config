@@ -699,30 +699,76 @@ characters C1 and C2 belong to the same 'class'."
                                       (server-edit)
                                   (kill-emacs))))
 
+;; utilities to resize windows
+;; inspired from http://www.emacswiki.org/emacs/WindowResize
+(defun win-vertical-position ()
+    "Figure out if the current window is on top, bottom or in the
+middle"
+    (let* ((win-edges (window-edges))
+           (this-window-y-min (nth 1 win-edges))
+           (this-window-y-max (nth 3 win-edges))
+           (fr-height (frame-height)))
+      (cond
+       ((eq 0 this-window-y-min) "t")
+       ((eq (- fr-height 1) this-window-y-max) "b")
+       (t "m"))))
+
+(defun win-horizontal-position ()
+    "Figure out if the current window is to the left, right or in the
+middle"
+    (let* ((win-edges (window-edges))
+           (this-window-x-min (nth 0 win-edges))
+           (this-window-x-max (nth 2 win-edges))
+           (fr-width (frame-width)))
+      (cond
+       ((eq 0 this-window-x-min) "l")
+       ((eq fr-width this-window-x-max) "r")
+       (t "m"))))
+
+(defun win-shift-border-down ()
+  (interactive)
+  (let ((pos (win-vertical-position)))
+    (enlarge-window
+     (cond
+      ((equal "t" pos) 1)
+      ((equal "b" pos) -1)
+      ((equal "m" pos) 1)))))
+
+(defun win-shift-border-right ()
+  (interactive)
+  (let ((pos (win-horizontal-position)))
+    (enlarge-window-horizontally
+     (cond
+      ((equal "l" pos) 1)
+      ((equal "r" pos) -1)
+      ((equal "m" pos) 1)))))
+
 ;; window-switching hydra
 (global-set-key
  (kbd "C-M-o")
  (defhydra hydra-window (:color amaranth)
    "window"
-   ("h" windmove-left)
-   ("j" windmove-down)
-   ("k" windmove-up)
-   ("l" windmove-right)
+   ("b" windmove-left)
+   ("n" windmove-down)
+   ("p" windmove-up)
+   ("f" windmove-right)
    ("v" (lambda ()
           (interactive)
           (split-window-right)
           (windmove-right))
         "vert")
-   ("x" (lambda ()
+   ("h" (lambda ()
           (interactive)
           (split-window-below)
           (windmove-down))
         "horz")
    ;; ("t" transpose-frame "'")
    ("o" delete-other-windows "one" :color blue)
-   ("J" enlarge-window-horizontally "↑")
-   ("K" shrink-window-horizontally "↓")
    ("d" delete-window "del")
+   ("N" win-resize-enlarge-horiz "↑")
+   ("P" shrink-window "↓")
+   ("F" enlarge-window-horizontally "→")
+   ("B" shrink-window-horizontally "←")
    ;; ("a" ace-window "ace")
    ;; ("s" ace-swap-window "swap")
    ;; ("d" ace-delete-window "del")
@@ -948,19 +994,6 @@ characters C1 and C2 belong to the same 'class'."
                                                                      (company-mode)))))
               auto-mode-alist))
 
-;; scrollwheel
-(defun up-slightly () (interactive) (scroll-up 5))
-(defun down-slightly () (interactive) (scroll-down 5))
-(defun up-one () (interactive) (scroll-up 1))
-(defun down-one () (interactive) (scroll-down 1))
-(defun up-a-lot () (interactive) (scroll-up))
-(defun down-a-lot () (interactive) (scroll-down))
-(global-set-key [mouse-4] 'down-slightly)
-(global-set-key [mouse-5] 'up-slightly)
-(global-set-key [S-mouse-4] 'down-one)
-(global-set-key [S-mouse-5] 'up-one)
-(global-set-key [C-mouse-4] 'down-a-lot)
-(global-set-key [C-mouse-5] 'up-a-lot)
 
 ;; FIXME: ???
 (put 'narrow-to-region 'disabled nil)
