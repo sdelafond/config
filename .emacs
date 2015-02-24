@@ -701,47 +701,44 @@ characters C1 and C2 belong to the same 'class'."
 
 ;; utilities to resize windows
 ;; inspired from http://www.emacswiki.org/emacs/WindowResize
-(defun win-vertical-position ()
-    "Figure out if the current window is on top, bottom or in the
-middle"
-    (let* ((win-edges (window-edges))
-           (this-window-y-min (nth 1 win-edges))
-           (this-window-y-max (nth 3 win-edges))
-           (fr-height (frame-height)))
-      (cond
-       ((eq 0 this-window-y-min) "t")
-       ((eq (- fr-height 1) this-window-y-max) "b")
-       (t "m"))))
+(defun win-position ()
+  "Return a tuple description the window position; the first element is the
+vertical position ('t', 'b' or 'm'), the second one is the horizontal
+position ('l', 'r', 'm')"
+    (let* ((fr-width (frame-width))
+           (fr-height (frame-height))
+           (win-edges (window-edges))
+           (win-x-min (nth 0 win-edges))
+           (win-y-min (nth 1 win-edges))
+           (win-x-max (nth 2 win-edges))
+           (win-y-max (nth 3 win-edges)))
+      (list
+       (cond
+        ((eq 0 win-y-min) "t")
+        ((eq (- fr-height 1) win-y-max) "b")
+        (t "m"))
+       (cond
+        ((eq 0 win-x-min) "l")
+        ((eq fr-width win-x-max) "r")
+        (t "m")))))
 
-(defun win-horizontal-position ()
-    "Figure out if the current window is to the left, right or in the
-middle"
-    (let* ((win-edges (window-edges))
-           (this-window-x-min (nth 0 win-edges))
-           (this-window-x-max (nth 2 win-edges))
-           (fr-width (frame-width)))
-      (cond
-       ((eq 0 this-window-x-min) "l")
-       ((eq fr-width this-window-x-max) "r")
-       (t "m"))))
-
-(defun win-shift-border-down ()
+(defun win-shift-vertical (arg)
   (interactive)
-  (let ((pos (win-vertical-position)))
+  (let ((pos (nth 0 (win-position))))
     (enlarge-window
      (cond
-      ((equal "t" pos) 1)
-      ((equal "b" pos) -1)
-      ((equal "m" pos) 1)))))
+      ((equal "t" pos) arg)
+      ((equal "b" pos) (- 0 arg))
+      ((equal "m" pos) arg)))))
 
-(defun win-shift-border-right ()
+(defun win-shift-horizontal (arg)
   (interactive)
-  (let ((pos (win-horizontal-position)))
+  (let ((pos (nth 1 (win-position))))
     (enlarge-window-horizontally
      (cond
-      ((equal "l" pos) 1)
-      ((equal "r" pos) -1)
-      ((equal "m" pos) 1)))))
+      ((equal "l" pos) arg)
+      ((equal "r" pos) (- 0 arg))
+      ((equal "m" pos) arg)))))
 
 ;; window-switching hydra
 (global-set-key
@@ -765,18 +762,17 @@ middle"
    ;; ("t" transpose-frame "'")
    ("o" delete-other-windows "one" :color blue)
    ("d" delete-window "del")
-   ("N" win-resize-enlarge-horiz "↑")
-   ("P" shrink-window "↓")
-   ("F" enlarge-window-horizontally "→")
-   ("B" shrink-window-horizontally "←")
+   ("P" (win-shift-vertical -1) "↑")
+   ("N" (win-shift-vertical 1) "↓")
+   ("F" (win-shift-horizontal 1) "→")
+   ("B" (win-shift-horizontal -1) "←")
    ;; ("a" ace-window "ace")
    ;; ("s" ace-swap-window "swap")
    ;; ("d" ace-delete-window "del")
    ;; ("i" ace-maximize-window "ace-one" :color blue)
-   ("b" ido-switch-buffer "buf")
+   ;; ("b" ido-switch-buffer "buf")
    ;; ("m" headlong-bookmark-jump "bmk")
    ("q" nil "cancel")))
-
 
 ;; numbering
 (line-number-mode t)
