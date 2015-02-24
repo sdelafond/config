@@ -211,7 +211,7 @@ prefix argument."
 (defun my-autoload (&rest modes)
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
-(my-autoload "id" "align" "company-mode" "git-commit-mode" "gitignore-mode"
+(my-autoload "id" "ace-jump-mode" "align" "company-mode" "git-commit-mode" "gitignore-mode"
              "gitconfig-mode" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "ruby-electric" "gtags"
              "outdent" "vcl-mode")
@@ -699,38 +699,83 @@ characters C1 and C2 belong to the same 'class'."
                                       (server-edit)
                                   (kill-emacs))))
 
+;; ace-jump-mode
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; utilities to resize windows
+;; inspired from http://www.emacswiki.org/emacs/WindowResize
+(defun win-position ()
+  "Return a tuple description the window position; the first element is the
+vertical position ('t', 'b' or 'm'), the second one is the horizontal
+position ('l', 'r', 'm')"
+    (let* ((fr-width (frame-width))
+           (fr-height (frame-height))
+           (win-edges (window-edges))
+           (win-x-min (nth 0 win-edges))
+           (win-y-min (nth 1 win-edges))
+           (win-x-max (nth 2 win-edges))
+           (win-y-max (nth 3 win-edges)))
+      (list
+       (cond
+        ((eq 0 win-y-min) "t")
+        ((eq (- fr-height 1) win-y-max) "b")
+        (t "m"))
+       (cond
+        ((eq 0 win-x-min) "l")
+        ((eq fr-width win-x-max) "r")
+        (t "m")))))
+
+(defun win-shift-vertical (arg)
+  (interactive)
+  (let ((pos (nth 0 (win-position))))
+    (enlarge-window
+     (cond
+      ((equal "t" pos) arg)
+      ((equal "b" pos) (- 0 arg))
+      ((equal "m" pos) arg)))))
+
+(defun win-shift-horizontal (arg)
+  (interactive)
+  (let ((pos (nth 1 (win-position))))
+    (enlarge-window-horizontally
+     (cond
+      ((equal "l" pos) arg)
+      ((equal "r" pos) (- 0 arg))
+      ((equal "m" pos) arg)))))
+
 ;; window-switching hydra
 (global-set-key
  (kbd "C-M-o")
  (defhydra hydra-window (:color amaranth)
    "window"
-   ("h" windmove-left)
-   ("j" windmove-down)
-   ("k" windmove-up)
-   ("l" windmove-right)
+   ("b" windmove-left)
+   ("n" windmove-down)
+   ("p" windmove-up)
+   ("f" windmove-right)
    ("v" (lambda ()
           (interactive)
           (split-window-right)
           (windmove-right))
         "vert")
-   ("x" (lambda ()
+   ("h" (lambda ()
           (interactive)
           (split-window-below)
           (windmove-down))
         "horz")
    ;; ("t" transpose-frame "'")
    ("o" delete-other-windows "one" :color blue)
-   ("J" enlarge-window-horizontally "↑")
-   ("K" shrink-window-horizontally "↓")
    ("d" delete-window "del")
+   ("P" (win-shift-vertical -1) "↑")
+   ("N" (win-shift-vertical 1) "↓")
+   ("F" (win-shift-horizontal 1) "→")
+   ("B" (win-shift-horizontal -1) "←")
    ;; ("a" ace-window "ace")
    ;; ("s" ace-swap-window "swap")
    ;; ("d" ace-delete-window "del")
    ;; ("i" ace-maximize-window "ace-one" :color blue)
-   ("b" ido-switch-buffer "buf")
+   ;; ("b" ido-switch-buffer "buf")
    ;; ("m" headlong-bookmark-jump "bmk")
    ("q" nil "cancel")))
-
 
 ;; numbering
 (line-number-mode t)
@@ -948,19 +993,6 @@ characters C1 and C2 belong to the same 'class'."
                                                                      (company-mode)))))
               auto-mode-alist))
 
-;; scrollwheel
-(defun up-slightly () (interactive) (scroll-up 5))
-(defun down-slightly () (interactive) (scroll-down 5))
-(defun up-one () (interactive) (scroll-up 1))
-(defun down-one () (interactive) (scroll-down 1))
-(defun up-a-lot () (interactive) (scroll-up))
-(defun down-a-lot () (interactive) (scroll-down))
-(global-set-key [mouse-4] 'down-slightly)
-(global-set-key [mouse-5] 'up-slightly)
-(global-set-key [S-mouse-4] 'down-one)
-(global-set-key [S-mouse-5] 'up-one)
-(global-set-key [C-mouse-4] 'down-a-lot)
-(global-set-key [C-mouse-5] 'up-a-lot)
 
 ;; FIXME: ???
 (put 'narrow-to-region 'disabled nil)
