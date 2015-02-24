@@ -360,7 +360,7 @@ pdb() {
   local extraOpts=""
   distribution=${distribution/-*} # remove -security, for instance
   [ $# -gt 0 ] && extraOpts="--debbuildopts '$@'"
-  pdebuild --pbuilder cowbuilder $=extraOpts --buildresult .. --auto-debsign -- --basepath /var/cache/pbuilder/${distribution}.cow
+  pdebuild --pbuilder cowbuilder $=extraOpts --buildresult .. --auto-debsign -- --basepath /var/cache/pbuilder/${distribution}.cow --hookdir /var/cache/pbuilder/hooks
   [ $? = 0 ] && lintian -viI $(ls ../*${version}*changes | grep -v _source.changes)
 }
 
