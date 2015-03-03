@@ -212,7 +212,7 @@ prefix argument."
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
 (my-autoload "id" "ace-jump-mode" "align" "company-mode" "git-commit-mode" "gitignore-mode"
-             "gitconfig-mode" "python-mode" "multi-mode" "org"
+             "gitconfig-mode" "helm" "projectile" "helm-projectile" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "ruby-electric" "gtags"
              "outdent" "vcl-mode")
 
@@ -701,6 +701,37 @@ characters C1 and C2 belong to the same 'class'."
 
 ;; ace-jump-mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; helm
+(setq
+ ;; open helm buffer in another window
+ helm-split-window-default-side 'other
+ ;; do not occupy whole other window
+ helm-split-window-in-side-p t)
+
+(helm-mode t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+(require 'helm-projectile)
+(defun helm-projectile-switch-buffer ()
+  "Use Helm instead of ido to switch buffer in projectile."
+  (interactive)
+  (helm :sources helm-source-projectile-buffers-list
+        :buffer "*helm projectile buffers*"
+        :prompt (projectile-prepend-project-name "Switch to buffer: ")))
+
+;; projectile
+(require 'projectile)
+(projectile-global-mode)
+;; Override some projectile keymaps
+(eval-after-load 'projectile
+  '(progn
+     (define-key projectile-command-map (kbd "b") 'helm-projectile-switch-buffer)
+     (define-key projectile-command-map (kbd "f") 'helm-projectile)
+     (define-key projectile-command-map (kbd "p") 'helm-projectile-switch-project)))
 
 ;; utilities to resize windows
 ;; inspired from http://www.emacswiki.org/emacs/WindowResize
