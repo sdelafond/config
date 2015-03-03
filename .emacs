@@ -484,8 +484,10 @@ todo/all-time/additional-option-like keywords."
   (define-key org-mode-map "\C-ca" 'org-agenda)
   (define-key org-mode-map "\C-cl" 'org-store-link)
   (define-key org-mode-map "\C-c/" 'org-sparse-tree)
+  (define-key org-mode-map "\C-c " 'nil))
   (define-key global-map "\C-cc" 'org-capture)
-  (define-key global-map "\C-c/" 'org-sparse-tree))
+  (define-key global-map "\C-c/" 'org-sparse-tree)
+
 
 (add-hook 'org-load-hook 'my-org-mode-hook)
 (add-hook 'org-mode-hook 'my-org-mode-hook)
