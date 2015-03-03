@@ -14,10 +14,6 @@
 (setq load-path (cons (concat my-emacsd "/lisp") load-path))
 (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 
-;; (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
-;; (setq my-icicled (concat my-emacsd "icicles"))
-;; (setq load-path (cons my-icicled load-path))
-
 ;; _____________________________________________________________________
 ;; macros
 (defmacro make-interactive-fun (fn args)
@@ -311,7 +307,6 @@ prefix argument."
   (setq org-icalendar-store-UID t)
   (setq org-icalendar-use-deadline '(event-if-todo))
 ;; (setq org-icalendar-include-todo t)
-  (setq org-completion-use-ido t)
   (setq org-deadline-warning-days 0)
   (setq org-default-priority 67)
 ;; (setq org-fast-tag-selection-single-key 'expert)
@@ -586,45 +581,13 @@ characters C1 and C2 belong to the same 'class'."
      (global-set-key "\C-ce" (make-interactive-fun 'change-dict "american"))
      (global-set-key "\C-c," 'flyspell-goto-next-error)))
 
-;; (defun my-recentf-mode-hook ()
-;;   (setq recentf-save-file (concat my-emacsd "recentf"))
-;;   (setq recentf-max-saved-items 500)
-;;   (setq recentf-max-menu-items 60)
-;;   (setq recentf-exclude '("/tmp/.*"))
-;;   (run-with-timer 60 60 t 'recentf-save-list)
-;;   (defun ido-from-recentf ()
-;;     (interactive)
-;;     (find-file
-;;      (ido-completing-read "Recentf open: "
-;; 			  (mapcar (lambda (path)
-;; 				    (expand-file-name path))
-;; 				  recentf-list)
-;; 			  nil t)))
-;;   (global-set-key "\C-xr\C-f" 
-;; 		  (if (fboundp 'icy-mode)
-;; 		      'icicle-recent-file
-;; 		    'ido-from-recentf)))
-;; (add-hook 'recentf-load-hook 'my-recentf-mode-hook)
-
-(defun my-ido-mode-hook ()
-  (ido-everywhere t)
-  (setq ido-enable-flex-matching t)
-  (setq ido-show-dot-for-dired t)
-  (setq ido-ignore-buffers '("^ " "^\\*.*"))
-  (setq ido-confirm-unique-completion nil)
-  (setq read-buffer-function 'ido-read-buffer)
-  (setq ido-default-buffer-method 'samewindow)
-;;      (setq ido-use-filename-at-point t)
-  (icomplete-mode 99))
-(add-hook 'ido-setup-hook 'my-ido-mode-hook)
-
-(defun my-iswitchb-mode-hook ()
-  (setq iswitchb-case t)
-  (setq iswitchb-buffer-ignore '("^ " "^\\*.*"))
-  (add-hook 'iswitchb-define-mode-map-hook
-	    '(lambda ()
-	       (define-key iswitchb-mode-map "\C-a" 'iswitchb-toggle-ignore))))
-(add-hook 'iswitchb-mode-hook 'my-iswitchb-mode-hook)
+(defun my-recentf-mode-hook ()
+  (setq recentf-save-file (concat my-emacsd "recentf"))
+  (setq recentf-max-saved-items 500)
+  (setq recentf-max-menu-items 60)
+  (setq recentf-exclude '("/tmp/.*"))
+  (run-with-timer 60 60 t 'recentf-save-list))
+(add-hook 'recentf-load-hook 'my-recentf-mode-hook)
 
 (defun my-align-hook ()
   (setq align-to-tab-stop nil)
@@ -908,28 +871,6 @@ position ('l', 'r', 'm')"
 ;; unique buffer names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
-
-;; buffer switching and more
-(if (require 'icicles nil t)
-    (progn
-      ;; custom-based values don't seem to take effect,
-      ;; so we define those here
-;;      (setq icicle-apropos-complete-keys '())
-;;      (setq icicle-apropos-prefix-keys '())
-;;      (setq icicle-apropos-complete-keys '([tab] [(control ?i)]))
-      (local-unset-key "\C-c/")
-      (setq icicle-menu-items-to-history-flag nil)
-      (setq icicle-apropos-complete-keys '([S-tab] [S-iso-lefttab] [backtab]))
-      (setq icicle-buffer-no-match-regexp "\\*")
-      (global-set-key [backtab] 'icicle-apropos-complete) ;; huh, shouldn't the above do that ?
-      (icy-mode)
-      ;; not sure why it doesn't work by default in a tty, but the following does
-      ;; the trick
-      (global-set-key "\C-cK" 'icicle-complete-keys)
-      )
-  (if (boundp 'ido-mode)
-      (ido-mode t)
-    (iswitchb-mode t)))
 
 ;; various variables
 (setq company-begin-commands '(self-insert-command))
