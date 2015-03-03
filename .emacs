@@ -798,6 +798,9 @@ position ('l', 'r', 'm')"
 ;; region highlighting
 (transient-mark-mode t)
 
+ ;; always "y or n"
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; auto-revert
 (global-auto-revert-mode t)
 (defalias 'auto-revert-handler 'my-auto-revert-handler)
