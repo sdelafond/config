@@ -200,6 +200,7 @@ prefix argument."
   (when (normal-backup-enable-predicate filename)
     (not (or (string-match "svn-commit" filename)
 	     (string-match "dwssap" filename)
+             (string-match "MSG" filename)
 	     (string-match "passwd" filename)
 	     (string-match "/tmp/dpep" filename)))))
 (setq backup-enable-predicate 'my-backup-enable-predicate)
@@ -216,7 +217,6 @@ prefix argument."
   "Add a call to FUN to each mode-hook listed in MODES-HOOKS."
   (loop for mode-hook in modes-hooks do
 	(add-hook mode-hook fun)))
-
 (add-function-to-hooks (make-fun 'set-fill-column 78) '(c-mode-hook lisp-mode-hook
                                                         emacs-lisp-mode-hook
                                                         html-mode-hook))
@@ -226,7 +226,6 @@ prefix argument."
   "Load GNU Global if available."
   (if (fboundp 'gtags-mode)
       (gtags-mode t)))
-
 (add-function-to-hooks 'load-gnu-global '(python-mode-hook java-mode-hook
                                           shell-mode-hook
                                           c-mode-hook lisp-mode-hook
@@ -243,11 +242,6 @@ prefix argument."
 
 ;; _____________________________________________________________________
 ;; Hooks
-(defun my-message-mode-hook ()
-  (setq message-beginning-of-line nil)
-  (turn-off-auto-fill))
-(add-hook 'message-mode-hook 'my-message-mode-hook)
-
 (defun my-org-mode-hook ()
 ;;   (require 'org-expiry)
 ;;   (org-expiry-insinuate)
@@ -258,7 +252,6 @@ prefix argument."
 ;;   (setq org-crypt-key "sdelafond@gmx.net")
 ;;   (add-hook 'before-save-hook 'org-encrypt-entries)
 
-;;  (require 'org-babel-init)
   (require 'ob-ruby)
   (require 'ob-python)
   (require 'ob-js)
@@ -291,8 +284,6 @@ prefix argument."
           ;; `url' breaks lines in long strings (was `verb')
           ("~" "\\verb~%s~" t)
           ("@" "\\alert{%s}" nil)))
-
-;;   (org-babel-load-library-of-babel)
 
   ;; agenda
   (setq org-agenda-files (directory-files "~/org" t "^[^.].*\\.todo$"))
@@ -346,21 +337,6 @@ prefix argument."
   ;;       				       (quote regexp) "<[^>\n]+>")))
   ;;       	  (org-agenda-overriding-header "Unscheduled TODO entries: ")))))
 
-  ;; tags
-  (setq org-tag-alist '((:startgroup . nil) ("@work" . ?w)
-			                    ("@home" . ?h)
-			                    ("@tel" . ?t)
-			                    ("@buy" . ?b)
-			(:endgroup . nil)
-			(:startgroup . nil) ("laptop" . ?l)
-			                    ("pc" . ?p)
-			(:startgroup . nil) ("jardin" . ?j)
-			                    ("maison" . ?m)
-			(:endgroup . nil)
-			(:endgroup . nil)
-			(:startgroup . nil) ("net" . ?n)
-			(:endgroup . nil)))
-
   ;; todo
   (setq org-todo-keywords
  	'((sequence "TODO(t)" "WAITING(w@/!)" "LATER(l@)" "|" "DONE(d!/@)" "CANCELED(c@)")))
@@ -372,8 +348,7 @@ prefix argument."
         	("LATER" :foreground "light orange" :weight bold))))
 
   ;; links
-  (setq org-link-abbrev-alist
-        '(("debian-bug"   . "http://bugs.debian.org/%s")))
+  (setq org-link-abbrev-alist '(("debian-bug" . "http://bugs.debian.org/%s")))
 
   ;; *** entry :tag1:tag2: -> link #tag1,tag2#
   (defun org-convert-entry-to-irc ()
@@ -470,23 +445,24 @@ todo/all-time/additional-option-like keywords."
   (setq org-outline-path-complete-in-steps nil)
 
   (setq org-capture-templates
-        (quote
-          (("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox") "* TODO %?\n  DEADLINE: %t")
-           ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox") "* %?\n  %U")
-           ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n  Source: %u, %c\n  %i"))))
+        (quote (("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox")
+                 "* TODO %?\n  DEADLINE: %t")
+                ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox")
+                 "* %?\n  %U")
+                ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox")
+                 "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
   ;; bindings
   (define-key org-mode-map "\C-ca" 'org-agenda)
   (define-key org-mode-map "\C-cl" 'org-store-link)
   (define-key org-mode-map "\C-c/" 'org-sparse-tree)
-  (define-key org-mode-map "\C-c " 'nil))
+  (define-key org-mode-map "\C-c " 'nil)
   (define-key global-map "\C-cc" 'org-capture)
-  (define-key global-map "\C-c/" 'org-sparse-tree)
-
-
+  (define-key global-map "\C-c/" 'org-sparse-tree))
 (add-hook 'org-load-hook 'my-org-mode-hook)
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
+;; flyspell
 (eval-after-load "flyspell" ;; yeah, we wish there was a flyspell-hook...
   '(progn
      (defun my-flyspell-ignore-uppercase (beg end &rest rest)
@@ -785,6 +761,12 @@ position ('l', 'r', 'm')"
 (require 'color-theme-seb)
 (color-theme-initialize)
 ;; (require 'color-theme-solarized)
+(global-font-lock-mode t)
+(setq font-lock-maximum-decoration t)
+(if (eq window-system nil)
+    (color-theme-console-seb)
+  ;;      (color-theme-solarized-dark)
+  (color-theme-gnome2))
 
 ;; paren matching
 (show-paren-mode t)
@@ -801,25 +783,6 @@ position ('l', 'r', 'm')"
 (global-auto-revert-mode t)
 (defalias 'auto-revert-handler 'my-auto-revert-handler)
 (setq global-auto-revert-mode-text " ARev")
-
-;; font-locking
-(global-font-lock-mode t)
-(setq font-lock-maximum-decoration t)
-
-(defun terminal-init-screen-256color ()
-  "Terminal initialization function for screen."
-  ;; use the xterm color initialization code.
-  (load "term/xterm")
-  (xterm-register-default-colors)
-  (tty-set-up-initial-frame-faces))
-
-  ;;; For GNU Emacs 21, use our own xterm-256color.el
-(if (= 21 emacs-major-version) (load "xterm-256color"))
-
-(if (eq window-system nil)
-    (color-theme-console-seb)
-  ;;      (color-theme-solarized-dark)
-  (color-theme-gnome2))
 
 ;; mode-line
 (defvar my-mode-line-coding-format
@@ -974,54 +937,18 @@ position ('l', 'r', 'm')"
 ;; FIXME: ???
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-
-;; (defun my-nxml-mode-hook ()
-;;   (nxml-delimiter-data-face ((nil (:foreground "LightGreen"))))
-;;   (nxml-delimiter-face ((t (:foreground "LightSalmon2" :weight bold))))
-;;   (nxml-name-face ((nil (:foreground "SkyBlue" :weight bold))))
-;;   (nxml-ref-face ((nil (:foreground "LavenderBlush")))))
-;; (add-hook 'nxml-mode-hook 'my-nxml-mode-hook)
-
-;; _____________________________________________________________________
-;; custom modes
-;; (defvar server-seb-mode-map
-;;   (let ((map (make-sparse-keymap)))
-;;     (define-key map "\C-xk"
-;;       '(lambda ()
-;; 	 (interactive)
-;; 	 (server-edit)))
-;;     map))
-;; (define-minor-mode server-seb-mode "Server")
-;; (add-hook 'server-visit-hook 'server-seb-mode)
+(put 'downcase-region 'disabled nil)
 
 (defun jsp-mode ()
   (interactive)
   (multi-mode 1 'html-mode '("<%" jde-mode) '("%>" html-mode)))
 
 (defun my-mutt-hook ()
-  (cl-flet ((make-html-mail ()
-                            (shell-command-on-region (point-min) (point-max)
-                                                     "python ~/bin/make-html-mail.py" t t))
-            (is-buffer-already-htmlized ()
-                                        "Check if the buffer has already been HTMLized"
-                                        (goto-char (point-min))
-                                        (re-search-forward "src=.*/c/image" nil t))
-            (is-buffer-to-htmlize ()
-                                  "Check if the buffer is a raw email needing HTMLization."
-                                  (goto-char (point-min))
-                                  (re-search-forward "^From: " nil t)
-                                  (and (re-search-forward "^From: " nil t) (re-search-forward "+sig+" nil t)))
-            (htmlize-and-exit ()
-                              (make-html-mail)
-                              (save-buffer)
-                              (server-edit)))
-    (if (is-buffer-already-htmlized) (server-edit))
-    (if (is-buffer-to-htmlize) (htmlize-and-exit) 
-      (progn 
-        (mail-mode)
-        (flyspell-mode)
-        (choose-dict-automatically)
-        (local-set-key "\C-ci" 'format-email-body)))))
+  (progn 
+    (mail-mode)
+    (flyspell-mode)
+    (choose-dict-automatically)
+    (local-set-key "\C-ci" 'format-email-body)))
 
 ;; _____________________________________________________________________
 ;; Custom-set
@@ -1057,5 +984,3 @@ position ('l', 'r', 'm')"
  '(org-special-keyword ((t (:inherit font-lock-keyword-face :foreground "color-45" :weight bold))))
  '(org-tag ((t (:foreground "color-208" :underline nil :weight bold))))
  '(org-warning ((t (:inherit font-lock-warning-face :foreground "color-250")))))
-
-(put 'downcase-region 'disabled nil)
