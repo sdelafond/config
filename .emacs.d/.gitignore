@@ -1,3 +1,4 @@
 recentf
 run-*.el
 projectile-bookmarks.eld
+**/*.elc
