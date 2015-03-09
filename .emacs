@@ -655,6 +655,7 @@ characters C1 and C2 belong to the same 'class'."
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
 
 (require 'helm-projectile)
 (defun helm-projectile-switch-buffer ()
