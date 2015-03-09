@@ -286,7 +286,6 @@ prefix argument."
           ("@" "\\alert{%s}" nil)))
 
   ;; agenda
-  (setq org-agenda-files (directory-files "~/org" t "^[^.].*\\.todo$"))
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 7)
   (setq org-agenda-show-all-dates t)
@@ -656,6 +655,7 @@ characters C1 and C2 belong to the same 'class'."
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 
 (require 'helm-projectile)
 (defun helm-projectile-switch-buffer ()
@@ -963,7 +963,6 @@ position ('l', 'r', 'm')"
  '(jde-global-classpath (quote ("." "/usr/share/java/jde.jar" "/opt/tomcat/common/lib/servlet.jar" "/usr/share/java/junit.jar")))
  '(jde-jdk-registry (quote (("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun"))))
  '(load-home-init-file t t)
- '(org-agenda-files (quote ("/home/seb/org/home.todo" "/home/seb/org/move.todo")))
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
  '(safe-local-variable-values (quote ((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos) (buffer-file-coding-system-explicit utf-8-dos . utf-8-dos) (buffer-file-coding-system-explicit . utf-8-dos)))))
