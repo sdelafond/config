@@ -596,7 +596,7 @@ characters C1 and C2 belong to the same 'class'."
   (setq recentf-save-file (concat my-emacsd "recentf"))
   (setq recentf-max-saved-items 500)
   (setq recentf-max-menu-items 60)
-  (setq recentf-exclude '("/tmp/.*"))
+  (setq recentf-exclude '("/tmp/.*")))
 (add-hook 'recentf-load-hook 'my-recentf-mode-hook)
 
 (defun my-align-hook ()
