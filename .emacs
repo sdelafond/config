@@ -597,7 +597,6 @@ characters C1 and C2 belong to the same 'class'."
   (setq recentf-max-saved-items 500)
   (setq recentf-max-menu-items 60)
   (setq recentf-exclude '("/tmp/.*"))
-  (run-with-timer 60 60 t 'recentf-save-list))
 (add-hook 'recentf-load-hook 'my-recentf-mode-hook)
 
 (defun my-align-hook ()
