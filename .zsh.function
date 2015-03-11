@@ -391,10 +391,7 @@ preexec() {
 #      2) export KRB5CCNAME=FILE:$krb5files[1] ; rm -f $krb5files[2,-1] ;;
 #    esac
 #  fi
-  case $cmd in
-    (connect|debsign|debuild|e|emacs|emacs-wrapper.sh|g|git|gitseb|gk|gpg|gpg2|mutt|rsync|run|scp|ssh|sshfs|svn|unison))
-      have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty ;;
-  esac
+  have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty
 }
 
 psc() {
