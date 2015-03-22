@@ -342,7 +342,7 @@ prefix argument."
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "light grey" :weight bold :background "red")
         	("LATER" :foreground "dark violet" :weight bold)
-        	("DONE" :foreground "color-36" :weight bold)
+        	("DONE" :foreground "dark green" :weight bold)
         	("WAITING" :foreground "dark orange" :weight bold)
         	("LATER" :foreground "light orange" :weight bold))))
 
