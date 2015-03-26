@@ -288,6 +288,9 @@ keychain-init-real() {
 
 keychain-init() {
 #  setopt localoptions xtrace
+
+  [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] && return 1
+
   local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
   if [ -f $SH_FILE ] ; then
     source $SH_FILE
