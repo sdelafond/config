@@ -289,8 +289,13 @@ keychain-init-real() {
 keychain-init() {
 #  setopt localoptions xtrace
 
-  [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] && return 1
-
+  if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] ; then
+    source ${HOME}/.gnupg/gpg-agent-info-${HOSTNAME}
+    export GPG_AGENT_INFO
+    export SSH_AUTH_SOCK
+    return 1
+  fi
+  
   local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
   if [ -f $SH_FILE ] ; then
     source $SH_FILE
