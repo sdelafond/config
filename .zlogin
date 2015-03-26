@@ -3,6 +3,9 @@ local wai="`who am i`" # this is used several times, make it a local variable
 # remapping a few keys
 source ~/.zsh.console
 
+# HOSTNAME
+export HOSTNAME=$(hostname -s)
+
 # the following line cannot be in zshenv since 'who am i' requires a tty
 #export LOGIN_HOST=`who am i | awk '{print $6}' | sed -e 's/[()]//g'`
 export LOGIN_HOST=${${=wai}[5]//[()]}
