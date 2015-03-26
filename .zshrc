@@ -475,6 +475,9 @@ fi
 # # makeflags
 # export MAKEFLAGS="-j$(grep -c '^processor\s:' /proc/cpuinfo)"
 
+# HOSTNAME
+export HOSTNAME=$(hostname -s)
+
 # short hostname
 export HOST_SHORT=${HOST/.*}
 
