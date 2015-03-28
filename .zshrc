@@ -528,6 +528,8 @@ case $HOST_SHORT in
     [[ $TERM = screen* ]] || [[ -n "$TMUX" ]] && unset DISPLAY ;;
 esac
 
+GPG_KEY="DAF6CE93"
+
 # aliases for repositories
 typeset -A REPOSITORIES
 
