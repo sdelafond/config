@@ -28,7 +28,7 @@ xscreensaver -nosplash &
 xset dpms 0 0 0
 xset s off
 case $HOST in
-  seb-debian)
+  mp)
     xrandr --output VGA1 --auto --output DP1 --auto --left-of VGA1 ;;
   centurion)
     xrandr --output DVI-I-1 --auto --output HDMI-0 --auto --left-of DVI-I-1 ;;    
