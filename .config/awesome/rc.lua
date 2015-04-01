@@ -361,7 +361,7 @@ settings.bindings.command = {
   [{settings.keys.super, "F1"}] = settings.applications.selection .. " gs",
   [{settings.keys.super_shift, "F1"}] = settings.applications.selection .. " gi",
   [{settings.keys.super_control, "F1"}] = settings.applications.selection .. " gm",
-  [{settings.keys.none, "F12"}] = settings.applications.keyboard_layout
+  [{settings.keys.alt, "F12"}] = settings.applications.keyboard_layout
 }
 
 function switch_screen(b)
