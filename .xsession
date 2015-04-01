@@ -27,6 +27,12 @@ xset r 108
 xscreensaver -nosplash &
 xset dpms 0 0 0
 xset s off
+case $HOST in
+  seb-debian)
+    xrandr --output VGA1 --auto --output DP1 --auto --left-of VGA1 ;;
+  centurion)
+    xrandr --output DVI-I-1 --auto --output HDMI-0 --auto --left-of DVI-I-1 ;;    
+esac
 
 # clipboard sync
 autocutsel -selection CLIPBOARD -fork
