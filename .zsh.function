@@ -290,7 +290,7 @@ keychain-init() {
 #  setopt localoptions xtrace
 
   if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] || [[ -n "$SSH_AUTH_SOCK" ]] ; then
-    source ${HOME}/.gnupg/gpg-agent-info-${HOSTNAME}
+    source ${HOME}/.gnupg/gpg-agent-info-${HOSTNAME} 2> /dev/null
     export GPG_AGENT_INFO
     export SSH_AUTH_SOCK
     return 1
