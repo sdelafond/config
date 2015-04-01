@@ -268,11 +268,11 @@ keychain-init-real() {
   unset SSH_AGENT_PID GPG_TTY
   pkill keychain
   pkill -9 keychain
-  rm -fr ~/.keychain/${HOST}-*
+  rm -fr ~/.keychain/${HOSTNAME}-*
   # start
   keychain --agents gpg --nogui --quiet --nocolor $GPG_KEY #`gpg --list-secret-keys | awk '/^sec/ { gsub(/.+\//, "", $2) ; print $2 }'`
 
-  local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
+  local SH_FILE="$HOME/.keychain/${HOSTNAME}-sh-gpg"
   if [ -f $SH_FILE ] ; then
     source $SH_FILE
   fi
@@ -289,14 +289,14 @@ keychain-init-real() {
 keychain-init() {
 #  setopt localoptions xtrace
 
-  if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] || [[ -n "$SSH_AUTH_SOCK" ]] ; then
+  if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] || [[ "$SSH_AUTH_SOCK" =~ ".*gpg.*" ]] ; then
     source ${HOME}/.gnupg/gpg-agent-info-${HOSTNAME} 2> /dev/null
     export GPG_AGENT_INFO
     export SSH_AUTH_SOCK
     return 1
   fi
   
-  local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
+  local SH_FILE="$HOME/.keychain/${HOSTNAME}-sh-gpg"
   if [ -f $SH_FILE ] ; then
     source $SH_FILE
     if [ -z "$SSH_AGENT_PID" ] || [ ! -d /proc/$SSH_AGENT_PID ] || ! grep -q gpg-agent /proc/$SSH_AGENT_PID/cmdline ; then
