@@ -3,8 +3,10 @@ send-hook '~f sdelafond@gmx\.net'	         "my_hdr From: Sébastien Delafond <sd
 
 send-hook '~f sdelafond@gmail\.com'	         "my_hdr From: Sébastien Delafond <sdelafond@gmail.com>"
 
-send-hook '~C @.*debian\.org' "set pgp_autosign ; my_hdr From: Sébastien Delafond <seb@debian.org>"
+#send-hook '~C @.*debian\.org' "set pgp_autosign ; my_hdr From: Sébastien Delafond <seb@debian.org>"
 send-hook '~t @bugs\.debian\.org' "unset pgp_autosign"
+
+send-hook '~t team@security\.debian\.org' "my_hdr Bcc: sdelafond@gmail.com"
 
 send-hook '~t buildd@ ~s build' "set pgp_autosign=yes indent_string='' edit_headers=yes editor='grab-changes.py' fast_reply=yes pgp_create_traditional=yes include=yes pgp_sign_as=seb@debian.org"
 
