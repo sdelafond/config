@@ -289,9 +289,12 @@ keychain-init-real() {
 keychain-init() {
 #  setopt localoptions xtrace
 
-  if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] || [[ "$SSH_AUTH_SOCK" =~ ".*/ssh-.*" ]] ; then
-    export SSH_AUTH_SOCK
-    return 1
+  if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] && [[ "$SSH_AUTH_SOCK" =~ ".*/ssh-.*" ]] ; then
+    broken=(${SSH_AUTH_SOCK}(N-@))
+    if (( ! ${#broken} )); then
+      export SSH_AUTH_SOCK
+      return 1
+    fi
   fi
   
   local SH_FILE="$HOME/.keychain/${HOSTNAME}-sh-gpg"
