@@ -291,7 +291,7 @@ keychain-init() {
 
   if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] || [[ "$SSH_AUTH_SOCK" =~ ".*/ssh-.*" ]] ; then
     broken=(${SSH_AUTH_SOCK}(N-@))
-    if (( ! ${#broken} )); then
+    if [[ -e $SSH_AUTH_SOCK ]] && (( ! ${#broken} )) ; then
       export SSH_AUTH_SOCK
       return 1
     fi
