@@ -12,6 +12,7 @@ source ~/.mutt-private/imap
 source ~/.mutt-private/msghooks
 source ~/.mutt-private/savehooks
 
+set abort_unmodified=no
 set autoedit=yes
 set beep_new=yes
 set bounce_delivered=no
