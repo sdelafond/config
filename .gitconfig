@@ -54,7 +54,7 @@
 #[push]
 #        default = upstream
 [push]
-	default = matching
+	default = current
 [url "git://git.debian.org/d-i/"]
 	insteadOf = git+ssh://git.debian.org/git/d-i/
 
