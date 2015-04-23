@@ -243,7 +243,40 @@ prefix argument."
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
-(package-initialize)
+(let ((package-list '(ace-jump-mode
+                      anything
+                      anything-git-files
+                      anything-ipython
+                      anything-show-completion
+                      async
+                      clojure-mode
+                      company
+                      dash
+                      epl
+                      git-commit-mode
+                      git-gutter
+                      gitconfig-mode
+                      gitignore-mode
+                      google-maps
+                      helm
+                      helm-projectile
+                      hydra
+                      ipython
+                      pkg-info
+                      projectile
+                      python-mode
+                      smartparens
+                      vcl-mode)))
+  (package-initialize)
+  ;; fetch the list of packages available
+  (unless package-archive-contents
+    (package-refresh-contents))
+  ;; install the missing packages
+  (dolist (package package-list)
+    (unless (package-installed-p package)
+      (package-install package))))
+
+ 
 
 ;; _____________________________________________________________________
 ;; Hooks
@@ -702,6 +735,9 @@ characters C1 and C2 belong to the same 'class'."
 ;; numbering
 (line-number-mode t)
 (column-number-mode t)
+
+;; Always ask for y/n keypress instead of typing out 'yes' or 'no'
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; narrowing
 (put 'narrow-to-region 'disabled nil)
