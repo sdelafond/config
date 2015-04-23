@@ -104,8 +104,8 @@ autoload -Uz vcs_info && {
   zstyle -e ':vcs_info:*' check-for-changes 'blacklisted-vcs-dir && reply=(false) || reply=(true)'
   zstyle ':vcs_info:*' stagedstr            "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
   zstyle ':vcs_info:*' unstagedstr          "%{${fg_bold[yellow]}%}⚡%{${fg_no_bold[default]}%}"
-  zstyle ':vcs_info:*' formats              "[%s%b%m%c%u]" "[%s%r]"
-  zstyle ':vcs_info:*' actionformats        "[%s%b%m|%a%c%u]" "[%s%r]"
+  zstyle ':vcs_info:*' formats              "[%s%b%m%c%u]" "%s%r"
+  zstyle ':vcs_info:*' actionformats        "[%s%b%m|%a%c%u]" "%s%r"
   zstyle ':vcs_info:svn*+set-message:*'     hooks symbol
   zstyle ':vcs_info:cvs*+set-message:*'     hooks symbol
   zstyle ':vcs_info:git-svn+set-message:*'  hooks symbol git-st git-stash git-untracked
@@ -388,7 +388,7 @@ typeset -xA extensions # this dictionary is also used by the lst() function
 extensions=()
 extensions[backup]="${literal}~ ${literal}# bak ${literal}svn-commit.tmp"
 extensions[docs]="calendar chm csv doc docx dvi emacs html ics odf ods odt org pdf pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xlsx xml"
-extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg ear exe gz img iso jar lzh ova pgdump rar rpm tar taz tgz udeb udf war xpi z zip"
+extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg ear exe gz img iso jar lzh ova pgdump qcow qcow2 rar rpm tar taz tgz udeb udf vmdk war xpi z zip"
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm wmv xvid yuv"
 extensions[audio]="au mp3 ogg ogv wav wma"
 extensions[pics]="bmp dng gif jpeg jpg pbm png ppm tga tif xbm xcf xpm"
@@ -472,8 +472,13 @@ if [[ ${#ec2_amis} -gt 0 ]] ; then
   path=($path ${ec2_amis[-1]}/bin)
 fi
 
+cb=~/.config-base
+
 # # makeflags
 # export MAKEFLAGS="-j$(grep -c '^processor\s:' /proc/cpuinfo)"
+
+# HOSTNAME
+export HOSTNAME=$(hostname -s)
 
 # short hostname
 export HOST_SHORT=${HOST/.*}
@@ -524,6 +529,8 @@ case $HOST_SHORT in
   *)
     [[ $TERM = screen* ]] || [[ -n "$TMUX" ]] && unset DISPLAY ;;
 esac
+
+GPG_KEY="DAF6CE93"
 
 # aliases for repositories
 typeset -A REPOSITORIES

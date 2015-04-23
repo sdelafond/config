@@ -223,6 +223,8 @@ awful.rules.rules = {
   { rule = { class = "URxvt", name = "demo-" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "recette-" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "qt-" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { class = "URxvt", name = "infra-" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { class = "URxvt", name = "deploy-" }, properties = { tag = getTagByShortcut("7") } },    
   { rule = { class = "URxvt", name = "ca.m" }, properties = { tag = getTagByShortcut("7") } },
 
   -- Home
@@ -359,7 +361,7 @@ settings.bindings.command = {
   [{settings.keys.super, "F1"}] = settings.applications.selection .. " gs",
   [{settings.keys.super_shift, "F1"}] = settings.applications.selection .. " gi",
   [{settings.keys.super_control, "F1"}] = settings.applications.selection .. " gm",
-  [{settings.keys.none, "F2"}] = settings.applications.keyboard_layout
+  [{settings.keys.alt, "F12"}] = settings.applications.keyboard_layout
 }
 
 function switch_screen(b)

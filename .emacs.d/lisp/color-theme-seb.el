@@ -32,6 +32,7 @@ widget, custom, latex, ediff."
      (info-node ((t (:foreground "yellow" :bold t :slant italic :italic t))))
      (info-menu-5 ((t (:underline t))))
      (info-xref ((t (:foreground "yellow" :bold t))))
+     (ace-jump-face-foreground ((t (:foreground "yellow" :bold t))))
      (diary-face ((t (:foreground "orange"))))
      (calendar-today-face ((t (:underline t))))
      (company-tooltip ((t (:background "color-249" :foreground "black"))))

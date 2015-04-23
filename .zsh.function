@@ -268,11 +268,11 @@ keychain-init-real() {
   unset SSH_AGENT_PID GPG_TTY
   pkill keychain
   pkill -9 keychain
-  rm -fr ~/.keychain/${HOST}-*
+  rm -fr ~/.keychain/${HOSTNAME}-*
   # start
-  keychain --agents gpg --nogui --quiet --nocolor `gpg --list-secret-keys | awk '/^sec/ { gsub(/.+\//, "", $2) ; print $2 }'`
+  keychain --agents gpg --nogui --quiet --nocolor $GPG_KEY #`gpg --list-secret-keys | awk '/^sec/ { gsub(/.+\//, "", $2) ; print $2 }'`
 
-  local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
+  local SH_FILE="$HOME/.keychain/${HOSTNAME}-sh-gpg"
   if [ -f $SH_FILE ] ; then
     source $SH_FILE
   fi
@@ -288,7 +288,16 @@ keychain-init-real() {
 
 keychain-init() {
 #  setopt localoptions xtrace
-  local SH_FILE="$HOME/.keychain/${HOST}-sh-gpg"
+
+  if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] || [[ "$SSH_AUTH_SOCK" =~ ".*/ssh-.*" ]] ; then
+    broken=(${SSH_AUTH_SOCK}(N-@))
+    if [[ -e $SSH_AUTH_SOCK ]] && (( ! ${#broken} )) ; then
+      export SSH_AUTH_SOCK
+      return 1
+    fi
+  fi
+  
+  local SH_FILE="$HOME/.keychain/${HOSTNAME}-sh-gpg"
   if [ -f $SH_FILE ] ; then
     source $SH_FILE
     if [ -z "$SSH_AGENT_PID" ] || [ ! -d /proc/$SSH_AGENT_PID ] || ! grep -q gpg-agent /proc/$SSH_AGENT_PID/cmdline ; then
@@ -360,7 +369,7 @@ pdb() {
   local extraOpts=""
   distribution=${distribution/-*} # remove -security, for instance
   [ $# -gt 0 ] && extraOpts="--debbuildopts '$@'"
-  pdebuild --pbuilder cowbuilder $=extraOpts --buildresult .. --auto-debsign -- --basepath /var/cache/pbuilder/${distribution}.cow
+  pdebuild --pbuilder cowbuilder $=extraOpts --buildresult .. --auto-debsign -- --basepath /var/cache/pbuilder/${distribution}.cow --hookdir /var/cache/pbuilder/hooks
   [ $? = 0 ] && lintian -viI $(ls ../*${version}*changes | grep -v _source.changes)
 }
 
@@ -370,7 +379,7 @@ pydoc-html() {
 }
 
 preexec() {
-#  setopt localoptions xtrace
+  # setopt localoptions xtrace
   set $=2
   local cmd
 
@@ -391,10 +400,7 @@ preexec() {
 #      2) export KRB5CCNAME=FILE:$krb5files[1] ; rm -f $krb5files[2,-1] ;;
 #    esac
 #  fi
-  case $cmd in
-    (connect|debsign|debuild|g|git|gitseb|gk|gpg|gpg2|rsync|run|scp|ssh|sshfs|svn|unison))
-      have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty ;;
-  esac
+  have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty
 }
 
 psc() {

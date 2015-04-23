@@ -14,10 +14,6 @@
 (setq load-path (cons (concat my-emacsd "/lisp") load-path))
 (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
 
-;; (setq load-path (cons "/usr/share/org-mode/lisp" load-path))
-;; (setq my-icicled (concat my-emacsd "icicles"))
-;; (setq load-path (cons my-icicled load-path))
-
 ;; _____________________________________________________________________
 ;; macros
 (defmacro make-interactive-fun (fn args)
@@ -204,6 +200,7 @@ prefix argument."
   (when (normal-backup-enable-predicate filename)
     (not (or (string-match "svn-commit" filename)
 	     (string-match "dwssap" filename)
+             (string-match "MSG" filename)
 	     (string-match "passwd" filename)
 	     (string-match "/tmp/dpep" filename)))))
 (setq backup-enable-predicate 'my-backup-enable-predicate)
@@ -211,8 +208,8 @@ prefix argument."
 (defun my-autoload (&rest modes)
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
-(my-autoload "id" "align" "company-mode" "git-commit-mode" "gitignore-mode"
-             "gitconfig-mode" "python-mode" "multi-mode" "org"
+(my-autoload "id" "ace-jump-mode" "align" "company-mode" "git-commit-mode" "gitignore-mode"
+             "gitconfig-mode" "helm" "projectile" "helm-projectile" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "ruby-electric" "gtags"
              "outdent" "vcl-mode")
 
@@ -220,7 +217,6 @@ prefix argument."
   "Add a call to FUN to each mode-hook listed in MODES-HOOKS."
   (loop for mode-hook in modes-hooks do
 	(add-hook mode-hook fun)))
-
 (add-function-to-hooks (make-fun 'set-fill-column 78) '(c-mode-hook lisp-mode-hook
                                                         emacs-lisp-mode-hook
                                                         html-mode-hook))
@@ -230,7 +226,6 @@ prefix argument."
   "Load GNU Global if available."
   (if (fboundp 'gtags-mode)
       (gtags-mode t)))
-
 (add-function-to-hooks 'load-gnu-global '(python-mode-hook java-mode-hook
                                           shell-mode-hook
                                           c-mode-hook lisp-mode-hook
@@ -280,11 +275,6 @@ prefix argument."
 
 ;; _____________________________________________________________________
 ;; Hooks
-(defun my-message-mode-hook ()
-  (setq message-beginning-of-line nil)
-  (turn-off-auto-fill))
-(add-hook 'message-mode-hook 'my-message-mode-hook)
-
 (defun my-org-mode-hook ()
 ;;   (require 'org-expiry)
 ;;   (org-expiry-insinuate)
@@ -295,7 +285,6 @@ prefix argument."
 ;;   (setq org-crypt-key "sdelafond@gmx.net")
 ;;   (add-hook 'before-save-hook 'org-encrypt-entries)
 
-;;  (require 'org-babel-init)
   (require 'ob-ruby)
   (require 'ob-python)
   (require 'ob-js)
@@ -329,10 +318,7 @@ prefix argument."
           ("~" "\\verb~%s~" t)
           ("@" "\\alert{%s}" nil)))
 
-;;   (org-babel-load-library-of-babel)
-
   ;; agenda
-  (setq org-agenda-files (directory-files "~/org" t "^[^.].*\\.todo$"))
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 7)
   (setq org-agenda-show-all-dates t)
@@ -344,7 +330,6 @@ prefix argument."
   (setq org-icalendar-store-UID t)
   (setq org-icalendar-use-deadline '(event-if-todo))
 ;; (setq org-icalendar-include-todo t)
-  (setq org-completion-use-ido t)
   (setq org-deadline-warning-days 0)
   (setq org-default-priority 67)
 ;; (setq org-fast-tag-selection-single-key 'expert)
@@ -384,34 +369,18 @@ prefix argument."
   ;;       				       (quote regexp) "<[^>\n]+>")))
   ;;       	  (org-agenda-overriding-header "Unscheduled TODO entries: ")))))
 
-  ;; tags
-  (setq org-tag-alist '((:startgroup . nil) ("@work" . ?w)
-			                    ("@home" . ?h)
-			                    ("@tel" . ?t)
-			                    ("@buy" . ?b)
-			(:endgroup . nil)
-			(:startgroup . nil) ("laptop" . ?l)
-			                    ("pc" . ?p)
-			(:startgroup . nil) ("jardin" . ?j)
-			                    ("maison" . ?m)
-			(:endgroup . nil)
-			(:endgroup . nil)
-			(:startgroup . nil) ("net" . ?n)
-			(:endgroup . nil)))
-
   ;; todo
   (setq org-todo-keywords
  	'((sequence "TODO(t)" "WAITING(w@/!)" "LATER(l@)" "|" "DONE(d!/@)" "CANCELED(c@)")))
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "light grey" :weight bold :background "red")
         	("LATER" :foreground "dark violet" :weight bold)
-        	("DONE" :foreground "color-36" :weight bold)
+        	("DONE" :foreground "dark green" :weight bold)
         	("WAITING" :foreground "dark orange" :weight bold)
         	("LATER" :foreground "light orange" :weight bold))))
 
   ;; links
-  (setq org-link-abbrev-alist
-        '(("debian-bug"   . "http://bugs.debian.org/%s")))
+  (setq org-link-abbrev-alist '(("debian-bug" . "http://bugs.debian.org/%s")))
 
   ;; *** entry :tag1:tag2: -> link #tag1,tag2#
   (defun org-convert-entry-to-irc ()
@@ -508,21 +477,60 @@ todo/all-time/additional-option-like keywords."
   (setq org-outline-path-complete-in-steps nil)
 
   (setq org-capture-templates
-        (quote
-          (("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox") "* TODO %?\n  DEADLINE: %t")
-           ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox") "* %?\n  %U")
-           ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox") "* TODO %? %U\n  Source: %u, %c\n  %i"))))
+        (quote (("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox")
+                 "* TODO %?\n  DEADLINE: %t")
+                ("l" "Link" entry (file+olp "~/org/home.todo" "URLs" "Inbox")
+                 "* %?\n  %U")
+                ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox")
+                 "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
   ;; bindings
   (define-key org-mode-map "\C-ca" 'org-agenda)
   (define-key org-mode-map "\C-cl" 'org-store-link)
   (define-key org-mode-map "\C-c/" 'org-sparse-tree)
+  (define-key org-mode-map "\C-c " 'nil)
   (define-key global-map "\C-cc" 'org-capture)
-  (define-key global-map "\C-c/" 'org-sparse-tree))
+  (define-key global-map "\C-c/" 'org-sparse-tree)
+  
+  (defun hot-expand (str)
+    "Expand org template."
+    (insert str)
+    (org-try-structure-completion))
+
+  (defhydra hydra-org-template (:color blue :hint nil)
+    "
+_c_enter  _q_uote    _L_aTeX:
+_l_atex   _e_xample  _i_ndex:
+_a_scii   _v_erse    _I_NCLUDE:
+_s_rc     ^ ^        _H_TML:
+_h_tml    ^ ^        _A_SCII:
+"
+    ("s" (hot-expand "<s"))
+    ("e" (hot-expand "<e"))
+    ("q" (hot-expand "<q"))
+    ("v" (hot-expand "<v"))
+    ("c" (hot-expand "<c"))
+    ("l" (hot-expand "<l"))
+    ("h" (hot-expand "<h"))
+    ("a" (hot-expand "<a"))
+    ("L" (hot-expand "<L"))
+    ("i" (hot-expand "<i"))
+    ("I" (hot-expand "<I"))
+    ("H" (hot-expand "<H"))
+    ("A" (hot-expand "<A"))
+    ("<" self-insert-command "ins")
+    ("o" nil "quit"))
+
+  (define-key org-mode-map "<"
+    (lambda () (interactive)
+      (if (looking-back "^")
+          (hydra-org-template/body)
+        (self-insert-command 1)))))  
 
 (add-hook 'org-load-hook 'my-org-mode-hook)
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
+;; flyspell
 (eval-after-load "flyspell" ;; yeah, we wish there was a flyspell-hook...
   '(progn
      (defun my-flyspell-ignore-uppercase (beg end &rest rest)
@@ -617,45 +625,12 @@ characters C1 and C2 belong to the same 'class'."
      (global-set-key "\C-ce" (make-interactive-fun 'change-dict "american"))
      (global-set-key "\C-c," 'flyspell-goto-next-error)))
 
-;; (defun my-recentf-mode-hook ()
-;;   (setq recentf-save-file (concat my-emacsd "recentf"))
-;;   (setq recentf-max-saved-items 500)
-;;   (setq recentf-max-menu-items 60)
-;;   (setq recentf-exclude '("/tmp/.*"))
-;;   (run-with-timer 60 60 t 'recentf-save-list)
-;;   (defun ido-from-recentf ()
-;;     (interactive)
-;;     (find-file
-;;      (ido-completing-read "Recentf open: "
-;; 			  (mapcar (lambda (path)
-;; 				    (expand-file-name path))
-;; 				  recentf-list)
-;; 			  nil t)))
-;;   (global-set-key "\C-xr\C-f" 
-;; 		  (if (fboundp 'icy-mode)
-;; 		      'icicle-recent-file
-;; 		    'ido-from-recentf)))
-;; (add-hook 'recentf-load-hook 'my-recentf-mode-hook)
-
-(defun my-ido-mode-hook ()
-  (ido-everywhere t)
-  (setq ido-enable-flex-matching t)
-  (setq ido-show-dot-for-dired t)
-  (setq ido-ignore-buffers '("^ " "^\\*.*"))
-  (setq ido-confirm-unique-completion nil)
-  (setq read-buffer-function 'ido-read-buffer)
-  (setq ido-default-buffer-method 'samewindow)
-;;      (setq ido-use-filename-at-point t)
-  (icomplete-mode 99))
-(add-hook 'ido-setup-hook 'my-ido-mode-hook)
-
-(defun my-iswitchb-mode-hook ()
-  (setq iswitchb-case t)
-  (setq iswitchb-buffer-ignore '("^ " "^\\*.*"))
-  (add-hook 'iswitchb-define-mode-map-hook
-	    '(lambda ()
-	       (define-key iswitchb-mode-map "\C-a" 'iswitchb-toggle-ignore))))
-(add-hook 'iswitchb-mode-hook 'my-iswitchb-mode-hook)
+(defun my-recentf-mode-hook ()
+  (setq recentf-save-file (concat my-emacsd "recentf"))
+  (setq recentf-max-saved-items 500)
+  (setq recentf-max-menu-items 60)
+  (setq recentf-exclude '("/tmp/.*")))
+(add-hook 'recentf-load-hook 'my-recentf-mode-hook)
 
 (defun my-align-hook ()
   (setq align-to-tab-stop nil)
@@ -732,6 +707,117 @@ characters C1 and C2 belong to the same 'class'."
                                       (server-edit)
                                   (kill-emacs))))
 
+;; ace-jump-mode
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; helm
+(setq
+ ;; open helm buffer in another window
+ helm-split-window-default-side 'other
+ ;; do not occupy whole other window
+ helm-split-window-in-side-p t)
+
+(helm-mode t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+
+(require 'helm-projectile)
+(defun helm-projectile-switch-buffer ()
+  "Use Helm instead of ido to switch buffer in projectile."
+  (interactive)
+  (helm :sources helm-source-projectile-buffers-list
+        :buffer "*helm projectile buffers*"
+        :prompt (projectile-prepend-project-name "Switch to buffer: ")))
+
+;; projectile
+(require 'projectile)
+(projectile-global-mode)
+;; Override some projectile keymaps
+(eval-after-load 'projectile
+  '(progn
+     (define-key projectile-command-map (kbd "b") 'helm-projectile-switch-buffer)
+     (define-key projectile-command-map (kbd "f") 'helm-projectile)
+     (define-key projectile-command-map (kbd "p") 'helm-projectile-switch-project)))
+
+;; utilities to resize windows
+;; inspired from http://www.emacswiki.org/emacs/WindowResize
+(defun win-position ()
+  "Return a tuple description the window position; the first element is the
+vertical position ('t', 'b' or 'm'), the second one is the horizontal
+position ('l', 'r', 'm')"
+    (let* ((fr-width (frame-width))
+           (fr-height (frame-height))
+           (win-edges (window-edges))
+           (win-x-min (nth 0 win-edges))
+           (win-y-min (nth 1 win-edges))
+           (win-x-max (nth 2 win-edges))
+           (win-y-max (nth 3 win-edges)))
+      (list
+       (cond
+        ((eq 0 win-y-min) "t")
+        ((eq (- fr-height 1) win-y-max) "b")
+        (t "m"))
+       (cond
+        ((eq 0 win-x-min) "l")
+        ((eq fr-width win-x-max) "r")
+        (t "m")))))
+
+(defun win-shift-vertical (arg)
+  (interactive)
+  (let ((pos (nth 0 (win-position))))
+    (enlarge-window
+     (cond
+      ((equal "t" pos) arg)
+      ((equal "b" pos) (- 0 arg))
+      ((equal "m" pos) arg)))))
+
+(defun win-shift-horizontal (arg)
+  (interactive)
+  (let ((pos (nth 1 (win-position))))
+    (enlarge-window-horizontally
+     (cond
+      ((equal "l" pos) arg)
+      ((equal "r" pos) (- 0 arg))
+      ((equal "m" pos) arg)))))
+
+;; window-switching hydra
+(global-set-key
+ (kbd "C-M-o")
+ (defhydra hydra-window (:color amaranth)
+   "window"
+   ("b" windmove-left)
+   ("n" windmove-down)
+   ("p" windmove-up)
+   ("f" windmove-right)
+   ("v" (lambda ()
+          (interactive)
+          (split-window-right)
+          (windmove-right))
+        "vert")
+   ("h" (lambda ()
+          (interactive)
+          (split-window-below)
+          (windmove-down))
+        "horz")
+   ;; ("t" transpose-frame "'")
+   ("o" delete-other-windows "one" :color blue)
+   ("d" delete-window "del")
+   ("P" (win-shift-vertical -1) "↑")
+   ("N" (win-shift-vertical 1) "↓")
+   ("F" (win-shift-horizontal 1) "→")
+   ("B" (win-shift-horizontal -1) "←")
+   ;; ("a" ace-window "ace")
+   ;; ("s" ace-swap-window "swap")
+   ;; ("d" ace-delete-window "del")
+   ;; ("i" ace-maximize-window "ace-one" :color blue)
+   ;; ("b" ido-switch-buffer "buf")
+   ;; ("m" headlong-bookmark-jump "bmk")
+   ("q" nil "cancel")))
+
 ;; numbering
 (line-number-mode t)
 (column-number-mode t)
@@ -747,6 +833,12 @@ characters C1 and C2 belong to the same 'class'."
 (require 'color-theme-seb)
 (color-theme-initialize)
 ;; (require 'color-theme-solarized)
+(global-font-lock-mode t)
+(setq font-lock-maximum-decoration t)
+(if (eq window-system nil)
+    (color-theme-console-seb)
+  ;;      (color-theme-solarized-dark)
+  (color-theme-gnome2))
 
 ;; paren matching
 (show-paren-mode t)
@@ -756,29 +848,13 @@ characters C1 and C2 belong to the same 'class'."
 ;; region highlighting
 (transient-mark-mode t)
 
+ ;; always "y or n"
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; auto-revert
 (global-auto-revert-mode t)
 (defalias 'auto-revert-handler 'my-auto-revert-handler)
 (setq global-auto-revert-mode-text " ARev")
-
-;; font-locking
-(global-font-lock-mode t)
-(setq font-lock-maximum-decoration t)
-
-(defun terminal-init-screen-256color ()
-  "Terminal initialization function for screen."
-  ;; use the xterm color initialization code.
-  (load "term/xterm")
-  (xterm-register-default-colors)
-  (tty-set-up-initial-frame-faces))
-
-  ;;; For GNU Emacs 21, use our own xterm-256color.el
-(if (= 21 emacs-major-version) (load "xterm-256color"))
-
-(if (eq window-system nil)
-    (color-theme-console-seb)
-  ;;      (color-theme-solarized-dark)
-  (color-theme-gnome2))
 
 ;; mode-line
 (defvar my-mode-line-coding-format
@@ -830,28 +906,6 @@ characters C1 and C2 belong to the same 'class'."
 ;; unique buffer names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
-
-;; buffer switching and more
-(if (require 'icicles nil t)
-    (progn
-      ;; custom-based values don't seem to take effect,
-      ;; so we define those here
-;;      (setq icicle-apropos-complete-keys '())
-;;      (setq icicle-apropos-prefix-keys '())
-;;      (setq icicle-apropos-complete-keys '([tab] [(control ?i)]))
-      (local-unset-key "\C-c/")
-      (setq icicle-menu-items-to-history-flag nil)
-      (setq icicle-apropos-complete-keys '([S-tab] [S-iso-lefttab] [backtab]))
-      (setq icicle-buffer-no-match-regexp "\\*")
-      (global-set-key [backtab] 'icicle-apropos-complete) ;; huh, shouldn't the above do that ?
-      (icy-mode)
-      ;; not sure why it doesn't work by default in a tty, but the following does
-      ;; the trick
-      (global-set-key "\C-cK" 'icicle-complete-keys)
-      )
-  (if (boundp 'ido-mode)
-      (ido-mode t)
-    (iswitchb-mode t)))
 
 ;; various variables
 (setq company-begin-commands '(self-insert-command))
@@ -951,71 +1005,22 @@ characters C1 and C2 belong to the same 'class'."
                                                                      (company-mode)))))
               auto-mode-alist))
 
-;; scrollwheel
-(defun up-slightly () (interactive) (scroll-up 5))
-(defun down-slightly () (interactive) (scroll-down 5))
-(defun up-one () (interactive) (scroll-up 1))
-(defun down-one () (interactive) (scroll-down 1))
-(defun up-a-lot () (interactive) (scroll-up))
-(defun down-a-lot () (interactive) (scroll-down))
-(global-set-key [mouse-4] 'down-slightly)
-(global-set-key [mouse-5] 'up-slightly)
-(global-set-key [S-mouse-4] 'down-one)
-(global-set-key [S-mouse-5] 'up-one)
-(global-set-key [C-mouse-4] 'down-a-lot)
-(global-set-key [C-mouse-5] 'up-a-lot)
 
 ;; FIXME: ???
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-
-;; (defun my-nxml-mode-hook ()
-;;   (nxml-delimiter-data-face ((nil (:foreground "LightGreen"))))
-;;   (nxml-delimiter-face ((t (:foreground "LightSalmon2" :weight bold))))
-;;   (nxml-name-face ((nil (:foreground "SkyBlue" :weight bold))))
-;;   (nxml-ref-face ((nil (:foreground "LavenderBlush")))))
-;; (add-hook 'nxml-mode-hook 'my-nxml-mode-hook)
-
-;; _____________________________________________________________________
-;; custom modes
-;; (defvar server-seb-mode-map
-;;   (let ((map (make-sparse-keymap)))
-;;     (define-key map "\C-xk"
-;;       '(lambda ()
-;; 	 (interactive)
-;; 	 (server-edit)))
-;;     map))
-;; (define-minor-mode server-seb-mode "Server")
-;; (add-hook 'server-visit-hook 'server-seb-mode)
+(put 'downcase-region 'disabled nil)
 
 (defun jsp-mode ()
   (interactive)
   (multi-mode 1 'html-mode '("<%" jde-mode) '("%>" html-mode)))
 
 (defun my-mutt-hook ()
-  (cl-flet ((make-html-mail ()
-                            (shell-command-on-region (point-min) (point-max)
-                                                     "python ~/bin/make-html-mail.py" t t))
-            (is-buffer-already-htmlized ()
-                                        "Check if the buffer has already been HTMLized"
-                                        (goto-char (point-min))
-                                        (re-search-forward "src=.*/c/image" nil t))
-            (is-buffer-to-htmlize ()
-                                  "Check if the buffer is a raw email needing HTMLization."
-                                  (goto-char (point-min))
-                                  (re-search-forward "^From: " nil t)
-                                  (and (re-search-forward "^From: " nil t) (re-search-forward "+sig+" nil t)))
-            (htmlize-and-exit ()
-                              (make-html-mail)
-                              (save-buffer)
-                              (server-edit)))
-    (if (is-buffer-already-htmlized) (server-edit))
-    (if (is-buffer-to-htmlize) (htmlize-and-exit) 
-      (progn 
-        (mail-mode)
-        (flyspell-mode)
-        (choose-dict-automatically)
-        (local-set-key "\C-ci" 'format-email-body)))))
+  (progn 
+    (mail-mode)
+    (flyspell-mode)
+    (choose-dict-automatically)
+    (local-set-key "\C-ci" 'format-email-body)))
 
 ;; _____________________________________________________________________
 ;; Custom-set
@@ -1029,7 +1034,6 @@ characters C1 and C2 belong to the same 'class'."
  '(jde-global-classpath (quote ("." "/usr/share/java/jde.jar" "/opt/tomcat/common/lib/servlet.jar" "/usr/share/java/junit.jar")))
  '(jde-jdk-registry (quote (("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun"))))
  '(load-home-init-file t t)
- '(org-agenda-files (quote ("/home/seb/org/home.todo" "/home/seb/org/move.todo")))
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
  '(safe-local-variable-values (quote ((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos) (buffer-file-coding-system-explicit utf-8-dos . utf-8-dos) (buffer-file-coding-system-explicit . utf-8-dos)))))
@@ -1051,5 +1055,3 @@ characters C1 and C2 belong to the same 'class'."
  '(org-special-keyword ((t (:inherit font-lock-keyword-face :foreground "color-45" :weight bold))))
  '(org-tag ((t (:foreground "color-208" :underline nil :weight bold))))
  '(org-warning ((t (:inherit font-lock-warning-face :foreground "color-250")))))
-
-(put 'downcase-region 'disabled nil)
