@@ -236,13 +236,13 @@ prefix argument."
     (require 'package)
   (load-file (concat my-emacsd "/23/package.el")))
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa" . "http://melpa.milkbox.net/packages/")))
+;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
 (let ((package-list '(ace-jump-mode
-                      anything
-                      anything-git-files
-                      anything-ipython
-                      anything-show-completion
+                      ;; anything
+                      ;; anything-git-files
+                      ;; anything-ipython
+                      ;; anything-show-completion
                       async
                       clojure-mode
                       company
@@ -252,16 +252,17 @@ prefix argument."
                       git-gutter
                       gitconfig-mode
                       gitignore-mode
-                      google-maps
+                      ;; google-maps
                       helm
                       helm-projectile
                       hydra
-                      ipython
+                      ;; ipython
                       pkg-info
                       projectile
-                      python-mode
+                      ;; python-mode
                       smartparens
-                      vcl-mode)))
+                      ;; vcl-mode
+		      )))
   (package-initialize)
   ;; fetch the list of packages available
   (unless package-archive-contents
@@ -299,7 +300,7 @@ prefix argument."
 
   (require 'org-protocol)
 
-  (require 'ox-confluence)
+;;  (require 'ox-confluence)
   (require 'ox-beamer)
   (require 'ox-md)
 

@@ -1,5 +1,5 @@
 recentf
 run-*.el
-elpa
+elpa/
 projectile-bookmarks.eld
 **/*.elc
