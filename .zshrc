@@ -297,7 +297,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 # completion styles
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 typeset -U otherHosts
-otherHosts=($(awk '/;(connect|run|ssh) [a-z][^@]+$/ {print $3}' ~/.zsh_history | grep -vE '(esg|ps-|c-5)' | sort -u) $_hosts)
+otherHosts=($(awk '/;(co|connect|run|ssh) [a-z][^@]+$/ {print $3}' ~/.zsh_history | grep -vE '(esg|ps-|c-5)' | sort -u) $_hosts)
 zstyle '*' hosts $otherHosts
 zstyle ':completion:*:processes' command 'ps h -u ${USER} --forest -o pid,cmd'
 zstyle ':completion:*:processes-names' command 'ps -u ${USER} -o command'
