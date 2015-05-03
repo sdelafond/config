@@ -1050,7 +1050,9 @@ position ('l', 'r', 'm')"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(helm-selection ((t (:background "color-241" :distant-foreground "black"))))
+ '(helm-ff-symlink ((t (:foreground "color-33"))))
+ '(helm-match ((t (:foreground "color-83"))))
+ '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
  '(org-checkbox-statistics-todo ((t (:foreground "color-177"))) t)
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))
