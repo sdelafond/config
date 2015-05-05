@@ -696,6 +696,11 @@ characters C1 and C2 belong to the same 'class'."
 (add-hook 'jde-mode-hook 'my-jde-mode-hook)
 ;;(setq global-senator-minor-mode t) ; fix from Debian's BTS
 
+(defun my-puppet-mode-hook ()
+  ((define-key map "\C-j" 'newline))
+  ((define-key map "\C-m" 'newline)))
+(add-hook 'puppet-mode-hook 'my-puppet-mode-hook)
+
 ;; _____________________________________________________________________
 ;; General preferences
 
@@ -884,6 +889,8 @@ position ('l', 'r', 'm')"
 		  0))
 
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1)) ;; no toolbar
+;; no electric-indent-mode
+(if (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
 ;; recentf
 (unless (eq (user-uid) 0) ;; not when sudoed
@@ -1039,6 +1046,7 @@ position ('l', 'r', 'm')"
  '(load-home-init-file t t)
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
+ '(puppet-indent-level 4)
  '(safe-local-variable-values
    (quote
     ((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos)
