@@ -1053,6 +1053,8 @@ position ('l', 'r', 'm')"
  '(helm-ff-symlink ((t (:foreground "color-33"))))
  '(helm-match ((t (:foreground "color-83"))))
  '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
+ '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
+ '(hydra-face-red ((t (:foreground "color-136" :weight bold))))
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
  '(org-checkbox-statistics-todo ((t (:foreground "color-177"))) t)
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))
