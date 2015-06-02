@@ -319,6 +319,9 @@ prefix argument."
           ("~" "\\verb~%s~" t)
           ("@" "\\alert{%s}" nil)))
 
+  ;; clock
+  (setq org-clock-clocktable-default-properties '(:maxlevel 5))
+
   ;; agenda
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 7)
