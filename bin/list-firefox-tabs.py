@@ -1,12 +1,16 @@
 import glob, json, os, sys
 
 sessionStoreGlobPath = ".mozilla/firefox/*default/sessionstore.js"
+sessionStoreGlobPath2 = ".mozilla/firefox/*default/sessionstore-backups/recovery.js"
 homePath = os.getenv('HOME')
 try:
   sessionStorePath = glob.glob(os.path.join(homePath, sessionStoreGlobPath))[0]
 except:
-  print >> sys.stderr, "Could not find your Firefox session store, aborting."
-  sys.exit(1)
+  try:
+    sessionStorePath = glob.glob(os.path.join(homePath, sessionStoreGlobPath2))[0]
+  except:
+    print >> sys.stderr, "Could not find your Firefox session store, aborting."
+    sys.exit(1)
 
 sessionData = json.load(open(sessionStorePath))
 
