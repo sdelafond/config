@@ -45,8 +45,8 @@ color body        yellow       default   "[;:][-]?[)/(|>\\]+"
 
 #  diff
 color body magenta default "^@@ .* @@$"
-color body red default '^-.*'
-color body green default '^\+.*'
+color body red default '^- .*'
+color body green default '^\+ .*'
 color body color133 default '^--- .*'
 color body color133 default '^\+\+\+ .*'
 #color body magenta default '^[ +-](===|---|\+\+\+|@@|Index:) .*' # diff-in-diff
