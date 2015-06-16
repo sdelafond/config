@@ -238,12 +238,13 @@ prefix argument."
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 ;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
-(let ((package-list '(ace-jump-mode
+(let ((package-list '(ace-window
                       ;; anything
                       ;; anything-git-files
                       ;; anything-ipython
                       ;; anything-show-completion
                       async
+                      avy
                       clojure-mode
                       company
                       dash
@@ -716,8 +717,17 @@ characters C1 and C2 belong to the same 'class'."
                                       (server-edit)
                                   (kill-emacs))))
 
-;; ace-jump-mode
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+;; ace-window/avy
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+(setq aw-background nil)
+;;(csetq aw-flip-keys '("n" "ν"))
+;;(add-to-list 'aw-dispatch-alist '(?ν aw-flip-window))
+
+(avy-setup-default)
+(setq avy-all-windows nil)
+(setq avy-styles-alist '((avy-goto-char-2 . post)))
+(define-key global-map (kbd "C-c SPC") 'avy-goto-line)
+(define-key global-map (kbd "M-n") 'avy-goto-char-2)
 
 ;; helm
 (setq
@@ -992,6 +1002,7 @@ position ('l', 'r', 'm')"
                                                                      (company-mode))))
 		("^/tmp/mutt"                         . my-mutt-hook)
 		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
+		("\.jsx"                              . js-mode)
 		("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
                                                                      (git-commit-mode)
                                                                      (flyspell-mode)
