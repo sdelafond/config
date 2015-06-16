@@ -1072,6 +1072,7 @@ position ('l', 'r', 'm')"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(avy-lead-face ((t (:background "color-21" :foreground "white"))))
  '(helm-ff-symlink ((t (:foreground "color-33"))))
  '(helm-match ((t (:foreground "color-83"))))
  '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
