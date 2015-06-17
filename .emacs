@@ -995,7 +995,7 @@ position ('l', 'r', 'm')"
 		("\\.properties$" 		      . conf-mode)
 		("rules" 		      	      . makefile-mode)
 		("diff$" 		      	      . diff-mode)
-		("/\.mutt/" 		      	      . muttrc-mode)
+		("/\.mutt" 		      	      . muttrc-mode)
 		("\\.vcl$" 		      	      . vcl-mode)
 		("\\.\\(el|clj\\)$"                   . (lambda () (progn
                                                                      (lisp-mode)
