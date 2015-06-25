@@ -263,6 +263,7 @@ awful.rules.rules = {
   { rule = { class = "feh" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
   { rule = { class = "Geeqie" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
   { rule = { class = "Geeqie", name = "Move - Geeqie" }, properties = { tag = getTagByShortcut("F1"), floating = true, focus = true } },
+  { rule = { class = "vlc" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true, floating = true } },
   { rule = { class = "Vlc" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true, floating = true },
     -- callback = function(c) 
     --              if awful.client.focus.filter(c) then
@@ -746,7 +747,7 @@ client.add_signal("unfocus", function(c)
 			     end)
 -- Manage hook
 function manage_client(c)
-  my_debug(string.format("Managing: name = '%s', class = '%s' instance = '%s'", c.name or "", c.class or "", c.instance or ""))
+  my_debug(string.format("Managing: name = '%s', class = '%s', instance = '%s'", c.name or "", c.class or "", c.instance or ""))
 
   -- Add bindings
   c:buttons(clientbuttons)
