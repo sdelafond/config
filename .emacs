@@ -210,7 +210,7 @@ prefix argument."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
 (my-autoload "id" "ace-jump-mode" "align" "company-mode" "git-commit-mode" "gitignore-mode"
              "gitconfig-mode" "helm" "projectile" "helm-projectile" "python-mode" "multi-mode" "org"
-             "time-stamp" "pf-mode" "ruby-mode" "ruby-electric" "gtags"
+             "time-stamp" "pf-mode" "ruby-mode" "gtags"
              "outdent" "vcl-mode")
 
 (defun add-function-to-hooks (fun modes-hooks)
@@ -301,7 +301,7 @@ prefix argument."
 
   (require 'org-protocol)
 
-;;  (require 'ox-confluence)
+  (require 'ox-confluence)
   (require 'ox-beamer)
   (require 'ox-md)
 
@@ -650,13 +650,13 @@ characters C1 and C2 belong to the same 'class'."
   (setq left-margin 2))
 (add-hook 'change-log-mode-hook 'my-change-log-hook)
 
-(defun my-ruby-mode-hook ()
-  (local-set-key "\r" 'newline-and-indent)
-  (outline-minor-mode)
-  (define-key outline-minor-mode-map "\C-c\C-e" 'outline-toggle-children)
-  (define-key outline-minor-mode-map "\C-c\C-a" 'hide-body)
-  (setq outline-regexp " *\\(def \\|class\\|module\\|#.*Main\\)"))
-(add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
+;; (defun my-ruby-mode-hook ()
+;;   ;; (local-set-key "\r" 'newline-and-indent)
+;;   (outline-minor-mode)
+;;   (define-key outline-minor-mode-map "\C-c\C-e" 'outline-toggle-children)
+;;   (define-key outline-minor-mode-map "\C-c\C-a" 'hide-body)
+;;   (setq outline-regexp " *\\(def \\|class\\|module\\|#.*Main\\)"))
+;; (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
 (defun my-python-mode-hook ()
   (local-set-key "\r" 'newline)
@@ -700,10 +700,13 @@ characters C1 and C2 belong to the same 'class'."
 (add-hook 'jde-mode-hook 'my-jde-mode-hook)
 ;;(setq global-senator-minor-mode t) ; fix from Debian's BTS
 
-(defun my-puppet-mode-hook ()
-  ((define-key map "\C-j" 'newline))
-  ((define-key map "\C-m" 'newline)))
-(add-hook 'puppet-mode-hook 'my-puppet-mode-hook)
+(defun my-no-electric-indent-hook ()
+  (local-set-key (kbd "C-j") 'newline)
+  (local-set-key (kbd "C-m") 'newline))
+(add-hook 'puppet-mode-hook (lambda () (electric-indent-local-mode -1)))
+(add-hook 'puppet-mode-hook 'my-no-electric-indent-hook)
+(add-hook 'ruby-mode-hook (lambda () (electric-indent-local-mode -1)))
+(add-hook 'ruby-mode-hook 'my-no-electric-indent-hook)
 
 ;; _____________________________________________________________________
 ;; General preferences
@@ -1089,4 +1092,5 @@ position ('l', 'r', 'm')"
  '(org-link ((((class color) (background dark)) (:foreground "color-69" :underline t))))
  '(org-special-keyword ((t (:inherit font-lock-keyword-face :foreground "color-45" :weight bold))))
  '(org-tag ((t (:foreground "color-208" :underline nil :weight bold))))
- '(org-warning ((t (:inherit font-lock-warning-face :foreground "color-250")))))
+ '(org-warning ((t (:inherit font-lock-warning-face :foreground "color-250"))))
+ '(show-paren-match ((t (:background "color-236")))))
