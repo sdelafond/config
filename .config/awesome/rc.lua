@@ -58,7 +58,7 @@ settings.applications = { ["terminal"]        = 'xterm-screen',
                           ["mpc_pause"]       = 'mpc toggle' }
 
 -- layouts, depending on host
-if env.host == "x230" then
+if env.host == "x230" or env.host == "x1" then
   settings.default_layout = awful.layout.suit.max
   settings.ut_layout = awful.layout.suit.tile
   settings.hp_tag = "1"
@@ -197,6 +197,7 @@ awful.rules.rules = {
   { rule = { name = "seb-debian" }, properties = { tag = getTagByShortcut(settings.mp_tag) } },
   { rule = { name = "mp" }, properties = { tag = getTagByShortcut(settings.mp_tag) } },
   { rule = { name = "x230" }, properties = { tag = getTagByShortcut("1") } },
+  { rule = { name = "x1" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
   { rule = { class = "Iceweasel" }, properties = { tag = getTagByShortcut("2") } },
