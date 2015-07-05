@@ -11,7 +11,11 @@
 ########################################################################
 
 AMIXER_OPTS_MUTE_=""
-AMIXER_OPTS_VOLUME="-c 0"
+if [[ $(hostname -s) == "x1" ]] ; then
+  AMIXER_OPTS_VOLUME="-c 1"
+else
+  AMIXER_OPTS_VOLUME="-c 0"
+fi
 
 if amixer | grep -E '^Simple.*Master' ; then
   MIXER=Master
