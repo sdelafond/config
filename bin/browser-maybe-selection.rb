@@ -1,5 +1,6 @@
 #! /usr/bin/ruby
 
+require 'shellwords'
 require 'uri'
 
 #ENV['DISPLAY'] = ':'
@@ -22,7 +23,7 @@ if ARGV[0] == nil or ARGV[0] == "default" then
   when rhttp
     URI::extract(selection, urlSchemes).each { |url|
       url.gsub!(/\.$/, '')
-      system("#{browser} '#{url}'")
+      system("#{browser} #{url.shellescape}")
     }
   end
 elsif ARGV[0] == 'gs' then
