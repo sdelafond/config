@@ -18,7 +18,6 @@ selection = ARGV[1] == nil ? `xclip -o` : ARGV[1]
 selection.gsub!(/\n\+/m, '')
 
 if ARGV[0] == nil or ARGV[0] == "default" then
-  selection.gsub!(/^\+/m, '')
   case selection
   when rhttp
     URI::extract(selection, urlSchemes).each { |url|
