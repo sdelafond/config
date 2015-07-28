@@ -54,6 +54,7 @@ settings.applications = { ["terminal"]        = 'xterm-screen',
 			  ["selection"]       = os.getenv("HOME") .. '/bin/browser-maybe-selection.rb',
 			  ["keyboard_layout"] = os.getenv("HOME") .. '/bin/keyboard-layout.sh',
 			  ["volume"]          = os.getenv("HOME") .. '/bin/volume.sh',
+			  ["backlight"]       = "xbacklight ",
                           ["killgkrellm"]     = 'pkill gkrellm',
                           ["mpc_pause"]       = 'mpc toggle' }
 
@@ -352,6 +353,8 @@ settings.bindings.client = {
 settings.bindings.command = {
   [{settings.keys.none, "XF86AudioRaiseVolume"}] = settings.applications.volume .. " up",
   [{settings.keys.none, "XF86AudioLowerVolume"}] = settings.applications.volume .. " down",
+  [{settings.keys.none, "XF86MonBrightnessUp"}] = settings.applications.backlight .. " -inc 10",
+  [{settings.keys.none, "XF86MonBrightnessDown"}] = settings.applications.backlight .. "-dec 10",
   [{settings.keys.super, "Up"}] = settings.applications.volume .. " up",
   [{settings.keys.super, "Down"}] = settings.applications.volume .. " down",
   [{settings.keys.none, "XF86AudioMute"}] = settings.applications.volume .. " mute",
