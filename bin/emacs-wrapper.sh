@@ -45,7 +45,7 @@ isInTmux() {
 }
 
 isParentShell() {
-  [[ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]] && [[ "$1" != /tmp/zshecl* ]]
+  [[ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]] && [[ "$1" != /tmp/zsh* ]]
 }
 
 runEmacsClient() {
