@@ -765,6 +765,9 @@ characters C1 and C2 belong to the same 'class'."
      (define-key projectile-command-map (kbd "f") 'helm-projectile)
      (define-key projectile-command-map (kbd "p") 'helm-projectile-switch-project)))
 
+;; hydras
+(global-set-key (kbd "C-M-k") 'hydra-pause-resume)
+
 ;; utilities to resize windows
 ;; inspired from http://www.emacswiki.org/emacs/WindowResize
 (defun win-position ()
