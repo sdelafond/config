@@ -277,6 +277,7 @@ awful.rules.rules = {
   { rule = { class = "guvcview" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
   { rule = { class = "Xitk" }, properties = { tag = getTagByShortcut("F1"), switchtotag = true } },
   { rule = { class = "MPlayer" }, properties = { tag = getTagByShortcut("F1"), floating = true, switchtotag = true } },
+  { rule = { class = "mplayer2" }, properties = { tag = getTagByShortcut("F1"), floating = true, switchtotag = true } },
 
   -- Sound
   { rule = { class = "esperanza" }, properties = { tag = getTagByShortcut("F2") } },
