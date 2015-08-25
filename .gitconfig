@@ -15,8 +15,11 @@
         d = diff
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
         g = grep
+	ma = merge --abort
         p = pull
 	pr = pull --rebase
+	ra = rebase --abort
+	rh = reset --hard
 	st = status
         stat = status	
 [branch]
