@@ -159,10 +159,14 @@ prefix argument."
   (interactive)
   (insert (concat "Sébastien Delafond <" my-email ">")))
 
-(defun insert-sig ()
+(defun insert-sig-fr ()
   (interactive)
   (insert (concat "Bien cordialement," "\n\n" "--SD")))
-(global-set-key "\C-cs" 'insert-sig)
+(global-set-key "\C-cs" 'insert-sig-fr)
+(defun insert-sig-en ()
+  (interactive)
+  (insert (concat "Cheers," "\n\n" "--Seb")))
+(global-set-key "\C-cS" 'insert-sig-en)
 
 (defun system-short-name ()
   (car (split-string system-name "\\.")))
