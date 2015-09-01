@@ -69,7 +69,6 @@ autoload -Uz vcs_info && {
       --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
 
     if [[ -n "${remote}" ]] && [[ ! $remote =~ (origin|alioth)/${hook_com[branch]} ]] && [[ ! $remote =~ refs/heads ]] ; then
-      echo $remote
       hook_com[branch]="${hook_com[branch]}→${remote}"
     fi
   }
