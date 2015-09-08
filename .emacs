@@ -179,7 +179,7 @@ prefix argument."
   "Open URL"
   (interactive (browse-url-interactive-arg "URL: "))
   (let ((cmd "~/bin/browser-maybe-selection.rb"))
-    (start-process (concat cmd url) "*Messages*" cmd "default" url)))
+    (start-process (concat cmd " default " url) "*Messages*" cmd "default" url)))
 
 (defun paste-and-shift (arg)
   (interactive)
