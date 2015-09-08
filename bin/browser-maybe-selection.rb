@@ -12,7 +12,7 @@ browser = $?.exitstatus == 0 ? "iceweasel" : "chromium"
 
 rhttp = URI.regexp(urlSchemes)
 
-selection = ARGV[1] == nil ? `xclip -o` : ARGV[1]
+selection = ARGV[1] == nil ? `xclip -o` : ARGV[1].dup
 
 # handle mutt wrap markers
 selection.gsub!(/\n\+/m, '')

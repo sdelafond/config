@@ -59,18 +59,30 @@ settings.applications = { ["terminal"]        = 'xterm-screen',
                           ["mpc_pause"]       = 'mpc toggle' }
 
 -- layouts, depending on host
-if env.host == "x230" or env.host == "x1" then
+if env.host == "x230" then
+  my_debug("X230")
   settings.default_layout = awful.layout.suit.max
-  settings.ut_layout = awful.layout.suit.tile
+  settings.ut_layout = awful.layout.suit.tile.right
   settings.hp_tag = "1"
   settings.centurion_tag = "4"
   settings.mp_tag = "7"
   settings.nic = "wlan0"
   settings.nic_unit = "b"
   settings.nic_autoscale = true
-elseif env.host == "centurion" then
-  settings.default_layout = awful.layout.suit.tile
-  settings.ut_layout = awful.layout.suit.tile
+elseif env.host == "x1" then
+  my_debug("X1")
+  settings.default_layout = awful.layout.suit.tile.right
+  settings.ut_layout = awful.layout.suit.tile.right
+  settings.hp_tag = "1"
+  settings.centurion_tag = "4"
+  settings.mp_tag = "7"
+  settings.nic = "wlan0"
+  settings.nic_unit = "b"
+  settings.nic_autoscale = true
+elseif env.host == "centurion" or env.host == "x1" then
+  my_debug("CENTURION")
+  settings.default_layout = awful.layout.suit.tile.right
+  settings.ut_layout = awful.layout.suit.tile.right
   settings.hp_tag = "4"
   settings.mp_tag = "7"
   settings.centurion_tag = "1"
@@ -78,8 +90,8 @@ elseif env.host == "centurion" then
   settings.nic_unit = "mb"
   settings.nic_autoscale = false
 elseif env.host == "seb-debian" or env.host == "mp" then
-  settings.default_layout = awful.layout.suit.tile
-  settings.ut_layout = awful.layout.suit.tile
+  settings.default_layout = awful.layout.suit.tile.right
+  settings.ut_layout = awful.layout.suit.tile.right
   settings.hp_tag = "4"
   settings.mp_tag = "1"
   settings.centurion_tag = "4"
@@ -87,8 +99,8 @@ elseif env.host == "seb-debian" or env.host == "mp" then
   settings.nic_unit = "mb"
   settings.nic_autoscale = false
 else
-  settings.default_layout = awful.layout.suit.tile
-  settings.ut_layout = awful.layout.suit.tile
+  settings.default_layout = awful.layout.suit.tile.right
+  settings.ut_layout = awful.layout.suit.tile.right
   settings.hp_tag = "4"
   settings.mp_tag = "7"
   settings.centurion_tag = "4"
