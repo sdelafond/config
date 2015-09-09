@@ -15,6 +15,7 @@ bind  pager   <up>     previous-line
 bind  pager   <down>   next-line
 bind  pager   <left>   exit
 bind  pager   <right>  view-attachments
+bind  pager   *        bottom
 bind  attach  <left>   exit
 bind  attach  <right>  view-attach
 bind  index   <right>  display-message
