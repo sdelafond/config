@@ -954,6 +954,7 @@ position ('l', 'r', 'm')"
 (setq lua-indent-level 2)
 (setq ruby-indent-level 2)
 (setq sh-basic-offset 2)
+(setq sh-indentation 2)
 (setq standard-indent 2)
 (setq tab-width 4)
 (setq vc-follow-symlinks t)
