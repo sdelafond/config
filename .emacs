@@ -327,6 +327,9 @@ prefix argument."
   ;; clock
   (setq org-clock-clocktable-default-properties '(:maxlevel 5 :narrow 80!))
 
+  ;; speed commands
+  (setq org-use-speed-commands t)
+
   ;; agenda
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 7)
