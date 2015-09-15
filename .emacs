@@ -325,6 +325,7 @@ prefix argument."
           ("@" "\\alert{%s}" nil)))
 
   ;; clock
+  (setq org-clock-into-drawer nil)
   (setq org-clock-clocktable-default-properties '(:maxlevel 5 :narrow 80!))
 
   ;; speed commands
