@@ -327,6 +327,9 @@ prefix argument."
   ;; clock
   (setq org-clock-clocktable-default-properties '(:maxlevel 5 :narrow 80!))
 
+  ;; speed commands
+  (setq org-use-speed-commands t)
+
   ;; agenda
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 7)
@@ -954,6 +957,7 @@ position ('l', 'r', 'm')"
 (setq lua-indent-level 2)
 (setq ruby-indent-level 2)
 (setq sh-basic-offset 2)
+(setq sh-indentation 2)
 (setq standard-indent 2)
 (setq tab-width 4)
 (setq vc-follow-symlinks t)
