@@ -7,8 +7,8 @@
 ;; custom path
 (setq my-home (expand-file-name (concat "~" (or (getenv "SUDO_USER") (getenv "USER")))))
 (setq my-emacsd (concat my-home "/.emacs.d/"))
-(loop for file in (directory-files my-emacsd nil "run.*")
-      do (load-file (concat my-emacsd file)))
+(loop for file in (directory-files my-emacsd t "run.*")
+      do (load-file file))
 (setq auto-save-list-file-prefix my-emacsd)
 (setq user-emacs-directory my-emacsd)
 (setq load-path (cons (concat my-emacsd "/lisp") load-path))
