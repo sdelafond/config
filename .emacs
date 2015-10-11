@@ -928,6 +928,7 @@ position ('l', 'r', 'm')"
 ;;(require 'git-gutter)
 (when (fboundp 'global-git-gutter-mode)
   (global-git-gutter-mode t)
+  (setq git-gutter:disabled-modes '(org-mode))
   (setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
   (setq git-gutter:modified-sign "⚡")
   (set-face-foreground 'git-gutter:modified "cyan")
