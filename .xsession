@@ -34,6 +34,10 @@ case $HOST in
     xrandr --output DVI-I-1 --auto --output HDMI-0 --auto --left-of DVI-I-1 ;;    
 esac
 
+# systray
+pasystray &
+blueman-applet &
+
 # clipboard sync
 autocutsel -selection CLIPBOARD -fork
 autocutsel -selection PRIMARY -fork
