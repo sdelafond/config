@@ -11,9 +11,9 @@ libnet-ldap-perl
 lua-mode
 mutt
 org-mode
-remember-el
 ruby
 sudo
+tmux
 xclip
 zsh
 EOF
