@@ -55,6 +55,7 @@ do
     what=$places[$i]
     [[ -n $noalias && $what = *" is an alias "* ]] && continue
     builtin print -r $what
+    echo MEH $what
     case $what in
     (*( is an alias for (noglob|nocorrect))*)
 	[[ ${what[(w)7]:t} != ${what[(w)1]} ]] &&
