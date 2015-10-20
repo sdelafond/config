@@ -53,7 +53,7 @@ settings.applications = { ["terminal"]        = 'xterm-screen',
 			  ["screen_off"]      = 'sh -c "sleep 1 ; xset dpms force off"',
 			  ["selection"]       = os.getenv("HOME") .. '/bin/browser-maybe-selection.rb',
 			  ["keyboard_layout"] = os.getenv("HOME") .. '/bin/keyboard-layout.sh',
-			  ["volume"]          = os.getenv("HOME") .. '/bin/volume.sh',
+			  ["volume"]          = os.getenv("HOME") .. '/bin/pulse-volume.sh',
 			  ["backlight"]       = "xbacklight ",
                           ["killgkrellm"]     = 'pkill gkrellm',
                           ["mpc_pause"]       = 'mpc toggle' }
