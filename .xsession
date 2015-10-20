@@ -35,8 +35,8 @@ case $HOST in
 esac
 
 # systray
-pasystray &
-blueman-applet &
+pasystray > /dev/null 2>&1 &
+blueman-applet > /dev/null 2>&1 &
 
 # clipboard sync
 autocutsel -selection CLIPBOARD -fork
