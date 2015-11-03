@@ -15,6 +15,7 @@
 
 if [ -n "$TMUX" ] ; then
   MARKER=$(echo $TMUX | awk -F, '{print $2$3}')
+  export TERM="screen-256color" # tmux-256color freaks out emacs
 else
   MARKER=$STY
 fi
