@@ -77,6 +77,10 @@ connect() { # pops an ssh windows if under x, or simple ssh if not
   local host=$argv[-1]
   xpop "ssh -Y $*" "$host"
 }
+connect-mosh() {
+  local host=$argv[-1]
+  xpop "mosh $*" "$host"
+}
 
 cp-other() {
   tar cf - "$1" | (cd $2 ; tar xfp -)
