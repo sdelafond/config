@@ -15,7 +15,7 @@ case $TERM in
   rxvt*|xterm*)
     TITLE_ESCAPE_BEGIN="\e]0;"
     TITLE_ESCAPE_END="\a" ;;
-  sun*|vt*|screen*|linux)
+  sun*|vt*|screen*|tmux*|linux)
     TITLE_ESCAPE_BEGIN="\ek"
     TITLE_ESCAPE_END="\e\\" ;;
 esac
@@ -23,7 +23,7 @@ esac
 setTerminalTitle() {
 #  setopt localoptions xtrace
   case $TERM in
-    rxvt*|xterm*|screen*)
+    rxvt*|xterm*|screen*|tmux*)
       title="$1"
       if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY$TMUX" ]] ; then
         title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
@@ -36,7 +36,7 @@ setTerminalTitle() {
           fi
         fi
       fi
-      if [[ $TERM != screen* ]] ; then
+      if [[ $TERM != (screen|tmux)* ]] ; then
         title="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       fi
 
