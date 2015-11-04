@@ -9,7 +9,7 @@ else # default for older terminals
 fi
 
 PROMPT=$'${PSEXTRA}%F{green}%80<...<%~%f%(?..%B%F{red} !%?%b%f) # '
-RPROMPT=$'[%B%F{'${usernameColor}'}%n%f%b %B%S%F{'${hostColor}'}'${hostnicks[$HOST_SHORT]:-$HOST_SHORT}$'%f%s%b]'
+RPROMPT=$'[%B%F{'${usernameColor}'}%n%f%b %B%U%F{'${hostColor}'}'${hostnicks[$HOST_SHORT]:-$HOST_SHORT}$'%f%u%b]'
 
 case $TERM in
   rxvt*|xterm*)
