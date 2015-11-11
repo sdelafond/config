@@ -309,6 +309,8 @@ prefix argument."
   (require 'ox-beamer)
   (require 'ox-md)
 
+  (setq org-ellipsis "⤵")
+
   ;; LaTeX
   (require 'ox-latex)
   (setq org-export-latex-listings t)
