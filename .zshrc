@@ -25,6 +25,7 @@ is4 && autoload -U colors && colors
 autoload -U url-quote-magic && zle -N self-insert url-quote-magic
 autoload -U select-word-style && select-word-style bash
 autoload run-help && alias run-help > /dev/null && unalias run-help
+autoload run-help-git
 
 # vcs-info
 autoload -Uz vcs_info && {
