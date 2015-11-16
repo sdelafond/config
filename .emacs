@@ -239,9 +239,9 @@ prefix argument."
 (if (>= emacs-major-version 24) 
     (require 'package)
   (load-file (concat my-emacsd "/23/package.el")))
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 ;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+			 ("melpa-stable" . "https://melpa-stable.milkbox.net/packages/")))
 (let ((package-list '(ace-window
                       ;; anything
                       ;; anything-git-files
@@ -309,7 +309,7 @@ prefix argument."
   (require 'ox-beamer)
   (require 'ox-md)
 
-  (setq org-ellipsis "⤵")
+  (setq org-ellipsis " ▼")
 
   ;; LaTeX
   (require 'ox-latex)
