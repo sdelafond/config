@@ -235,10 +235,17 @@ prefix argument."
                                           c-mode-hook lisp-mode-hook
                                           emacs-lisp-mode-hook))
 
-;; ELPA
+;; ELPA/MELPA
 (if (>= emacs-major-version 24) 
     (require 'package)
   (load-file (concat my-emacsd "/23/package.el")))
+(setq tls-checktrust t)
+(setq gnutls-verify-error t)
+(let ((trustfile "/etc/ssl/certs/ca-certificates.crt"))
+  (setq gnutls-trustfiles (list trustfile))
+  (setq tls-program
+        (list
+         (format "gnutls-cli --x509cafile %s -p %%p %%h" trustfile))))
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 ;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("melpa-stable" . "https://melpa-stable.milkbox.net/packages/")))
