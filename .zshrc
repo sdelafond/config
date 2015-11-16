@@ -24,7 +24,10 @@ autoload -U compinit && compinit
 is4 && autoload -U colors && colors 
 autoload -U url-quote-magic && zle -N self-insert url-quote-magic
 autoload -U select-word-style && select-word-style bash
-autoload run-help && alias run-help > /dev/null && unalias run-help
+autoload run-help
+autoload run-help-git
+autoload run-help-sudo
+autoload run-help-s
 
 # vcs-info
 autoload -Uz vcs_info && {
@@ -296,7 +299,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 # completion styles
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 typeset -U otherHosts
-otherHosts=($(awk '/;(co||com|connect|connect-mosh|run|ssh) [a-z][^@]+$/ {print $3}' ~/.zsh_history | grep -vE '(esg|ps-|c-5)' | sort -u) $_hosts)
+otherHosts=($(awk '/;(co|com|connect|connect-mosh|run|ssh) [a-z][^@]+$/ && !/(esg|ps|c-5)/ {print $3}' ~/.zsh_history | sort -u) $_hosts)
 zstyle '*' hosts $otherHosts
 zstyle ':completion:*:processes' command 'ps h -u ${USER} --forest -o pid,cmd'
 zstyle ':completion:*:processes-names' command 'ps -u ${USER} -o command'
@@ -311,7 +314,7 @@ zstyle ':completion:*' file-sort name
 zstyle ':completion:*' menu select=long
 
 # completion for some custom functions
-compdef _connect-run connect run
+compdef _connect-run co com connect connect-mosh run
 compdef _hosts dig digs
 compdef '_deb_packages expl uninstalled' i
 compdef '_deb_packages expl installed' rp
