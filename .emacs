@@ -783,8 +783,7 @@ characters C1 and C2 belong to the same 'class'."
      (define-key projectile-command-map (kbd "f") 'helm-projectile)
      (define-key projectile-command-map (kbd "p") 'helm-projectile-switch-project)))
 
-;; hydras
-(global-set-key (kbd "C-M-k") 'hydra-pause-resume)
+;;;; hydras
 
 ;; utilities to resize windows
 ;; inspired from http://www.emacswiki.org/emacs/WindowResize
@@ -860,6 +859,53 @@ position ('l', 'r', 'm')"
    ;; ("b" ido-switch-buffer "buf")
    ;; ("m" headlong-bookmark-jump "bmk")
    ("q" nil "cancel")))
+
+;; search hydra
+(global-set-key 
+ (kbd "C-M-l")
+ (defhydra hydra-search (:color blue :hint nil)
+   "
+Current Buffer : _s_earch _n_: avy-goto-char-2
+Multiple Buffers : helm-multi-_S_woop
+Project Directory: projectile-_g_rep helm-projectile-_G_rep
+"
+  ("s" isearch-forward)
+  ;; ("space" avy-goto-line)
+  ("n" avy-goto-char-2)
+  ;; ("h" helm-swoop)
+  ("S" helm-multi-swoop)
+  ("g" helm-projectile-grep)
+  ("G" projectile-grep)))
+
+;; git-gutter
+(global-set-key
+ (kbd "C-M-g")
+ (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1) :hint nil)
+  "
+Git gutter:
+  _n_: next hunk        _s_tage hunk     _q_uit
+  _p_: previous hunk    _r_evert hunk    _Q_uit and deactivate git-gutter
+  ^ ^                   _p_opup hunk
+  _a_: first hunk
+  _e_: last hunk        set start _R_evision
+"
+  ("n" git-gutter:next-hunk)
+  ("p" git-gutter:previous-hunk)
+  ("a" (progn (goto-char (point-min))
+              (git-gutter:next-hunk 1)))
+  ("e" (progn (goto-char (point-min))
+              (git-gutter:previous-hunk 1)))
+  ("s" git-gutter:stage-hunk)
+  ("r" git-gutter:revert-hunk)
+  ("p" git-gutter:popup-hunk)
+  ("R" git-gutter:set-start-revision)
+  ("q" nil :color blue)
+  ("Q" (progn (git-gutter-mode -1)
+              ;; git-gutter-fringe doesn't seem to
+              ;; clear the markup right away
+              (sit-for 0.1)
+              (git-gutter:clear))
+       :color blue)))
 
 ;; numbering
 (line-number-mode t)
