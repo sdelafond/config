@@ -828,7 +828,7 @@ position ('l', 'r', 'm')"
 
 ;; window-switching hydra
 (global-set-key
- (kbd "C-M-o")
+ (kbd "M-o")
  (defhydra hydra-window (:color amaranth)
    "window"
    ("b" windmove-left)
@@ -862,24 +862,26 @@ position ('l', 'r', 'm')"
 
 ;; search hydra
 (global-set-key 
- (kbd "C-M-l")
+ (kbd "M-k")
  (defhydra hydra-search (:color blue :hint nil)
    "
-Current Buffer : _s_earch _n_: avy-goto-char-2
+Current Buffer : _s_earch-forward sea_r_ch-backward _n_: avy-goto-char-2 _h_elm-occur-from-isearch
 Multiple Buffers : helm-multi-_S_woop
-Project Directory: projectile-_g_rep helm-projectile-_G_rep
+Project Directory: projectile-_g_rep _f_: helm-projectile-grep
 "
+  ("r" isearch-backward)
   ("s" isearch-forward)
+  ("h" helm-occur-from-isearch)
   ;; ("space" avy-goto-line)
   ("n" avy-goto-char-2)
   ;; ("h" helm-swoop)
   ("S" helm-multi-swoop)
-  ("g" helm-projectile-grep)
-  ("G" projectile-grep)))
+  ("f" helm-projectile-grep)
+  ("g" projectile-grep)))
 
 ;; git-gutter
 (global-set-key
- (kbd "C-M-g")
+ (kbd "C-M-d")
  (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1) :hint nil)
   "
 Git gutter:
