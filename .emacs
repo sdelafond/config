@@ -1007,6 +1007,7 @@ Git gutter:
 (setq indent-tabs-mode nil)
 (setq browse-url-browser-function 'my-browse-url-tab)
 (setq case-fold-search t)
+(setq echo-keystrokes 0.1)
 (setq ids-creator-id "seb")
 (setq inhibit-startup-message t)
 (setq line-move-visual nil) 
