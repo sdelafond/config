@@ -865,17 +865,17 @@ position ('l', 'r', 'm')"
  (kbd "M-k")
  (defhydra hydra-search (:color blue :hint nil)
    "
-Current Buffer : _s_earch-forward sea_r_ch-backward _n_: avy-goto-char-2 _h_elm-occur-from-isearch
-Multiple Buffers : helm-multi-_S_woop
+Current Buffer : i_s_earch-forward isea_r_ch-backward _n_: avy-goto-char-2 _h_elm-occur-from-isearch i_S_earch-forward-egex isea_R_ch-backward-regex
 Project Directory: projectile-_g_rep _f_: helm-projectile-grep
 "
   ("r" isearch-backward)
   ("s" isearch-forward)
+  ("S" isearch-forward-regexp)
+  ("R" isearch-backward-regexp)
   ("h" helm-occur-from-isearch)
   ;; ("space" avy-goto-line)
   ("n" avy-goto-char-2)
   ;; ("h" helm-swoop)
-  ("S" helm-multi-swoop)
   ("f" helm-projectile-grep)
   ("g" projectile-grep)))
 
