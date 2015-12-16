@@ -1052,54 +1052,55 @@ Git gutter:
 ;; associate file patterns and modes
 (setq auto-mode-alist 
       (append '(("\\.texi$" 		      	      . texi-outline)
-		("\\.[jp]y$" 		      	      . python-mode)
-		("\\.emacs" 		      	      . lisp-mode)
-		("\\.rb$" 		      	      . (lambda () (progn
-                                                                     (ruby-mode)
-                                                                     (company-mode))))
-		("Capfile" 		      	      . (lambda () (progn
-                                                                     (ruby-mode)
-                                                                     (company-mode))))
-		("Rakefile" 		      	      . (lambda () (progn
-                                                                     (ruby-mode)
-                                                                     (company-mode))))
-		("\\.pp$" 		      	      . (lambda () (progn
-                                                                     (puppet-mode)
-                                                                     (company-mode))))
-		("pf\\.conf" 		      	      . pf-mode)
-		("\\.properties$" 		      . conf-mode)
-		("rules" 		      	      . makefile-mode)
-		("diff$" 		      	      . diff-mode)
-		("/\.mutt" 		      	      . muttrc-mode)
-		("\\.vcl$" 		      	      . vcl-mode)
-		("\\.\\(el|clj\\)$"                   . (lambda () (progn
+                ("\\.[jp]y$" 		      	      . python-mode)
+                ("\\.emacs" 		      	      . lisp-mode)
+                ("\\.rb$" 		      	      . (lambda () (progn
+                                                           (ruby-mode)
+                                                           (company-mode))))
+                ("Capfile" 		      	      . (lambda () (progn
+                                                           (ruby-mode)
+                                                           (company-mode))))
+                ("Rakefile" 		      	      . (lambda () (progn
+                                                             (ruby-mode)
+                                                             (company-mode))))
+                ("\\.pp$" 		      	      . (lambda () (progn
+                                                           (puppet-mode)
+                                                           (company-mode))))
+                ("pf\\.conf" 		      	      . pf-mode)
+                ("\\.properties$" 		      . conf-mode)
+                ("rules" 		      	      . makefile-mode)
+                ("diff$" 		      	      . diff-mode)
+                ("/\.mutt" 		      	      . muttrc-mode)
+                ("/\.md$" 		      	      . markdown-mode)
+                ("\\.vcl$" 		      	      . vcl-mode)
+                ("\\.\\(el|clj\\)$"                   . (lambda () (progn
                                                                      (lisp-mode)
                                                                      (company-mode))))
-		("^/tmp/mutt"                         . my-mutt-hook)
-		("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
-		("\.jsx"                              . js-mode)
-		("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
-                                                                     (git-commit-mode)
-                                                                     (flyspell-mode)
-                                                                     (remove-hook 'kill-buffer-query-functions
-                                                                                  'git-commit-kill-buffer-noop t))))
-		("\\.org$"                            . (lambda () (progn
+                ("^/tmp/mutt"                         . my-mutt-hook)
+                ("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
+                ("\.jsx"                              . js-mode)
+                ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
+                                                                                 (git-commit-mode)
+                                                                                 (flyspell-mode)
+                                                                                 (remove-hook 'kill-buffer-query-functions
+                                                                                              'git-commit-kill-buffer-noop t))))
+                ("\\.org$"                            . (lambda () (progn
                                                                      (org-mode)
-                                                                     ;(flyspell-mode)
+                                        ;(flyspell-mode)
                                                                      )))
-		("\\.\\(todo\\|csv\\)$"               . org-mode)
-		("\\.jsp$" 		      	      . (lambda () (progn
-                                                                     (jsp-mode)
-                                                                     (company-mode))))
-		("\\.html$" 		      	      . (lambda () (progn
-                                                                     (html-mode)
-                                                                     (company-mode))))
-		("\\.xml$" 		      	      . (lambda () (progn
-                                                                     (xml-mode)
-                                                                     (company-mode))))
-		("\\.z" 		      	      . (lambda () (progn
-                                                                     (sh-mode)
-                                                                     (company-mode)))))
+                ("\\.\\(todo\\|csv\\)$"               . org-mode)
+                ("\\.jsp$" 		      	      . (lambda () (progn
+                                                           (jsp-mode)
+                                                           (company-mode))))
+                ("\\.html$" 		      	      . (lambda () (progn
+                                                             (html-mode)
+                                                             (company-mode))))
+                ("\\.xml$" 		      	      . (lambda () (progn
+                                                           (xml-mode)
+                                                           (company-mode))))
+                ("\\.z" 		      	      . (lambda () (progn
+                                                         (sh-mode)
+                                                         (company-mode)))))
               auto-mode-alist))
 
 
