@@ -16,6 +16,7 @@
         d = diff
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
         g = grep
+	l1 = log --pretty=oneline
 	l = log
 	lo = log
 	m = merge
