@@ -14,6 +14,7 @@
         commit = commit --verbose
         cp = cherry-pick
         d = diff
+        dc = diff --cached
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
         g = grep
 	l1 = log --pretty=oneline
