@@ -38,7 +38,7 @@ widget, custom, latex, ediff."
      (company-tooltip ((t (:background "color-249" :foreground "black"))))
      (makefile-space-face ((t (:background "hotpink"))))
      (holiday-face ((t (:background "red"))))
-     (show-paren-match-face ((t (:foreground "black" :background "color-33"))))
+     (show-paren-match-face ((t (:foreground "black" :background "color-154"))))
      (show-paren-mismatch-face ((t (:foreground "white" :background "red"))))
      (flyspell-duplicate ((t (:foreground "color-81" :bold nil :weight normal))))
      (flyspell-incorrect ((t (:foreground "color-150" :bold nil :weight normal))))
