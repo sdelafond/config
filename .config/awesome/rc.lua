@@ -76,7 +76,7 @@ elseif env.host == "x1" then
   settings.hp_tag = "1"
   settings.centurion_tag = "4"
   settings.mp_tag = "7"
-  settings.nic = "wlan0"
+  settings.nic = "wlp4s0"
   settings.nic_unit = "b"
   settings.nic_autoscale = true
 elseif env.host == "centurion" or env.host == "x1" then
