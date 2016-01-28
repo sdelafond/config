@@ -283,8 +283,9 @@ keychain-init-real() {
 
   export GPG_TTY=`tty`
   local key
-  for key in ~/.ssh/*.[dr]sa(DN) ; do
-    ssh-add -l | G -q $(basename $key) || ssh-add $key 2DN
+  for key in $(awk '/IdentityFile/ {gsub(/~/,"'${HOME}'",$2);print $2}' ~/.ssh/config | S -u) ; do
+    [[ -f $key ]] || continue
+    ssh-add -l | G -q $(basename $key) || ssh-add $key
   done
 #  rename -f "s|/S.gpg|/${HOST}-S.gpg|" ~/.gnupg/S*(=)
 #  perl -i -pe "s|/S.gpg|/${HOST}-S.gpg|" "$HOME/.keychain/${HOST}-sh-gpg"

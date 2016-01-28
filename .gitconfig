@@ -26,6 +26,7 @@
 	pr = pull --rebase
 	r = rebase
 	ra = rebase --abort
+	rc = rebase --continue
 	rh = reset --hard
 	s = status
 	st = status
