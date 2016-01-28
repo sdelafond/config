@@ -6,6 +6,9 @@ awesome
 awesome-extra
 emacs-goodies-el
 emacs23-nox
+gnupg-agent
+gnupg2
+keychain
 lbdb
 libnet-ldap-perl
 lua-mode
