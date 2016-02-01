@@ -1,11 +1,13 @@
 #! /bin/sh
 
 xargs echo sudo apt-get install --yes <<EOF 
+aspell-en
 aspell-fr
 awesome
 awesome-extra
 emacs-goodies-el
 emacs23-nox
+emacs24-nox
 gnupg-agent
 gnupg2
 keychain
