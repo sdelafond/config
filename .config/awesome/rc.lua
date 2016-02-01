@@ -229,6 +229,7 @@ awful.rules.rules = {
   { rule = { name = "metalof" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "seb.dev" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "seb.jessie" }, properties = { tag = getTagByShortcut("3") } },
 
   -- M
   { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
