@@ -319,6 +319,8 @@ prefix argument."
 
   (setq org-ellipsis " ▼")
 
+  (toggle-word-wrap)
+
   ;; LaTeX
   (require 'ox-latex)
   (setq org-export-latex-listings t)
