@@ -319,6 +319,8 @@ prefix argument."
 
   (setq org-ellipsis " ▼")
 
+  (toggle-word-wrap)
+
   ;; LaTeX
   (require 'ox-latex)
   (setq org-export-latex-listings t)
@@ -859,7 +861,8 @@ position ('l', 'r', 'm')"
    ;; ("i" ace-maximize-window "ace-one" :color blue)
    ;; ("b" ido-switch-buffer "buf")
    ;; ("m" headlong-bookmark-jump "bmk")
-   ("q" nil "cancel")))
+   ("q" nil "cancel")
+   ("k" nil "cancel")))
 
 ;; search hydra
 (global-set-key 
