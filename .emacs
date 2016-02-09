@@ -1079,6 +1079,7 @@ Git gutter:
                                                                      (company-mode))))
                 ("^/tmp/mutt"                         . my-mutt-hook)
                 ("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
+                ("DSA-"                               . flyspell-mode)
                 ("\.jsx"                              . js-mode)
                 ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
                                                                                  (git-commit-mode)
