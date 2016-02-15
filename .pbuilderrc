@@ -1,1 +1,4 @@
+unset DISPLAY
+unset XAUTHORITY
+
 HOOKDIR=/var/cache/pbuilder/hooks
