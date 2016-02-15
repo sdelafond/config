@@ -19,16 +19,18 @@ keysym c = c C ccedilla Ccedilla
 keysym z = z Z guillemotleft
 keysym x = x X guillemotright
 
-keycode 22 = NoSymbol
 keycode 107 = Pointer_Button2
-keycode 135 = Pointer_Button2
 keycode 133 = Super_L
+keycode 134 = Pointer_Button2
+keycode 135 = Pointer_Button2
 keycode 160 = XF86AudioMute
 keycode 174 = XF86AudioLowerVolume
 keycode 176 = XF86AudioRaiseVolume
 
 keycode 105 = Multi_key
 keycode 166 = Multi_key
+keycode 191 = Mode_switch
+keycode 192 = Multi_key
 keycode 229 = XF86Search
 
 keycode 34 = parenleft braceleft
