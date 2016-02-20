@@ -274,7 +274,7 @@ keychain-init-real() {
   pkill -9 keychain
   rm -fr ~/.keychain/${HOSTNAME}-*
   # start
-  if gpg --list-secret-keys | G '^sec.*'$GPG_KEY ; then
+  if gpg --list-secret-keys | G -q '^sec.*'$GPG_KEY ; then
     keychain --agents gpg --nogui --quiet --nocolor $GPG_KEY
   else
     keychain --agents ssh --nogui --quiet --nocolor
@@ -286,11 +286,11 @@ keychain-init-real() {
   fi
 
   export GPG_TTY=`tty`
-  local key
-  for key in $(awk '/IdentityFile/ {gsub(/~/,"'${HOME}'",$2);print $2}' ~/.ssh/config | S -u) ; do
-    [[ -f $key ]] || continue
-    ssh-add -l | G -q $(basename $key) || ssh-add $key
-  done
+  # local key
+  # for key in $(awk '/IdentityFile/ {gsub(/~/,"'${HOME}'",$2);print $2}' ~/.ssh/config | S -u) ; do
+  #   [[ -f $key ]] || continue
+  #   ssh-add -l | G -q $(basename $key) || ssh-add $key
+  # done
 #  rename -f "s|/S.gpg|/${HOST}-S.gpg|" ~/.gnupg/S*(=)
 #  perl -i -pe "s|/S.gpg|/${HOST}-S.gpg|" "$HOME/.keychain/${HOST}-sh-gpg"
 }

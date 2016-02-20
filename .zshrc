@@ -486,6 +486,9 @@ export HOSTNAME=$(hostname -s)
 export HOST_SHORT=${HOST/.*}
 
 # let's make sure our TERM is known to the system
+if [[ $TERM == tmux-256color ]] && [[ ! -f /usr/share/terminfo/t/tmux-256color ]] ; then
+  export TERM="screen-256color"
+fi
 infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}
 
 # to be handily copied to remote machines
