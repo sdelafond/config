@@ -1072,6 +1072,7 @@ Git gutter:
                                                            (puppet-mode)
                                                            (company-mode))))
                 ("pf\\.conf" 		      	      . pf-mode)
+                ("\\.md" 		      	      . markdown-mode)
                 ("\\.properties$" 		      . conf-mode)
                 ("rules" 		      	      . makefile-mode)
                 ("diff$" 		      	      . diff-mode)
