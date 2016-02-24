@@ -319,6 +319,8 @@ prefix argument."
 
   (setq org-ellipsis " ▼")
 
+  (toggle-word-wrap)
+
   ;; LaTeX
   (require 'ox-latex)
   (setq org-export-latex-listings t)
@@ -762,6 +764,7 @@ characters C1 and C2 belong to the same 'class'."
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x ,") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
@@ -859,7 +862,8 @@ position ('l', 'r', 'm')"
    ;; ("i" ace-maximize-window "ace-one" :color blue)
    ;; ("b" ido-switch-buffer "buf")
    ;; ("m" headlong-bookmark-jump "bmk")
-   ("q" nil "cancel")))
+   ("q" nil "cancel")
+   ("k" nil "cancel")))
 
 ;; search hydra
 (global-set-key 
@@ -1068,6 +1072,7 @@ Git gutter:
                                                            (puppet-mode)
                                                            (company-mode))))
                 ("pf\\.conf" 		      	      . pf-mode)
+                ("\\.md" 		      	      . markdown-mode)
                 ("\\.properties$" 		      . conf-mode)
                 ("rules" 		      	      . makefile-mode)
                 ("diff$" 		      	      . diff-mode)
@@ -1079,6 +1084,7 @@ Git gutter:
                                                                      (company-mode))))
                 ("^/tmp/mutt"                         . my-mutt-hook)
                 ("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
+                ("DSA-"                               . flyspell-mode)
                 ("\.jsx"                              . js-mode)
                 ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
                                                                                  (git-commit-mode)

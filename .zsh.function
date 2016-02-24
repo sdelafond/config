@@ -274,19 +274,23 @@ keychain-init-real() {
   pkill -9 keychain
   rm -fr ~/.keychain/${HOSTNAME}-*
   # start
-  keychain --agents gpg --nogui --quiet --nocolor $GPG_KEY #`gpg --list-secret-keys | awk '/^sec/ { gsub(/.+\//, "", $2) ; print $2 }'`
+  if gpg --list-secret-keys | G -q '^sec.*'$GPG_KEY ; then
+    keychain --agents gpg --nogui --quiet --nocolor $GPG_KEY
+  else
+    keychain --agents ssh --nogui --quiet --nocolor
+  fi
 
-  local SH_FILE="$HOME/.keychain/${HOSTNAME}-sh-gpg"
+  local SH_FILE=$(echo $HOME/.keychain/${HOSTNAME}-sh*)
   if [ -f $SH_FILE ] ; then
     source $SH_FILE
   fi
 
   export GPG_TTY=`tty`
-  local key
-  for key in $(awk '/IdentityFile/ {gsub(/~/,"'${HOME}'",$2);print $2}' ~/.ssh/config | S -u) ; do
-    [[ -f $key ]] || continue
-    ssh-add -l | G -q $(basename $key) || ssh-add $key
-  done
+  # local key
+  # for key in $(awk '/IdentityFile/ {gsub(/~/,"'${HOME}'",$2);print $2}' ~/.ssh/config | S -u) ; do
+  #   [[ -f $key ]] || continue
+  #   ssh-add -l | G -q $(basename $key) || ssh-add $key
+  # done
 #  rename -f "s|/S.gpg|/${HOST}-S.gpg|" ~/.gnupg/S*(=)
 #  perl -i -pe "s|/S.gpg|/${HOST}-S.gpg|" "$HOME/.keychain/${HOST}-sh-gpg"
 }
@@ -294,7 +298,7 @@ keychain-init-real() {
 keychain-init() {
 #  setopt localoptions xtrace
 
-  if [[ -z $(echo ~/.ssh/*.[dr]sa(DN)) ]] || [[ "$SSH_AUTH_SOCK" =~ ".*/ssh-.*" ]] ; then
+  if [[ -z "$(echo ~/.ssh/*.[dr]sa(DN))" ]] || [[ "$SSH_AUTH_SOCK" =~ ".*ssh/ssh-.*" ]] ; then
     broken=(${SSH_AUTH_SOCK}(N-@))
     if [[ -e $SSH_AUTH_SOCK ]] && (( ! ${#broken} )) ; then
       export SSH_AUTH_SOCK
@@ -302,10 +306,10 @@ keychain-init() {
     fi
   fi
   
-  local SH_FILE="$HOME/.keychain/${HOSTNAME}-sh-gpg"
+  local SH_FILE=$(echo $HOME/.keychain/${HOSTNAME}-sh*)
   if [ -f $SH_FILE ] ; then
     source $SH_FILE
-    if [ -z "$SSH_AGENT_PID" ] || [ ! -d /proc/$SSH_AGENT_PID ] || ! grep -q gpg-agent /proc/$SSH_AGENT_PID/cmdline ; then
+    if [ -z "$SSH_AGENT_PID" ] || [ ! -d /proc/$SSH_AGENT_PID ] || ! grep -qE '(gpg|ssh)-agent' /proc/$SSH_AGENT_PID/cmdline ; then
       keychain-init-real
     fi
   else
@@ -405,7 +409,7 @@ preexec() {
 #      2) export KRB5CCNAME=FILE:$krb5files[1] ; rm -f $krb5files[2,-1] ;;
 #    esac
 #  fi
-  have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty
+  have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty 2> /dev/null
 }
 
 psc() {

@@ -1,6 +1,6 @@
 # default list of header fields to weed when displaying
 ignore *
-unignore  From: Subject: To: Cc: Date: Delivery-date: Reply-To: Organization: X-Mailer: User-Agent: X-Originating-IP:
+unignore  From: Subject: To: Cc: Date: Delivery-date: Reply-To: Organization: X-Mailer: User-Agent: X-Originating-IP: Message-ID:
 
 unhdr_order *
-hdr_order From: Subject: To: Cc: Date: Delivery-date: Reply-To: Organization: X-Mailer: User-Agent: X-Originating-IP:
+hdr_order From: Subject: To: Cc: Date: Delivery-date: Reply-To: Organization: X-Mailer: User-Agent: X-Originating-IP: Message-ID:
