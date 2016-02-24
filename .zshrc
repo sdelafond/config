@@ -394,7 +394,7 @@ extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg ear exe 
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm wmv xvid yuv"
 extensions[audio]="au mp3 ogg ogv wav wma"
 extensions[pics]="bmp dng gif jpeg jpg pbm png ppm tga tif xbm xcf xpm"
-extensions[code]="${literal}Makefile a bash c c++ class cpp diff el elz hs jacl java js jy ko lua o out patch pl pm py pyc pyo rb sh so sql tcl zsh"
+extensions[code]="${literal}Makefile a bash c c++ class cpp diff el elz h hs jacl java js jy ko lua o out patch pl pm py pyc pyo rb sh so sql tcl zsh"
 
 # add the uppercase extensions too
 for key in ${(k)extensions[@]} ; do
@@ -486,6 +486,9 @@ export HOSTNAME=$(hostname -s)
 export HOST_SHORT=${HOST/.*}
 
 # let's make sure our TERM is known to the system
+if [[ $TERM == tmux-256color ]] && [[ ! -f /usr/share/terminfo/t/tmux-256color ]] ; then
+  export TERM="screen-256color"
+fi
 infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}
 
 # to be handily copied to remote machines
