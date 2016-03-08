@@ -218,6 +218,7 @@ awful.rules.rules = {
   { rule = { class = "Opera" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Konqueror" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Chromium" }, properties = { tag = getTagByShortcut("2") } },
+  { rule = { class = "chromium" }, properties = { tag = getTagByShortcut("2") } },
 
   -- workstation at UT
   { rule = { name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
