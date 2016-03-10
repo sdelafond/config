@@ -96,7 +96,7 @@ autoload -Uz vcs_info && {
   function blacklisted-vcs-dir() {
     local d
     local -a blacklisted_dirs
-    blacklisted_dirs=( "dd-wrt/src" "dd-wrt/firmware-mod-kit" "src/router" "kernel" )
+    blacklisted_dirs=( "dd-wrt/src" "dd-wrt/firmware-mod-kit" "src/router" "kernel" "dd-wrt-github")
     for d in ${blacklisted_dirs}; do
       [[ ${PWD}/ == */${d}/* ]] && return 0
     done
@@ -110,7 +110,7 @@ autoload -Uz vcs_info && {
   zstyle ':vcs_info:*' actionformats        "[%s%b %m|%a%c%u]" "%s%r"
   zstyle ':vcs_info:svn*+set-message:*'     hooks symbol
   zstyle ':vcs_info:cvs*+set-message:*'     hooks symbol
-  zstyle ':vcs_info:git-svn+set-message:*'  hooks symbol git-st git-stash git-untracked
+  zstyle ':vcs_info:git-svn+set-message:*'  hooks symbol git-st git-stash git-untracked git-localname
   zstyle ':vcs_info:git+set-message:*'      hooks symbol git-st git-stash git-untracked git-remotebranch git-localname
 
   vcs_stuff() {
@@ -391,7 +391,7 @@ extensions=()
 extensions[backup]="${literal}~ ${literal}# bak ${literal}svn-commit.tmp"
 extensions[debian]="build changes dsc ${literal}changelog ${literal}control ${literal}rules ${literal}compat ${literal}config ${literal}copyright ${literal}dirs ${literal}files ${literal}watch ${literal}postinst ${literal}postrm ${literal}preinst ${literal}prerm postinst preinst postrm prerm links ${literal}links ${literal}docs docs ${literal}templates templates"
 extensions[docs]="calendar chm conf csv doc docx dvi emacs html ics odf ods odt org pdf pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xlsx xml"
-extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg ear exe gz img iso jar lzh ova pgdump qcow qcow2 rar rpm tar taz tgz udeb udf vmdk war xpi xz z zip"
+extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg ear exe gz img iso jar lzh lzma ova pgdump qcow qcow2 rar rpm squashfs tar taz tgz udeb udf vmdk war xpi xz z zip"
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm wmv xvid yuv"
 extensions[audio]="au mp3 ogg ogv wav wma"
 extensions[pics]="bmp dng gif jpeg jpg pbm png ppm tga tif xbm xcf xpm"
