@@ -213,7 +213,7 @@ prefix argument."
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
 (my-autoload "id" "ace-jump-mode" "align" "company-mode" "git-commit-mode" "gitignore-mode"
-             "gitconfig-mode" "helm" "projectile" "helm-projectile" "python-mode" "multi-mode" "org"
+             "gitconfig-mode" "helm" "projectile" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "gtags"
              "outdent" "vcl-mode")
 
@@ -267,7 +267,6 @@ prefix argument."
                       gitignore-mode
                       ;; google-maps
                       helm
-                      helm-projectile
                       hydra
                       ;; ipython
                       pkg-info
@@ -769,7 +768,7 @@ characters C1 and C2 belong to the same 'class'."
 (define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 
-(require 'helm-projectile)
+;; (require 'helm-projectile)
 (defun helm-projectile-switch-buffer ()
   "Use Helm instead of ido to switch buffer in projectile."
   (interactive)
