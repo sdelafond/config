@@ -213,7 +213,7 @@ prefix argument."
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
 (my-autoload "id" "ace-jump-mode" "align" "company-mode" "git-commit-mode" "gitignore-mode"
-             "gitconfig-mode" "helm" "projectile" "python-mode" "multi-mode" "org"
+             "gitconfig-mode" "helm" "helm-projectile" "projectile" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "gtags"
              "outdent" "vcl-mode")
 
@@ -248,7 +248,7 @@ prefix argument."
          (format "gnutls-cli --x509cafile %s -p %%p %%h" trustfile))))
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 ;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ;; ("melpa" . "https://melpa.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")))
 (let ((package-list '(ace-window
                       ;; anything
@@ -267,6 +267,7 @@ prefix argument."
                       gitignore-mode
                       ;; google-maps
                       helm
+                      helm-projectile
                       hydra
                       ;; ipython
                       pkg-info
