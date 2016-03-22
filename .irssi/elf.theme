@@ -291,9 +291,9 @@ abstracts = {
   #  sb_act_msg = "%r$*";
   sb_act_msg = "$*";
   # hilight 
-  sb_act_hilight = "%_%Y$*%n";
+  sb_act_hilight = "%Y%_$*%_%n";
   # hilight with specified color, $0 = color, $1 = text
-  sb_act_hilight_color = "$0$1-%n";
+  sb_act_hilight_color = "$0%_$1-%_%n";
 
   sb_lightbar_bg = "%c";
   lightbar_selected_item = "%_%R$0%n%_";
