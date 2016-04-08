@@ -769,7 +769,7 @@ characters C1 and C2 belong to the same 'class'."
 (define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 
-;; (require 'helm-projectile)
+(require 'helm-projectile)
 (defun helm-projectile-switch-buffer ()
   "Use Helm instead of ido to switch buffer in projectile."
   (interactive)
