@@ -10,8 +10,10 @@ XINPUT_ID=$(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/i' | tail -1)
 xinput set-prop $XINPUT_ID "Evdev Middle Button Emulation" 1
 xinput set-prop $XINPUT_ID "Evdev Middle Button Timeout" 50
 # single-finger scrolling only
+xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics ClickPad" 0
 xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Edges" 0 0 0 4807
 xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Edge Scrolling" 1 1 0
+xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Palm Detection" 1
 
 # mouse acceleration
 xset m 4 10
