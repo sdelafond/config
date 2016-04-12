@@ -7,7 +7,7 @@
 ;; custom path
 (setq my-home (expand-file-name (concat "~" (or (getenv "SUDO_USER") (getenv "USER")))))
 (setq my-emacsd (concat my-home "/.emacs.d/"))
-(loop for file in (directory-files my-emacsd t "run.*")
+(loop for file in (directory-files my-emacsd t ".*.el$")
       do (load-file file))
 (setq auto-save-list-file-prefix my-emacsd)
 (setq user-emacs-directory my-emacsd)
@@ -393,57 +393,57 @@ prefix argument."
   ;;       	     (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
   ;;       				       (quote regexp) "<[^>\n]+>")))
   ;;       	  (org-agenda-overriding-header "Unscheduled TODO entries: ")))))
-  (define-key org-agenda-mode-map
-    "v" 'hydra-org-agenda-view/body)
+;;   (define-key org-agenda-mode-map
+;;     "v" 'hydra-org-agenda-view/body)
 
-  (defun org-agenda-cts ()
-    (let ((args (get-text-property
-		 (min (1- (point-max)) (point))
-		 'org-last-args)))
-      (nth 2 args)))
+;;   (defun org-agenda-cts ()
+;;     (let ((args (get-text-property
+;; 		 (min (1- (point-max)) (point))
+;; 		 'org-last-args)))
+;;       (nth 2 args)))
 
-  (defhydra hydra-org-agenda-view (:hint nil)
-    "
-_d_: ?d? day        _g_: time grid=?g? _a_: arch-trees
-_w_: ?w? week       _[_: inactive      _A_: arch-files
-_t_: ?t? fortnight  _f_: follow=?f?    _r_: report=?r?
-_m_: ?m? month      _e_: entry =?e?    _D_: diary=?D?
-_y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
-    ("SPC" org-agenda-reset-view)
-    ("d" org-agenda-day-view
-     (if (eq 'day (org-agenda-cts))
-	 "[x]" "[ ]"))
-    ("w" org-agenda-week-view
-     (if (eq 'week (org-agenda-cts))
-	 "[x]" "[ ]"))
-    ("t" org-agenda-fortnight-view
-     (if (eq 'fortnight (org-agenda-cts))
-	 "[x]" "[ ]"))
-    ("m" org-agenda-month-view
-     (if (eq 'month (org-agenda-cts)) "[x]" "[ ]"))
-    ("y" org-agenda-year-view
-     (if (eq 'year (org-agenda-cts)) "[x]" "[ ]"))
-    ("l" org-agenda-log-mode
-     (format "% -3S" org-agenda-show-log))
-    ("L" (org-agenda-log-mode '(4)))
-    ("c" (org-agenda-log-mode 'clockcheck))
-    ("f" org-agenda-follow-mode
-     (format "% -3S" org-agenda-follow-mode))
-    ("a" org-agenda-archives-mode)
-    ("A" (org-agenda-archives-mode 'files))
-    ("r" org-agenda-clockreport-mode
-     (format "% -3S" org-agenda-clockreport-mode))
-    ("e" org-agenda-entry-text-mode
-     (format "% -3S" org-agenda-entry-text-mode))
-    ("g" org-agenda-toggle-time-grid
-     (format "% -3S" org-agenda-use-time-grid))
-    ("D" org-agenda-toggle-diary
-     (format "% -3S" org-agenda-include-diary))
-    ("!" org-agenda-toggle-deadlines)
-    ("["
-     (let ((org-agenda-include-inactive-timestamps t))
-       (org-agenda-check-type t 'timeline 'agenda)  (org-agenda-redo)))
-    ("q" (message "Abort") :exit t))
+;;   (defhydra hydra-org-agenda-view (:hint nil)
+;;     "
+;; _d_: ?d? day        _g_: time grid=?g? _a_: arch-trees
+;; _w_: ?w? week       _[_: inactive      _A_: arch-files
+;; _t_: ?t? fortnight  _f_: follow=?f?    _r_: report=?r?
+;; _m_: ?m? month      _e_: entry =?e?    _D_: diary=?D?
+;; _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
+;;     ("SPC" org-agenda-reset-view)
+;;     ("d" org-agenda-day-view
+;;      (if (eq 'day (org-agenda-cts))
+;; 	 "[x]" "[ ]"))
+;;     ("w" org-agenda-week-view
+;;      (if (eq 'week (org-agenda-cts))
+;; 	 "[x]" "[ ]"))
+;;     ("t" org-agenda-fortnight-view
+;;      (if (eq 'fortnight (org-agenda-cts))
+;; 	 "[x]" "[ ]"))
+;;     ("m" org-agenda-month-view
+;;      (if (eq 'month (org-agenda-cts)) "[x]" "[ ]"))
+;;     ("y" org-agenda-year-view
+;;      (if (eq 'year (org-agenda-cts)) "[x]" "[ ]"))
+;;     ("l" org-agenda-log-mode
+;;      (format "% -3S" org-agenda-show-log))
+;;     ("L" (org-agenda-log-mode '(4)))
+;;     ("c" (org-agenda-log-mode 'clockcheck))
+;;     ("f" org-agenda-follow-mode
+;;      (format "% -3S" org-agenda-follow-mode))
+;;     ("a" org-agenda-archives-mode)
+;;     ("A" (org-agenda-archives-mode 'files))
+;;     ("r" org-agenda-clockreport-mode
+;;      (format "% -3S" org-agenda-clockreport-mode))
+;;     ("e" org-agenda-entry-text-mode
+;;      (format "% -3S" org-agenda-entry-text-mode))
+;;     ("g" org-agenda-toggle-time-grid
+;;      (format "% -3S" org-agenda-use-time-grid))
+;;     ("D" org-agenda-toggle-diary
+;;      (format "% -3S" org-agenda-include-diary))
+;;     ("!" org-agenda-toggle-deadlines)
+;;     ("["
+;;      (let ((org-agenda-include-inactive-timestamps t))
+;;        (org-agenda-check-type t 'timeline 'agenda)  (org-agenda-redo)))
+;;     ("q" (message "Abort") :exit t))
 
   ;; todo
   (setq org-todo-keywords
