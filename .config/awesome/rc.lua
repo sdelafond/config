@@ -241,8 +241,9 @@ awful.rules.rules = {
   { rule = { class = "URxvt", name = "recette-" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "qt-" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { class = "URxvt", name = "infra-" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { class = "URxvt", name = "deploy-" }, properties = { tag = getTagByShortcut("7") } },    
+  { rule = { class = "URxvt", name = "deploy-" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { class = "URxvt", name = "ca.m" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { class = "URxvt", name = "aws-" }, properties = { tag = getTagByShortcut("8") } },
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 
