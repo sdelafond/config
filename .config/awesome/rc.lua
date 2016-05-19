@@ -233,8 +233,7 @@ awful.rules.rules = {
   { rule = { name = "seb.jessie" }, properties = { tag = getTagByShortcut("3") } },
 
   -- M
-  { rule = { name = "10.0.1.180" }, properties = { tag = getTagByShortcut("7") } },
-  { rule = { name = "10.80.1.180" }, properties = { tag = getTagByShortcut("7") } },
+  { rule = { name = "10.92" }, properties = { tag = getTagByShortcut("7") } },
   { rule = { class = "URxvt", name = "th2.prod" }, properties = { tag = getTagByShortcut("6") } },
   { rule = { class = "URxvt", name = "pp" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { class = "URxvt", name = "demo-" }, properties = { tag = getTagByShortcut("3") } },
@@ -253,7 +252,7 @@ awful.rules.rules = {
   { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "california" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "puff" }, properties = { tag = getTagByShortcut("4") } },
-  { rule = { name = "beastie" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "beastie" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "lanner" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "t60" }, properties = { tag = getTagByShortcut("4") } },
