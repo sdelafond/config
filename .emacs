@@ -601,7 +601,15 @@ _h_tml    ^ ^        _A_SCII:
     (lambda () (interactive)
       (if (looking-back "^")
           (hydra-org-template/body)
-        (self-insert-command 1)))))  
+        (self-insert-command 1))))
+
+  (local-set-key (kbd "C-M-h")
+                 (defhydra hydra-org-timestamp-change (:color amaranth :hint nil)
+                   ("b" (org-timestamp-change -1 'hour) "-1h")
+                   ("f" (org-timestamp-change 1 'hour) "+1h")
+                   ("p" (org-timestamp-change -1 'day) "-1d")
+                   ("n" (org-timestamp-change 1 'day) "+1d")
+                   ("q" nil "quit" :color blue))))
 
 (add-hook 'org-load-hook 'my-org-mode-hook)
 (add-hook 'org-mode-hook 'my-org-mode-hook)
