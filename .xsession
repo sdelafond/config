@@ -8,6 +8,7 @@ xkbset exp "=m"
 # emulate middle button
 XINPUT_ID=$(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/i' | tail -1)
 xinput set-prop $XINPUT_ID "Evdev Middle Button Emulation" 1
+xinput set-prop $XINPUT_ID "libinput Middle Emulation Enabled" 1
 xinput set-prop $XINPUT_ID "Evdev Middle Button Timeout" 50
 # single-finger scrolling only
 xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics ClickPad" 0
