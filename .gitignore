@@ -19,3 +19,4 @@ python-module-stampdir/
 debian/files
 fish
 .emacs.d/url
+core
