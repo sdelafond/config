@@ -13,14 +13,16 @@ source ~/.mutt-private/msghooks
 source ~/.mutt-private/savehooks
 
 set abort_unmodified=no
-set autoedit=yes
+set autoedit=no
 set beep_new=yes
 set bounce_delivered=no
 set charset="utf-8"
 set collapse_unread=yes
 set confirmappend=no
 set date_format="%b/%d"
+set edit_headers=no
 set fast_reply=yes
+set hostname=hz1
 set include=yes
 set index_format="%4C %Z %2M %D  %-30.30L (%4c) %s"
 #set index_format="%4C %Z %{%b %d} %-30.30L (%?l?%4l&%4c?) %s"
