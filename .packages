@@ -10,14 +10,13 @@ emacs23-nox
 emacs24-nox
 gnupg-agent
 gnupg2
+jq
 keychain
 lbdb
 libnet-ldap-perl
 lua-mode
 mutt
-ncdu
 org-mode
-ruby
 sudo
 tmux
 xclip
