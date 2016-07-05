@@ -61,6 +61,12 @@ conv() {
     c2f) echo "${2}°C is `round $((32+9*${2}/5.))`°F" ;;
     p2k) echo "${2}lbs is `round $((${2}*0.454))`kgs" ;;
     k2p) echo "${2}kgs is `round $((${2}/0.454))`lbs" ;;
+    e2d)
+      local rate=$(curl -s "http://api.fixer.io/latest?symbols=USD" | jq '.rates.USD')
+      echo "$2 EUR is \$$(round $(( $rate * $2 )))" ;;
+    d2e)
+      local rate=$(curl -s "http://api.fixer.io/latest?base=USD&symbols=EUR" | jq '.rates.EUR')
+      echo "\$$2 is $(round $(( $rate * $2 ))) EUR" ;;
     cm2i) echo "Not implemented..." ;;
     i2cm) echo "Not implemented..." ;;
   esac
