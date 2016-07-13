@@ -1,0 +1,4 @@
+$CONFIG{'owner'} = 'Sebastien Delafond';
+$CONFIG{'email'} = 'seb@debian.org';
+$CONFIG{'keyid'} = [ qw{91AD581ADAF6CE93} ];
+$CONFIG{'gpg-sign-args'} = 'save';
