@@ -28,6 +28,7 @@
 	ra = rebase --abort
 	rc = rebase --continue
 	rh = reset --hard
+	sst = show --stat
 	s = status
 	st = status
         stat = status	
