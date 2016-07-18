@@ -8,11 +8,11 @@ require 'uri'
 urlSchemes = ['http', 'ftp', 'https']
 
 system("pgrep -f '(firefox-bin|firefox.real)'")
-browser = $?.exitstatus == 0 ? "firefox" : "chromium"
+browser = ($?.exitstatus == 0 && ARGV[1].nil?) ? "firefox" : "chromium"
+
+selection = `xclip -o`
 
 rhttp = URI.regexp(urlSchemes)
-
-selection = ARGV[1] == nil ? `xclip -o` : ARGV[1].dup
 
 # handle mutt wrap markers
 selection.gsub!(/\n\+/m, '')
