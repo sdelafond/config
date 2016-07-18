@@ -382,6 +382,10 @@ settings.bindings.command = {
   [{settings.keys.super, "F1"}] = settings.applications.selection .. " gs",
   [{settings.keys.super_shift, "F1"}] = settings.applications.selection .. " gi",
   [{settings.keys.super_control, "F1"}] = settings.applications.selection .. " gm",
+  [{settings.keys.none, "F2"}] = settings.applications.selection .. " default chromium",
+  [{settings.keys.super, "F2"}] = settings.applications.selection .. " gs chromium",
+  [{settings.keys.super_shift, "F2"}] = settings.applications.selection .. " gi chromium",
+  [{settings.keys.super_control, "F2"}] = settings.applications.selection .. " gm chromium",
   [{settings.keys.alt, "F12"}] = settings.applications.keyboard_layout
 }
 
