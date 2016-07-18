@@ -303,9 +303,9 @@ keychain-init-real() {
 }
 
 keychain-init() {
-#  setopt localoptions xtrace
+  # setopt localoptions xtrace
 
-  if [[ -z "$(echo ~/.ssh/*.[dr]sa(DN))" ]] || [[ "$SSH_AUTH_SOCK" =~ ".*ssh/ssh-.*" ]] ; then
+  if [[ -z "$(echo ~/.ssh/*.[dr]sa(DN))" ]] || [[ "$SSH_AUTH_SOCK" =~ ".*ssh/ssh_.*" ]] ; then
     broken=(${SSH_AUTH_SOCK}(N-@))
     if [[ -e $SSH_AUTH_SOCK ]] && (( ! ${#broken} )) ; then
       export SSH_AUTH_SOCK
