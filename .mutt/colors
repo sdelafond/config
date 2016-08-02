@@ -10,6 +10,7 @@ color tilde       blue           default # pager body
 color tree        color213       default # index
 color underline   yellow         default
 
+color header      color239	 default  ""
 color header      brightcolor193 default  "^From: "
 color header      brightcolor105 default  "^Subject: "
 color header      brightcolor113 default  "^To: "
