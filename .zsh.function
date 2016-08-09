@@ -36,17 +36,6 @@ beep() {
  fi
 }
 
-burn() {
-  mkisofs -JR -f "$@" | s cdrecord -v -v driveropts=burnfree gracetime=2 -overburn -eject -
-}
-
-burnV() { # burn and md5sum the resulting CD (only for single files)
-  mkisofs -JR -f "$1" | s cdrecord -v -v gracetime=2 -
-  mount /cdrecorder
-  diff "`basename \"$1\"`" /cdrecorder/"$1" > /dev/null && echo "OK" || echo "failed"
-  umount /cdrecorder
-}
-
 calc() {
   awk 'BEGIN { OFMT="%f"; print '"$*"'}'
 }
@@ -73,12 +62,6 @@ conv() {
   esac
 }
 
-convertToU10() {
-  inFile="$1"
-  outFile=`echo $1 | sed -e 's/\.\([^\.]*\)$/.u10.avi/'`
-  mencoder "$inFile" -o "$outFile" -ovc xvid -xvidencopts bitrate=384:max_bframes=0 -oac mp3lame -lameopts mode=2:cbr:br=128 -vf scale=320:240,expand=320:240,harddup -ofps 15.0 -srate 44100 -ffourcc XVID
-}
-
 connect() { # pops an ssh windows if under x, or simple ssh if not
 #  setopt localoptions xtrace
   local host=$argv[-1]
@@ -103,16 +86,6 @@ disable-command() {
       $command "$@"
     fi
   }
-}
-
-divx2dvd() {
-  local divxFile=$1
-  local tmpBase=tmp
-  local tmpAudio="${tmpBase}.ac3"
-  local tmpVideo="${tmpBase}.m2v"
-  transcode -y ffmpeg --export_prof dvd-ntsc --export_asr 3 -D0 -s2 -m "$tmpAudio" -J modfps=clonetype=3 --export_fps 29.97 -i "$divxFile" -o "$tmpBase"
-  mplex -f8 -o "${divxFile}.dvd.mpg" "$tmpVideo" "$tmpAudio"
-  \rm -f "$tmpVideo" "$tmpAudio"
 }
 
 dpkg-list-binaries() {
@@ -175,10 +148,6 @@ find() { # filter out .svn
 findN() {
   find . -iname "*$1*"
 }
-
-# g() {
-#   www "www.google.com/search?q=$*"
-# }
 
 gg() {
   # googlegrep
@@ -345,10 +314,6 @@ lst() { # list files by type
   fi
   local matches="`echo \"$p\"/*.${(s, ,)${extensions[$type]}}(.DN)`"
   [[ -n "$matches" ]] && ls $argv "$p"/*.${(s, ,)${extensions[$type]}}(.DN)
-}
-
-mf() {
-  firefox "$1" &
 }
 
 move-in-files() {
@@ -621,16 +586,6 @@ _setup-env() {
 setup-env() {
   _setup-env base
   [ -n "$1" ] && _setup-env $1
-}
-
-www() {
-  for browser in links2 links elinks w3m lynx ; do
-    if have $browser ; then
-      $browser $1
-      return 0
-    fi
-  done
-  echo "No text-based browser found" && return 1
 }
 
 xpop() { # my precious :)
