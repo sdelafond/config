@@ -93,14 +93,6 @@ cp-other() {
   tar cf - "$1" | (cd $2 ; tar xfp -)
 }
 
-debian-doc() {
-  zmore /usr/share/doc/$1/$2
-}
-
-debuild() {
-  command debuild --preserve-envvar MAKEFLAGS -i $@ --lintian-opts -viI
-}
-
 disable-command() {
   local command=$1
   shift
@@ -378,17 +370,6 @@ nth () {
   awk '/'"${pattern}"'/ {print $'"${number}"'}'
 }
 
-pdb() {
-#  setopt localoptions xtrace
-  local distribution=$(dpkg-parsechangelog | awk '/^Distribution:/ {print $2}')
-  local version=$(dpkg-parsechangelog | awk '/^Version:/ { gsub(/^[0-9]:/, "", $2) ; print $2}')
-  local extraOpts=""
-  distribution=${distribution/-*} # remove -security, for instance
-  [ $# -gt 0 ] && extraOpts="--debbuildopts '$@'"
-  pdebuild --pbuilder cowbuilder $=extraOpts --buildresult .. --auto-debsign -- --basepath /var/cache/pbuilder/${distribution}.cow --hookdir /var/cache/pbuilder/hooks
-  [ $? = 0 ] && lintian -viI $(ls ../*${version}*changes | grep -v _source.changes)
-}
-
 pydoc-html() {
   local html=/usr/share/doc/python$(python -V |& perl -pe 's/.*? (\d\.\d).*/\1/' )-doc/html/lib/module-MODULE.html
   www ${html/MODULE/$1}
@@ -433,14 +414,6 @@ psm() {
 
 psg() {
   psall | grep -v "grep -iE $1" | grep -iE "$1"
-}
-
-rebuild-upstream-source() {
-#  setopt localoptions xtrace
-  local dir=${1:-$(basename $(pwd))}
-  local package=${dir/-*}
-  local version=${dir/*-}
-  tar czv --exclude CVS --exclude .svn --exclude '.git*' --exclude debian --exclude *stamp -f ${package}_${version}.orig.tar.gz $dir
 }
 
 remove-host() { 

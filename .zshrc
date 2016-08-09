@@ -545,6 +545,7 @@ typeset -A REPOSITORIES
 # always source these config files...
 source ~/.zsh.alias
 source ~/.zsh.function
+source ~/.zsh.function.d/*
 
 # maybe overloaded later
 [[ $HOST == *puppet-master* ]] || set-git-info sdelafond@gmail.com "Sébastien Delafond"
