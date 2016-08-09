@@ -88,10 +88,6 @@ disable-command() {
   }
 }
 
-dpkg-list-binaries() {
-  dpkg -L $1 | G bin/
-}
-
 dus() {
   du -s "$@" | sort -n
 }
@@ -413,10 +409,6 @@ rgrep() {
   esac
 
   rgrepLocal "$pattern" "$dir" | grep -v \\.svn
-}
-
-rmdeb() {
-  \rm -f ${1:-.}/*.{changes,deb,orig.tar.gz,upload,dsc,build,diff.gz}(DN)
 }
 
 rmmod() {
