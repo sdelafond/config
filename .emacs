@@ -1186,7 +1186,7 @@ _n_: Navigate           _._: mark position _/_: jump to mark
                 ("/\.mutt" 		      	      . muttrc-mode)
                 ("/\.md$" 		      	      . markdown-mode)
                 ("\\.vcl$" 		      	      . vcl-mode)
-                ("\\.\\(el|clj\\)$"                   . (lambda () (progn
+                ("\\.\\(el\\|clj\\)$"                 . (lambda () (progn
                                                                      (lisp-mode)
                                                                      (company-mode))))
                 ("^/tmp/mutt"                         . my-mutt-hook)
