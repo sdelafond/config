@@ -261,6 +261,7 @@ prefix argument."
                       company
                       dash
                       epl
+		      flycheck
                       git-commit-mode
                       git-gutter
                       gitconfig-mode
@@ -811,6 +812,9 @@ characters C1 and C2 belong to the same 'class'."
 (setq avy-styles-alist '((avy-goto-char-2 . post)))
 (define-key global-map (kbd "C-c SPC") 'avy-goto-line)
 (define-key global-map (kbd "M-n") 'avy-goto-char-2)
+
+;; flycheck
+(global-flycheck-mode)
 
 ;; helm
 (setq
