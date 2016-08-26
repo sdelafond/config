@@ -1098,6 +1098,9 @@ _n_: Navigate           _._: mark position _/_: jump to mark
   (require 'recentf)
   (recentf-mode t))
 
+;; cvelist
+(autoload 'debian-cvelist-mode "debian-cvelist.el" "Major mode for debian CVE lists" t)
+
 ;; git-gutter
 ;;(require 'git-gutter)
 (when (fboundp 'global-git-gutter-mode)
@@ -1197,6 +1200,7 @@ _n_: Navigate           _._: mark position _/_: jump to mark
                 ("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
                 ("DSA-"                               . flyspell-mode)
                 ("\.jsx"                              . js-mode)
+                ("CVE/list$"                          . debian-cvelist-mode)
                 ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
                                                                                  (git-commit-mode)
                                                                                  (flyspell-mode)
