@@ -53,10 +53,10 @@ conv() {
     k2p) echo "${value}kgs is `round $((${value}/0.454))`lbs" ;;
     e2d)
       local rate=$(curl -s "http://api.fixer.io/latest?symbols=USD" | jq '.rates.USD')
-      echo "$value EUR is \$$(round $(( $rate * $value )))" ;;
+      echo "$value EUR is \$$(( $rate * $value ))" ;;
     d2e)
       local rate=$(curl -s "http://api.fixer.io/latest?base=USD&symbols=EUR" | jq '.rates.EUR')
-      echo "\$$value is $(round $(( $value * $2 ))) EUR" ;;
+      echo "\$$value is \$$(( $value * $2 )) EUR" ;;
     cm2i) echo "Not implemented..." ;;
     i2cm) echo "Not implemented..." ;;
   esac
