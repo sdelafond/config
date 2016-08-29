@@ -303,6 +303,7 @@ awful.rules.rules = {
   { rule = { class = "Exaile" }, properties = { tag = getTagByShortcut("F2") } },
   { rule = { class = "Gmpc" }, properties = { tag = getTagByShortcut("F2") } },
   { rule = { class = "Ario" }, properties = { tag = getTagByShortcut("F2") } },
+  { rule = { class = "Spotify" }, properties = { tag = getTagByShortcut("F2") } },
 
   -- Communication
   { rule = { class = "Skype" }, properties = { tag = getTagByShortcut("F4"), floating = true } },
@@ -384,9 +385,6 @@ settings.bindings.command = {
   [{settings.keys.super_shift, "F1"}] = settings.applications.selection .. " gi",
   [{settings.keys.super_control, "F1"}] = settings.applications.selection .. " gm",
   [{settings.keys.none, "F2"}] = settings.applications.selection .. " default chromium",
-  [{settings.keys.super, "F2"}] = settings.applications.selection .. " gs chromium",
-  [{settings.keys.super_shift, "F2"}] = settings.applications.selection .. " gi chromium",
-  [{settings.keys.super_control, "F2"}] = settings.applications.selection .. " gm chromium",
   [{settings.keys.alt, "F12"}] = settings.applications.keyboard_layout
 }
 
