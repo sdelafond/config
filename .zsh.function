@@ -227,7 +227,7 @@ i() { # install package $1
 }
 
 keychain-init-real() {
-#  setopt localoptions xtrace
+  setopt localoptions xtrace
   # cleanup
   for e in GPG_AGENT_INFO SSH_AUTH_SOCK ; do
     rm -fr `echo $e`
@@ -260,13 +260,12 @@ keychain-init-real() {
 }
 
 keychain-init() {
-  # setopt localoptions xtrace
-
-  if [[ -z "$(echo ~/.ssh/*.[dr]sa(DN))" ]] || [[ "$SSH_AUTH_SOCK" =~ ".*ssh/ssh_.*" ]] ; then
-    broken=(${SSH_AUTH_SOCK}(N-@))
-    if [[ -e $SSH_AUTH_SOCK ]] && (( ! ${#broken} )) ; then
-      export SSH_AUTH_SOCK
-      return 1
+  local forwarded_auth_sock_link="${HOME}/.ssh/ssh_auth_sock.${HOSTNAME}"
+  if [[ -L $forwarded_auth_sock_link ]] ; then
+    local forwarded_auth_sock=$(readlink -f $forwarded_auth_sock_link)
+    if [[ -S $forwarded_auth_sock ]] ; then
+      export SSH_AUTH_SOCK=$forwarded_auth_sock_link
+      return
     fi
   fi
   
