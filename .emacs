@@ -262,6 +262,7 @@ prefix argument."
                       dash
                       epl
 		      flycheck
+		      flycheck-color-mode-line
                       git-commit-mode
                       git-gutter
                       gitconfig-mode
@@ -815,6 +816,21 @@ characters C1 and C2 belong to the same 'class'."
 
 ;; flycheck
 (global-flycheck-mode)
+(require 'flycheck-color-mode-line)
+(eval-after-load "flycheck"
+  '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+(defhydra hydra-flycheck
+  (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+   :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+   :hint nil)
+  "Errors"
+  ("f"  flycheck-error-list-set-filter                            "Filter")
+  ("n"  flycheck-next-error                                       "Next")
+  ("p"  flycheck-previous-error                                   "Previous")
+  ("<" flycheck-first-error                                       "First")
+  (">"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+  ("q"  nil))
+(global-set-key (kbd "M-g f") 'hydra-flycheck/body)
 
 ;; helm
 (setq
