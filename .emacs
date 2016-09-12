@@ -277,6 +277,7 @@ prefix argument."
                       ;; python-mode
                       smartparens
                       ;; vcl-mode
+                      yaml-mode
 		      )))
   (package-initialize)
   ;; fetch the list of packages available
