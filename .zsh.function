@@ -227,7 +227,7 @@ i() { # install package $1
 }
 
 keychain-init-real() {
-  setopt localoptions xtrace
+#  setopt localoptions xtrace
   # cleanup
   for e in GPG_AGENT_INFO SSH_AUTH_SOCK ; do
     rm -fr `echo $e`
