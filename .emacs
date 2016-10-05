@@ -816,6 +816,7 @@ characters C1 and C2 belong to the same 'class'."
 (define-key global-map (kbd "M-n") 'avy-goto-char-2)
 
 ;; flycheck
+(setq flycheck-keymap-prefix "\C-c ~")
 (global-flycheck-mode)
 (require 'flycheck-color-mode-line)
 (eval-after-load "flycheck"
