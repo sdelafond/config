@@ -341,7 +341,7 @@ prefix argument."
 
   ;; clock
   (setq org-clock-into-drawer nil)
-  (setq org-clock-clocktable-default-properties '(:maxlevel 5 :narrow 80!))
+  (setq org-clock-clocktable-default-properties '(:maxlevel 5 :formula "$7='(org-clock-time% @2$2 $2..$6);%1.f" :narrow 80!))
 
   ;; speed commands
   (setq org-use-speed-commands t)
