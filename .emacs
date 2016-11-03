@@ -248,7 +248,7 @@ prefix argument."
          (format "gnutls-cli --x509cafile %s -p %%p %%h" trustfile))))
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 ;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")
+;;			 ("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")))
 (let ((package-list '(ace-window
                       ;; anything
