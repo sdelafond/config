@@ -353,6 +353,7 @@ prefix argument."
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-if-done t)
   (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-with-log-mode nil)
   (setq org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
   (setq org-combined-agenda-icalendar-file "~/org/org.ics")
   (setq org-icalendar-store-UID t)
