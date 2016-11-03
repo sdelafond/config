@@ -349,7 +349,8 @@ prefix argument."
   ;; agenda
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 7)
-  (setq org-agenda-show-all-dates t)
+  (setq org-agenda-show-all-dates nil)
+  (setq org-agenda-show-log nil)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-if-done t)
   (setq org-agenda-start-on-weekday nil)
