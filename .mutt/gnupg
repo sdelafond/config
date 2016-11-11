@@ -14,9 +14,11 @@
 
 set crypt_use_gpgme=yes
 
-set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
+set crypt_replysign = yes
+set crypt_replyencrypt = yes
+set crypt_replysignencrypted = yes
 
-set pgp_good_sign="^gpg: good signature"
-set pgp_use_gpg_agent=yes
+set crypt_verify_sig = yes
 
-set pgp_auto_decode=yes
+# set pgp_use_gpg_agent=yes
+# set pgp_auto_decode=yes
