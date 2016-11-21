@@ -843,6 +843,9 @@ characters C1 and C2 belong to the same 'class'."
  ;; do not occupy whole other window
  helm-split-window-in-side-p t)
 
+;; prefer creating window on the right for the rest
+(setq split-height-threshold nil)
+
 (helm-mode t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
