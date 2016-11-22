@@ -8,7 +8,7 @@ source ~/.mutt/folderhooks
 set alias_file=.mutt-private/aliases
 source ~/.mutt-private/aliases
 source ~/.mutt-private/identities
-source ~/.mutt-private/offlineimap
+source ~/.mutt-private/offlineimap-sec
 source ~/.mutt-private/msghooks
 source ~/.mutt-private/savehooks
 
