@@ -34,7 +34,7 @@ case $HOST in
   mp)
     xrandr --output VGA1 --auto --output DP1 --auto --left-of VGA1 ;;
   centurion)
-    xrandr --output DVI-I-1 --auto --output HDMI-0 --auto --left-of DVI-I-1 ;;    
+    xrandr --output DP-4 --primary --mode 2560x1440 --output HDMI-0 --auto --left-of DP-4 --output DVI-D-0 --auto --right-of DP-4 ;;
 esac
 
 # systray
