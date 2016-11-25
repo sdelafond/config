@@ -1130,7 +1130,7 @@ _n_: Navigate           _._: mark position _/_: jump to mark
   (global-git-gutter-mode t)
   (setq git-gutter:disabled-modes '(org-mode))
   (setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
-  (setq git-gutter:modified-sign "⚡")
+  (setq git-gutter:modified-sign "↯")
   (set-face-foreground 'git-gutter:modified "yellow")
   (setq git-gutter:separator-sign "|"))
 
