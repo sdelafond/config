@@ -1078,9 +1078,6 @@ _n_: Navigate           _._: mark position _/_: jump to mark
 ;; region highlighting
 (transient-mark-mode t)
 
- ;; always "y or n"
-(defalias 'yes-or-no-p 'y-or-n-p)
-
 ;; auto-revert
 (global-auto-revert-mode t)
 (defalias 'auto-revert-handler 'my-auto-revert-handler)
@@ -1125,19 +1122,13 @@ _n_: Navigate           _._: mark position _/_: jump to mark
 (autoload 'debian-cvelist-mode "debian-cvelist.el" "Major mode for debian CVE lists" t)
 
 ;; git-gutter
-;;(require 'git-gutter)
-(when (fboundp 'global-git-gutter-mode)
-  (global-git-gutter-mode t)
-  (setq git-gutter:disabled-modes '(org-mode))
-  (setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
-  (setq git-gutter:modified-sign "↯")
-  (set-face-foreground 'git-gutter:modified "yellow")
-  (setq git-gutter:separator-sign "|"))
-
-;; git-rebase
-(defun my-git-rebase-mode-hook ()
-  (read-only-mode))
-(add-hook 'git-rebase-mode-hook 'my-git-rebase-mode-hook)
+(require 'git-gutter)
+(setq git-gutter:disabled-modes '(org-mode))
+(setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
+(setq git-gutter:modified-sign "↯")
+(setq git-gutter:separator-sign "|")
+(global-git-gutter-mode t)
+(set-face-foreground 'git-gutter:modified "yellow")
 
 ;; unique buffer names
 (require 'uniquify)
