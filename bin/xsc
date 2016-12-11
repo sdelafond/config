@@ -2,4 +2,4 @@
 
 source ~/.zshenv
 source ~/.zshrc
-xterm-screen
+xsc

@@ -47,7 +47,7 @@ autocutsel -selection PRIMARY -fork
 
 # clients
 gkrellm &
-xterm-screen &
+xsc &
 
 # WM
 export _JAVA_AWT_WM_NONREPARENTING=1 # for awesome+java

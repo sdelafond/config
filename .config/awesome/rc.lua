@@ -47,7 +47,7 @@ settings.keys.super_control = {settings.keys.super[1], settings.keys.control[1] 
 settings.keys.super_alt_control = {settings.keys.super[1], settings.keys.alt[1], settings.keys.control[1] }
 
 -- Applications
-settings.applications = { ["terminal"]        = 'xterm-screen',
+settings.applications = { ["terminal"]        = 'xsc',
                           ["terminal_without_screen"] = 'xterm',
 			  ["lock_screen"]     = 'bash -c "xset dpms force off ; xscreensaver-command -lock"',
 			  ["screen_off"]      = 'sh -c "sleep 1 ; xset dpms force off"',
@@ -216,22 +216,21 @@ awful.rules.rules = {
   -- web
   { rule = { class = "Iceweasel" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "Opera" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "Konqueror" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "Chromium" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "chromium" }, properties = { tag = getTagByShortcut("2") } },
+  { rule = { class = ".hromium" }, properties = { tag = getTagByShortcut("2") } },
 
   -- workstation at UT
-  { rule = { name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
-  { rule = { name = "host51.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
-  { rule = { name = "sid" }, properties = { tag = getTagByShortcut("5") } },
+  { rule = { name = "untangle.com" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "VNC:" }, properties = { tag = getTagByShortcut("5") } },
 
   -- UT dev
-  { rule = { name = "metalof" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "ngfw" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "seb.dev" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "seb.jessie" }, properties = { tag = getTagByShortcut("3") } },
+
+  -- Debian
+  { rule = { name = "debian@" }, properties = { tag = getTagByShortcut("6") } },
+  { rule = { name = ".debian.org" }, properties = { tag = getTagByShortcut("6") } },
 
   -- M
   { rule = { name = "10.92" }, properties = { tag = getTagByShortcut("7") } },
@@ -369,6 +368,9 @@ settings.bindings.client = {
 }
 
 settings.bindings.command = {
+  [{settings.keys.super, "Prior"}] = settings.applications.volume .. " up",
+  [{settings.keys.super, "Next"}] = settings.applications.volume .. " down",
+  [{settings.keys.super, "End"}] = settings.applications.volume .. " mute",
   [{settings.keys.none, "XF86AudioRaiseVolume"}] = settings.applications.volume .. " up",
   [{settings.keys.none, "XF86AudioLowerVolume"}] = settings.applications.volume .. " down",
   [{settings.keys.none, "XF86MonBrightnessUp"}] = settings.applications.backlight .. " -inc 2",
