@@ -1254,7 +1254,7 @@ _n_: Navigate           _._: mark position _/_: jump to mark
     (mail-mode)
     (flyspell-mode)
     (turn-on-orgtbl)
-    (turn-on-orgstruct++)
+    (turn-on-orgstruct)
     (choose-dict-automatically)
     (local-set-key "\C-ci" 'format-email-body)))
 
