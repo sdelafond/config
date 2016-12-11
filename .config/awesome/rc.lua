@@ -368,6 +368,9 @@ settings.bindings.client = {
 }
 
 settings.bindings.command = {
+  [{settings.keys.super, "Prior"}] = settings.applications.volume .. " up",
+  [{settings.keys.super, "Next"}] = settings.applications.volume .. " down",
+  [{settings.keys.super, "End"}] = settings.applications.volume .. " mute",
   [{settings.keys.none, "XF86AudioRaiseVolume"}] = settings.applications.volume .. " up",
   [{settings.keys.none, "XF86AudioLowerVolume"}] = settings.applications.volume .. " down",
   [{settings.keys.none, "XF86MonBrightnessUp"}] = settings.applications.backlight .. " -inc 2",
