@@ -216,22 +216,21 @@ awful.rules.rules = {
   -- web
   { rule = { class = "Iceweasel" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "Opera" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "Konqueror" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "Chromium" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "chromium" }, properties = { tag = getTagByShortcut("2") } },
+  { rule = { class = ".hromium" }, properties = { tag = getTagByShortcut("2") } },
 
   -- workstation at UT
-  { rule = { name = "host52.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
-  { rule = { name = "host51.untangle.com" }, properties = { tag = getTagByShortcut("5") } },
-  { rule = { name = "sid" }, properties = { tag = getTagByShortcut("5") } },
+  { rule = { name = "untangle.com" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "VNC:" }, properties = { tag = getTagByShortcut("5") } },
 
   -- UT dev
-  { rule = { name = "metalof" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "untangle" }, properties = { tag = getTagByShortcut("3") } },
+  { rule = { name = "ngfw" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "seb.dev" }, properties = { tag = getTagByShortcut("3") } },
   { rule = { name = "seb.jessie" }, properties = { tag = getTagByShortcut("3") } },
+
+  -- Debian
+  { rule = { name = "debian@" }, properties = { tag = getTagByShortcut("6") } },
+  { rule = { name = ".debian.org" }, properties = { tag = getTagByShortcut("6") } },
 
   -- M
   { rule = { name = "10.92" }, properties = { tag = getTagByShortcut("7") } },
