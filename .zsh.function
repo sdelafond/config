@@ -605,3 +605,8 @@ xpop() { # my precious :)
     zsh -c "$expandedCommand"
   fi
 }
+
+xs() {
+  setopt localoptions xtrace
+  ${=XTERM/&} -e zsh -i -c "sc $1" &
+}

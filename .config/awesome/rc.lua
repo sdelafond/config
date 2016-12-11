@@ -47,7 +47,7 @@ settings.keys.super_control = {settings.keys.super[1], settings.keys.control[1] 
 settings.keys.super_alt_control = {settings.keys.super[1], settings.keys.alt[1], settings.keys.control[1] }
 
 -- Applications
-settings.applications = { ["terminal"]        = 'xterm-screen',
+settings.applications = { ["terminal"]        = 'xsc',
                           ["terminal_without_screen"] = 'xterm',
 			  ["lock_screen"]     = 'bash -c "xset dpms force off ; xscreensaver-command -lock"',
 			  ["screen_off"]      = 'sh -c "sleep 1 ; xset dpms force off"',
