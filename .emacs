@@ -918,7 +918,7 @@ position ('l', 'r', 'm')"
 
 ;; window-switching hydra
 (global-set-key
- (kbd "M-o")
+ (kbd "S-M-o")
  (defhydra hydra-window (:color amaranth)
    "window"
    ("b" windmove-left)
@@ -951,28 +951,9 @@ position ('l', 'r', 'm')"
    ("q" nil "cancel")
    ("k" nil "cancel")))
 
-;; search hydra
-(global-set-key 
- (kbd "M-k")
- (defhydra hydra-search (:color blue :hint nil)
-   "
-Current Buffer : i_s_earch-forward isea_r_ch-backward _n_: avy-goto-char-2 _h_elm-occur-from-isearch i_S_earch-forward-egex isea_R_ch-backward-regex
-Project Directory: projectile-_g_rep _f_: helm-projectile-grep
-"
-  ("r" isearch-backward)
-  ("s" isearch-forward)
-  ("S" isearch-forward-regexp)
-  ("R" isearch-backward-regexp)
-  ("h" helm-occur-from-isearch)
-  ;; ("space" avy-goto-line)
-  ("n" avy-goto-char-2)
-  ;; ("h" helm-swoop)
-  ("f" helm-projectile-grep)
-  ("g" projectile-grep)))
-
 ;; git-gutter
 (global-set-key
- (kbd "C-M-d")
+ (kbd "M-g g")
  (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1) :hint nil)
   "
 Git gutter:
@@ -1000,53 +981,60 @@ Git gutter:
               (git-gutter:clear))
        :color blue)))
 
-(defhydra goto (:color blue :hint nil)
+(global-set-key
+ (kbd "M-g j")
+ (defhydra goto (:color blue :hint nil)
   "
 Goto:
-^Char^              ^Word^                ^org^                    ^search^
-^^^^^^^^---------------------------------------------------------------------------
+^Char/Line^         ^Word^                ^org^                    ^search^
+^^^^^^^^--------------------------------------------------------------------------------------
 _c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: helm-occur
-_C_: char           _W_: some word        _a_: heading in agenda   _p_: helm-swiper
-_L_: char in line   _s_: subword by char  _q_: swoop org buffers   _f_: search forward
-^  ^                _S_: some subword     ^ ^                      _b_: search backward
------------------------------------------------------------------------------------
-_B_: helm-buffers       _l_: avy-goto-line
-_m_: helm-mini          _i_: ace-window
-_R_: helm-recentf
+_C_: char           _W_: some word        _a_: heading in agenda   _O_: helm-occur-from-isearch
+_L_: char in line   _,_: subword by char  ^ ^                      _s_: search forward
+_l_: avy-goto-line  _._: some subword     ^ ^                      _r_: search backward
+^ ^                 ^ ^                   ^ ^                      _S_: search forward regex
+^ ^                 ^ ^                   ^ ^                      _R_: search backward regex
+-----------------------------------------------------------------------------------------------
+_g_: projectile-grep    _f_: helm-projectile-grep
 
-_n_: Navigate           _._: mark position _/_: jump to mark
+_B_: helm-buffers
+_m_: helm-mini          _i_: ace-window
+_M_: helm-recentf
+
+_n_: Navigate           _;_: mark position _/_: jump to mark
 "
   ("c" avy-goto-char-2)
   ("C" avy-goto-char)
   ("L" avy-goto-char-in-line)
-  ("w" avy-goto-word-1)
-  ;; jump to beginning of some word
-  ("W" avy-goto-word-0)
-  ;; jump to subword starting with a char
-  ("s" avy-goto-subword-1)
-  ;; jump to some subword
-  ("S" avy-goto-subword-0)
-
   ("l" avy-goto-line)
-  ("i" ace-window)
+
+  ("w" avy-goto-word-1)
+  ("W" avy-goto-word-0)
+  ("," avy-goto-subword-1)
+  ("." avy-goto-subword-0)
 
   ("h" helm-org-headlines)
   ("a" helm-org-agenda-files-headings)
-  ("q" helm-multi-swoop-org)
 
   ("o" helm-occur)
-  ("p" swiper-helm)
+  ("O" helm-occur-from-isearch)
+  ("s" isearch-forward)
+  ("r" isearch-backward)
+  ("S" isearch-forward-regexp)
+  ("R" isearch-backward-regexp)
 
-  ("f" isearch-forward)
-  ("b" isearch-backward)
+  ("g" projectile-grep)
+  ("f" helm-projectile-grep)
 
-  ("." org-mark-ring-push :color red)
-  ("/" org-mark-ring-goto :color blue)
   ("B" helm-buffers-list)
   ("m" helm-mini)
-  ("R" helm-recentf)
-  ("n" hydra-navigate/body))
-(global-set-key (kbd "M-g g") 'goto/body)
+  ("M" helm-recentf)
+
+  ("i" ace-window)
+
+  ("n" hydra-navigate/body)
+  (";" org-mark-ring-push :color red)
+  ("/" org-mark-ring-goto :color blue)))
 
 ;; numbering
 (line-number-mode t)
