@@ -607,6 +607,7 @@ xpop() { # my precious :)
 }
 
 xs() {
-  setopt localoptions xtrace
-  ${=XTERM/&} -e zsh -i -c "sc $1" &
+#  setopt localoptions xtrace
+  #${=XTERM/&} -e zsh -i -c "sc $1" &
+  xpop "sc $1" $1@$HOSTNAME
 }
