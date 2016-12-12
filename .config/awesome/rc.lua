@@ -194,7 +194,9 @@ awful.rules.rules = {
 --                      focus = true,
 --                      keys = clientkeys,
 --                      buttons = clientbuttons } },
-  { rule = { class = "gkrellm", name = "conf" }, properties = { floating = true } },
+  { rule = { class = "gkrellm", name = "conf" }, properties = { floating = true },
+                                                                callback = { function(c) awful.client.movetoscreen(c, mouse.screen-1)
+                                                                             end } },
   { rule = { class = "nvidia" }, properties = { floating = true } },
   { rule = { class = "pinentry" }, properties = { floating = true } },
   { rule = { class = "frame", name = "preferences" }, properties = { floating = true } },
@@ -214,9 +216,8 @@ awful.rules.rules = {
   { rule = { name = "x1" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
-  { rule = { class = "Iceweasel" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") } },
-  { rule = { class = ".hromium" }, properties = { tag = getTagByShortcut("2") } },
+  { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") },
+  { rule = { class = ".hromium" }, properties = { tag = getTagByShortcut("2") },
 
   -- workstation at UT
   { rule = { name = "untangle.com" }, properties = { tag = getTagByShortcut("5") } },
@@ -357,13 +358,19 @@ settings.bindings = { ["command"] = {},
 
 settings.bindings.client = {
   [{settings.keys.super, "0"}] = function(c) c.sticky = not c.sticky ; c.above = not c.above end,
-  [{settings.keys.super, "f"}] = function(c) my_debug("toggling float for " .. c.name) ; awful.client.floating.toggle(c) ; end,
- [{settings.keys.super, "k"}] = function(c) c:kill() end,
+ [{settings.keys.super, "space"}] = function(c) c:kill() end,
  [{settings.keys.super, "m"}] = function(c)
 				 c.maximized_horizontal = not c.maximized_horizontal
 				 c.maximized_vertical = not c.maximized_vertical 
 			       end,
- [{settings.keys.super, "z"}] = awful.client.movetoscreen,
+ [{settings.keys.super_control, "j"}] = function(c)
+                                         awful.client.movetoscreen(c, mouse.screen + 1) 
+					 awful.screen.focus_relative(1)
+                                        end,
+ [{settings.keys.super_control, "k"}] = function(c)
+                                         awful.client.movetoscreen(c, mouse.screen - 1)
+					 awful.screen.focus_relative(-1)
+                                        end,
  [{settings.keys.super, ";"}] = function(c) c:swap(awful.client.getmaster()) end,
 }
 
@@ -379,7 +386,6 @@ settings.bindings.command = {
   [{settings.keys.super, "Down"}] = settings.applications.volume .. " down",
   [{settings.keys.none, "XF86AudioMute"}] = settings.applications.volume .. " mute",
   [{settings.keys.super, "s"}] = settings.applications.terminal,
-  [{settings.keys.super, "space"}] = settings.applications.mpc_pause,
   [{settings.keys.super, "l"}] = settings.applications.lock_screen,
   [{settings.keys.super, "o"}] = settings.applications.screen_off,
   [{settings.keys.none, "F1"}] = settings.applications.selection .. " default",
@@ -439,19 +445,18 @@ settings.bindings.global = {
   [{settings.keys.super, "Tab"}] = function() awful.client.focus.history.previous() ; if client.focus then client.focus:raise() end end,
   [{settings.keys.super, "u"}] = awful.client.urgent.jumpto,
   [{settings.keys.super, "a"}] = function() awful.tag.viewonly(lastTag) end,
-  [{settings.keys.super, "j"}] = function() awful.tag.viewonly(lastTag) end,
   
   [{settings.keys.super, "Left"}] = awful.tag.viewprev,
   [{settings.keys.super, "Right"}] = awful.tag.viewnext,
   
-  [{settings.keys.super, "f"}] = function() awful.screen.focus_relative(1) end,
-  [{settings.keys.super, "b"}] = function() awful.screen.focus_relative(-1) end,
+  [{settings.keys.super, "j"}] = function() awful.screen.focus_relative(1) end,
+  [{settings.keys.super, "k"}] = function() awful.screen.focus_relative(-1) end,
 
   [{settings.keys.super_alt, "z"}] = function() switch_screen(false) end,
   [{settings.keys.super_alt_shift, "z"}] = function() switch_screen(true) end,
   
-  [{settings.keys.super_alt, "j"}] = function() awful.tag.incmwfact(-0.05) end,
-  [{settings.keys.super_alt, "k"}] = function() awful.tag.incmwfact(0.05) end,
+  [{settings.keys.super_alt, "n"}] = function() awful.tag.incmwfact(-0.05) end,
+  [{settings.keys.super_alt, "p"}] = function() awful.tag.incmwfact(0.05) end,
   
   [{settings.keys.super_alt, "i"}] = function() awful.tag.incncol(1) end,
   [{settings.keys.super_alt, "o"}] = function() awful.tag.incncol(-1) end,
@@ -459,10 +464,8 @@ settings.bindings.global = {
   [{settings.keys.super_alt, "h"}] = function() awful.tag.incnmaster(1) end,
   [{settings.keys.super_alt, "l"}] = function() awful.tag.incnmaster(-1) end,
   
-  [{settings.keys.super_alt, "n"}] = function() awful.layout.inc(settings.layouts, 1) end,
-  [{settings.keys.super_alt, "p"}] = function() awful.layout.inc(settings.layouts, -1) end,
-
-  [{settings.keys.super_alt, "f"}] = function() awful.layout.set(awful.layout.suit.floating) end,
+  [{settings.keys.super_alt, "e"}] = function() awful.layout.inc(settings.layouts, 1) end,
+  [{settings.keys.super_alt, "r"}] = function() awful.layout.inc(settings.layouts, -1) end,
   [{settings.keys.super_alt, "m"}] = function() awful.layout.set(awful.layout.suit.max) end,
   [{settings.keys.super_alt, "t"}] = function() awful.layout.set(awful.layout.suit.tile.left) end,
 
