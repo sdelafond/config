@@ -45,7 +45,6 @@ macro generic <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt docum
 macro index   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
 macro pager   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
 
-macro index \es '<enter-command>unset wait_key<enter><shell-escape>read -p"MU query: " x; mu find --clearlinks --linksdir ~/Maildir/.search --format links $x<enter><change-folder-readonly>=search<enter>' "MU search"
 macro index \eS 'c=search<enter>' 'Go to search folder'
 
 bind index \cv next-page
