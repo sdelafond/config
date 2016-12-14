@@ -194,10 +194,8 @@ awful.rules.rules = {
 --                      focus = true,
 --                      keys = clientkeys,
 --                      buttons = clientbuttons } },
-  { rule = { class = "gkrellm", name = "conf" }, properties = { floating = true },
-                                                                callback = { function(c) awful.client.movetoscreen(c, mouse.screen-1)
-                                                                             end } },
-  { rule = { class = "nvidia" }, properties = { floating = true } },
+  { rule = { class = "Gkrellm" }, callback = function(c) awful.client.movetoscreen(c, mouse.screen-1) end },
+  { rule = { class = "Gkrellm", name = "conf" }, properties = { floating = true } },
   { rule = { class = "pinentry" }, properties = { floating = true } },
   { rule = { class = "frame", name = "preferences" }, properties = { floating = true } },
 
@@ -216,8 +214,32 @@ awful.rules.rules = {
   { rule = { name = "x1" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
-  { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") },
-  { rule = { class = ".hromium" }, properties = { tag = getTagByShortcut("2") },
+  { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") } },
+  { rule = { class = "Firefox", name = "Default" }, callback = function(c)
+						      awful.client.movetoscreen(c,3)
+						      awful.screen.focus(3)
+						      awful.client.movetotag(getTagByShortcut("2"), c)
+                                                    end },
+  { rule = { class = "Firefox", name = "Debian" }, callback = function(c)
+						      awful.client.movetoscreen(c,2)
+						      awful.screen.focus(2)
+						      awful.client.movetotag(getTagByShortcut("6"), c)
+                                                   end },
+  { rule = { class = "Firefox", name = "Untangle" }, callback = function(c)
+						      awful.client.movetoscreen(c,2)
+						      awful.screen.focus(2)
+						      awful.client.movetotag(getTagByShortcut("3"), c)
+                                                     end },
+  { rule = { class = "Firefox", name = "Mappy" }, callback = function(c)
+						    awful.client.movetoscreen(c,2)
+						    awful.screen.focus(2)
+						    awful.client.movetotag(getTagByShortcut("7"), c)
+                                                  end },
+  { rule = { class = ".hromium" }, callback = function(c)
+						    awful.client.movetoscreen(c,2)
+						    awful.screen.focus(2)
+						    awful.client.movetotag(getTagByShortcut("2"), c)
+                                                  end },
 
   -- workstation at UT
   { rule = { name = "untangle.com" }, properties = { tag = getTagByShortcut("5") } },
@@ -247,9 +269,9 @@ awful.rules.rules = {
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 
-  { rule = { name = "het" }, properties = { tag = getTagByShortcut("4") } }, 
-  { rule = { name = "proliant" }, properties = { tag = getTagByShortcut("4") }, 
-    callback = { function(c) c:swap(awful.client.getmaster()) end } },
+  { rule = { name = "hetz" }, properties = { tag = getTagByShortcut("4"),
+					     maximized_horizontal = true,
+					     maximized_vertical = true } }, 
   { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "california" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "puff" }, properties = { tag = getTagByShortcut("4") } },
@@ -366,10 +388,12 @@ settings.bindings.client = {
  [{settings.keys.super_control, "j"}] = function(c)
                                          awful.client.movetoscreen(c, mouse.screen + 1) 
 					 awful.screen.focus_relative(1)
+					 my_debug(string.format("screen: %s", mouse.screen))
                                         end,
  [{settings.keys.super_control, "k"}] = function(c)
                                          awful.client.movetoscreen(c, mouse.screen - 1)
 					 awful.screen.focus_relative(-1)
+					 my_debug(string.format("screen: %s", mouse.screen))
                                         end,
  [{settings.keys.super, ";"}] = function(c) c:swap(awful.client.getmaster()) end,
 }
@@ -813,7 +837,7 @@ function manage_client(c)
 
   c.size_hints_honor = settings.size_hints_honor
 
-  awful.client.movetoscreen(c, mouse.screen)
+--  awful.client.movetoscreen(c, mouse.screen)
 end
 client.add_signal("manage", manage_client)
 
