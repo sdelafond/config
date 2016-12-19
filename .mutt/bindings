@@ -48,6 +48,7 @@ macro pager   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt docum
 macro index \eS 'c=search<enter>' 'Go to search folder'
 
 bind index \cv next-page
+bind index "\eu" next-new
 
 # travel2cal
 macro index \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
