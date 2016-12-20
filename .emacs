@@ -918,7 +918,7 @@ position ('l', 'r', 'm')"
 
 ;; window-switching hydra
 (global-set-key
- (kbd "S-M-o")
+ (kbd "M-o")
  (defhydra hydra-window (:color amaranth)
    "window"
    ("b" windmove-left)
