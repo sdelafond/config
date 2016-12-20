@@ -227,6 +227,7 @@ i() { # install package $1
 }
 
 keychain-init-real() {
+  return
 #  setopt localoptions xtrace
   # cleanup
   for e in GPG_AGENT_INFO SSH_AUTH_SOCK ; do
@@ -260,6 +261,7 @@ keychain-init-real() {
 }
 
 keychain-init() {
+  return
   local forwarded_auth_sock_link="${HOME}/.ssh/ssh_auth_sock.${HOSTNAME}"
   if [[ -L $forwarded_auth_sock_link ]] ; then
     local forwarded_auth_sock=$(readlink -f $forwarded_auth_sock_link)
@@ -357,7 +359,8 @@ preexec() {
 #      2) export KRB5CCNAME=FILE:$krb5files[1] ; rm -f $krb5files[2,-1] ;;
 #    esac
 #  fi
-  have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty 2> /dev/null
+  #have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty 2> /dev/null
+  have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
 }
 
 psc() {
