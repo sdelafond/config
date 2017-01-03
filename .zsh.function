@@ -360,7 +360,9 @@ preexec() {
 #    esac
 #  fi
   #have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty 2> /dev/null
-  have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
+  if ! [[ "$SSH_AUTH_SOCK" =~ ".*ssh/ssh_auth_sock.*" ]] ; then
+    have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
+  fi
 }
 
 psc() {
