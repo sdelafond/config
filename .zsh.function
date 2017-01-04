@@ -360,8 +360,14 @@ preexec() {
 #    esac
 #  fi
   #have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty 2> /dev/null
-  if ! [[ "$SSH_AUTH_SOCK" =~ ".*ssh/ssh_auth_sock.*" ]] ; then
-    have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
+  local forwarded_auth_sock_link="${HOME}/.ssh/ssh_auth_sock.${HOSTNAME}"
+  if [[ -L $forwarded_auth_sock_link ]] ; then
+    local forwarded_auth_sock=$(readlink -f $forwarded_auth_sock_link)
+    if [[ -S $forwarded_auth_sock ]] ; then
+      export SSH_AUTH_SOCK=$forwarded_auth_sock_link
+    else
+      have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
+    fi
   fi
 }
 
