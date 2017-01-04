@@ -1013,7 +1013,7 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("," avy-goto-subword-1)
   ("." avy-goto-subword-0)
 
-  ("h" helm-org-headlines)
+  ("h" org-goto)
   ("a" helm-org-agenda-files-headings)
 
   ("o" helm-occur)
