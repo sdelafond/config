@@ -385,12 +385,12 @@ settings.bindings.client = {
 				 c.maximized_horizontal = not c.maximized_horizontal
 				 c.maximized_vertical = not c.maximized_vertical 
 			       end,
- [{settings.keys.super_control, "j"}] = function(c)
+ [{settings.keys.super_shift, "j"}] = function(c)
                                          awful.client.movetoscreen(c, mouse.screen + 1) 
 					 awful.screen.focus_relative(1)
 					 my_debug(string.format("screen: %s", mouse.screen))
                                         end,
- [{settings.keys.super_control, "k"}] = function(c)
+ [{settings.keys.super_shift, "k"}] = function(c)
                                          awful.client.movetoscreen(c, mouse.screen - 1)
 					 awful.screen.focus_relative(-1)
 					 my_debug(string.format("screen: %s", mouse.screen))
