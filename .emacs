@@ -475,15 +475,22 @@ prefix argument."
     (message (concat heading " " delim tags delim))))
 
   ;; spelling
-  (defun org-mode-flyspell-verify ()
-    "Don't let flyspell put overlays at active buttons, or on
-todo/all-time/additional-option-like keywords."
-    (let ((pos (max (1- (point)) (point-min)))
-          (word (thing-at-point 'word)))
-      (and (not (get-text-property pos 'keymap))
-           (not (get-text-property pos 'org-no-flyspell))
-           (not (member word org-todo-keywords-1))
-           (not (member word org-all-time-keywords)))))
+  (defadvice org-mode-flyspell-verify (after org-mode-flyspell-verify-hack activate)
+    "from http://emacs.stackexchange.com/questions/9333/how-does-one-use-flyspell-in-org-buffers-without-flyspell-triggering-on-tangled/9347"
+    (let ((rlt ad-return-value)
+          (begin-regexp "^\\*")
+          (end-regexp "\n")
+          old-flag
+          b e)
+      (when ad-return-value
+        (save-excursion
+          (setq old-flag case-fold-search)
+          (setq case-fold-search t)
+          (setq b (re-search-backward begin-regexp nil t))
+          (if b (setq e (re-search-forward end-regexp nil t)))
+          (setq case-fold-search old-flag))
+        (if (and b e (< (point) e)) (setq rlt nil)))
+      (setq ad-return-value rlt)))
 
   ;; archiving
   (setq org-auto-archive-required-days 21)
