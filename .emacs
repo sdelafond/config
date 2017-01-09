@@ -1043,6 +1043,77 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   (";" org-mark-ring-push :color red)
   ("/" org-mark-ring-goto :color blue)))
 
+(global-set-key
+ (kbd "M-g y")
+ (defhydra hydra-yank-pop ()
+  "yank"
+  ("C-y" yank nil)
+  ("M-y" yank-pop nil)
+  ("y" (yank-pop 1) "next")
+  ("Y" (yank-pop -1) "prev")
+  ("l" helm-show-kill-ring "list" :color blue)))
+(global-set-key (kbd "M-y") #'hydra-yank-pop/yank-pop)
+(global-set-key (kbd "C-y") #'hydra-yank-pop/yank)
+
+(global-set-key
+ (kbd "C-n")
+ (defhydra hydra-move
+   (:body-pre (next-line))
+   "move"
+   ("n" next-line)
+   ("p" previous-line)
+   ("f" forward-char)
+   ("b" backward-char)
+   ("a" beginning-of-line)
+   ("e" move-end-of-line)
+   ("v" scroll-up-command)
+   ;; Converting M-v to V here by analogy.
+   ("V" scroll-down-command)
+   ("l" recenter-top-bottom)
+   ("q" nil "cancel" :color blue)))
+
+(global-set-key
+ (kbd "M-g t")
+ (defhydra hydra-transpose (:color red)
+   "Transpose"
+   ("c" transpose-chars "characters")
+   ("w" transpose-words "words")
+   ("o" org-transpose-words "Org mode words")
+   ("l" transpose-lines "lines")
+   ("s" transpose-sentences "sentences")
+   ("e" org-transpose-elements "Org mode elements")
+   ("p" transpose-paragraphs "paragraphs")
+   ("t" org-table-transpose-table-at-point "Org mode table")
+   ("q" nil "cancel" :color blue)))
+
+(defhydra hydra-rectangle (:body-pre (rectangle-mark-mode 1)
+                           :color pink
+                           :post (deactivate-mark))
+"
+  ^_p_^     _d_elete    _s_tring
+_b_   _f_   _o_k        _y_ank
+  ^_n_^     _c_opy      _r_eset
+^^^^        _e_xchange  _u_ndo
+^^^^        ^ ^         _k_ill
+"
+  ("b" backward-char nil)
+  ("f" forward-char nil)
+  ("p" previous-line nil)
+  ("n" next-line nil)
+  ("e" exchange-point-and-mark nil)
+  ("c" copy-rectangle-as-kill nil)
+  ("d" delete-rectangle nil)
+  ("r" (if (region-active-p)
+           (deactivate-mark)
+         (rectangle-mark-mode 1)) nil)
+  ("y" yank-rectangle nil)
+  ("u" undo nil)
+  ("s" string-rectangle nil)
+  ("k" kill-rectangle nil)
+  ("o" nil nil)
+  ("q" nil "cancel" :color blue))
+(global-set-key (kbd "C-x SPC") 'hydra-rectangle/body)
+
 ;; numbering
 (line-number-mode t)
 (column-number-mode t)
