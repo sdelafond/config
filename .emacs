@@ -569,7 +569,7 @@ prefix argument."
                  "* TODO %?\n  DEADLINE: %t")
                 ("l" "Link" entry (file+olp "~/org/links.org" "URLs" "Inbox")
                  "* %?\n  %U")
-                ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox")
+                ("e" "Mail" entry (file+headline "~/org/home.todo" "Inbox")
                  "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
   ;; bindings
