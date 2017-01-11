@@ -559,7 +559,7 @@ prefix argument."
 ;;  (add-hook 'after-save-hook 'org-my-archive-done-tasks)
 
   ;; note/capture/refile
-  (setq org-default-notes-file (concat org-directory "~/org/home.todo"))
+  (setq org-default-notes-file (concat org-directory "/home/seb/org/home.todo"))
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps nil)
