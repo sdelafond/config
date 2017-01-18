@@ -37,6 +37,7 @@ set pager_stop=yes
 set print_command="$HOME/bin/mutt-print.sh"
 set quit=ask-yes
 set quit=yes
+set recall=no
 set reply_regexp="^(re([\[0-9\]+])*|aw) ?:[ \t]*"
 set rfc2047_parameters=yes
 set send_charset="utf-8"
