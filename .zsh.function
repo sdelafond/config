@@ -365,10 +365,10 @@ preexec() {
     local forwarded_auth_sock=$(readlink -f $forwarded_auth_sock_link)
     if [[ -S $forwarded_auth_sock ]] ; then
       export SSH_AUTH_SOCK=$forwarded_auth_sock_link
+      return
     fi
-  else
-    have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
   fi
+  have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
 }
 
 psc() {
