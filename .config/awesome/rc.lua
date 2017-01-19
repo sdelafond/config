@@ -353,7 +353,8 @@ awful.rules.rules = {
   { rule = { class = "rdesktop" }, properties = { tag = getTagByShortcut("9") } },
   { rule = { class = "qemu" }, properties = { tag = getTagByShortcut("9") } },
   { rule = { class = "kvm" }, properties = { tag = getTagByShortcut("9") } },
-  { rule = { class = "VirtualBox" }, properties = { tag = getTagByShortcut("9") }, 
+  { rule = { class = "VirtualBox" }, properties = { tag = getTagByShortcut("9") } }, 
+  { rule = { class = "Steam" }, properties = { tag = getTagByShortcut("9") },
     callback = function(c) awful.client.setslave(c) end },
 --   { rule = { class = "VirtualBox", name = "Sun VirtualBox" },
 --     callback = function(c) c:swap(awful.client.getmaster()) end },
@@ -412,11 +413,8 @@ settings.bindings.command = {
   [{settings.keys.super, "s"}] = settings.applications.terminal,
   [{settings.keys.super, "l"}] = settings.applications.lock_screen,
   [{settings.keys.super, "o"}] = settings.applications.screen_off,
-  [{settings.keys.none, "F1"}] = settings.applications.selection .. " default",
-  [{settings.keys.super, "F1"}] = settings.applications.selection .. " gs",
-  [{settings.keys.super_shift, "F1"}] = settings.applications.selection .. " gi",
-  [{settings.keys.super_control, "F1"}] = settings.applications.selection .. " gm",
-  [{settings.keys.none, "F2"}] = settings.applications.selection .. " default chromium",
+  [{settings.keys.super, "F1"}] = settings.applications.selection .. " default",
+  [{settings.keys.super, "F2"}] = settings.applications.selection .. " default chromium",
   [{settings.keys.alt, "F12"}] = settings.applications.keyboard_layout
 }
 
