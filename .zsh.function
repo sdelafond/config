@@ -36,6 +36,15 @@ beep() {
  fi
 }
 
+c() {
+  local p=".."
+  local i
+  for i in $(seq 2 ${1:-1}) ; do
+    p=$p/..
+  done
+  cd $p
+}
+
 calc() {
   awk 'BEGIN { OFMT="%f"; print '"$*"'}'
 }
