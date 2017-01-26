@@ -1053,22 +1053,22 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
 (global-set-key (kbd "M-y") #'hydra-yank-pop/yank-pop)
 (global-set-key (kbd "C-y") #'hydra-yank-pop/yank)
 
-(global-set-key
- (kbd "C-n")
- (defhydra hydra-move
-   (:body-pre (next-line))
-   "move"
-   ("n" next-line)
-   ("p" previous-line)
-   ("f" forward-char)
-   ("b" backward-char)
-   ("a" beginning-of-line)
-   ("e" move-end-of-line)
-   ("v" scroll-up-command)
-   ;; Converting M-v to V here by analogy.
-   ("V" scroll-down-command)
-   ("l" recenter-top-bottom)
-   ("q" nil "cancel" :color blue)))
+;; (global-set-key
+;;  (kbd "C-n")
+;;  (defhydra hydra-move
+;;    (:body-pre (next-line))
+;;    "move"
+;;    ("n" next-line)
+;;    ("p" previous-line)
+;;    ("f" forward-char)
+;;    ("b" backward-char)
+;;    ("a" beginning-of-line)
+;;    ("e" move-end-of-line)
+;;    ("v" scroll-up-command)
+;;    ;; Converting M-v to V here by analogy.
+;;    ("V" scroll-down-command)
+;;    ("l" recenter-top-bottom)
+;;    ("q" nil "cancel" :color blue)))
 
 (global-set-key
  (kbd "M-g t")
