@@ -306,7 +306,7 @@ zstyle ':completion:*' file-sort name
 zstyle ':completion:*' menu select=long
 
 # completion for some custom functions
-compdef _connect-run co com connect connect-mosh run
+compdef _connect-run co com connect connect-mosh run ssh
 compdef _hosts dig digs
 compdef '_deb_packages expl uninstalled' i
 compdef '_deb_packages expl installed' rp

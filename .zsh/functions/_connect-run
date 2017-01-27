@@ -1,16 +1,16 @@
-#compdef connect run
+#compdef co com connect connect-mosh run ssh
 
 _main() {
   local curcontext="$curcontext" state line expl common tmp ret=1
   typeset -A opt_args
 
   case "$service" in
-    connect|ssh)
-      _arguments -C -s ':remote host name:->userhost' && ret=0 ;;
     run)
       _arguments -C -s '*-c[do not pop up a new window]' \
       ':remote host name:->userhost' \
       '*::args:->command' && ret=0 ;;
+    *)
+      _arguments -C -s ':remote host name:->userhost' && ret=0 ;;
   esac
 
   while [[ -n "$state" ]]; do
