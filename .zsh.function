@@ -36,6 +36,15 @@ beep() {
  fi
 }
 
+c() {
+  local p=".."
+  local i
+  for i in $(seq 2 ${1:-1}) ; do
+    p=$p/..
+  done
+  cd $p
+}
+
 calc() {
   awk 'BEGIN { OFMT="%f"; print '"$*"'}'
 }
@@ -338,7 +347,7 @@ pydoc-html() {
 }
 
 preexec() {
-  # setopt localoptions xtrace
+#  setopt localoptions xtrace
   set $=2
   local cmd
 
@@ -360,6 +369,14 @@ preexec() {
 #    esac
 #  fi
   #have keychain && have gpg-connect-agent && keychain-init && update-gpg-agent-tty 2> /dev/null
+  local forwarded_auth_sock_link="${HOME}/.ssh/ssh_auth_sock.${HOSTNAME}"
+  if [[ -L $forwarded_auth_sock_link ]] ; then
+    local forwarded_auth_sock=$(readlink -f $forwarded_auth_sock_link)
+    if [[ -S $forwarded_auth_sock ]] ; then
+      export SSH_AUTH_SOCK=$forwarded_auth_sock_link
+      return
+    fi
+  fi
   have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
 }
 

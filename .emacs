@@ -475,15 +475,22 @@ prefix argument."
     (message (concat heading " " delim tags delim))))
 
   ;; spelling
-  (defun org-mode-flyspell-verify ()
-    "Don't let flyspell put overlays at active buttons, or on
-todo/all-time/additional-option-like keywords."
-    (let ((pos (max (1- (point)) (point-min)))
-          (word (thing-at-point 'word)))
-      (and (not (get-text-property pos 'keymap))
-           (not (get-text-property pos 'org-no-flyspell))
-           (not (member word org-todo-keywords-1))
-           (not (member word org-all-time-keywords)))))
+  (defadvice org-mode-flyspell-verify (after org-mode-flyspell-verify-hack activate)
+    "from http://emacs.stackexchange.com/questions/9333/how-does-one-use-flyspell-in-org-buffers-without-flyspell-triggering-on-tangled/9347"
+    (let ((rlt ad-return-value)
+          (begin-regexp "^\\*")
+          (end-regexp "\n")
+          old-flag
+          b e)
+      (when ad-return-value
+        (save-excursion
+          (setq old-flag case-fold-search)
+          (setq case-fold-search t)
+          (setq b (re-search-backward begin-regexp nil t))
+          (if b (setq e (re-search-forward end-regexp nil t)))
+          (setq case-fold-search old-flag))
+        (if (and b e (< (point) e)) (setq rlt nil)))
+      (setq ad-return-value rlt)))
 
   ;; archiving
   (setq org-auto-archive-required-days 21)
@@ -552,8 +559,6 @@ todo/all-time/additional-option-like keywords."
 ;;  (add-hook 'after-save-hook 'org-my-archive-done-tasks)
 
   ;; note/capture/refile
-  (setq org-default-notes-file (concat org-directory "~/org/home.todo"))
-  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps nil)
 
@@ -562,7 +567,7 @@ todo/all-time/additional-option-like keywords."
                  "* TODO %?\n  DEADLINE: %t")
                 ("l" "Link" entry (file+olp "~/org/links.org" "URLs" "Inbox")
                  "* %?\n  %U")
-                ("m" "Mail" entry (file+headline "~/org/home.todo" "Inbox")
+                ("e" "Mail" entry (file+headline "~/org/home.todo" "Inbox")
                  "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
   ;; bindings
@@ -1013,7 +1018,7 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("," avy-goto-subword-1)
   ("." avy-goto-subword-0)
 
-  ("h" helm-org-headlines)
+  ("h" org-goto)
   ("a" helm-org-agenda-files-headings)
 
   ("o" helm-occur)
@@ -1035,6 +1040,77 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("n" hydra-navigate/body)
   (";" org-mark-ring-push :color red)
   ("/" org-mark-ring-goto :color blue)))
+
+(global-set-key
+ (kbd "M-g y")
+ (defhydra hydra-yank-pop ()
+  "yank"
+  ("C-y" yank nil)
+  ("M-y" yank-pop nil)
+  ("y" (yank-pop 1) "next")
+  ("Y" (yank-pop -1) "prev")
+  ("l" helm-show-kill-ring "list" :color blue)))
+(global-set-key (kbd "M-y") #'hydra-yank-pop/yank-pop)
+(global-set-key (kbd "C-y") #'hydra-yank-pop/yank)
+
+;; (global-set-key
+;;  (kbd "C-n")
+;;  (defhydra hydra-move
+;;    (:body-pre (next-line))
+;;    "move"
+;;    ("n" next-line)
+;;    ("p" previous-line)
+;;    ("f" forward-char)
+;;    ("b" backward-char)
+;;    ("a" beginning-of-line)
+;;    ("e" move-end-of-line)
+;;    ("v" scroll-up-command)
+;;    ;; Converting M-v to V here by analogy.
+;;    ("V" scroll-down-command)
+;;    ("l" recenter-top-bottom)
+;;    ("q" nil "cancel" :color blue)))
+
+(global-set-key
+ (kbd "M-g t")
+ (defhydra hydra-transpose (:color red)
+   "Transpose"
+   ("c" transpose-chars "characters")
+   ("w" transpose-words "words")
+   ("o" org-transpose-words "Org mode words")
+   ("l" transpose-lines "lines")
+   ("s" transpose-sentences "sentences")
+   ("e" org-transpose-elements "Org mode elements")
+   ("p" transpose-paragraphs "paragraphs")
+   ("t" org-table-transpose-table-at-point "Org mode table")
+   ("q" nil "cancel" :color blue)))
+
+(defhydra hydra-rectangle (:body-pre (rectangle-mark-mode 1)
+                           :color pink
+                           :post (deactivate-mark))
+"
+  ^_p_^     _d_elete    _s_tring
+_b_   _f_   _o_k        _y_ank
+  ^_n_^     _c_opy      _r_eset
+^^^^        _e_xchange  _u_ndo
+^^^^        ^ ^         _k_ill
+"
+  ("b" backward-char nil)
+  ("f" forward-char nil)
+  ("p" previous-line nil)
+  ("n" next-line nil)
+  ("e" exchange-point-and-mark nil)
+  ("c" copy-rectangle-as-kill nil)
+  ("d" delete-rectangle nil)
+  ("r" (if (region-active-p)
+           (deactivate-mark)
+         (rectangle-mark-mode 1)) nil)
+  ("y" yank-rectangle nil)
+  ("u" undo nil)
+  ("s" string-rectangle nil)
+  ("k" kill-rectangle nil)
+  ("o" nil nil)
+  ("q" nil "cancel" :color blue))
+(global-set-key (kbd "C-x SPC") 'hydra-rectangle/body)
 
 ;; numbering
 (line-number-mode t)
