@@ -17,6 +17,10 @@ gbp-pb() {
   gbp buildpackage --git-builder="pdebuild --pbuilder cowbuilder --auto-debsign --buildresult $debian/build-area" $@
 }
 
+gbp-sb() {
+  gbp buildpackage --git-builder="sbuild -k 0x91AD581ADAF6CE93" $@
+}
+
 pdb() {
 #  setopt localoptions xtrace
   local distribution=$(dpkg-parsechangelog | awk '/^Distribution:/ {print $2}')
