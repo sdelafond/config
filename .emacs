@@ -255,20 +255,22 @@ prefix argument."
                       ;; anything-git-files
                       ;; anything-ipython
                       ;; anything-show-completion
+                      ag
                       async
                       avy
                       clojure-mode
                       company
                       dash
                       epl
-		      flycheck
-		      flycheck-color-mode-line
+                      flycheck
+                      flycheck-color-mode-line
                       git-commit-mode
                       git-gutter
                       gitconfig-mode
                       gitignore-mode
                       ;; google-maps
                       helm
+                      helm-ag
                       helm-projectile
                       hydra
                       ;; ipython
