@@ -561,6 +561,8 @@ prefix argument."
   ;; note/capture/refile
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps nil)
+  (setq org-default-notes-file org-agenda-files)
+  (setq org-refile-targets '((seb/org-refile-files . (:maxlevel . 2))))
 
   (setq org-capture-templates
         (quote (("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox")
