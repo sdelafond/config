@@ -45,6 +45,12 @@ autoload -Uz vcs_info && {
     hook_com[misc]+=${(j:/:)gitstatus}
   }
 
+  function +vi-git-stash() {
+    local stashed
+    stashed=$(git stash list | wc -l)
+    (( $stashed )) && hook_com[misc]+="%{${fg_bold[white]}%}⚑%{${fg_no_bold[default]}%} "
+  }
+
   ### Show symbol
   function +vi-symbol() {
     case ${hook_com[vcs_orig]} in
