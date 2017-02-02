@@ -129,7 +129,7 @@ settings.tags_defs = { { shortcut = "1", layout = settings.default_layout },
 		       {  shortcut = "6", layout = settings.default_layout, name = "Misc" }, -- nmaster = 2
 		       {  shortcut = "7", layout = settings.default_layout, name = "Mappy" },
 		       {  shortcut = "8", layout = settings.default_layout, name = "Txt" },
-		       {  shortcut = "9", layout = settings.default_layout, name = "VMs", mwfact = 0.2 },
+		       {  shortcut = "9", layout = awful.layout.suite.max, name = "VMs" },
 		       {  shortcut = "F1", layout = awful.layout.suit.floating, name = "Media" }, -- mwfact = 0.2 },
 		       {  shortcut = "F2", layout = awful.layout.suit.max, name = "Snd" },
 		       {  shortcut = "F3", layout = awful.layout.suit.max, name = "VNC" },
