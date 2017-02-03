@@ -649,7 +649,7 @@ vicious.register(mycpuwidget, vicious.widgets.cpu, "$1", 1.5)
 
 mywifiwidget = widget({ type = "textbox" })
 vicious.register(mywifiwidget, vicious.widgets.wifi,
-                 string.format("%s(%s%%)", "${ssid}", "${linp}"),
+                 string.format('<span weight="bold" color="white">%s(%s%%)</span>', "${ssid}", "${linp}"),
                  3, settings.nic)
 
 mynetwidget = awful.widget.graph()
