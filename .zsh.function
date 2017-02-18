@@ -629,5 +629,11 @@ xpop() { # my precious :)
 xs() {
 #  setopt localoptions xtrace
   #${=XTERM/&} -e zsh -i -c "sc $1" &
-  xpop "sc $1" $1@$HOSTNAME
+  local name=$1
+  local title=${name}@$HOSTNAME
+  if [[ -f ~/.tmuxp/${name}.yaml ]] ; then
+    xpop "unset TMUX ; tmuxp load $name" $title
+  else
+    xpop "sc $name" ${title}
+  fi
 }
