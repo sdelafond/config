@@ -178,8 +178,8 @@ prefix argument."
 (defun my-browse-url-tab (url &optional new-window)
   "Open URL"
   (interactive (browse-url-interactive-arg "URL: "))
-  (let ((cmd "~/bin/browser-maybe-selection.rb"))
-    (start-process (concat cmd " default " url) "*Messages*" cmd "default" url)))
+  (let ((cmd "firefox"))
+    (start-process (concat cmd " " url) "*Messages*" cmd url)))
 
 (defun paste-and-shift (arg)
   (interactive)
