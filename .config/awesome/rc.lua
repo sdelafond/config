@@ -214,7 +214,6 @@ awful.rules.rules = {
   { rule = { name = "x1" }, properties = { tag = getTagByShortcut("1") } },
 
   -- web
-  { rule = { class = "Firefox" }, properties = { tag = getTagByShortcut("2") } },
   { rule = { class = "Firefox", name = "Default" }, callback = function(c)
 						      awful.client.movetoscreen(c,3)
 						      awful.screen.focus(3)
