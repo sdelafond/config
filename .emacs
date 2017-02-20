@@ -272,6 +272,7 @@ prefix argument."
                       helm
                       helm-ag
                       helm-projectile
+                      ht
                       hydra
                       ;; ipython
                       pkg-info
