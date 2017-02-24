@@ -14,10 +14,11 @@ if [ $? = 2 ] ; then
 else
   grepSwitch="P"
 fi
-alias G="grep -$grepSwitch"
-alias Gi="grep -${grepSwitch}i"
+alias G="grep -${grepSwitch}"
+alias Gi="grep -i${grepSwitch}"
 alias Gv="grep -v${grepSwitch}"
-alias Gvi="grep -v${grepSwitch}i"
+alias Gvi="grep -vi${grepSwitch}"
+alias GS='gitseb'
 alias H='head'
 alias M='more'
 alias P='perl -pe'
@@ -46,7 +47,7 @@ alias dos2unix="perl -i -pe 's/\r$//'"
 alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 alias e='emacs-wrapper.sh'
 alias feh='feh -Z -F -p'
-alias g='gitseb'
+alias g='git'
 alias geoip='python ~/bin/ip2city.py'
 alias gitup='git svn fetch --all && git svn rebase'
 alias gqview='geeqie'
