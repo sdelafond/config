@@ -3,7 +3,7 @@
 # set -x
 # exec > /tmp/ew.log 2>&1
 
-# Copyright (C) 2008 Sebastien Delafond (sdelafond@gmail.com)
+# Copyright (C) 2008-2017 Sebastien Delafond (sdelafond@gmail.com)
 # Author: Sebastien Delafond (sdelafond@gmail.com)
 #
 # This program is free software; you can redistribute it and/or modify
@@ -22,11 +22,11 @@ TMUX_TITLE="emacs"
 # you shouldn't have to modify anything below this
 
 if [[ -n "$TMUX" ]] ; then
-  MARKER=$(echo $TMUX | awk -F, '{print $2$3}')
+  MARKER=$(tmux display-message -p '#{session_name}')
 else
   MARKER=$STY
 fi
-export SERVER_WINDOW_FILE=/tmp/emacsserver-window-${MARKER}
+SERVER_WINDOW_FILE=/tmp/emacsserver-window-${MARKER}
 DEFAULT_MSG_WAIT=2 # in seconds, if not defined in ~/.screenrc
 USER_CONFIGURED_MSG_WAIT=$(awk '/msgwait/{print $2}' ~/.screenrc 2> /dev/null)
 DEFAULT_MSG_WAIT=${USER_CONFIGURED_MSG_WAIT:-$DEFAULTMSGWAIT}
@@ -77,18 +77,9 @@ setScreenMsgWait() {
 
 startEmacsServer() {
   if isInScreen; then 
-    screen -X setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
     screen=screen
   else
-    WINDOW=0
-    tmux list-windows | grep -E '^[0-9]' | while read l ; do
-      j=$(echo $l | perl -pe 's/:.+//')
-      [[ $j != $WINDOW ]] && break
-      WINDOW=$(($WINDOW+1))
-    done
-    tmux setenv WINDOW $WINDOW
-    tmux setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
-    screen=(tmux new-window -n $TMUX_TITLE -t $WINDOW)
+    screen=(tmux new-window -n $TMUX_TITLE)
   fi
 
   $screen emacs-server.sh

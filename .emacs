@@ -178,8 +178,8 @@ prefix argument."
 (defun my-browse-url-tab (url &optional new-window)
   "Open URL"
   (interactive (browse-url-interactive-arg "URL: "))
-  (let ((cmd "~/bin/browser-maybe-selection.rb"))
-    (start-process (concat cmd " default " url) "*Messages*" cmd "default" url)))
+  (let ((cmd "firefox"))
+    (start-process (concat cmd " " url) "*Messages*" cmd url)))
 
 (defun paste-and-shift (arg)
   (interactive)
@@ -272,6 +272,7 @@ prefix argument."
                       helm
                       helm-ag
                       helm-projectile
+                      ht
                       hydra
                       ;; ipython
                       pkg-info
@@ -321,6 +322,7 @@ prefix argument."
   (require 'ox-confluence)
   (require 'ox-beamer)
   (require 'ox-md)
+  (require 'ox-pandoc)
 
   (setq org-ellipsis " ▼")
 
@@ -463,7 +465,10 @@ prefix argument."
         	("LATER" :foreground "light orange" :weight bold))))
 
   ;; links
-  (setq org-link-abbrev-alist '(("debian-bug" . "http://bugs.debian.org/%s")))
+  (setq org-link-abbrev-alist '(("debian-bug" . "https://bugs.debian.org/%s")
+                                ("debian-dp" . "https://packages.debian.org/%s")
+                                ("debian-dsp" . "https://tracker.debian.org/%s")
+                                ("debian-dst" . "https://security-tracker.debian.org/tracker/%s")))
 
   ;; *** entry :tag1:tag2: -> link #tag1,tag2#
   (defun org-convert-entry-to-irc ()
@@ -1279,7 +1284,7 @@ _b_   _f_   _o_k        _y_ank
                                                                      (lisp-mode)
                                                                      (company-mode))))
                 ("^/tmp/mutt"                         . my-mutt-hook)
-                ("^\\(.*/\\.followup\\|\\.article\\)" . flyspell-mode)
+                ("^\\(.*/\\.followup\\|\\.article\\)" . my-mutt-hook)
                 ("DSA-"                               . flyspell-mode)
                 ("\.jsx"                              . js-mode)
                 ("CVE/list$"                          . debian-cvelist-mode)
@@ -1342,6 +1347,9 @@ _b_   _f_   _o_k        _y_ank
  '(load-home-init-file t t)
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
+ '(package-selected-packages
+   (quote
+    (yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter git-commit-mode flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 4)
  '(safe-local-variable-values
    (quote
@@ -1361,7 +1369,7 @@ _b_   _f_   _o_k        _y_ank
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
  '(hydra-face-red ((t (:foreground "color-136" :weight bold))))
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
- '(org-checkbox-statistics-todo ((t (:foreground "color-177"))) t)
+ '(org-checkbox-statistics-todo ((t (:foreground "color-177"))))
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))
  '(org-hide ((t (:foreground "#00000000"))))
  '(org-level-1 ((t (:foreground "color-33" :weight bold))))
