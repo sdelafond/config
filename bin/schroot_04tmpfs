@@ -14,4 +14,3 @@ elif [ $STAGE = "setup-recover" ]; then
 elif [ $STAGE = "setup-stop" ]; then
   umount -f /var/lib/schroot/union/overlay
 fi
-END
