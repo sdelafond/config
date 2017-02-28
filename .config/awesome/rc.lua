@@ -697,7 +697,7 @@ function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox,
                       mymemwidget,
                       layout = awful.widget.layout.horizontal.leftright
                     },
-                    widget({ type = "systray" }),
+                    s == systray_screen and widget({ type = "systray" }) or nil,
                     mytasklist[s],
                     layout = awful.widget.layout.horizontal.rightleft
                   }
