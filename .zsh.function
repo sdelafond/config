@@ -493,7 +493,7 @@ s() { # smarter sudo
     ksu $ksuArgs $(what $SHELL) -c "$expandedCommand"
   else
     if [[ "$reply" != /* ]] || [[ "$reply" =~ ".*\s.*" ]] ; then
-      sudo $opts $SHELL -c "source .zsh.alias ; source .zsh.function ; $expandedCommand"
+      sudo $opts $SHELL -c "source ~/.zsh.alias ; source ~/.zsh.function ; $expandedCommand"
     else
       sudo $opts $originalCommand $@
     fi

@@ -87,7 +87,7 @@ elseif env.host == "centurion" or env.host == "x1" then
   settings.hp_tag = "4"
   settings.mp_tag = "7"
   settings.centurion_tag = "1"
-  settings.nic = "eth3"
+  settings.nic = "eth0"
   settings.nic_unit = "mb"
   settings.nic_autoscale = false
 elseif env.host == "seb-debian" or env.host == "mp" then
@@ -697,7 +697,7 @@ function make_wibox(s, mywibox, mytaglist, mypromptbox, mylayoutbox,
                       mymemwidget,
                       layout = awful.widget.layout.horizontal.leftright
                     },
-                    s == systray_screen and widget({ type = "systray" }) or nil,
+                    widget({ type = "systray" }),
                     mytasklist[s],
                     layout = awful.widget.layout.horizontal.rightleft
                   }
