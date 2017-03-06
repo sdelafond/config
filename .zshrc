@@ -200,13 +200,16 @@ zle -C files menu-complete _generic
 bindkey '^Xl' files
 
 # last typed word
-insert-last-typed-word() { zle insert-last-word -- 0 -1 };
-zle -N insert-last-typed-word
-bindkey "^[m" insert-last-typed-word
+autoload -Uz copy-earlier-word && {
+  zle -N copy-earlier-word
+  bindkey "^[m" copy-earlier-word
+}
 
 # edit command-line
-autoload edit-command-line && zle -N edit-command-line
-bindkey '\ee' edit-command-line
+autoload edit-command-line && {
+  zle -N edit-command-line
+  bindkey '\ee' edit-command-line
+}
 
 # complete word from history
 zle -C hist-complete complete-word _generic
