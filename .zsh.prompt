@@ -8,7 +8,7 @@ else # default for older terminals
   hostColor=cyan
 fi
 
-PROMPT=$'${PSEXTRA}%F{green}%80<...<%~%f%(?..%B%F{red} !%?%b%f) # '
+PROMPT=$'${PSEXTRA}%F{green}%80<...<%~%f%(?..%B%F{red} %??%b%f)%(1j.%F{green} %j&%f.) # '
 RPROMPT=$'[%B%F{'${usernameColor}'}%n%f%b %B%U%F{'${hostColor}'}'${hostnicks[$HOST_SHORT]:-$HOST_SHORT}$'%f%u%b]'
 
 case $TERM in
