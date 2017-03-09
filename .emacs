@@ -352,7 +352,8 @@ prefix argument."
 
   ;; agenda
   (setq org-agenda-include-diary nil)
-  (setq org-agenda-span 7)
+  (setq org-agenda-span 'year)
+  (setq org-agenda-start-day "-6m")
   (setq org-agenda-show-all-dates nil)
   (setq org-agenda-show-log nil)
   (setq org-agenda-skip-deadline-if-done t)
@@ -364,7 +365,7 @@ prefix argument."
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-with-log-mode nil)
   (setq org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
-  (setq org-combined-agenda-icalendar-file "~/org/org.ics")
+  ;; (setq org-combined-agenda-icalendar-file "~/org/org.ics")
   (setq org-icalendar-store-UID t)
   (setq org-icalendar-use-deadline '(event-if-todo))
 ;; (setq org-icalendar-include-todo t)
