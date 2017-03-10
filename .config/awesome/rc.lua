@@ -215,9 +215,9 @@ awful.rules.rules = {
 
   -- web
   { rule = { class = "Firefox", name = "Default" }, callback = function(c)
-						      awful.client.movetoscreen(c,3)
-						      awful.screen.focus(3)
-						      awful.client.movetotag(getTagByShortcut("2"), c)
+						      awful.client.movetoscreen(c,2)
+						      awful.screen.focus(2)
+						      awful.client.movetotag(getTagByShortcut("1"), c)
                                                     end },
   { rule = { class = "Firefox", name = "Debian" }, callback = function(c)
 						      awful.client.movetoscreen(c,2)
@@ -268,9 +268,13 @@ awful.rules.rules = {
 
   -- Home
   { rule = { name = "weshyo" }, properties = { tag = getTagByShortcut("4") } }, 
-  { rule = { name = "hetz" }, properties = { tag = getTagByShortcut("4"),
-					     maximized_horizontal = true,
-					     maximized_vertical = true } }, 
+  { rule = { name = "hetz" }, properties = { maximized_horizontal = true,
+					     maximized_vertical = true }, 
+                              callback = function(c)
+                                awful.client.movetoscreen(c,1)
+				awful.screen.focus(1)
+				awful.client.movetotag(getTagByShortcut("4"), c)
+                              end },
   { rule = { name = "frisco" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "california" }, properties = { tag = getTagByShortcut(settings.centurion_tag) } },
   { rule = { name = "puff" }, properties = { tag = getTagByShortcut("4") } },
@@ -574,6 +578,12 @@ settings.bindings.client_digits = {
 }
 
 settings.bindings.root_digits = {
+  [settings.keys.super] = function(my_shortcut)
+                              return function()
+				       awful.screen.focus(tonumber(my_shortcut))
+                                     end
+                            end,
+
   [settings.keys.control] = function(my_shortcut)
                               return function()
                                        awful.tag.viewonly(getTagByShortcut(my_shortcut))
