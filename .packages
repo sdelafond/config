@@ -6,7 +6,6 @@ aspell-fr
 awesome
 awesome-extra
 emacs-goodies-el
-emacs24-nox
 emacs25-nox
 gnupg-agent
 gnupg2
@@ -16,6 +15,7 @@ libnet-ldap-perl
 lua-mode
 mutt
 org-mode
+pandoc
 silversearcher-ag
 sudo
 tmux
