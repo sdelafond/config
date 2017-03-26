@@ -304,7 +304,6 @@ prefix argument."
 ;;   (org-crypt-use-before-save-magic)
 ;;   (setq org-crypt-key "sdelafond@gmx.net")
 ;;   (add-hook 'before-save-hook 'org-encrypt-entries)
-
   (require 'ob-ruby)
   (require 'ob-python)
   (require 'ob-js)
@@ -626,6 +625,8 @@ _h_tml    ^ ^        _A_SCII:
       (if (looking-back "^")
           (hydra-org-template/body)
         (self-insert-command 1))))
+
+  (local-set-key (kbd "<M-RET>") 'org-meta-return)
 
   (local-set-key (kbd "C-M-h")
                  (defhydra hydra-org-timestamp-change (:color amaranth :hint nil)
@@ -1201,11 +1202,11 @@ _b_   _f_   _o_k        _y_ank
 
 ;; git-gutter
 (require 'git-gutter)
+;;(global-git-gutter-mode t)
 (setq git-gutter:disabled-modes '(org-mode))
 (setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
 (setq git-gutter:modified-sign "↯")
 (setq git-gutter:separator-sign "|")
-(global-git-gutter-mode t)
 (set-face-foreground 'git-gutter:modified "yellow")
 
 ;; unique buffer names
@@ -1302,7 +1303,8 @@ _b_   _f_   _o_k        _y_ank
                                                                      (org-mode)
                                         ;(flyspell-mode)
                                                                      )))
-                ("\\.\\(todo\\|csv\\)$"               . org-mode)
+                ("\\.\\(todo\\|csv\\)$"               . (lambda () (progn
+								     (org-mode))))
                 ("\\.jsp$" 		      	      . (lambda () (progn
                                                            (jsp-mode)
                                                            (company-mode))))
