@@ -480,8 +480,8 @@ settings.bindings.global = {
   [{settings.keys.super_alt, "z"}] = function() switch_screen(false) end,
   [{settings.keys.super_alt_shift, "z"}] = function() switch_screen(true) end,
   
-  [{settings.keys.super_alt, "n"}] = function() awful.tag.incmwfact(-0.05) end,
-  [{settings.keys.super_alt, "p"}] = function() awful.tag.incmwfact(0.05) end,
+  [{settings.keys.super_alt, "p"}] = function() awful.tag.incmwfact(-0.05) end,
+  [{settings.keys.super_alt, "n"}] = function() awful.tag.incmwfact(0.05) end,
   
   [{settings.keys.super_alt, "i"}] = function() awful.tag.incncol(1) end,
   [{settings.keys.super_alt, "o"}] = function() awful.tag.incncol(-1) end,
