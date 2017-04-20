@@ -274,6 +274,7 @@ prefix argument."
                       helm-projectile
                       ht
                       hydra
+                      key-chord
                       ;; ipython
                       pkg-info
                       projectile
@@ -875,6 +876,10 @@ characters C1 and C2 belong to the same 'class'."
         (message (concat "Saved " buffer-file-name " with +x")))))
 (add-hook 'after-save-hook 'make-buffer-executable-if-hashbang)
 
+;; key-chord
+(key-chord-mode 1)
+(setq key-chord-two-keys-delay 0.1)
+
 ;; flycheck
 (setq flycheck-keymap-prefix "\C-c ~")
 (global-flycheck-mode)
@@ -1093,6 +1098,7 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("n" hydra-navigate/body)
   (";" org-mark-ring-push :color red)
   ("/" org-mark-ring-goto :color blue)))
+(key-chord-define-global "jj" 'goto/body)
 
 (global-set-key
  (kbd "M-g y")
@@ -1385,7 +1391,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
    (quote
-    (yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter git-commit-mode flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter git-commit-mode flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 4)
  '(safe-local-variable-values
    (quote
