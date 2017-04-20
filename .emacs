@@ -860,6 +860,21 @@ characters C1 and C2 belong to the same 'class'."
     (load-file savehist-file))
 (savehist-mode 1)
 
+;; save files starting with #! as executable
+;; (from https://github.com/baron42bba/.emacs.d/blob/master/bba.org#safe-hash-bang-files-executable)
+(defun make-buffer-executable-if-hashbang ()
+  (if (and (save-excursion
+             (save-restriction
+               (widen)
+               (goto-char (point-min))
+               (save-match-data
+                 (looking-at "^#!"))))
+           (not (file-executable-p buffer-file-name)))
+      (progn
+        (shell-command (concat "chmod ugo+x " buffer-file-name))
+        (message (concat "Saved " buffer-file-name " with +x")))))
+(add-hook 'after-save-hook 'make-buffer-executable-if-hashbang)
+
 ;; flycheck
 (setq flycheck-keymap-prefix "\C-c ~")
 (global-flycheck-mode)
