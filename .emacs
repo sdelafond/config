@@ -295,6 +295,15 @@ prefix argument."
 
 ;; _____________________________________________________________________
 ;; Hooks
+(defun my-mutt-hook ()
+  (progn 
+    (mail-mode)
+    (flyspell-mode)
+    (turn-on-orgtbl)
+    (turn-on-orgstruct)
+    (choose-dict-automatically)
+    (local-set-key "\C-ci" 'format-email-body)))
+
 (defun my-org-mode-hook ()
 ;;   (require 'org-expiry)
 ;;   (org-expiry-insinuate)
@@ -1328,15 +1337,6 @@ _b_   _f_   _o_k        _y_ank
 (defun jsp-mode ()
   (interactive)
   (multi-mode 1 'html-mode '("<%" jde-mode) '("%>" html-mode)))
-
-(defun my-mutt-hook ()
-  (progn 
-    (mail-mode)
-    (flyspell-mode)
-    (turn-on-orgtbl)
-    (turn-on-orgstruct)
-    (choose-dict-automatically)
-    (local-set-key "\C-ci" 'format-email-body)))
 
 ;; _____________________________________________________________________
 ;; Custom-set
