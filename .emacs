@@ -291,8 +291,6 @@ prefix argument."
     (unless (package-installed-p package)
       (package-install package))))
 
- 
-
 ;; _____________________________________________________________________
 ;; Hooks
 (defun my-mutt-hook ()
@@ -825,7 +823,7 @@ characters C1 and C2 belong to the same 'class'."
 ;; _____________________________________________________________________
 ;; General preferences
 
-;; No more "C-x C-s C-x #'
+;; No more "C-x C-s C-x #' (server-mode)
 (define-key global-map "\C-xj" '(lambda ()
                                   (interactive)
                                   (save-buffer)
@@ -845,6 +843,22 @@ characters C1 and C2 belong to the same 'class'."
 (setq avy-styles-alist '((avy-goto-char-2 . post)))
 (define-key global-map (kbd "C-c SPC") 'avy-goto-line)
 (define-key global-map (kbd "M-n") 'avy-goto-char-2)
+
+;; saving history locally: available on every system, and still private as
+;; it's not in the public git emacs configuration
+;; (from https://github.com/baron42bba/.emacs.d/blob/master/bba.org#save-history)
+(setq savehist-additional-variables '(kill-ring 
+				      search-ring
+				      regexp-search-ring
+				      last-kbd-macro
+				      kmacro-ring
+				      shell-command-history))
+(setq kmacro-ring-max 42)
+(setq history-delete-duplicates t)
+(setq savehist-file "~/org/emacs_history")
+(if (file-exists-p savehist-file)
+    (load-file savehist-file))
+(savehist-mode 1)
 
 ;; flycheck
 (setq flycheck-keymap-prefix "\C-c ~")
