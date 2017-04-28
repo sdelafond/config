@@ -274,6 +274,7 @@ prefix argument."
                       helm-projectile
                       ht
                       hydra
+		      json-mode
                       key-chord
                       ;; ipython
                       pkg-info
@@ -1276,6 +1277,7 @@ _b_   _f_   _o_k        _y_ank
 (setq sh-basic-offset 2)
 (setq sh-indentation 2)
 (setq standard-indent 2)
+(setq js-indent-level 2)
 (setq tab-width 2)
 (setq vc-follow-symlinks t)
 (setq visible-bell t)
@@ -1336,6 +1338,7 @@ _b_   _f_   _o_k        _y_ank
                 ("^/tmp/mutt"                         . my-mutt-hook)
                 ("^\\(.*/\\.followup\\|\\.article\\)" . my-mutt-hook)
                 ("DSA-"                               . flyspell-mode)
+                ("\.json"                             . json-mode)
                 ("\.jsx"                              . js-mode)
                 ("CVE/list$"                          . debian-cvelist-mode)
                 ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
@@ -1386,12 +1389,13 @@ _b_   _f_   _o_k        _y_ank
    (quote
     ("." "/usr/share/java/jde.jar" "/opt/tomcat/common/lib/servlet.jar" "/usr/share/java/junit.jar")))
  '(jde-jdk-registry (quote (("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun"))))
+ '(json-reformat:indent-width 2)
  '(load-home-init-file t t)
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
    (quote
-    (key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter git-commit-mode flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter git-commit-mode flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 4)
  '(safe-local-variable-values
    (quote
