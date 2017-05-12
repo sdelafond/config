@@ -274,7 +274,7 @@ prefix argument."
                       helm-projectile
                       ht
                       hydra
-		      json-mode
+                      json-mode
                       key-chord
                       ;; ipython
                       pkg-info
