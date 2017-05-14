@@ -228,7 +228,7 @@ i() { # install package $1
     openbsd*)
       s pkg_add -v $@ ;;
     linux-gnu*)
-      s apt-get install $@ ;;
+      s apt install $@ ;;
     *)
       echo "Platform $OSTYPE not supported" ;;
   esac
