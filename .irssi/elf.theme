@@ -76,11 +76,11 @@ abstracts = {
   warningmessage = "%yWarning:%n $*";
   errormessage = "%rError:%n $*";
   attentionmessage = "%YAttention:%n $*";
-  channelmessage = "%BChannel:%n $*";
+  channelmessage = "%MChannel:%n $*";
   usermessage = "%CUser:%n $*";
 
   # channel name is printed
-  channel = "%B$*%n";
+  channel = "%C$*%n";
 
   # nick is printed
   nick = "%c$*%c%n";
@@ -89,7 +89,7 @@ abstracts = {
   nickhost = "[%c$*%n]";
 
   # server name is printed
-  server = "%b$*%n";
+  server = "%c$*%n";
 
   # some kind of comment is printed
   comment = "$*";
@@ -98,7 +98,7 @@ abstracts = {
   reason = "(%c{comment $*}%n)";
 
   # mode change is printed ([+o nick])
-  mode = "[%B{comment $*}%n]";
+  mode = "[%M{comment $*}%n]";
 
   ##
   ## channel specific messages
@@ -363,7 +363,7 @@ formats = {
     pubmsg_channel = "{pubmsgnick $3 {pubnick \00313$[-13]0} %n|%m({msgchannel $1})%n}$2";
     line_start = "            %w-%c-%C-%n| %n";
     line_start_irssi = "            {line_start}%n| %rIrssi: %n";
-    servertag = "[%b$0%n]";
+    servertag = "[%c$0%n]";
     refnum_too_low = "{errormessage Window number must be greater than 1}";
     error_server_sticky = "{errormessage Window's server is sticky and it cannot be changed without -unsticky option}";
     set_server_sticky = "{acknowledgedmessage Window's server set sticky}";
@@ -387,11 +387,11 @@ formats = {
     setupserver_removed = "{acknowledgedmessage Server {server $0} removed}";
     setupserver_not_found = "{errormessage Server {server $0} not found}";
     your_nick = "{infomessage Your nickname is {nick $0}}";
-    join = "%b-->> {channick_hilight $0} {chanhost_hilight $1} has joined {channel $2}";
-    part = "%b<--- {channick $0} {chanhost $1} has left {channel $2} {reason $3}";
+    join = "%c-->> {channick_hilight $0} {chanhost_hilight $1} has joined {channel $2}";
+    part = "%c<--- {channick_hilight $0} {chanhost_hilight $1} has left {channel $2} {reason $3}";
     kick = "%R!!!!%n {channick $0} was kicked from {channel $1} by {nick $2} {reason $3}";
-    quit = "%b<<-- {channick $0} {chanhost $1} has quit {reason $2}";
-    quit_once = "%b<<-- {channel $3} {channick $0} {chanhost $1} has quit {reason $2}";
+    quit = "%c<<-- {channick $0} {chanhost $1} has quit {reason $2}";
+    quit_once = "%c<<-- {channel $3} {channick $0} {chanhost $1} has quit {reason $2}";
     invite = "{attentionmessage {nick $0} invites you to {channel $1}}";
     not_invited = "{errormessage You have not been invited to a channel!}";
     new_topic = "{channelmessage {nick $0} changed the topic of {channel $1} to: $2}";
