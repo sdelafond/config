@@ -28,6 +28,7 @@ xset r 108
 
 # screen sleep
 xscreensaver -nosplash &
+xss-lock -l -- xscreensaver-command --lock &
 xset dpms 0 0 0
 xset s off
 case $HOST in
@@ -53,3 +54,4 @@ xsc &
 export _JAVA_AWT_WM_NONREPARENTING=1 # for awesome+java
 exec awesome # -c /etc/xdg/awesome/rc.lua
 #sawfish
+
