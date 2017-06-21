@@ -280,6 +280,7 @@ awful.rules.rules = {
   { rule = { name = "puff" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "beastie" }, properties = { tag = getTagByShortcut("5") } },
   { rule = { name = "lanner" }, properties = { tag = getTagByShortcut("4") } },
+  { rule = { name = "rpi" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "hippie" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { name = "t60" }, properties = { tag = getTagByShortcut("4") } },
   { rule = { class = "Vncviewer", name = "hp" }, properties = { tag = getTagByShortcut("F3") } },
