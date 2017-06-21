@@ -283,6 +283,7 @@ prefix argument."
                       smartparens
                       ;; vcl-mode
                       yaml-mode
+		      yasnippet
 		      )))
   (package-initialize)
   ;; fetch the list of packages available
@@ -357,6 +358,7 @@ prefix argument."
 
   ;; speed commands
   (setq org-use-speed-commands t)
+  (setq org-speed-commands-user (quote (("S" . widen))))
 
   ;; agenda
   (setq org-agenda-include-diary nil)
@@ -929,6 +931,7 @@ characters C1 and C2 belong to the same 'class'."
 
 ;; projectile
 (require 'projectile)
+(setq projectile-use-git-grep t)
 (projectile-global-mode)
 ;; Override some projectile keymaps
 (eval-after-load 'projectile
@@ -936,6 +939,14 @@ characters C1 and C2 belong to the same 'class'."
      (define-key projectile-command-map (kbd "b") 'helm-projectile-switch-buffer)
      (define-key projectile-command-map (kbd "f") 'helm-projectile)
      (define-key projectile-command-map (kbd "p") 'helm-projectile-switch-project)))
+
+;; yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
+(define-key yas-minor-mode-map [tab] nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(global-set-key (kbd "C-c y") 'yas-insert-snippet)
+(yas/reload-all)
 
 ;;;; hydras
 
