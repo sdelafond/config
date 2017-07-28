@@ -20,6 +20,4 @@ fi
  
 #tmpfile="`mktemp $PDIR/mutt_XXXXXXXX.pdf`"
 tmpfile="/tmp/mutt-msg.pdf"
-enscript $INPUT -G2r -p - 2>/dev/null | ps2pdf - $tmpfile
-$OPEN_PDF $tmpfile >/dev/null 2>&1 &
-sleep 1
+iconv -c -f utf-8 -t ISO-8859-1 $INPUT | enscript -G -p - 2>/dev/null | ps2pdf - $tmpfile
