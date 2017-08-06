@@ -3,12 +3,15 @@
 xargs echo sudo apt-get install --yes <<EOF 
 aspell-en
 aspell-fr
-awesome
-awesome-extra
+fonts-dejavu
+fonts-dejavu-core
+fonts-dejavu-extra
+fonts-font-awesome
 emacs-goodies-el
 emacs25-nox
 gnupg-agent
 gnupg2
+i3
 jq
 lbdb
 libnet-ldap-perl
@@ -16,6 +19,7 @@ lua-mode
 mutt
 org-mode
 pandoc
+py3status
 silversearcher-ag
 sudo
 tmux

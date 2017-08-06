@@ -18,6 +18,7 @@ set $mod Mod4
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono Bold 10
+#FontAwesome Bold 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -176,8 +177,8 @@ bar {
 ## Variables
 set $app.terminal xsc
 set $app.terminal_without_screen xterm
-set $app.screen_lock bash -c "xset dpms force off ; xscreensaver-command -lock"
-set $app.screen_off bash -c "sleep 1 ; xset dpms force off"
+set $app.screen_lock bash -c "xset dpms force off && xscreensaver-command -lock"
+set $app.screen_off bash -c "sleep 1 && xset dpms force off"
 set $app.selection ~/bin/browser-maybe-selection.rb
 set $app.keyboard_layout ~/bin/keyboard-layout.sh
 set $app.volume ~/bin/pulse-volume.sh
@@ -202,8 +203,8 @@ bindsym XF86MonBrightnessUp exec $app.backlight -inc 2
 bindsym XF86MonBrightnessDown exec $app.backlight -dec 2
 
 # screen lock/off
-bindsym $mod+l exec app.screen_lock
-bindsym $mod+o exec app.screen_off
+bindsym $mod+l exec $app.screen_lock
+bindsym $mod+o exec $app.screen_off
 
 # selection -> web
 bindsym $mod+F1 exec $app.selection default
@@ -211,6 +212,12 @@ bindsym $mod+F2 exec $app.selection default chromium
 
 # keyboard layout
 bindsym $mod+F12 exec $app.keyboard_layout
+
+## Mouse bindings
+# FIXME
+bindsym --whole-window $mod+button3 exec $app.volume mute
+bindsym --whole-window $mod+button4 exec $app.volume up
+bindsym --whole-window $mod+button5 exec $app.volume down
 
 ## Clients assignments
 assign [class="^URxvt$" title="mine.nu$"] 4
