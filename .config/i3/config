@@ -44,10 +44,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+n focus left
-bindsym $mod+p focus right
-bindsym $mod+semicolon focus down
-#bindsym $mod+l focus up
+bindsym $mod+p focus left
+bindsym $mod+n focus right
+bindsym $mod+Shift+p focus up
+bindsym $mod+Shift+n focus down
 
 # # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
@@ -88,10 +88,10 @@ bindsym $mod+Shift+space floating toggle
 #bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+j focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+k focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -103,17 +103,6 @@ bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-
-bindsym Ctrl+1 workspace 1
-bindsym Ctrl+2 workspace 2
-bindsym Ctrl+3 workspace 3
-bindsym Ctrl+4 workspace 4
-bindsym Ctrl+5 workspace 5
-bindsym Ctrl+6 workspace 6
-bindsym Ctrl+7 workspace 7
-bindsym Ctrl+8 workspace 8
-bindsym Ctrl+9 workspace 9
-
 #bindsym $mod+0 workspace 10
 
 # move focused container to workspace
@@ -126,7 +115,7 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+#bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -213,6 +202,27 @@ bindsym $mod+F2 exec $app.selection default chromium
 # keyboard layout
 bindsym $mod+F12 exec $app.keyboard_layout
 
+# workspaces
+bindsym Ctrl+1 workspace 1
+bindsym Ctrl+2 workspace 2
+bindsym Ctrl+3 workspace 3
+bindsym Ctrl+4 workspace 4
+bindsym Ctrl+5 workspace 5
+bindsym Ctrl+6 workspace 6
+bindsym Ctrl+7 workspace 7
+bindsym Ctrl+8 workspace 8
+bindsym Ctrl+9 workspace 9
+bindsym Ctrl+F1 workspace F1
+bindsym Ctrl+F2 workspace F2
+bindsym Ctrl+F3 workspace F3
+bindsym Ctrl+F4 workspace F4
+bindsym Ctrl+F5 workspace F5
+bindsym Ctrl+F6 workspace F6
+bindsym Ctrl+F7 workspace F7
+
+# last workspace
+bindsym $mod+a workspace back_and_forth
+
 ## Mouse bindings
 # FIXME
 bindsym --whole-window $mod+button3 exec $app.volume mute
@@ -220,4 +230,67 @@ bindsym --whole-window $mod+button4 exec $app.volume up
 bindsym --whole-window $mod+button5 exec $app.volume down
 
 ## Clients assignments
+
+# terminals
 assign [class="^URxvt$" title="mine.nu$"] 4
+assign [class="^URxvt$" title="hetz"] 4
+assign [class="^URxvt$" title="centurion$"] 4
+assign [class="^URxvt$" title="lanner$"] 4
+assign [class="^URxvt$" title="omnia"] 4
+
+assign [class="^URxvt$" title="bpi"] 5
+assign [class="^URxvt$" title="beastie$"] 5
+
+assign [class="^URxvt$" title="untangle"] 3
+assign [class="^URxvt$" title="ngfw"] 3
+
+assign [class="^URxvt$" title="debian.org"] 6
+
+assign [class="^URxvt$" title="recette-"] 3
+assign [class="^URxvt$" title="qt-"] 3
+assign [class="^URxvt$" title="prod-"] 5
+assign [class="^URxvt$" title="th2.prod"] 6
+assign [class="^URxvt$" title="infra-"] 7
+assign [class="^URxvt$" title="deploy-"] 7
+assign [class="^URxvt$" title="seb-debian$"] 7
+
+assign [class="^URxvt$" title="x230$"] 1
+assign [class="^URxvt$" title="x1$"] 1
+
+assign [class="^URxvt$" ] 6
+
+# browsers
+assign [class="irefox$"] 2
+assign [class="hromium$"] 2
+
+# VNC
+assign [class="rdp"] 5
+assign [class="vnc"] 5
+
+# VM
+assign [class="rdesktop"] 9
+assign [class="qemu"] 9
+assign [class="kvm"] 9
+assign [class="virtualbox"] 9
+assign [class="steam"] 9
+
+# vids/pics
+assign [class="vlc"] F1
+assign [class="qiv"] F1
+assign [class="feh"] F1
+assign [class="geeqie"] F1
+assign [class="mplayer"] F1
+
+# sound
+assign [class="gmpc"] F2
+assign [class="spotify"] F2
+
+# comms
+assign [class="skype"] F4
+
+# graphics
+assign [class="gimp"] F5
+assign [class="dia"] F5
+
+# photo
+assign [class="darktable"] F7
