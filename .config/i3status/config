@@ -51,8 +51,8 @@ wireless _first_ {
 
 ethernet _first_ {
         # if you use %speed, i3status requires root privileges
-        format_up = "E%ip (%speed)"
-        format_down = "E"
+        format_up = "%ip (%speed)"
+        format_down = ""
 }
 
 whatismyip { # py3status
