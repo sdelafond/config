@@ -188,8 +188,8 @@ bindsym XF86AudioLowerVolume exec $app.volume down
 bindsym XF86AudioMute exec $app.volume mute
 
 # brightness
-bindsym XF86MonBrightnessUp exec $app.backlight -inc 2
-bindsym XF86MonBrightnessDown exec $app.backlight -dec 2
+bindsym XF86MonBrightnessUp exec $app.backlight -inc
+bindsym XF86MonBrightnessDown exec $app.backlight -dec
 
 # screen lock/off
 bindsym $mod+l exec $app.screen_lock
