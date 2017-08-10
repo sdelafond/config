@@ -33,6 +33,7 @@
 	ra = rebase --abort
 	rc = rebase --continue
 	rh = reset --hard
+	rc = rebase --interactive
 	sst = show --stat
 	s = status
 	st = status
