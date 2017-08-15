@@ -28,14 +28,23 @@ xset r 108
 
 # screen sleep
 xscreensaver -nosplash &
-xss-lock -l -- xscreensaver-command --lock &
+#xss-lock -l -- xscreensaver-command --lock &
 xset dpms 0 0 0
 xset s off
 case $HOST in
   mp)
-    xrandr --output VGA1 --auto --output DP1 --auto --left-of VGA1 ;;
+    screen1="DP1"
+    screen2="VGA1"
+    xrandr --output $screen1 --primary --auto --output $screen2 --auto --right-of $screen1 ;;
   centurion)
-    xrandr --output DP-4 --primary --mode 2560x1440 --output HDMI-0 --auto --left-of DP-4 --output DVI-D-0 --auto --right-of DP-4 ;;
+    screen1="DP-4"
+    screen2="DVI-D-0"
+    screen3="HDMI-0"
+    xrandr --output $screen1 --primary --mode 2560x1440 --output $screen2 --auto --right-of DP-4 --output $screen3 --auto --left-of DP-4 ;;
+  x1)
+    screen1="eDP-1"
+    screen2=$screen1
+    screen3=$screen1 ;;
 esac
 
 # systray
@@ -47,11 +56,11 @@ autocutsel -selection CLIPBOARD -fork
 autocutsel -selection PRIMARY -fork
 
 # clients
-gkrellm &
+#gkrellm &
 
 # WM
 #export _JAVA_AWT_WM_NONREPARENTING=1 # for awesome+java
 /usr/bin/feh --bg-center ~/.config/awesome/background.png
-exec i3 # -c /etc/xdg/awesome/rc.lua
-#sawfish
+exec i3
+
 
