@@ -129,6 +129,7 @@ bindsym $mod+Shift+F9 move container to workspace F9
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+bindsym $mod+Shift+w exec /home/seb/bin/i3-write.sh
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -174,10 +175,6 @@ bar {
 
 # Added by Seb
 
-## Colors
-client.focused_inactive #333333 #285577 #ffffff #484e50 #5f676a
-client.focused #4c7899 #397aac #ffffff #2e9ef4  #285577
-
 ## Variables
 set $app.terminal xsc
 set $app.terminal_without_screen xterm
@@ -188,10 +185,14 @@ set $app.keyboard_layout ~/bin/keyboard-layout.sh
 set $app.volume ~/bin/pulse-volume.sh
 set $app.backlig xbacklight
 set $app.backlight ~/bin/xbacklight.sh
-# screens will be overridden on a per-host basis via i3-msg
-set $screen1 DP-4
-set $screen2 DVI-D-0
-set $screen3 HDMI-0
+# screens will be overridden on a per-host basis
+set $screen1 I3_SCREEN_1
+set $screen2 I3_SCREEN_2
+set $screen3 I3_SCREEN_3
+
+## Colors
+client.focused_inactive #333333 #285577 #ffffff #484e50 #5f676a
+client.focused #4c7899 #397aac #ffffff #2e9ef4  #285577
 
 ## Settings
 focus_on_window_activation none
@@ -317,11 +318,15 @@ assign [class="^URxvt$" title="home$"] 1
 
 assign [class="^URxvt$" ] 6
 
+# office
+assign [class="(?i)office" ] 8
+
 # browsers
 assign [class="(?i)firefox$" title="Default"] F1
 assign [class="(?i)firefox$" title="Untangle"] F3
 assign [class="(?i)firefox$" title="Debian"] F6
 assign [class="(?i)irefox$" title="app"] F7
+assign [class="(?i)irefox$"] F1
 assign [class="(?i)chromium$"] F2
 
 # VNC & co

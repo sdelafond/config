@@ -33,19 +33,25 @@ xset dpms 0 0 0
 xset s off
 case $HOST in
   mp)
-    screen1="DP1"
-    screen2="VGA1"
-    xrandr --output $screen1 --primary --auto --output $screen2 --auto --right-of $screen1 ;;
+    I3_SCREEN_1="DP1"
+    I3_SCREEN_2="VGA1"
+    I3_SCREEN_3=$I3_SCREEN_2
+    xrandr --output $I3_SCREEN_1 --primary --auto --output $I3_SCREEN_2 --auto --right-of $I3_SCREEN_1 ;;
   centurion)
-    screen1="DP-4"
-    screen2="DVI-D-0"
-    screen3="HDMI-0"
-    xrandr --output $screen1 --primary --mode 2560x1440 --output $screen2 --auto --right-of DP-4 --output $screen3 --auto --left-of DP-4 ;;
+    I3_SCREEN_1="DP-4"
+    I3_SCREEN_2="DVI-D-0"
+    I3_SCREEN_3="HDMI-0"
+    xrandr --output $I3_SCREEN_1 --primary --mode 2560x1440 --output $I3_SCREEN_2 --auto --right-of DP-4 --output $I3_SCREEN_3 --auto --left-of DP-4 ;;
   x1)
-    screen1="eDP-1"
-    screen2=$screen1
-    screen3=$screen1 ;;
+    I3_SCREEN_1="eDP-1"
+    I3_SCREEN_2=$I3_SCREEN_1
+    I3_SCREEN_3=$I3_SCREEN_1 ;;
+  *)
+    I3_SCREEN_1=$(xrandr -q | awk '/connected/ {print $1;exit}') # first connected
+    I3_SCREEN_2=$I3_SCREEN_1
+    I3_SCREEN_3=$I3_SCREEN_1 ;;
 esac
+export I3_SCREEN_1 I3_SCREEN_2 I3_SCREEN_3
 
 # systray
 pasystray > /dev/null 2>&1 &
@@ -61,6 +67,7 @@ autocutsel -selection PRIMARY -fork
 # WM
 #export _JAVA_AWT_WM_NONREPARENTING=1 # for awesome+java
 /usr/bin/feh --bg-center ~/.config/awesome/background.png
+/home/seb/bin/i3-write.sh
 exec i3
 
 
