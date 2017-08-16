@@ -33,9 +33,9 @@ xset dpms 0 0 0
 xset s off
 case $HOST in
   mp)
-    I3_SCREEN_1="DP1"
-    I3_SCREEN_2="VGA1"
-    I3_SCREEN_3=$I3_SCREEN_2
+    I3_SCREEN_1="VGA-1"
+    I3_SCREEN_2="DP-2"
+    I3_SCREEN_3=$I3_SCREEN_1
     xrandr --output $I3_SCREEN_1 --primary --auto --output $I3_SCREEN_2 --auto --right-of $I3_SCREEN_1 ;;
   centurion)
     I3_SCREEN_1="DP-4"
