@@ -46,7 +46,7 @@ wifi {
 
 wireless _first_ {
         format_up = "&#xf1eb;%quality %essid %ip"
-        format_down = "W:down"
+        format_down = "&#xf1eb;:down"
 }
 
 ethernet _first_ {
