@@ -274,6 +274,7 @@ bindsym $mod+Ctrl+11 workspace F11
 bindsym $mod+Ctrl+12 workspace F12
 
 bindsym $mod+Ctrl+h workspace F1; workspace 4; workspace 1
+bindsym $mod+Ctrl+d workspace F6; workspace 6
 bindsym $mod+Ctrl+u workspace F3; workspace 3
 bindsym $mod+Ctrl+m workspace F7; workspace 7
 
@@ -307,7 +308,8 @@ assign [class="^URxvt$" title="debian.org"] 6
 assign [class="^URxvt$" title="recette-"] 3
 assign [class="^URxvt$" title="qt-"] 3
 assign [class="^URxvt$" title="prod-"] 5
-assign [class="^URxvt$" title="th2.prod"] 6
+assign [class="^URxvt$" title="th2.prod"] 2
+assign [class="^URxvt$" title="py.priv"] 2
 assign [class="^URxvt$" title="infra-"] 7
 assign [class="^URxvt$" title="deploy-"] 7
 assign [class="^URxvt$" title="seb-debian$"] 7
@@ -351,5 +353,5 @@ assign [class="(?i)dia"] F8
 assign [class="(?i)darktable"] F9
 
 # sound
-assign [class="(?i)gmpc"] 2
-assign [class="(?i)spotify"] 2
+assign [class="(?i)gmpc"] 9
+assign [class="(?i)spotify"] 9
