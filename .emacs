@@ -1317,6 +1317,7 @@ _b_   _f_   _o_k        _y_ank
 (global-set-key "\C-cg" 'goto-line)
 (global-set-key "\C-x/" 'revert-buffer)
 (global-set-key "\C-ca" 'align)
+(global-set-key (kbd "M-k") 'kill-whole-line)
 
 ;; associate file patterns and modes
 (setq auto-mode-alist 
