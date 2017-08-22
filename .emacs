@@ -1409,7 +1409,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
    (quote
-    (yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter git-commit-mode flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter git-commit-mode flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 4)
  '(safe-local-variable-values
    (quote
