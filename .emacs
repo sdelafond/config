@@ -485,16 +485,16 @@ prefix argument."
                                 ("debian-dsp" . "https://tracker.debian.org/%s")
                                 ("debian-dst" . "https://security-tracker.debian.org/tracker/%s")))
 
-  ;; *** entry :tag1:tag2: -> link #tag1,tag2#
+  ;; *** [[url][desc]] :tag1:tag2: -> url #tag1,tag2#
   (defun org-convert-entry-to-irc ()
     (interactive)
-    (let ((heading (org-element-property :raw-value
-                                         (save-excursion
-                                           (org-back-to-heading)
-                                           (org-element-at-point))))
+    (let ((link (save-excursion
+                  (org-back-to-heading)
+                  (search-forward " ")
+                  (org-element-link-parser)))
           (tags (mapconcat 'identity (org-get-tags) ","))
           (delim "#"))
-    (message (concat heading " " delim tags delim))))
+      (message (concat (org-element-property :raw-link link) " " delim tags delim))))
 
   ;; spelling
   (defadvice org-mode-flyspell-verify (after org-mode-flyspell-verify-hack activate)
@@ -591,6 +591,8 @@ prefix argument."
                  "* TODO %?\n  DEADLINE: %t")
                 ("l" "Link" entry (file+olp "~/org/links.org" "URLs" "Inbox")
                  "* %?\n  %U")
+                ("L" "Link from FF" entry (file+olp "~/org/links.org" "URLs" "Inbox")
+                 "* %a %?\n  %U")
                 ("e" "Mail" entry (file+headline "~/org/home.todo" "Inbox")
                  "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
