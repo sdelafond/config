@@ -269,9 +269,9 @@ bindsym $mod+Ctrl+6 workspace F6
 bindsym $mod+Ctrl+7 workspace F7
 bindsym $mod+Ctrl+8 workspace F8
 bindsym $mod+Ctrl+9 workspace F9
-bindsym $mod+Ctrl+10 workspace F10
-bindsym $mod+Ctrl+11 workspace F11
-bindsym $mod+Ctrl+12 workspace F12
+bindsym $mod+Ctrl+0 workspace F10
+# bindsym $mod+Ctrl+11 workspace F11
+# bindsym $mod+Ctrl+12 workspace F12
 
 bindsym $mod+Ctrl+h workspace F1; workspace 4; workspace 1
 bindsym $mod+Ctrl+d workspace F6; workspace 6
