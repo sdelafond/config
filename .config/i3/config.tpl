@@ -344,8 +344,10 @@ assign [class="(?i)steam"] F9
 
 # vids, pics, etc
 assign [class="(?i)vlc"] F8
-assign [class="(?i)qiv"] F8
-assign [class="(?i)feh"] F8
+#assign [title="(?i)^qiv"] F8
+for_window [title="(?i)^qiv"] floating enable, move window to workspace F8
+#assign [class="(?i)feh"] F8
+for_window [class="(?i)feh"] floating enable, move window to workspace F8
 assign [class="(?i)geeqie"] F8
 assign [class="(?i)mplayer"] F8
 assign [class="(?i)gimp"] F8
