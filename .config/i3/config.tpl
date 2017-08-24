@@ -227,6 +227,7 @@ bindsym $mod+F12 exec $app.keyboard_layout
 workspace 1 output $screen1
 workspace 2 output $screen1
 workspace 3 output $screen1
+workspace 6 output $screen1
 
 workspace F1 output $screen2
 workspace F2 output $screen2
