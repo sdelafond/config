@@ -40,8 +40,8 @@ sysdata {
 }
 
 wifi {
-  format_down = ""
   format_up = "{ssid} {signal_percent} {bitrate} {ip}"
+  format_down = ""
 }
 
 wireless _first_ {
