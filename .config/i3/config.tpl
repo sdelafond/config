@@ -357,4 +357,4 @@ assign [class="(?i)darktable"] F9
 
 # sound
 assign [class="(?i)gmpc"] 9
-assign [class="(?i)spotify"] 9
+for_window [class="(?i)spotify"] move window to workspace 9
