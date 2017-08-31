@@ -7,10 +7,12 @@
 	hydra-org-timestamp-change/body
 	hydra-org-timestamp-change/lambda-b
 	hydra-org-timestamp-change/lambda-f
+	hydra-org-timestamp-change/lambda-n
 	hydra-org-timestamp-change/lambda-p
 	hydra-org-timestamp-change/nil
 	))
 
 (setq mc/cmds-to-run-once
       '(
+	hydra-multiple-cursors/mc/mark-next-like-this
 	))

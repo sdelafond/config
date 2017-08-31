@@ -1060,7 +1060,7 @@ Git gutter:
 
 (global-set-key
  (kbd "M-g j")
- (defhydra goto (:color blue :hint nil)
+ (defhydra hydra-goto (:color blue :hint nil)
   "
 Goto:
 ^Char/Line^         ^Word^                ^org^                    ^search^
@@ -1112,7 +1112,7 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("n" hydra-navigate/body)
   (";" org-mark-ring-push :color red)
   ("/" org-mark-ring-goto :color blue)))
-(key-chord-define-global "jj" 'goto/body)
+(key-chord-define-global "jj" 'hydra-goto/body)
 
 (global-set-key
  (kbd "M-g y")
@@ -1184,6 +1184,27 @@ _b_   _f_   _o_k        _y_ank
   ("o" nil nil)
   ("q" nil "cancel" :color blue))
 (global-set-key (kbd "C-x SPC") 'hydra-rectangle/body)
+
+(defhydra hydra-multiple-cursors (:hint nil)
+  "
+     ^Up^            ^Down^        ^Other^
+----------------------------------------------
+[_p_]   Next    [_n_]   Next    [_l_] Edit lines
+[_P_]   Skip    [_N_]   Skip    [_a_] Mark all
+[_M-p_] Unmark  [_M-n_] Unmark  [_r_] Mark by regexp
+^ ^             ^ ^             [_q_] Quit
+"
+  ("l" mc/edit-lines :exit t)
+  ("a" mc/mark-all-like-this :exit t)
+  ("n" mc/mark-next-like-this)
+  ("N" mc/skip-to-next-like-this)
+  ("M-n" mc/unmark-next-like-this)
+  ("p" mc/mark-previous-like-this)
+  ("P" mc/skip-to-previous-like-this)
+  ("M-p" mc/unmark-previous-like-this)
+  ("r" mc/mark-all-in-region-regexp :exit t)
+  ("q" nil))
+(key-chord-define-global "mm" 'hydra-multiple-cursors/body)
 
 ;; numbering
 (line-number-mode t)
