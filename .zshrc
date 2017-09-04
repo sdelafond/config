@@ -286,6 +286,22 @@ bindkey '^q' dirname-previous-word
 
 bindkey '^W' kill-region
 
+# syntax highlighting
+local f="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -f $f ]] ; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=yellow,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=green,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=yellow,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=red,bold'
+  ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan,bold'
+fi
+
 ###################################
 # Completion settings
 ###################################
