@@ -1206,6 +1206,17 @@ _b_   _f_   _o_k        _y_ank
   ("q" nil))
 (key-chord-define-global "mm" 'hydra-multiple-cursors/body)
 
+(defhydra hydra-lisp-eval (:exit t :columns 2 :idle 1.0)
+  "Lisp eval"
+  ("r" eval-region "Region")
+  ("b" eval-buffer "Buffer")
+  ("e" eval-expression "S-expression")
+  ("l" eval-last-sexp "Last s-expression")
+  ("L" eval-last-sexp-print-value "Last s-expression and print value")
+  ("d" eval-defun "Defun / Function")
+  ("f" eval-defun "Defun / Function"))
+(key-chord-define-global "ll" 'hydra-lisp-eval/body)
+
 ;; numbering
 (line-number-mode t)
 (column-number-mode t)
