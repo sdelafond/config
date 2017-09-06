@@ -291,15 +291,22 @@ local f="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 if [[ -f $f ]] ; then
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+  ZSH_HIGHLIGHT_STYLES[command]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[arg0]='fg=cyan'
+  ZSH_HIGHLIGHT_STYLES[alias]='fg=yellow,bold'
+  ZSH_HIGHLIGHT_STYLES[function]='fg=yellow,bold'
+  ZSH_HIGHLIGHT_STYLES[reserved-word]='bg=magenta,bold,reverse'
+  ZSH_HIGHLIGHT_STYLES[builtin]='bg=blue,bold,reverse'
+  ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,underline'
+  ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=cyan,underline'
+  ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=yellow,bold'
   ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=yellow,bold'
   ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=magenta,bold'
   ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=green,bold'
   ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=cyan,bold'
   ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=yellow,bold'
   ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=red,bold'
-  ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'
-  ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=cyan,bold'
-  ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan,bold'
 fi
 
 ###################################
