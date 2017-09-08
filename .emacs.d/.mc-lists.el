@@ -11,6 +11,7 @@
 	hydra-org-timestamp-change/lambda-n
 	hydra-org-timestamp-change/lambda-p
 	hydra-org-timestamp-change/nil
+	org-delete-char
 	org-end-of-line
 	org-self-insert-command
 	))
