@@ -1206,7 +1206,7 @@ _b_   _f_   _o_k        _y_ank
   ("M-p" mc/unmark-previous-like-this)
   ("r" mc/mark-all-in-region-regexp :exit t)
   ("q" nil))
-(key-chord-define-global "mm" 'hydra-multiple-cursors/body)
+(key-chord-define-global "MM" 'hydra-multiple-cursors/body)
 
 (defhydra hydra-lisp-eval (:exit t :columns 2 :idle 0.4)
   "Lisp eval"
@@ -1217,7 +1217,7 @@ _b_   _f_   _o_k        _y_ank
   ("L" eval-last-sexp-print-value "Last s-expression and print value")
   ("d" eval-defun "Defun / Function")
   ("f" eval-defun "Defun / Function"))
-(key-chord-define-global "ll" 'hydra-lisp-eval/body)
+(key-chord-define-global "LL" 'hydra-lisp-eval/body)
 
 ;; numbering
 (line-number-mode t)
