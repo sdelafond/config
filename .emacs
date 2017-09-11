@@ -885,7 +885,8 @@ characters C1 and C2 belong to the same 'class'."
 
 ;; key-chord
 (key-chord-mode 1)
-(setq key-chord-two-keys-delay 0.1)
+(setq key-chord-one-keys-delay 0.1)
+(setq key-chord-two-key-delay 0.2)
 
 ;; flycheck
 (setq flycheck-keymap-prefix "\C-c ~")
@@ -1217,7 +1218,7 @@ _b_   _f_   _o_k        _y_ank
   ("L" eval-last-sexp-print-value "Last s-expression and print value")
   ("d" eval-defun "Defun / Function")
   ("f" eval-defun "Defun / Function"))
-(key-chord-define-global "LL" 'hydra-lisp-eval/body)
+(key-chord-define lisp-mode-map "LL" 'hydra-lisp-eval/body)
 
 ;; numbering
 (line-number-mode t)
