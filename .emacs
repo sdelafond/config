@@ -586,6 +586,7 @@ prefix argument."
   (setq org-refile-use-outline-path t)
   (setq org-outline-path-complete-in-steps nil)
   (setq org-default-notes-file org-agenda-files)
+  (setq seb/org-refile-files '())
   (setq org-refile-targets '((seb/org-refile-files . (:maxlevel . 2))))
 
   (setq org-capture-templates
