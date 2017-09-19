@@ -367,6 +367,7 @@ prefix argument."
   (setq org-agenda-start-day "-6m")
   (setq org-agenda-show-all-dates nil)
   (setq org-agenda-show-log nil)
+  (setq org-agenda-show-future-repeats 'next)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-delay-if-deadline t)
   (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
