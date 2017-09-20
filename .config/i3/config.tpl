@@ -284,6 +284,7 @@ bindsym $mod+Ctrl+u workspace F3; workspace 3
 bindsym $mod+Ctrl+m workspace F7; workspace 7
 
 # last workspace
+workspace_auto_back_and_forth yes
 bindsym $mod+a workspace back_and_forth
 
 ## Mouse bindings
