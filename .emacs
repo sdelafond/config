@@ -212,7 +212,7 @@ prefix argument."
 (defun my-autoload (&rest modes)
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
-(my-autoload "id" "ace-jump-mode" "align" "company-mode" "git-commit-mode" "gitignore-mode"
+(my-autoload "id" "ace-jump-mode" "align" "company-mode" "gitignore-mode"
              "gitconfig-mode" "helm" "helm-projectile" "projectile" "python-mode" "multi-mode" "org"
              "time-stamp" "pf-mode" "ruby-mode" "gtags"
              "outdent" "vcl-mode")
@@ -264,7 +264,6 @@ prefix argument."
                       epl
                       flycheck
                       flycheck-color-mode-line
-                      git-commit-mode
                       git-gutter
                       gitconfig-mode
                       gitignore-mode
@@ -276,6 +275,8 @@ prefix argument."
                       hydra
                       json-mode
                       key-chord
+		      magit
+		      magit-svn
 		      multiple-cursors
                       ;; ipython
                       pkg-info
@@ -910,6 +911,9 @@ characters C1 and C2 belong to the same 'class'."
   ("q"  nil))
 (global-set-key (kbd "M-g f") 'hydra-flycheck/body)
 
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; helm
 (setq
  ;; open helm buffer in another window
@@ -1448,7 +1452,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
    (quote
-    (dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter git-commit-mode flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 4)
  '(safe-local-variable-values
    (quote
