@@ -913,6 +913,7 @@ characters C1 and C2 belong to the same 'class'."
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 
 ;; helm
 (setq
