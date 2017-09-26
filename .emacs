@@ -1221,7 +1221,7 @@ _b_   _f_   _o_k        _y_ank
   ("q" nil))
 (key-chord-define-global "MM" 'hydra-multiple-cursors/body)
 
-(defhydra hydra-lisp-eval (:exit t :columns 2 :idle 0.4)
+(defhydra hydra-lisp-eval (:exit t :columns 2)
   "Lisp eval"
   ("r" eval-region "Region")
   ("b" eval-buffer "Buffer")
