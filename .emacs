@@ -912,6 +912,10 @@ characters C1 and C2 belong to the same 'class'."
 (global-set-key (kbd "M-g f") 'hydra-flycheck/body)
 
 ;; magit
+(defun my-magit-mode-hook ()
+  (progn
+    (setq magit-diff-refine-hunk "all")))
+(add-hook 'magit-mode-hook 'my-magit-mode-hook)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 
@@ -1453,7 +1457,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
    (quote
-    (dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 4)
  '(safe-local-variable-values
    (quote
