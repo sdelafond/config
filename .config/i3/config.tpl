@@ -62,8 +62,8 @@ bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
 # move workspace
-bindsym $mod+Shift+p move workspace to output left
-bindsym $mod+Shift+n move workspace to output right
+bindsym $mod+Shift+b move workspace to output left
+bindsym $mod+Shift+f move workspace to output right
 
 # # alternatively, you can use the cursor keys:
 # bindsym $mod+Shift+Left move left
@@ -283,7 +283,7 @@ bindsym $mod+Ctrl+u workspace F3; workspace 3
 bindsym $mod+Ctrl+m workspace F7; workspace 7
 
 # last workspace
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 bindsym $mod+a workspace back_and_forth
 
 ## Mouse bindings
