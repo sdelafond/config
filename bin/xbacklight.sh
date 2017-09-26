@@ -9,5 +9,5 @@ case $1 in
   -dec) op="-" ;;
 esac
 
-new=$(( $actual $op ( ${2:-1} * 5 ) ))
+new=$(( $actual $op ( ${2:-1} * 25 ) ))
 echo $new | sudo tee $DIR/brightness
