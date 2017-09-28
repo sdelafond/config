@@ -307,8 +307,10 @@ assign [class="^URxvt$" title="beastie$"] 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw"] 3
+for_window [class="^URxvt$" title="ngfw"] move window to workspace 3
 
 assign [class="^URxvt$" title="debian.org"] 6
+for_window [class="^URxvt$" title="debian"] move window to workspace 6
 
 assign [class="^URxvt$" title="recette-"] 3
 assign [class="^URxvt$" title="qt-"] 3
@@ -323,7 +325,7 @@ assign [class="^URxvt$" title="x230$"] 1
 assign [class="^URxvt$" title="x1$"] 1
 assign [class="^URxvt$" title="home$"] 1
 
-assign [class="^URxvt$" ] 6
+assign [class="^URxvt$" ] 1
 
 # office
 assign [class="(?i)office" ] 8
