@@ -167,7 +167,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 #  status_command i3status
-  status_command py3status -c ~/.config/i3status/config
+  status_command py3status -c ~/.config/i3status/config -l /dev/null
   position top
   tray_output primary
   colors {
