@@ -1476,6 +1476,8 @@ _b_   _f_   _o_k        _y_ank
  '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
  '(hydra-face-red ((t (:foreground "color-136" :weight bold))))
+ '(org-agenda-date-today ((t (:inherit org-agenda-date :foreground "color-228" :inverse-video t :underline t :slant italic :weight bold))))
+ '(org-agenda-date-weekend ((t (:inherit org-agenda-date))))
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
  '(org-checkbox-statistics-todo ((t (:foreground "color-177"))))
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))

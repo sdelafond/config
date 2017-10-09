@@ -1,4 +1,5 @@
-if [[ $wai == *tty[1-9]* ]] ; then # this is a console
+if [[ -z "$wai" ]] || [[ $wai == *tty[1-9]* ]] ; then 
+  # this is a single-user mode, or a text console
   setterm -powerdown 0 -powersave off -blank 0 # no screen blanking
   sudo loadkeys us # us keyboard layout, no matter what
   # switch caps-lock and control
