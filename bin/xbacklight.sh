@@ -9,5 +9,15 @@ case $1 in
   -dec) op="-" ;;
 esac
 
-new=$(( $actual $op ( ${2:-1} * 25 ) ))
+if [[ -z "$2" ]] && [[ $actual -gt 100 ]] ; then
+  step=25
+elif [[ $actual -gt 75 ]] ; then
+  step=15
+elif [[ $actual -gt 50 ]] ; then
+  step=10
+else
+  step=5
+fi
+
+new=$(( $actual $op $step ))
 echo $new | sudo tee $DIR/brightness
