@@ -331,11 +331,10 @@ assign [class="^URxvt$" ] 1
 assign [class="(?i)office" ] 8
 
 # browsers
-assign [class="(?i)firefox$" title="Default"] F1
+assign [class="(?i)navigator.*firefox"] F1
 assign [class="(?i)firefox$" title="Untangle"] F3
 assign [class="(?i)firefox$" title="Debian"] F6
 assign [class="(?i)irefox$" title="app"] F7
-assign [class="(?i)irefox$"] F1
 assign [class="(?i)chromium$"] F2
 
 # VNC & co
