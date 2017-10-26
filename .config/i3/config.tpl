@@ -163,20 +163,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-#  status_command i3status
-  status_command py3status -c ~/.config/i3status/config -l /dev/null
-  position top
-  tray_output primary
-  colors {
-    urgent_workspace #2f343a #EEEE00 #222222
-    focused_workspace #2f343a #336d99 #222222
-    focused_background #003300
-  }
-}
-
 # Added by Seb
 
 ## Variables
@@ -189,13 +175,27 @@ set $app.keyboard_layout ~/bin/keyboard-layout.sh
 set $app.volume ~/bin/pulse-volume.sh
 set $app.backlight ~/bin/xbacklight.sh
 # screens will be overridden on a per-host basis
-set $screen1 I3_SCREEN_1
-set $screen2 I3_SCREEN_2
-set $screen3 I3_SCREEN_3
+set $screen1 DP-4
+set $screen2 DVI-D-0
+set $screen3 HDMI-0
+set $color.focused #78acd2
 
 ## Colors
-client.focused_inactive #333333 #285577 #ffffff #484e50 #5f676a
-client.focused #4c7899 #397aac #ffffff #2e9ef4  #285577
+client.focused_inactive #333333 #285577 #000000 #484e50 #5f676a
+client.focused #4c7899 $color.focused #ffffff #2e9ef4  #285577
+
+## i3bar with py3status
+bar {
+#  status_command i3status
+  status_command py3status -c ~/.config/i3status/config -l /dev/null
+  position top
+  tray_output primary
+  colors {
+    urgent_workspace #2f343a #EEEE00 #222222
+    focused_workspace #2f343a $color.focused #ffffff
+    focused_background #004400
+  }
+}
 
 ## Settings
 focus_on_window_activation none
