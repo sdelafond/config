@@ -1452,7 +1452,7 @@ _b_   _f_   _o_k        _y_ank
  '(jde-jdk-registry (quote (("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun"))))
  '(json-reformat:indent-width 2)
  '(load-home-init-file t t)
- '(org-agenda-files (quote ("~/.config-home/org/home.todo")))
+ '(org-agenda-files (quote ("~/org/home.todo")))
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
