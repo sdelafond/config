@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+	dabbrev-expand
 	helm-M-x
 	hydra-multiple-cursors/nil
 	hydra-org-timestamp-change/body
