@@ -58,6 +58,9 @@ export I3_SCREEN_1 I3_SCREEN_2 I3_SCREEN_3
 pasystray > /dev/null 2>&1 &
 blueman-applet > /dev/null 2>&1 &
 
+# notifications
+dunst &
+
 # clipboard sync
 autocutsel -selection CLIPBOARD -fork
 autocutsel -selection PRIMARY -fork

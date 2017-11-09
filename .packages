@@ -3,6 +3,7 @@
 xargs echo sudo apt-get install --yes <<EOF 
 aspell-en
 aspell-fr
+dunst
 fonts-dejavu
 fonts-dejavu-core
 fonts-dejavu-extra
