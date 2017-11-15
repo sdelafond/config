@@ -29,7 +29,7 @@ xset r 108
 
 # screen sleep
 xscreensaver -nosplash &
-#xss-lock -l -- xscreensaver-command --lock &
+xss-lock -l -- xscreensaver-command --lock &
 xset dpms 0 0 0
 xset s off
 case $HOST in
