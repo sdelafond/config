@@ -1452,12 +1452,11 @@ _b_   _f_   _o_k        _y_ank
  '(jde-jdk-registry (quote (("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun"))))
  '(json-reformat:indent-width 2)
  '(load-home-init-file t t)
- '(org-agenda-files (quote ("~/org/home.todo")))
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
    (quote
-    (magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
