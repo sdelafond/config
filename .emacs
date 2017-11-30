@@ -914,6 +914,7 @@ characters C1 and C2 belong to the same 'class'."
 ;; magit
 (defun my-magit-mode-hook ()
   (progn
+    (setq magit-commit-ask-to-stage "verbose")
     (setq magit-diff-refine-hunk "all")))
 (add-hook 'magit-mode-hook 'my-magit-mode-hook)
 (global-set-key (kbd "C-x g") 'magit-status)
