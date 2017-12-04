@@ -1,0 +1,120 @@
+#!/bin/bash
+
+# Copyright 2010,2012,2013,2015 Ben Hutchings
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+set -e
+
+unset GIT_URL_BASE
+export BUG_URL_LIST=
+
+while [ $# -ge 1 ]; do
+    case "$1" in
+	--url)
+	    case "$2" in
+		http*/gitweb\?p=* | */\?p=*)
+		    export GIT_URL_BASE="$2;a=commit;h="
+		    ;;
+		http*/cgit/* | http*/cgit.cgi/* | http://kernel.ubuntu.com/git/* | http*//cgit.* | https://git.kernel.org/*)
+		    export GIT_URL_BASE="$2/commit?id="
+		    ;;
+		https://github.com/*)
+		    export GIT_URL_BASE="$2/commit/"
+		    ;;
+		http://sourceforge.net/p/*)
+		    export GIT_URL_BASE="$2/ci/"
+		    ;;
+		http://git.infradead.org/*.git)
+		    # Ugh. This is gitweb but the URL structure is different.
+		    export GIT_URL_BASE="$2/commit/"
+		    ;;
+		*)
+		    echo >&2 "E: URL '$2' not recognised as gitweb, cgit, github or sourceforge"
+		    exit 2
+		    ;;
+	    esac
+	    shift 2
+	    ;;
+	--local)
+	    export GIT_URL_BASE=
+	    shift 1
+	    ;;
+	--bug)
+	    case "$2" in
+		http*://*)
+		    bug_url="$2"
+		    ;;
+		[0-9]*)
+		    bug_url="https://bugs.debian.org/$2"
+		    ;;
+		CVE-*)
+		    bug_url="https://security-tracker.debian.org/tracker/$2"
+		    CVE_LIST="$CVE_LIST $bug_url"
+		    ;;
+		*)
+		    echo >&2 "E: Bug '$2' not recognised as URL or number"
+		    exit 2
+		    ;;
+	    esac
+	    BUG_URL_LIST="$BUG_URL_LIST $bug_url"
+	    shift 2
+	    ;;
+	*)
+	    break
+	    ;;
+    esac
+done
+
+if [ ! -v GIT_URL_BASE ]; then
+    echo >&2 "I: Assuming this patch is in Linus's tree."
+    echo >&2 "I: If not, use the --url option to specify the git web URL."
+    export GIT_URL_BASE=https://git.kernel.org/linus/
+fi
+
+echo "$@" | while read name; do
+    printf '%s\n' "$name"
+    mv "$name" "$name".orig
+    awk '
+BEGIN {
+    split(ENVIRON["BUG_URL_LIST"], bug_urls)
+    split(ENVIRON["CVE_LIST"], cves)
+}
+FNR == 1 { hash = $2 }
+/^$/ && hash != "" {
+    printf("From: %s <%s>\n",  ENVIRON["GIT_AUTHOR_EMAIL"], ENVIRON["DEBEMAIL"])
+    print "Date: "  strftime("%Y")
+    print "Subject: " ENVIRON["CVE_LIST"]
+    print
+    if (ENVIRON["GIT_URL_BASE"] != "") {
+        print "Origin: " ENVIRON["GIT_URL_BASE"] hash
+    } else {
+        print "Forwarded: no"
+    }
+    for (i in bug_urls) {
+       if (match(bug_urls[i], "^https?://bugs\\.debian\\.org/")) {
+           print "Bug-Debian: " bug_urls[i]
+       } else if (match(bug_urls[i], "^https?://security-tracker\\.debian\\.org/")) {
+           print "Bug-Debian-Security: " bug_urls[i]
+       } else {
+           print "Bug: " bug_urls[i]
+       }
+    }
+    hash = ""
+}
+FNR > 1 { print }' \
+        "$name".orig > "$name"
+    rm "$name".orig
+done
