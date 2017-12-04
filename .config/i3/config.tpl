@@ -343,9 +343,9 @@ assign [class="(?i)vnc"] F5
 assign [class="(?i)rdesktop"] F5
 
 # VM
-assign [class="(?i)qemu"] F9
-assign [class="(?i)kvm"] F9
-assign [class="(?i)virtualbox"] F9
+assign [class="(?i)qemu"] F5
+assign [class="(?i)kvm"] F5
+assign [class="(?i)virtualbox"] F5
 assign [class="(?i)steam"] F9
 
 # vids, pics, etc
