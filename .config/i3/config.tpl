@@ -175,10 +175,9 @@ set $app.keyboard_layout ~/bin/keyboard-layout.sh
 set $app.volume ~/bin/pulse-volume.sh
 set $app.backlight ~/bin/xbacklight.sh
 # screens will be overridden on a per-host basis
-set $screen1 DP-4
-set $screen2 DVI-D-0
-set $screen3 HDMI-0
-set $color.focused #78acd2
+set $screen1 I3_SCREEN_1
+set $screen2 I3_SCREEN_2
+set $screen3 I3_SCREEN_3
 
 ## Colors
 client.focused_inactive #333333 #285577 #000000 #484e50 #5f676a
