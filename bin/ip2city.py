@@ -9,13 +9,13 @@ host = sys.argv[1]
 try:
   addr = socket.gethostbyname(host)
 except:
-  print "Couldn't resolve %s" % (host,)
+  print("Couldn't resolve %s" % (host,))
   sys.exit(1)
 
 h = GeoIP.new(GeoIP.GEOIP_MEMORY_CACHE).record_by_addr(addr)
 
 if not h:
-  print "couldn't locate host %s" % (host,)
+  print("couldn't locate host %s" % (host,))
   sys.exit(1)
 
 h = collections.defaultdict(str, **h)
