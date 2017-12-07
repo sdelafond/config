@@ -21,5 +21,4 @@ if not h:
 h = collections.defaultdict(str, **h)
 h['host'] = host
 
-print(h)
 print(outputTpl % h)
