@@ -178,6 +178,7 @@ set $app.backlight ~/bin/xbacklight.sh
 set $screen1 I3_SCREEN_1
 set $screen2 I3_SCREEN_2
 set $screen3 I3_SCREEN_3
+set $color.focused #78acd2
 
 ## Colors
 client.focused_inactive #333333 #285577 #000000 #484e50 #5f676a
