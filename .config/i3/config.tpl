@@ -332,9 +332,9 @@ assign [class="(?i)office" ] 8
 
 # browsers
 assign [class="(?i)navigator.*firefox"] F1
-for_window [class="(?i)irefox$" title="Untangle"] move window to workspace F3
-for_window [class="(?i)irefox$" title="Debian"] move window to workspace F6
-for_window [class="(?i)irefox$" title="app"] move window to workspace F7
+for_window [class="(?i)irefox$" title="^Untangle"] move window to workspace F3
+for_window [class="(?i)irefox$" title="^Debian"] move window to workspace F6
+for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
 assign [class="(?i)chromium$"] F2
 
 # VNC & co
