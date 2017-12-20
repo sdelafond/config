@@ -919,6 +919,7 @@ characters C1 and C2 belong to the same 'class'."
 (add-hook 'magit-mode-hook 'my-magit-mode-hook)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(global-magit-file-mode)
 
 ;; helm
 (setq
