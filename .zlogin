@@ -1,4 +1,4 @@
-local wai="`who am i`" # this is used several times, make it a local variable
+local wai="$(who am i)" # this is used several times, make it a local variable
 
 # remapping a few keys
 source ~/.zsh.console
