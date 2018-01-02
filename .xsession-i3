@@ -1,4 +1,6 @@
 eval $(dbus-launch)
+pgrep -u $USER pulseaudio || pulseaudio --start --log-target=syslog
+
 xrdb -load ~/.Xdefaults
 
 # declare that we'll map mouse keys
