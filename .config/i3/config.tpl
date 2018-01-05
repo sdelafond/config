@@ -97,43 +97,11 @@ bindsym $mod+j focus parent
 # focus the child container
 bindsym $mod+k focus child
 
-# switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-#bindsym $mod+0 workspace 10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+F1 move container to workspace F1
-bindsym $mod+Shift+F2 move container to workspace F2
-bindsym $mod+Shift+F3 move container to workspace F3
-bindsym $mod+Shift+F4 move container to workspace F4
-bindsym $mod+Shift+F5 move container to workspace F5
-bindsym $mod+Shift+F6 move container to workspace F6
-bindsym $mod+Shift+F7 move container to workspace F7
-bindsym $mod+Shift+F8 move container to workspace F8
-bindsym $mod+Shift+F9 move container to workspace F9
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+w exec /home/seb/bin/i3-write.sh
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -202,6 +170,9 @@ focus_on_window_activation none
 
 ## Keyboard bindings
 
+# write config from template
+bindsym $mod+Shift+w exec /home/seb/bin/i3-write.sh
+
 # urgent WS
 bindsym $mod+u [urgent=latest] focus
 
@@ -242,6 +213,10 @@ workspace 4 output $screen3
 workspace 9 output $screen3
 workspace F5 output $screen3
 workspace F8 output $screen3
+workspace T4 output $screen3
+workspace T9 output $screen3
+workspace T5 output $screen3
+workspace T8 output $screen3
 
 bindsym Ctrl+1 workspace 1
 bindsym Ctrl+2 workspace 2
@@ -252,30 +227,56 @@ bindsym Ctrl+6 workspace 6
 bindsym Ctrl+7 workspace 7
 bindsym Ctrl+8 workspace 8
 bindsym Ctrl+9 workspace 9
-bindsym Ctrl+F1 workspace F1
-bindsym Ctrl+F2 workspace F2
-bindsym Ctrl+F3 workspace F3
-bindsym Ctrl+F4 workspace F4
-bindsym Ctrl+F5 workspace F5
-bindsym Ctrl+F6 workspace F6
-bindsym Ctrl+F7 workspace F7
-bindsym Ctrl+F8 workspace F8
-bindsym Ctrl+F9 workspace F9
-bindsym Ctrl+F10 workspace F10
-bindsym Ctrl+F11 workspace F11
-bindsym Ctrl+F12 workspace F12
-bindsym $mod+Ctrl+1 workspace F1
-bindsym $mod+Ctrl+2 workspace F2
-bindsym $mod+Ctrl+3 workspace F3
-bindsym $mod+Ctrl+4 workspace F4
-bindsym $mod+Ctrl+5 workspace F5
-bindsym $mod+Ctrl+6 workspace F6
-bindsym $mod+Ctrl+7 workspace F7
-bindsym $mod+Ctrl+8 workspace F8
-bindsym $mod+Ctrl+9 workspace F9
-bindsym $mod+Ctrl+0 workspace F10
-# bindsym $mod+Ctrl+11 workspace F11
-# bindsym $mod+Ctrl+12 workspace F12
+
+bindsym Ctrl+Shift+1 move container to workspace 1
+bindsym Ctrl+Shift+2 move container to workspace 2
+bindsym Ctrl+Shift+3 move container to workspace 3
+bindsym Ctrl+Shift+4 move container to workspace 4
+bindsym Ctrl+Shift+5 move container to workspace 5
+bindsym Ctrl+Shift+6 move container to workspace 6
+bindsym Ctrl+Shift+7 move container to workspace 7
+bindsym Ctrl+Shift+8 move container to workspace 8
+bindsym Ctrl+Shift+9 move container to workspace 9
+
+bindsym $mod+1 workspace F1
+bindsym $mod+2 workspace F2
+bindsym $mod+3 workspace F3
+bindsym $mod+4 workspace F4
+bindsym $mod+5 workspace F5
+bindsym $mod+6 workspace F6
+bindsym $mod+7 workspace F7
+bindsym $mod+8 workspace F8
+bindsym $mod+9 workspace F9
+
+bindsym $mod+Shift+1 move container to workspace F1
+bindsym $mod+Shift+2 move container to workspace F2
+bindsym $mod+Shift+3 move container to workspace F3
+bindsym $mod+Shift+4 move container to workspace F4
+bindsym $mod+Shift+5 move container to workspace F5
+bindsym $mod+Shift+6 move container to workspace F6
+bindsym $mod+Shift+7 move container to workspace F7
+bindsym $mod+Shift+8 move container to workspace F8
+bindsym $mod+Shift+9 move container to workspace F9
+
+bindsym $mod+Ctrl+1 workspace T1
+bindsym $mod+Ctrl+2 workspace T2
+bindsym $mod+Ctrl+3 workspace T3
+bindsym $mod+Ctrl+4 workspace T4
+bindsym $mod+Ctrl+5 workspace T5
+bindsym $mod+Ctrl+6 workspace T6
+bindsym $mod+Ctrl+7 workspace T7
+bindsym $mod+Ctrl+8 workspace T8
+bindsym $mod+Ctrl+9 workspace T9
+
+bindsym $mod+CtrlShift+1 move container to workspace T1
+bindsym $mod+CtrlShift+2 move container to workspace T2
+bindsym $mod+CtrlShift+3 move container to workspace T3
+bindsym $mod+CtrlShift+4 move container to workspace T4
+bindsym $mod+CtrlShift+5 move container to workspace T5
+bindsym $mod+CtrlShift+6 move container to workspace T6
+bindsym $mod+CtrlShift+7 move container to workspace T7
+bindsym $mod+CtrlShift+8 move container to workspace T8
+bindsym $mod+CtrlShift+9 move container to workspace T9
 
 bindsym $mod+Ctrl+h workspace F1; workspace 4; workspace 1
 bindsym $mod+Ctrl+d workspace F6; workspace 6
@@ -363,3 +364,6 @@ assign [class="(?i)darktable"] F9
 # sound
 assign [class="(?i)gmpc"] 9
 for_window [class="(?i)spotify"] move window to workspace 9
+
+# comm
+assign [class="(?i)signal"] T4
