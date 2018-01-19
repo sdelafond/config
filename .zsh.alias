@@ -14,6 +14,7 @@ if [ $? = 2 ] ; then
 else
   grepSwitch="P"
 fi
+alias D="diff"
 alias G="grep -${grepSwitch}"
 alias Gi="grep -i${grepSwitch}"
 alias Gv="grep -v${grepSwitch}"
