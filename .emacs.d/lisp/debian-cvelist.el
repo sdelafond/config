@@ -26,13 +26,15 @@
    "Keymap for `debian-cvelist-mode'.")
 
 (defvar debian-cvelist-font-lock-keywords
-  '(("^CVE-[0-9]\\{4\\}-[0-9X]\\{4,5\\}" . font-lock-function-name-face)
+  '(("^CVE-[0-9]\\{4\\}-[0-9X]\\{4,7\\}" . font-lock-function-name-face)
+    ("D[LS]A-[0-9]\\{4,5\\}-[0-9]" . font-lock-function-name-face)
+    ("#[0-9]\\{1,7\\}" . font-lock-type-face)
     ("^\tNOTE:" . font-lock-comment-delimiter-face)
     ("^\tTODO:" . font-lock-warning-face)
     ("^\t\\(RESERVED\\|NOT-FOR-US\\|REJECTED\\)" . font-lock-keyword-face)
-    ("^CVE-[0-9]\\{4\\}-[0-9X]\\{4,5\\}" "\\[\\(.*\\)\\]$" nil nil (1 font-lock-variable-name-face))
+    ("^CVE-[0-9]\\{4\\}-[0-9X]\\{4,7\\}" "[\\[(]\\(.+?\\).$" nil nil (1 font-lock-variable-name-face))
     ("\\<unfixed\\|undetermined\\>" . font-lock-warning-face)
-    ("\\<end-of-life\\|not-affected\\|no-dsa\\>" . font-lock-constant-face))
+    ("\\<end-of-life\\|not-affected\\|no-dsa\\|ignored\\|postponed\\>" . font-lock-constant-face))
   "Keyword highlighting for `debian-cvelist-mode'")
 
 (defun debian-cvelist-is-cve ()
