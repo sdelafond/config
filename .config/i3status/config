@@ -24,6 +24,7 @@ order += "ethernet _first_"
 order += "whatismyip"
 #order += "battery all"
 order += "battery_level"
+order += "backlight"
 order += "volume master"
 order += "tztime local"
 
@@ -32,7 +33,7 @@ netdata {
 }
 
 net_rate {
-  format = "{down}↓ {up}↑"
+  format = "{down}↓{up}↑"
 }
 
 sysdata {
@@ -65,6 +66,9 @@ whatismyip { # py3status
 
 battery_level {
   notification = true
+  color_charging = "#FFFF80"
+  color_degraded = "#FF5050"
+  color_bad = "#FF3300"
   format = "{icon} {percent}% {time_remaining}"
 }
 
@@ -80,8 +84,15 @@ disk "/" {
         format = "%avail"
 }
 
+backlight {
+  color = "#00CCFF"
+  format = "☼ {level}"
+}
+
 volume master {
-  format = "<span foreground='#F272DF'>♪ %volume</span>"
-  format_muted = "<span foreground='#F272DF'>♪ muted</span>"
+  color = "#F272DF"
+  color_muted = "#AABBCC"
+  format = "♪ %volume"
+  format_muted = "♪ muted"
 #  device = "pulse"
 }
