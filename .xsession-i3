@@ -73,7 +73,7 @@ autocutsel -selection PRIMARY -fork
 # WM
 #export _JAVA_AWT_WM_NONREPARENTING=1 # for awesome+java
 /usr/bin/feh --bg-center ~/.config/awesome/background.png
-/home/seb/bin/i3-write.sh
+/home/seb/bin/i3-write.py
 exec i3
 
 

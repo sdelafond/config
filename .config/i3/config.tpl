@@ -143,9 +143,9 @@ set $app.keyboard_layout ~/bin/keyboard-layout.sh
 set $app.volume ~/bin/pulse-volume.sh
 set $app.backlight ~/bin/xbacklight.sh
 # screens will be overridden on a per-host basis
-set $screen1 I3_SCREEN_1
-set $screen2 I3_SCREEN_2
-set $screen3 I3_SCREEN_3
+set $screen1 %ENV(I3_SCREEN_1)
+set $screen2 %ENV(I3_SCREEN_2)
+set $screen3 %ENV(I3_SCREEN_3)
 set $color.focused #78acd2
 
 ## Colors
@@ -308,10 +308,10 @@ assign [class="^URxvt$" title="beastie$"] 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
-for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
+%IF(%ENV(HOSTNAME) == centurion)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 
 assign [class="^URxvt$" title="debian.org"] 6
-for_window [class="^URxvt$" title="debian@"] move window to workspace 6
+%IF(%ENV(HOSTNAME) == centurion)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
 
 assign [class="^URxvt$" title="recette-"] 3
 assign [class="^URxvt$" title="qt-"] 3
