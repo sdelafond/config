@@ -13,11 +13,13 @@ xinput set-prop $XINPUT_POINTER "Evdev Middle Button Emulation" 1
 xinput set-prop $XINPUT_POINTER "libinput Middle Emulation Enabled" 1
 xinput set-prop $XINPUT_POINTER "Evdev Middle Button Timeout" 50
 # single-finger scrolling only
-XINPUT_TP=$(xinput | perl -nle 'print $1 if m/Synaptics .*id=(\d+)/i' | tail -1)
-xinput set-prop $XINPUT_TP "Synaptics ClickPad" 0
-xinput set-prop $XINPUT_TP "Synaptics Edges" 0 0 0 4807
-xinput set-prop $XINPUT_TP "Synaptics Edge Scrolling" 1 1 0
-xinput set-prop $XINPUT_TP "Synaptics Palm Detection" 1
+XINPUT_TP="SynPS/2 Synaptics TouchPad"
+xinput set-prop "$XINPUT_TP" "Synaptics ClickPad" 0
+xinput set-prop "$XINPUT_TP" "Synaptics Edges" 0 0 0 4807
+xinput set-prop "$XINPUT_TP" "Synaptics Edge Scrolling" 1 1 0
+xinput set-prop "$XINPUT_TP" "Synaptics Palm Detection" 1
+# trackpoint
+xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
 
 # mouse acceleration
 xset m 4 10
