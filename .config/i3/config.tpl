@@ -171,7 +171,7 @@ focus_on_window_activation none
 ## Keyboard bindings
 
 # write config from template
-bindsym $mod+Shift+w exec /home/seb/bin/i3-write.sh
+bindsym $mod+Shift+w exec /home/seb/bin/i3-write.py
 
 # urgent WS
 bindsym $mod+u [urgent=latest] focus
