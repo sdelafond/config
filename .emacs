@@ -323,7 +323,7 @@ prefix argument."
   (defun my-org-confirm-babel-evaluate (lang body)
     (not (string= lang "ditaa")))  ; don't ask for ditaa
   (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
-  (require 'ob-sh)
+  (require 'ob-shell)
   (require 'ob-sql)
   (require 'ob-emacs-lisp)
   (setq org-src-fontify-natively t)

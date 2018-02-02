@@ -49,6 +49,10 @@ bindsym $mod+n focus right
 bindsym $mod+Shift+p focus up
 bindsym $mod+Shift+n focus down
 
+# focus outputs
+bindsym $mod+f focus output right
+bindsym $mod+b focus output left
+
 # # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
 # bindsym $mod+Down focus down
@@ -86,7 +90,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+f floating toggle
+#bindsym $mod+f floating toggle
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -171,7 +175,7 @@ focus_on_window_activation none
 ## Keyboard bindings
 
 # write config from template
-bindsym $mod+Shift+w exec /home/seb/bin/i3-write.sh
+bindsym $mod+Shift+w exec /home/seb/bin/i3-write.py
 
 # urgent WS
 bindsym $mod+u [urgent=latest] focus
