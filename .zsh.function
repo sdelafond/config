@@ -177,11 +177,15 @@ gg() {
 gitseb() {
 #  setopt localoptions xtrace
   local d reload
+  local -a commands
+  commands=(${(s:, :)@})
   for d in ~/.config-*(N) ~/etc ~/org ; do
     [ -d $d ] || continue
-    echo "## $(basename ${d//.config-})"
+    echo "\e[1m## $(basename ${d//.config-})\e[0m"
     pushd $d
-    git $@
+    for command in ${commands[@]} ; do
+      git $=command
+    done
     popd
   done
   [[ "$1" == "pull" ]] &&  zreload
