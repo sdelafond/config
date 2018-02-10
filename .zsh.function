@@ -177,7 +177,8 @@ gg() {
 gitseb() {
 #  setopt localoptions xtrace
   local d reload
-  for d in ~/.config-*(N) ; do
+  for d in ~/.config-*(N) ~/etc ~/org ; do
+    [ -d $d ] || continue
     echo "## $(basename ${d//.config-})"
     pushd $d
     git $@
