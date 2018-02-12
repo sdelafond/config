@@ -20,6 +20,7 @@ alias Gi="grep -i${grepSwitch}"
 alias Gv="grep -v${grepSwitch}"
 alias Gvi="grep -vi${grepSwitch}"
 alias GS='gitseb'
+alias GSU='GS add -A, ca, p --no-edit, push'
 alias H='head'
 alias M='more'
 alias P='perl -pe'
