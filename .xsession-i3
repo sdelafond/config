@@ -12,14 +12,6 @@ XINPUT_POINTER=$(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/i' | tail -
 xinput set-prop $XINPUT_POINTER "Evdev Middle Button Emulation" 1
 xinput set-prop $XINPUT_POINTER "libinput Middle Emulation Enabled" 1
 xinput set-prop $XINPUT_POINTER "Evdev Middle Button Timeout" 50
-# single-finger scrolling only
-XINPUT_TP="SynPS/2 Synaptics TouchPad"
-xinput set-prop "$XINPUT_TP" "Synaptics ClickPad" 0
-xinput set-prop "$XINPUT_TP" "Synaptics Edges" 0 0 0 4807
-xinput set-prop "$XINPUT_TP" "Synaptics Edge Scrolling" 1 1 0
-xinput set-prop "$XINPUT_TP" "Synaptics Palm Detection" 1
-# trackpoint
-xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
 
 # mouse acceleration
 xset m 4 10
@@ -50,7 +42,17 @@ case $HOST in
   x1)
     I3_SCREEN_1="eDP-1"
     I3_SCREEN_2=$I3_SCREEN_1
-    I3_SCREEN_3=$I3_SCREEN_1 ;;
+    I3_SCREEN_3=$I3_SCREEN_1
+    # single-finger scrolling only
+    XINPUT_TP="SynPS/2 Synaptics TouchPad"
+    xinput set-prop "$XINPUT_TP" "Synaptics ClickPad" 0
+    xinput set-prop "$XINPUT_TP" "Synaptics Edges" 0 0 0 4807
+    xinput set-prop "$XINPUT_TP" "Synaptics Edge Scrolling" 1 1 0
+    xinput set-prop "$XINPUT_TP" "Synaptics Palm Detection" 1
+    # trackpoint
+    xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
+    # mouse acceleration
+    echo 130 | sudo tee /sys/devices/platform/i8042/serio1/serio2/sensitivity ;;
   *)
     I3_SCREEN_1=$(xrandr -q | awk '/connected/ {print $1;exit}') # first connected
     I3_SCREEN_2=$I3_SCREEN_1
