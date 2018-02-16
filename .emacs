@@ -318,6 +318,7 @@ prefix argument."
 ;;   (add-hook 'before-save-hook 'org-encrypt-entries)
   (require 'ob-ruby)
   (require 'ob-python)
+  (setq org-babel-python-command "python3")
   (require 'ob-js)
   (require 'ob-ditaa)
   (defun my-org-confirm-babel-evaluate (lang body)
