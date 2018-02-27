@@ -1,21 +1,61 @@
-macro attach d "<pipe-message> gpg --quiet --decrypt | less\n" "decrypt with GnuPG"
+## macros
 
+# GPG decrypt
+macro attach  d	  "<pipe-message> gpg --quiet --decrypt | less\n" "decrypt with GnuPG"
+
+# From:
 macro compose \ca '<esc>f^uSébastien Delafond <sdelafond@gmx.net><enter>' 'Set From: #1'
 macro compose \cd '<esc>f^uSébastien Delafond <seb@debian.org><enter>' 'Set From: #3'
 macro compose \cb '<esc>f^uSébastien Delafond <sdelafond@gmail.com><enter>' 'Set From: #4'
 macro compose \ct '<edit-type><kill-line>text/html; charset=utf-8<Enter><edit-headers>' 'Make HTML attachement'
-#macro compose \cw '^t^utext/html; charset=iso-8859-1^jFpython make-html-mail.py^jy^j' 'Make HTML attachement'
+
+# reload
 macro generic \c. ':source ~/.muttrc<enter>' 'Reload preferences'
-macro generic n ':source ~/.muttrc<enter>' 'Reload preferences'
+macro generic n	  ':source ~/.muttrc<enter>' 'Reload preferences'
 
-macro pager <F10> |urlview\n
+# tag
+macro pager   ';' 'q<tag-prefix>'
 
-# emacs-like bindings
+# search
+macro index   \eS 'c=search<enter>' 'Go to search folder'
+
+# send to org
+macro index   \eo "|~/bin/mail-to-org.py<enter>"
+macro pager   \eo "|~/bin/mail-to-org.py<enter>"
+
+# Show documentation when pressing F1
+macro generic <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
+macro index   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
+macro pager   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
+
+# travel2cal
+macro index   \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import (default)"
+macro pager   \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import (default)"
+macro index   \ei "<pipe-message>~/vcs/travel2cal/travel2cal.py -n Seb<enter>" "Import (Seb)"
+macro pager   \ei "<pipe-message>~/vcs/travel2cal/travel2cal.py -n Seb<enter>" "Import (Seb)"
+
+# inbox
+macro index   i "c=INBOX<enter>\eV"
+
+## dealing with URLs
+macro pager   <F10> |urlview\n
+# simulate the old url menu
+macro index   \cb |urlview\n 'call urlview to extract URLs out of a message'
+
+## emacs-like pager & index
+bind  pager   \cv   next-page
+bind  pager   \ev   previous-page
+bind  pager   *	    bottom
+bind  index   "\ev" previous-page
+bind  index   \cv   next-page
+bind  index   "\ev" previous-page
+bind  index   "\eu" next-new
+
+## arrows, just in case
 bind  pager   <up>     previous-line
 bind  pager   <down>   next-line
 bind  pager   <left>   exit
 bind  pager   <right>  view-attachments
-bind  pager   *        bottom
 bind  attach  <left>   exit
 bind  attach  <right>  view-attach
 bind  index   <right>  display-message
@@ -23,42 +63,5 @@ macro index   <left>   "c?"
 bind  browser <right>  select-entry
 bind  browser <left>   exit
 
-macro  pager   ';'     'q<tag-prefix>'
-
+# fetch mail
 bind index "^" imap-fetch-mail
-
-bind editor    \cn      history-down
-bind editor    \cp      history-up
-bind editor    "\e<delete>"    kill-word
-bind editor    "\e<backspace>" kill-word
-#map delete-char to a sane value
-#bind editor     <delete>  delete-char
-
-# weed out binary-only announcements to -devel-changes
-#macro index \CW T!~s\(.*source.*\)\nWn^T~A\n "Weed out binary-only announcements"
-
-# simulate the old url menu
-macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
-
-# Show documentation when pressing F1
-macro generic <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
-macro index   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
-macro pager   <f1> "!zless /usr/share/doc/mutt/manual.txt.gz\n" "Show Mutt documentation"
-
-macro index \eS 'c=search<enter>' 'Go to search folder'
-
-bind index \cv next-page
-bind index "\eu" next-new
-
-# travel2cal
-macro index \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
-macro pager \ci "<pipe-message>~/vcs/travel2cal/travel2cal.py<enter>" "Import"
-macro index \ei "<pipe-message>~/vcs/travel2cal/travel2cal.py -n Seb<enter>" "Import"
-macro pager \ei "<pipe-message>~/vcs/travel2cal/travel2cal.py -n Seb<enter>" "Import"
-
-# mutt -> org
-macro index \eo "|~/bin/mail-to-org.py<enter>"
-macro pager \eo "|~/bin/mail-to-org.py<enter>"
-
-# inbox
-macro index i "c=INBOX<enter>\eV"
