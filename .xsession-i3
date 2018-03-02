@@ -52,7 +52,7 @@ case $HOST in
     # trackpoint
     xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
     # mouse acceleration
-    echo 130 | sudo tee /sys/devices/platform/i8042/serio1/serio2/sensitivity ;;
+    echo 100 | sudo tee /sys/devices/platform/i8042/serio1/serio2/sensitivity ;;
   *)
     I3_SCREEN_1=$(xrandr -q | awk '/connected/ {print $1;exit}') # first connected
     I3_SCREEN_2=$I3_SCREEN_1
