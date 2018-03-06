@@ -309,6 +309,7 @@ assign [class="^URxvt$" title="omnia"] 2
 
 assign [class="^URxvt$" title="bpi"] 5
 assign [class="^URxvt$" title="beastie$"] 5
+%IF(%ENV(HOSTNAME) == centurion)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
