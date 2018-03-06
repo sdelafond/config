@@ -3,6 +3,10 @@
 # GPG decrypt
 macro attach  d	  "<pipe-message> gpg --quiet --decrypt | less\n" "decrypt with GnuPG"
 
+# general emacs-like behavior for history
+bind editor \Cp history-up
+bind editor \Cn history-down
+
 # From:
 macro compose \ca '<esc>f^uSébastien Delafond <sdelafond@gmx.net><enter>' 'Set From: #1'
 macro compose \cd '<esc>f^uSébastien Delafond <seb@debian.org><enter>' 'Set From: #3'
