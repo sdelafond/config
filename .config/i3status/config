@@ -37,7 +37,7 @@ net_rate {
 }
 
 sysdata {
-  format = "CPU:{cpu_usage}% Mem:{mem_used}/{mem_total}GB {mem_used_percent}%"
+  format = "CPU:{cpu_usage}% Mem:{mem_used}/{mem_total}GB {mem_used_percent}% {cpu_temp}"
 }
 
 wifi {
@@ -77,7 +77,7 @@ tztime local {
 }
 
 load {
-        format = "%1min"
+        format = "%1min %5min %15min"
 }
 
 disk "/" {
