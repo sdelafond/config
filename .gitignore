@@ -13,6 +13,9 @@ org/*.tex
 org/*.log
 org/*.html
 org/*.mm
+org/*.aux
+org/*.out
+org/*.toc
 *.debhelper*
 *.substvars
 python-module-stampdir/
