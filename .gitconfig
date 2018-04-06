@@ -79,3 +79,5 @@
 
 [magit]
 	hideCampaign = true
+[user]
+	signingkey = 0x91AD581ADAF6CE93
