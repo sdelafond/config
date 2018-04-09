@@ -71,12 +71,8 @@ dunst &
 autocutsel -selection CLIPBOARD -fork
 autocutsel -selection PRIMARY -fork
 
-# clients
-#gkrellm &
-
 # WM
-#export _JAVA_AWT_WM_NONREPARENTING=1 # for awesome+java
-/usr/bin/feh --bg-center ~/.config/awesome/background.png
+/usr/bin/feh --bg-center ~/.config/i3/background.png
 /home/seb/bin/i3-write.py
 exec i3
 
