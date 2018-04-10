@@ -75,5 +75,3 @@ autocutsel -selection PRIMARY -fork
 /usr/bin/feh --bg-center ~/.config/i3/background.png
 /home/seb/bin/i3-write.py
 exec i3
-
-
