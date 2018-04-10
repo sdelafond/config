@@ -5,7 +5,7 @@ URxvt.cutchars: `"'()*,;<>[]{|}
 
 URxvt.iso14755: false
 
-URxvt.letterSpace: 0
+URxvt.letterSpace: -1
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
 URxvt.boldFont: xft:DejaVu Sans Mono:bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
 URxvt.italicFont: xft:DejaVu Sans Mono:italic:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
