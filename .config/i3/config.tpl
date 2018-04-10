@@ -303,7 +303,8 @@ bindsym --whole-window $mod+button5 exec $app.volume down
 assign [class="^URxvt$" title="mine.nu$"] 4
 assign [class="^URxvt$" title="hetz"] 4
 
-assign [class="^URxvt$" title="centurion$"] 4
+%IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="mail@"] move window to workspace 4
+
 assign [class="^URxvt$" title="lanner$"] 2
 assign [class="^URxvt$" title="omnia"] 2
 
@@ -337,7 +338,7 @@ assign [class="^URxvt$" ] 1
 assign [class="(?i)office" ] 8
 
 # browsers
-assign [class="(?i)navigator.*firefox"] F1
+for_window [class="(?i)firefox$" title="^New Window"] move window to workspace F1
 for_window [class="(?i)irefox$" title="^Untangle"] move window to workspace F3
 for_window [class="(?i)irefox$" title="^Debian"] move window to workspace F6
 for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
