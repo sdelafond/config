@@ -60,6 +60,7 @@ widget, custom, latex, ediff."
      (magit-branch-remote ((t (:foreground "color-77" :weight bold))))
      (magit-hash ((t (:foreground "color-26"))))
      (magit-popup-argument ((t (:foreground "color-201" :weight bold))))
+     (magit-popup-option-value ((t (:foreground "color-201" :weight bold))))
      (font-lock-comment-face ((t (:foreground "color-252" :italic t :bold t))))
      (py-XXX-tag-face ((t (:foreground "color-252" :italic t :bold t)))) 
      (font-lock-string-face ((t (:foreground "color-210"))))
