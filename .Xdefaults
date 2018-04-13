@@ -22,7 +22,7 @@ URxvt.fadeColor: black
 URxvt.tintColor: pink
 URxvt.shading: 35
 URxvt.transparent: true
-URxvt.perl-ext-common: default,-selection,-searchable-scrollback
+URxvt.perl-ext-common: default,confirm-paste,-selection,-searchable-scrollback
 URxvt.pointerColor: yellow
 URxvt.pointerColor2: blue
 
