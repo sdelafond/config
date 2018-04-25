@@ -19,7 +19,7 @@ URxvt.scrollBar: false
 URxvt.externalBorder: 0
 URxvt.fading: 40
 URxvt.fadeColor: black
-URxvt.shading: 50
+URxvt.shading: 35
 URxvt.transparent: true
 URxvt.perl-ext-common: default,confirm-paste,-selection,-searchable-scrollback
 URxvt.pointerColor: yellow
