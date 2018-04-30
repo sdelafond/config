@@ -12,9 +12,13 @@
 	hydra-org-timestamp-change/lambda-n
 	hydra-org-timestamp-change/lambda-p
 	hydra-org-timestamp-change/nil
+	org-beginning-of-line
+	org-cycle
 	org-delete-char
 	org-end-of-line
+	org-kill-line
 	org-self-insert-command
+	org-time-stamp
 	))
 
 (setq mc/cmds-to-run-once
@@ -22,4 +26,6 @@
 	delete-window
 	hydra-multiple-cursors/body
 	hydra-multiple-cursors/mc/mark-next-like-this
+	hydra-multiple-cursors/mc/mark-previous-like-this
+	hydra-multiple-cursors/mc/unmark-previous-like-this
 	))
