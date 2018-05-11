@@ -1,5 +1,3 @@
-Aterm.cutchars: `"'()*,;<>[]{|}
-Rxvt.cutchars: `"'()*,;<>[]{|}
 XTerm.cutchars: `"'()*,;<>[]{|}
 URxvt.cutchars: `"'()*,;<>[]{|}
 
@@ -7,9 +5,9 @@ URxvt.iso14755: false
 
 URxvt.letterSpace: -1
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.boldFont: xft:DejaVu Sans Mono:bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.italicFont: xft:DejaVu Sans Mono:italic:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.boldItalicFont: xft:DejaVu Sans Mono:italic:bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.boldFont: xft:DejaVu Sans Mono:style=bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.italicFont: xft:DejaVu Sans Mono:style=oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.boldItalicFont: xft:DejaVu Sans Mono:style=bold oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
 
 URxvt.background: black
 URxvt.foreground: lightgrey
@@ -25,14 +23,14 @@ URxvt.perl-ext-common: default,confirm-paste,-selection,-searchable-scrollback
 URxvt.pointerColor: yellow
 URxvt.pointerColor2: blue
 
-! Xft*antialias:          true
+Xft*antialias:          true
 Xft*dpi:                96
 
 *customization: -color
 XTerm*termName:  xterm-256color
 
-XTerm*faceName: Bitstream DejaVu Sans Mono:pixelsize=13
-XTerm*faceNameDoubleSize:   Bitstream DejaVu Sans Mono:pixelsize=13
+XTerm*faceName: xft:DejaVu Sans Mono:pixelsize=13:antialias=true
+XTerm*faceNameDoubleSize: DejaVu Sans Mono:pixelsize=13:antialias=true
 XTerm*faceSize: 13
 XTerm*background: black
 XTerm*foreground: lightgrey
@@ -53,6 +51,3 @@ XTerm*on2Clicks: word
 XTerm*on3Clicks: regex [^ \n<>]+ 
 XTerm*on4Clicks: line
 XTerm*on5Clicks: all
-
-Emacs.geometry: 90x60
-Speebar.geometry: 35x60
