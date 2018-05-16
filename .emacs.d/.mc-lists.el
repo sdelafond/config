@@ -28,4 +28,5 @@
 	hydra-multiple-cursors/mc/mark-next-like-this
 	hydra-multiple-cursors/mc/mark-previous-like-this
 	hydra-multiple-cursors/mc/unmark-previous-like-this
+	org-return
 	))
