@@ -3,7 +3,7 @@ URxvt.cutchars: `"'()*,;<>[]{|}
 
 URxvt.iso14755: false
 
-URxvt.letterSpace: -1
+URxvt.letterSpace: 0
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
 URxvt.boldFont: xft:DejaVu Sans Mono:style=bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
 URxvt.italicFont: xft:DejaVu Sans Mono:style=oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
@@ -17,7 +17,7 @@ URxvt.scrollBar: false
 URxvt.externalBorder: 0
 URxvt.fading: 40
 URxvt.fadeColor: black
-URxvt.shading: 35
+URxvt.shading: 20
 URxvt.transparent: true
 URxvt.perl-ext-common: default,confirm-paste,-selection,-searchable-scrollback
 URxvt.pointerColor: yellow
