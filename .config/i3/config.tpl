@@ -300,7 +300,8 @@ bindsym --whole-window $mod+button5 exec $app.volume down
 ## Clients assignments
 
 # terminals
-assign [class="^URxvt$" title="mine.nu$"] 4
+assign [class="^URxvt$" title="o.mine.nu$"] 4
+%IF(%SYS(hostname -s) == x1)assign [class="^URxvt$" title="a.mine.nu$"] 3
 assign [class="^URxvt$" title="hetz"] 4
 
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="mail@"] move window to workspace 4
@@ -311,13 +312,16 @@ assign [class="^URxvt$" title="omnia"] 2
 assign [class="^URxvt$" title="bpi"] 5
 assign [class="^URxvt$" title="beastie$"] 5
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
+%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
+%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 
 assign [class="^URxvt$" title="debian.org"] 6
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
+%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
 
 assign [class="^URxvt$" title="recette-"] 3
 assign [class="^URxvt$" title="qt-"] 3
