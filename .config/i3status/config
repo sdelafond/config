@@ -37,7 +37,7 @@ net_rate {
 }
 
 sysdata {
-  format = "CPU:{cpu_usage}% Mem:{mem_used}/{mem_total}GB {mem_used_percent}% {cpu_temp}"
+  format = "C:{cpu_usage}% M:{mem_used}/{mem_total}GB T:{cpu_temp}"
 }
 
 wifi {
