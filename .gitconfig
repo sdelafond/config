@@ -18,7 +18,9 @@
         cp = cherry-pick
         d = diff
         dc = diff --cached
+	dst = diff --stat
 	f = fetch
+	fa = fetch --all
 	fo = fetch origin
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
         g = grep
