@@ -304,7 +304,7 @@ assign [class="^URxvt$" title="o.mine.nu$"] 4
 %IF(%SYS(hostname -s) == x1)assign [class="^URxvt$" title="a.mine.nu$"] 3
 assign [class="^URxvt$" title="hetz"] 4
 
-%IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="mail@"] move window to workspace 4
+%IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="mail@"] move window to workspace T4
 
 assign [class="^URxvt$" title="lanner$"] 2
 assign [class="^URxvt$" title="omnia"] 2
@@ -377,4 +377,4 @@ assign [class="(?i)gmpc"] 9
 for_window [class="(?i)spotify"] move window to workspace 9
 
 # comm
-assign [class="(?i)signal"] T4
+assign [class="(?i)signal"] 4
