@@ -1474,6 +1474,7 @@ _b_   _f_   _o_k        _y_ank
  ;; If there is more than one, they won't work right.
  '(avy-lead-face ((t (:background "color-21" :foreground "white"))))
  '(helm-ff-symlink ((t (:foreground "color-33"))))
+ '(helm-grep-file ((t (:foreground "color-50" :underline t))))
  '(helm-match ((t (:foreground "color-83"))))
  '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
