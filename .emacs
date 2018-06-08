@@ -1459,7 +1459,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
    (quote
-    (markdown-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (go-mode markdown-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
@@ -1474,7 +1474,6 @@ _b_   _f_   _o_k        _y_ank
  ;; If there is more than one, they won't work right.
  '(avy-lead-face ((t (:background "color-21" :foreground "white"))))
  '(helm-ff-symlink ((t (:foreground "color-33"))))
- '(helm-grep-file ((t (:foreground "color-50" :underline t))))
  '(helm-match ((t (:foreground "color-83"))))
  '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
