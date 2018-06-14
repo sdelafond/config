@@ -350,14 +350,14 @@ for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
 assign [class="(?i)chromium$"] F2
 
 # VNC & co
-assign [class="(?i)rdp"] F5
-assign [class="(?i)vnc"] F5
-assign [class="(?i)rdesktop"] F5
+assign [class="(?i)rdp"] T5
+assign [class="(?i)vnc"] T5
+assign [class="(?i)rdesktop"] T5
 
 # VM
-assign [class="(?i)qemu"] F5
-assign [class="(?i)kvm"] F5
-assign [class="(?i)virtualbox"] F5
+assign [class="(?i)qemu"] T5
+assign [class="(?i)kvm"] T5
+assign [class="(?i)virtualbox"] T5
 assign [class="(?i)steam"] F9
 
 # vids, pics, etc
