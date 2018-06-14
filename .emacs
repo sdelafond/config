@@ -1476,6 +1476,7 @@ _b_   _f_   _o_k        _y_ank
  '(helm-ff-symlink ((t (:foreground "color-33"))))
  '(helm-match ((t (:foreground "color-83"))))
  '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
+ '(helm-grep-file ((t (:foreground "color-50" :underline t))))
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
  '(hydra-face-red ((t (:foreground "color-136" :weight bold))))
  '(org-agenda-date-today ((t (:inherit org-agenda-date :foreground "color-228" :inverse-video t :underline t :slant italic :weight bold))))
