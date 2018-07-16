@@ -210,12 +210,12 @@ workspace 6 output $screen1
 workspace F1 output $screen2
 workspace F2 output $screen2
 workspace F3 output $screen2
+workspace F5 output $screen3
 workspace F6 output $screen2
 workspace F7 output $screen2
 
 workspace 4 output $screen3
 workspace 9 output $screen3
-workspace F5 output $screen3
 workspace F8 output $screen3
 workspace T4 output $screen3
 workspace T9 output $screen3
