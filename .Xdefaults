@@ -4,10 +4,10 @@ URxvt.cutchars: `"'()*,;<>[]{|}
 URxvt.iso14755: false
 
 URxvt.letterSpace: 0
-URxvt.font: xft:DejaVu Sans Mono:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.boldFont: xft:DejaVu Sans Mono:style=bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.italicFont: xft:DejaVu Sans Mono:style=oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.boldItalicFont: xft:DejaVu Sans Mono:style=bold oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.font: xft:DejaVuSansMono Nerd Font:pixelsize=13:antialias=true,xft:DejaVu Sans Mono:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.boldFont: xft:DejaVuSansMono Nerd Font:style=Bold:pixelsize=13:antialias=true,xft:DejaVu Sans Mono:style=bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.italicFont: xft:DejaVuSansMono Nerd Font:style=Oblique:pixelsize=13:antialias=true,xft:DejaVu Sans Mono:style=oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.boldItalicFont: xft:DejaVuSansMono Nerd Font:style=Bold Oblique:pixelsize=13:antialias=true,xft:DejaVu Sans Mono:style=bold oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
 
 URxvt.background: black
 URxvt.foreground: lightgrey
