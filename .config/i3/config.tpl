@@ -358,6 +358,7 @@ assign [class="(?i)rdesktop"] T5
 assign [class="(?i)qemu"] T5
 assign [class="(?i)kvm"] T5
 assign [class="(?i)virtualbox"] T5
+assign [class="(?i)flightgear"] T6
 assign [class="(?i)steam"] F9
 
 # vids, pics, etc
