@@ -942,6 +942,10 @@ characters C1 and C2 belong to the same 'class'."
 (define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 
+;; "follow" in helm-occur
+(cl-defmethod helm-setup-user-source ((source helm-source-multi-occur))
+  (setf (slot-value source 'follow) 1))
+
 (require 'helm-projectile)
 (defun helm-projectile-switch-buffer ()
   "Use Helm instead of ido to switch buffer in projectile."
