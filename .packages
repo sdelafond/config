@@ -25,5 +25,5 @@ sudo
 tmux
 xclip
 zsh
-EOF
 zsh-syntax-highlighting
+EOF
