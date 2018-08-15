@@ -50,7 +50,7 @@ alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 alias e='emacs-wrapper.sh'
 alias feh='feh -Z -F -p'
 alias g='git'
-alias geoip='python ~/bin/ip2city.py'
+alias geoip='python3 ~/bin/ip2city.py'
 alias gitup='git svn fetch --all && git svn rebase'
 alias gqview='geeqie'
 alias jed='echo use "e"'
