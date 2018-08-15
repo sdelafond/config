@@ -303,6 +303,7 @@ bindsym --whole-window $mod+button5 exec $app.volume down
 assign [class="^URxvt$" title="o.mine.nu$"] 4
 %IF(%SYS(hostname -s) == x1)assign [class="^URxvt$" title="a.mine.nu$"] 3
 assign [class="^URxvt$" title="hetz"] 4
+assign [class="^URxvt$" title="jmt"] 4
 
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="mail@"] move window to workspace T4
 
