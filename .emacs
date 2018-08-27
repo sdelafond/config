@@ -281,7 +281,8 @@ prefix argument."
                       ;; ipython
                       pkg-info
                       projectile
-                      ;; python-mode
+		      puppet-mode
+                      python-mode
                       smartparens
                       ;; vcl-mode
                       yaml-mode
