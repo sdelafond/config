@@ -2,6 +2,7 @@
 
 # GPG decrypt
 macro attach  d	  "<pipe-message> gpg --quiet --decrypt | less\n" "decrypt with GnuPG"
+macro attach  e	  "<pipe-message> emacs-wrapper.sh -\n" "edit in emacs"
 
 # general emacs-like behavior for history
 bind editor \Cp history-up
