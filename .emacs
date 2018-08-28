@@ -281,7 +281,8 @@ prefix argument."
                       ;; ipython
                       pkg-info
                       projectile
-                      ;; python-mode
+		      puppet-mode
+                      python-mode
                       smartparens
                       ;; vcl-mode
                       yaml-mode
@@ -867,11 +868,13 @@ characters C1 and C2 belong to the same 'class'."
 				      kmacro-ring
 				      shell-command-history))
 (setq kmacro-ring-max 42)
-(setq history-delete-duplicates t)
-(setq savehist-file "~/org/emacs_history")
-(if (file-exists-p savehist-file)
-    (load-file savehist-file))
-(savehist-mode 1)
+(if (file-directory-p "~/org")
+  (progn
+    (setq history-delete-duplicates t)
+    (setq savehist-file "~/org/emacs_history")
+    (if (file-exists-p savehist-file)
+	(load-file savehist-file))
+    (savehist-mode 1)))
 
 ;; save files starting with #! as executable
 ;; (from https://github.com/baron42bba/.emacs.d/blob/master/bba.org#safe-hash-bang-files-executable)
