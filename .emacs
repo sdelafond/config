@@ -287,6 +287,7 @@ prefix argument."
                       ;; vcl-mode
                       yaml-mode
 		      yasnippet
+		      yasnippet-snippets
 		      )))
   (package-initialize)
   ;; fetch the list of packages available
@@ -972,7 +973,8 @@ characters C1 and C2 belong to the same 'class'."
 (yas-global-mode 1)
 (define-key yas-minor-mode-map [tab] nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
-(global-set-key (kbd "C-c y") 'yas-insert-snippet)
+(global-set-key (kbd "C-c y") 'yas-expand)
+(global-set-key (kbd "C-c i") 'yas-insert-snippet)
 (yas/reload-all)
 
 ;;;; hydras
@@ -1466,7 +1468,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-export-html-use-infojs (quote when-configured))
  '(package-selected-packages
    (quote
-    (go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
@@ -1481,9 +1483,9 @@ _b_   _f_   _o_k        _y_ank
  ;; If there is more than one, they won't work right.
  '(avy-lead-face ((t (:background "color-21" :foreground "white"))))
  '(helm-ff-symlink ((t (:foreground "color-33"))))
+ '(helm-grep-file ((t (:foreground "color-50" :underline t))))
  '(helm-match ((t (:foreground "color-83"))))
  '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
- '(helm-grep-file ((t (:foreground "color-50" :underline t))))
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
  '(hydra-face-red ((t (:foreground "color-136" :weight bold))))
  '(org-agenda-date-today ((t (:inherit org-agenda-date :foreground "color-228" :inverse-video t :underline t :slant italic :weight bold))))
