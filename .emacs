@@ -279,6 +279,7 @@ prefix argument."
 		      magit-svn
 		      multiple-cursors
                       ;; ipython
+		      org-super-agenda
                       pkg-info
                       projectile
 		      puppet-mode
@@ -367,6 +368,7 @@ prefix argument."
   (setq org-speed-commands-user (quote (("S" . widen))))
 
   ;; agenda
+  (org-super-agenda-mode t)
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 'year)
   (setq org-agenda-start-day "-6m")
@@ -1466,9 +1468,11 @@ _b_   _f_   _o_k        _y_ank
  '(load-home-init-file t t)
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
+ '(org-super-agenda-mode t)
+ '(org-super-agenda-separator "")
  '(package-selected-packages
    (quote
-    (yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
@@ -1488,8 +1492,10 @@ _b_   _f_   _o_k        _y_ank
  '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
  '(hydra-face-red ((t (:foreground "color-136" :weight bold))))
+ '(org-agenda-date ((t (:foreground "color-117" :weight bold :inverse-video t)))) ;; :underline t))))
  '(org-agenda-date-today ((t (:inherit org-agenda-date :foreground "color-228" :inverse-video t :underline t :slant italic :weight bold))))
  '(org-agenda-date-weekend ((t (:inherit org-agenda-date))))
+ '(org-agenda-structure ((t (:foreground "color-122" :inverse-video t))))
  '(org-archived ((((class color) (min-colors 8) (background dark)) (:foreground "color-22"))))
  '(org-checkbox-statistics-todo ((t (:foreground "color-177"))))
  '(org-date ((((class color) (background dark)) (:foreground "Cyan"))))
