@@ -4,3 +4,4 @@ elpa/
 projectile-bookmarks.eld
 **/*.elc
 bookmarks
+snippets
