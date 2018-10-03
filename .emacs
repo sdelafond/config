@@ -944,6 +944,7 @@ characters C1 and C2 belong to the same 'class'."
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x ,") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(key-chord-define-global "CC" 'helm-calcul-expression)
 (define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 
