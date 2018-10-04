@@ -161,11 +161,11 @@ prefix argument."
 
 (defun insert-sig-fr ()
   (interactive)
-  (insert (concat "Bien cordialement," "\n\n" "--SD")))
+  (insert (concat "Bien cordialement," "\n\n" "-- \nSD")))
 (global-set-key "\C-cs" 'insert-sig-fr)
 (defun insert-sig-en ()
   (interactive)
-  (insert (concat "Cheers," "\n\n" "--Seb")))
+  (insert (concat "Cheers," "\n\n" "-- \nSeb")))
 (global-set-key "\C-cS" 'insert-sig-en)
 
 (defun system-short-name ()
