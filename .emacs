@@ -261,6 +261,8 @@ prefix argument."
                       clojure-mode
                       company
                       dash
+		      dockerfile-mode
+		      docker-compose-mode
                       epl
                       flycheck
                       flycheck-color-mode-line
@@ -1388,6 +1390,8 @@ _b_   _f_   _o_k        _y_ank
       (append '(("\\.texi$" 		      	      . texi-outline)
                 ("\\.[jp]y$" 		      	      . python-mode)
                 ("\\.emacs" 		      	      . lisp-mode)
+                ("Dockerfile.*"                       . dockerfile-mode)
+                ("docker-compose.*"                   . docker-compose-mode)
                 ("\\.rb$" 		      	      . (lambda () (progn
                                                            (ruby-mode)
                                                            (company-mode))))
@@ -1473,7 +1477,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-mode t)
  '(package-selected-packages
    (quote
-    (org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
