@@ -279,6 +279,7 @@ prefix argument."
                       key-chord
 		      magit
 		      magit-svn
+		      markdown-mode
 		      multiple-cursors
                       ;; ipython
 		      org-super-agenda
