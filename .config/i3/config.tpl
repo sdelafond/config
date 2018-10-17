@@ -317,6 +317,7 @@ assign [class="^URxvt$" title="beastie$"] 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
+assign [class="^URxvt$" title="mfw@"] 3
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 
