@@ -1475,6 +1475,9 @@ _b_   _f_   _o_k        _y_ank
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
  '(org-super-agenda-header-separator "")
+ ;; FIXME: default to "old" name for this variable until upstream makes a new
+ ;; release
+ '(org-super-agenda-separator "")
  '(org-super-agenda-mode t)
  '(package-selected-packages
    (quote
