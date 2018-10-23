@@ -4,7 +4,7 @@ color error       red            default # global
 color indicator   default        color030 # index
 color markers     red            default # index
 color message     black	         brightcolor29
-color signature   color213       default # pager body
+color signature   brightcolor193 default
 color status      white          blue
 color tilde       blue           default # pager body
 color tree        color213       default # index
