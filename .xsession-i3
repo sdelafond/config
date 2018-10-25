@@ -1,5 +1,5 @@
 eval $(dbus-launch)
-pgrep -u $USER pulseaudio || pulseaudio --start
+pgrep -u $USER pulseaudio || pulseaudio &
 
 xrdb -load ~/.Xdefaults
 
