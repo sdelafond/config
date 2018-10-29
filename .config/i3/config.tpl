@@ -217,6 +217,8 @@ workspace F7 output $screen2
 workspace 4 output $screen3
 workspace 9 output $screen3
 workspace F8 output $screen3
+workspace T2 output $screen3
+workspace T3 output $screen3
 workspace T4 output $screen3
 workspace T9 output $screen3
 workspace T5 output $screen3
@@ -380,4 +382,7 @@ assign [class="(?i)gmpc"] 9
 for_window [class="(?i)spotify"] move window to workspace 9
 
 # comm
-assign [class="(?i)signal"] 4
+assign [class="(?i)signal"] T3
+
+# misc
+assign [class="(?i)keybase"] T2
