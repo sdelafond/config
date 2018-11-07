@@ -210,6 +210,7 @@ workspace 6 output $screen1
 workspace F1 output $screen2
 workspace F2 output $screen2
 workspace F3 output $screen2
+workspace F4 output $screen2
 workspace F5 output $screen2
 workspace F6 output $screen2
 workspace F7 output $screen2
@@ -348,6 +349,7 @@ assign [class="(?i)office" ] 8
 # browsers
 for_window [class="(?i)firefox$" title="^New Window"] move window to workspace F1
 for_window [class="(?i)irefox$" title="^Untangle"] move window to workspace F3
+for_window [class="(?i)irefox$" title="exia"] move window to workspace F4
 for_window [class="(?i)irefox$" title="^Etal"] move window to workspace F5
 for_window [class="(?i)irefox$" title="^Debian"] move window to workspace F6
 for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
