@@ -226,15 +226,6 @@ prefix argument."
                                                         html-mode-hook))
 (add-function-to-hooks (make-fun 'set-fill-column 72) '(text-mode-hook))
 
-(defun load-gnu-global ()
-  "Load GNU Global if available."
-  (if (fboundp 'gtags-mode)
-      (gtags-mode t)))
-(add-function-to-hooks 'load-gnu-global '(python-mode-hook java-mode-hook
-                                          shell-mode-hook
-                                          c-mode-hook lisp-mode-hook
-                                          emacs-lisp-mode-hook))
-
 ;; ELPA/MELPA
 (if (>= emacs-major-version 24) 
     (require 'package)
@@ -820,17 +811,6 @@ characters C1 and C2 belong to the same 'class'."
   ;; (define-key outline-minor-mode-map "\C-c\C-a" 'hide-body)
 )
 (add-hook 'python-mode-hook 'my-python-mode-hook)
-
-(defun my-jde-mode-hook ()
-  (c-add-style "my-java" '("java" (c-basic-offset . 4)))
-  (c-set-style "my-java")
-  (jde-compile-option-classpath nil)
-  (jde-compile-option-verbose nil)
-;;  (put 'jde-global-classpath 'customized-value '("." "/usr/share/java/jde.jar" "/opt/tomcat/common/lib/servlet.jar" "/usr/share/java/junit.jar"))
-;;  (jde-jdk-registry (quote (("1.4.2" . "/usr/local/j2sdk1.4.2_01"))))
-)
-(add-hook 'jde-mode-hook 'my-jde-mode-hook)
-;;(setq global-senator-minor-mode t) ; fix from Debian's BTS
 
 (defun my-no-electric-indent-hook ()
   (local-set-key (kbd "C-j") 'newline)
