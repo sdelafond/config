@@ -13,12 +13,12 @@ dpkg-list-binaries() {
 gbp-pb() {
   # FIXME: yes this could be an alias; until I move from grouping by
   # nature (alias/function/env/etc) to theme (debian/home/etc), it
-  # stays there
+  # stays here
   gbp buildpackage --git-builder="pdebuild --pbuilder cowbuilder --auto-debsign --buildresult $debian/build-area" $@
 }
 
 gbp-sb() {
-  gbp buildpackage --git-builder="sbuild -k 0x91AD581ADAF6CE93" $@
+  gbp buildpackage --git-builder="sbuild" $@
 }
 
 pdb() {

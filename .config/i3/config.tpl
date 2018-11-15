@@ -206,17 +206,20 @@ workspace 1 output $screen1
 workspace 2 output $screen1
 workspace 3 output $screen1
 workspace 6 output $screen1
+workspace 7 output $screen1
+workspace 8 output $screen1
+workspace 9 output $screen1
 
 workspace F1 output $screen2
 workspace F2 output $screen2
 workspace F3 output $screen2
+workspace F4 output $screen2
 workspace F5 output $screen2
 workspace F6 output $screen2
 workspace F7 output $screen2
+workspace F8 output $screen2
 
 workspace 4 output $screen3
-workspace 9 output $screen3
-workspace F8 output $screen3
 workspace T2 output $screen3
 workspace T3 output $screen3
 workspace T4 output $screen3
@@ -288,6 +291,7 @@ bindsym $mod+Ctrl+h workspace F1; workspace 4; workspace 1
 bindsym $mod+Ctrl+d workspace F6; workspace 6
 bindsym $mod+Ctrl+u workspace F3; workspace 3
 bindsym $mod+Ctrl+m workspace F7; workspace 7
+bindsym $mod+Ctrl+x workspace F8; workspace 8
 
 # last workspace
 workspace_auto_back_and_forth no
@@ -319,7 +323,9 @@ assign [class="^URxvt$" title="beastie$"] 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
-assign [class="^URxvt$" title="mfw@"] 3
+assign [class="^URxvt$" title="exi"] 8
+assign [class="^URxvt$" title="mfw@"] 9
+
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 
@@ -351,6 +357,7 @@ for_window [class="(?i)irefox$" title="^Untangle"] move window to workspace F3
 for_window [class="(?i)irefox$" title="^Etal"] move window to workspace F5
 for_window [class="(?i)irefox$" title="^Debian"] move window to workspace F6
 for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
+for_window [class="(?i)irefox$" title="exi"] move window to workspace F8
 assign [class="(?i)chromium$"] F2
 
 # VNC & co
@@ -363,23 +370,21 @@ assign [class="(?i)qemu"] T5
 assign [class="(?i)kvm"] T5
 assign [class="(?i)virtualbox"] T5
 assign [class="(?i)flightgear"] T6
-assign [class="(?i)steam"] F9
+assign [class="(?i)steam"] T7
 
 # vids, pics, etc
-assign [class="(?i)vlc"] F8
-#assign [title="(?i)^qiv"] F8
-for_window [title="(?i)^qiv"] floating enable, move window to workspace F8
-#assign [class="(?i)feh"] F8
-for_window [class="(?i)feh"] floating enable, move window to workspace F8
-assign [class="(?i)geeqie"] F8
-assign [class="(?i)mplayer"] F8
-assign [class="(?i)gimp"] F8
-assign [class="(?i)dia"] F8
-assign [class="(?i)darktable"] F9
+assign [class="(?i)vlc"] T8
+for_window [title="(?i)^qiv"] floating enable, move window to workspace T8
+for_window [class="(?i)feh"] floating enable, move window to workspace T8
+assign [class="(?i)geeqie"] T8
+assign [class="(?i)mplayer"] T8
+assign [class="(?i)gimp"] T8
+assign [class="(?i)dia"] T8
+assign [class="(?i)darktable"] T8
 
 # sound
 assign [class="(?i)gmpc"] 9
-for_window [class="(?i)spotify"] move window to workspace 9
+for_window [class="(?i)spotify"] move window to workspace T9
 
 # comm
 assign [class="(?i)signal"] T3

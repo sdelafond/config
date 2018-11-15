@@ -1,5 +1,4 @@
 eval $(dbus-launch)
-pgrep -u $USER pulseaudio || pulseaudio &
 
 xrdb -load ~/.Xdefaults
 
@@ -59,6 +58,9 @@ case $HOST in
     I3_SCREEN_3=$I3_SCREEN_1 ;;
 esac
 export I3_SCREEN_1 I3_SCREEN_2 I3_SCREEN_3
+
+# pulse
+pgrep -u $USER pulseaudio || pulseaudio &
 
 # systray
 pasystray > /dev/null 2>&1 &
