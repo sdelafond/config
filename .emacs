@@ -482,6 +482,8 @@ prefix argument."
         	("DONE" :foreground "dark green" :weight bold)
         	("WAITING" :foreground "dark orange" :weight bold)
         	("LATER" :foreground "light orange" :weight bold))))
+  (setq org-priority-faces
+        (quote ((?A . (:background "blue" :foreground "yellow" :weight bold)))))
 
   ;; links
   (setq org-link-abbrev-alist '(("debian-bug" . "https://bugs.debian.org/%s")
