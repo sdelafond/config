@@ -5,3 +5,4 @@ projectile-bookmarks.eld
 **/*.elc
 bookmarks
 snippets
+eshell/lastdir
