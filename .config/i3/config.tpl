@@ -323,7 +323,7 @@ assign [class="^URxvt$" title="beastie$"] 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
-assign [class="^URxvt$" title="exi"] 8
+assign [class="^URxvt$" title="exia"] 8
 assign [class="^URxvt$" title="mfw@"] 9
 
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
@@ -357,7 +357,7 @@ for_window [class="(?i)irefox$" title="^Untangle"] move window to workspace F3
 for_window [class="(?i)irefox$" title="^Etal"] move window to workspace F5
 for_window [class="(?i)irefox$" title="^Debian"] move window to workspace F6
 for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
-for_window [class="(?i)irefox$" title="exi"] move window to workspace F8
+for_window [class="(?i)irefox$" title="exia"] move window to workspace F8
 assign [class="(?i)chromium$"] F2
 
 # VNC & co
