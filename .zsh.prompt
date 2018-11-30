@@ -20,20 +20,26 @@ case $TERM in
     TITLE_ESCAPE_END="\e\\" ;;
 esac
 
+getTmuxWindowIndex() {
+  local windowShortcuts=(0 1 2 3 4 5 6 7 8 9 j k l a b)
+  let index="$(tmux display-message -p '#{window_index}') + 1"
+  echo $windowShortcuts[$index]
+}
+
 setTerminalTitle() {
 #  setopt localoptions xtrace
   case $TERM in
     rxvt*|xterm*|screen*|tmux*)
-      title="$1"
+      local cmd="$1"
+      local title="$(getTmuxWindowIndex):"
       if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY$TMUX" ]] ; then
         title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       else
         if [[ -n "${vcs_info_msg_1_}" ]] ; then
-          if [[ -n "${title}" ]] ; then
-            title="${vcs_info_msg_1_}|${title}"
-          else
-            title="${vcs_info_msg_1_}"
-          fi
+            title="${title}${vcs_info_msg_1_}"
+	fi
+        if [[ -n "${cmd}" ]] ; then
+            title="${title}|${cmd}"
         fi
       fi
       if [[ $TERM != (screen|tmux)* ]] ; then
