@@ -26,41 +26,42 @@ getTmuxWindowIndex() {
   echo $windowShortcuts[$index]
 }
 
+_setTerminalTitle() {
+  print -Pn "${TITLE_ESCAPE_BEGIN}${1}${TITLE_ESCAPE_END}"
+}
+
 setTerminalTitle() {
 #  setopt localoptions xtrace
   case $TERM in
     rxvt*|xterm*|screen*|tmux*)
       local cmd="$1"
-      local title="$(getTmuxWindowIndex):"
+      terminalTitle="$(getTmuxWindowIndex):"
       if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY$TMUX" ]] ; then
-        title="$title@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
+        terminalTitle="$terminalTitle@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       else
         if [[ -n "${vcs_info_msg_1_}" ]] ; then
-            title="${title}${vcs_info_msg_1_}"
+            terminalTitle="${terminalTitle}${vcs_info_msg_1_}"
 	fi
         if [[ -n "${cmd}" ]] ; then
-            title="${title}|${cmd}"
+            terminalTitle="${terminalTitle}|${cmd}"
         fi
       fi
       if [[ $TERM != (screen|tmux)* ]] ; then
-        title="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
+        terminalTitle="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       fi
 
-      [[ -z $title ]] && title=" "
+      [[ -z $terminalTitle ]] && terminalTitle=" "
 
-      print -Pn "${TITLE_ESCAPE_BEGIN}${title}${TITLE_ESCAPE_END}"
+      _setTerminalTitle "$terminalTitle"
   esac
 }
 
 precmd() {
   # for the next line, check out the *vcs stuff in .zshrc
   vcs_stuff 2> /dev/null
-  setTerminalTitle
-}
-
-postcmd() {
-#  vcs_stuff 2> /dev/null
-  setTerminalTitle
+  # just strip previous title from cmd marker
+  terminalTitle=${terminalTitle/\|*}
+  _setTerminalTitle "$terminalTitle"
 }
 
 [[ "$EUID" != 0 ]] || RPROMPT="%S${RPROMPT}%s"
