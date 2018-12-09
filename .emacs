@@ -212,10 +212,10 @@ prefix argument."
 (defun my-autoload (&rest modes)
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
-(my-autoload "id" "ace-jump-mode" "align" "company-mode" "gitignore-mode"
-             "gitconfig-mode" "helm" "helm-projectile" "projectile" "python-mode" "multi-mode" "org"
-             "time-stamp" "pf-mode" "ruby-mode" "gtags"
-             "outdent" "vcl-mode")
+(my-autoload "id" "ace-jump-mode" "align" "company-mode"
+	     "gitignore-mode" "gitconfig-mode" "ivy" "projectile"
+	     "python-mode" "multi-mode" "org" "time-stamp" "pf-mode"
+	     "ruby-mode" "gtags" "outdent" "vcl-mode")
 
 (defun add-function-to-hooks (fun modes-hooks)
   "Add a call to FUN to each mode-hook listed in MODES-HOOKS."
@@ -241,55 +241,13 @@ prefix argument."
 ;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
 ;;			 ("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")))
-(let ((package-list '(ace-window
-                      ;; anything
-                      ;; anything-git-files
-                      ;; anything-ipython
-                      ;; anything-show-completion
-                      ag
-                      async
-                      avy
-                      clojure-mode
-                      company
-                      dash
-		      dockerfile-mode
-		      docker-compose-mode
-                      epl
-                      flycheck
-                      flycheck-color-mode-line
-                      git-gutter
-                      gitconfig-mode
-                      gitignore-mode
-                      ;; google-maps
-                      helm
-                      helm-ag
-                      helm-projectile
-                      ht
-                      hydra
-                      json-mode
-                      key-chord
-		      magit
-		      magit-svn
-		      markdown-mode
-		      multiple-cursors
-                      ;; ipython
-		      org-super-agenda
-                      pkg-info
-                      projectile
-		      puppet-mode
-                      python-mode
-                      smartparens
-                      ;; vcl-mode
-                      yaml-mode
-		      yasnippet
-		      yasnippet-snippets
-		      )))
+(progn
   (package-initialize)
   ;; fetch the list of packages available
   (unless package-archive-contents
     (package-refresh-contents))
   ;; install the missing packages
-  (dolist (package package-list)
+  (dolist (package package-selected-packages)
     (unless (package-installed-p package)
       (package-install package))))
 
@@ -913,48 +871,37 @@ characters C1 and C2 belong to the same 'class'."
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-magit-file-mode)
 
-;; helm
-(setq
- ;; open helm buffer in another window
- helm-split-window-default-side 'other
- ;; do not occupy whole other window
- helm-split-window-in-side-p t)
+;; ivy/counsel/swiper
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+(setq enable-recursive-minibuffers t)
+(counsel-mode 1)
+(counsel-projectile-mode 1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 ;; prefer creating window on the right for the rest
 (setq split-height-threshold nil)
-
-(helm-mode t)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "C-x ,") 'helm-mini)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(key-chord-define-global "CC" 'helm-calcul-expression)
-(define-key helm-map (kbd "C-j") 'helm-maybe-exit-minibuffer)
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-
-;; "follow" in helm-occur
-(cl-defmethod helm-setup-user-source ((source helm-source-multi-occur))
-  (setf (slot-value source 'follow) 1))
-
-(require 'helm-projectile)
-(defun helm-projectile-switch-buffer ()
-  "Use Helm instead of ido to switch buffer in projectile."
-  (interactive)
-  (helm :sources helm-source-projectile-buffers-list
-        :buffer "*helm projectile buffers*"
-        :prompt (projectile-prepend-project-name "Switch to buffer: ")))
 
 ;; projectile
 (require 'projectile)
 (setq projectile-use-git-grep t)
 (projectile-global-mode)
-;; Override some projectile keymaps
-(eval-after-load 'projectile
-  '(progn
-     (define-key projectile-command-map (kbd "b") 'helm-projectile-switch-buffer)
-     (define-key projectile-command-map (kbd "f") 'helm-projectile)
-     (define-key projectile-command-map (kbd "p") 'helm-projectile-switch-project)))
 
 ;; yasnippet
 (require 'yasnippet)
@@ -1080,19 +1027,14 @@ Git gutter:
 Goto:
 ^Char/Line^         ^Word^                ^org^                    ^search^
 ^^^^^^^^--------------------------------------------------------------------------------------
-_c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: helm-occur
-_C_: char           _W_: some word        _a_: heading in agenda   _O_: helm-occur-from-isearch
-_L_: char in line   _,_: subword by char  ^ ^                      _s_: search forward
-_l_: avy-goto-line  _._: some subword     ^ ^                      _r_: search backward
-^ ^                 ^ ^                   ^ ^                      _S_: search forward regex
+_c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: ivy-occur
+_C_: char           _W_: some word        _?_: FIXME               _s_: search forward
+_L_: char in line   _,_: subword by char  ^ ^                      _r_: search backward
+_l_: avy-goto-line  _._: some subword     ^ ^                      _S_: search forward regex
 ^ ^                 ^ ^                   ^ ^                      _R_: search backward regex
 -----------------------------------------------------------------------------------------------
-_g_: projectile-grep    _f_: helm-projectile-grep
-
-_B_: helm-buffers
-_m_: helm-mini          _i_: ace-window
-_M_: helm-recentf
-
+_g_: projectile-grep    _j_: counsel-projectile-grep
+_i_: ace-window
 _n_: Navigate           _;_: mark position _/_: jump to mark
 "
   ("c" avy-goto-char-2)
@@ -1106,21 +1048,14 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("." avy-goto-subword-0)
 
   ("h" org-goto)
-  ("a" helm-org-agenda-files-headings)
 
-  ("o" helm-occur)
-  ("O" helm-occur-from-isearch)
+  ("o" ivy-occur)
   ("s" isearch-forward)
   ("r" isearch-backward)
   ("S" isearch-forward-regexp)
   ("R" isearch-backward-regexp)
 
   ("g" projectile-grep)
-  ("f" helm-projectile-grep)
-
-  ("B" helm-buffers-list)
-  ("m" helm-mini)
-  ("M" helm-recentf)
 
   ("i" ace-window)
 
@@ -1136,8 +1071,7 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("C-y" yank nil)
   ("M-y" yank-pop nil)
   ("y" (yank-pop 1) "next")
-  ("Y" (yank-pop -1) "prev")
-  ("l" helm-show-kill-ring "list" :color blue)))
+  ("Y" (yank-pop -1) "prev")))
 (global-set-key (kbd "M-y") #'hydra-yank-pop/yank-pop)
 (global-set-key (kbd "C-y") #'hydra-yank-pop/yank)
 
@@ -1457,13 +1391,11 @@ _b_   _f_   _o_k        _y_ank
  '(org-export-exclude-tags (quote ("noexport" "archive")))
  '(org-export-html-use-infojs (quote when-configured))
  '(org-super-agenda-header-separator "")
- ;; FIXME: default to "old" name for this variable until upstream makes a new
- ;; release
- '(org-super-agenda-separator "")
  '(org-super-agenda-mode t)
+ '(org-super-agenda-separator "")
  '(package-selected-packages
    (quote
-    (docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
