@@ -241,13 +241,51 @@ prefix argument."
 ;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
 ;;			 ("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")))
-(progn
+(let ((package-list '(ace-window
+                      ag
+                      async
+                      avy
+                      clojure-mode
+                      company
+		      counsel
+		      counsel-projectile
+                      dash
+		      dockerfile-mode
+		      docker-compose-mode
+                      epl
+                      flycheck
+                      flycheck-color-mode-line
+                      git-gutter
+                      gitconfig-mode
+                      gitignore-mode
+                      ht
+                      hydra
+		      ivy
+                      json-mode
+                      key-chord
+		      magit
+		      magit-svn
+		      markdown-mode
+		      multiple-cursors
+                      ;; ipython
+		      org-super-agenda
+                      pkg-info
+                      projectile
+		      puppet-mode
+                      python-mode
+                      smartparens
+		      swiper
+                      ;; vcl-mode
+                      yaml-mode
+		      yasnippet
+		      yasnippet-snippets
+		      )))
   (package-initialize)
   ;; fetch the list of packages available
   (unless package-archive-contents
     (package-refresh-contents))
   ;; install the missing packages
-  (dolist (package package-selected-packages)
+  (dolist (package package-list)
     (unless (package-installed-p package)
       (package-install package))))
 
@@ -891,7 +929,6 @@ characters C1 and C2 belong to the same 'class'."
 (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 (global-set-key (kbd "C-c g") 'counsel-git)
 (global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
