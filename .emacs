@@ -247,8 +247,6 @@ prefix argument."
                       avy
                       clojure-mode
                       company
-		      counsel
-		      counsel-projectile
                       dash
 		      dockerfile-mode
 		      docker-compose-mode
@@ -260,7 +258,6 @@ prefix argument."
                       gitignore-mode
                       ht
                       hydra
-		      ivy
                       json-mode
                       key-chord
 		      magit
@@ -270,11 +267,10 @@ prefix argument."
                       ;; ipython
 		      org-super-agenda
                       pkg-info
-                      projectile
 		      puppet-mode
                       python-mode
                       smartparens
-		      swiper
+		      use-package
                       ;; vcl-mode
                       yaml-mode
 		      yasnippet
@@ -288,6 +284,10 @@ prefix argument."
   (dolist (package package-list)
     (unless (package-installed-p package)
       (package-install package))))
+
+;; use-package
+(require 'use-package)
+(setq use-package-always-ensure t)
 
 ;; _____________________________________________________________________
 ;; Hooks
@@ -910,35 +910,67 @@ characters C1 and C2 belong to the same 'class'."
 (global-magit-file-mode)
 
 ;; ivy/counsel/swiper
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-(setq enable-recursive-minibuffers t)
-(counsel-mode 1)
-(counsel-projectile-mode 1)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-x l") 'counsel-locate)
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(use-package ivy
+  :defer 0.1
+  :diminish
+  :bind (("C-c C-r" . ivy-resume)
+         ("C-x B" . ivy-switch-buffer-other-window))
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-use-virtual-buffers t)
+  :config
+  (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+  (setq split-height-threshold nil)
+  (setq enable-recursive-minibuffers t)
+  (ivy-mode))
 
-;; prefer creating window on the right for the rest
-(setq split-height-threshold nil)
+(use-package ivy-rich
+  :after ivy
+  :custom
+  (ivy-virtual-abbreviate 'full
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
+  :config
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-rich-switch-buffer-transformer))
 
-;; projectile
-(require 'projectile)
-(setq projectile-use-git-grep t)
-(projectile-global-mode)
+(use-package swiper
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
+
+(use-package counsel
+  :after ivy
+  :config 
+  (counsel-mode)
+  (counsel-projectile-mode)
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)
+	 ("C-c g" . counsel-git)
+	 ("C-c j" . counsel-git-grep)
+	 ("C-x l" . counsel-locate)
+	 :map help-map
+	 ("f" . counsel-describe-function)
+	 ("v" . counsel-describe-variable)
+	 ("l" . counsel-find-library)
+	 ("i" . counsel-info-lookup-symbol)
+	 ("u" . counsel-unicode-char)
+	 :map minibuffer-local-map
+	 ("C-r" . counsel-minibuffer-history)))
+
+(use-package projectile
+  :config
+  (setq projectile-use-git-grep t)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-global-mode))
+
+(use-package counsel-projectile
+  :after
+  projectile
+  counsel
+  :config
+  (setq projectile-use-git-grep t)
+  (projectile-global-mode))
 
 ;; yasnippet
 (require 'yasnippet)
