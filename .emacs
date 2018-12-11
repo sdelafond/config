@@ -251,17 +251,12 @@ prefix argument."
 		      dockerfile-mode
 		      docker-compose-mode
                       epl
-                      flycheck
-                      flycheck-color-mode-line
                       git-gutter
                       gitconfig-mode
                       gitignore-mode
                       ht
                       hydra
                       json-mode
-                      key-chord
-		      magit
-		      magit-svn
 		      markdown-mode
 		      multiple-cursors
                       ;; ipython
@@ -273,8 +268,6 @@ prefix argument."
 		      use-package
                       ;; vcl-mode
                       yaml-mode
-		      yasnippet
-		      yasnippet-snippets
 		      )))
   (package-initialize)
   ;; fetch the list of packages available
@@ -875,41 +868,47 @@ characters C1 and C2 belong to the same 'class'."
         (message (concat "Saved " buffer-file-name " with +x")))))
 (add-hook 'after-save-hook 'make-buffer-executable-if-hashbang)
 
-;; key-chord
-(key-chord-mode 1)
-(setq key-chord-one-keys-delay 0.1)
-(setq key-chord-two-key-delay 0.2)
+(use-package key-chord
+  :config
+  (key-chord-mode 1)
+  (setq key-chord-one-keys-delay 0.1)
+  (setq key-chord-two-key-delay 0.2))
 
-;; flycheck
-(setq flycheck-keymap-prefix "\C-c ~")
-(global-flycheck-mode)
-(require 'flycheck-color-mode-line)
-(eval-after-load "flycheck"
-  '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
-(defhydra hydra-flycheck
-  (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
-   :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
-   :hint nil)
-  "Errors"
-  ("f"  flycheck-error-list-set-filter                            "Filter")
-  ("n"  flycheck-next-error                                       "Next")
-  ("p"  flycheck-previous-error                                   "Previous")
-  ("<" flycheck-first-error                                       "First")
-  (">"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
-  ("q"  nil))
-(global-set-key (kbd "M-g f") 'hydra-flycheck/body)
+(use-package flycheck
+  :config
+  (setq flycheck-keymap-prefix "\C-c ~")
+  (global-flycheck-mode)
+  (defhydra hydra-flycheck
+    (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+     :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+     :hint nil)
+    "Errors"
+    ("f"  flycheck-error-list-set-filter                            "Filter")
+    ("n"  flycheck-next-error                                       "Next")
+    ("p"  flycheck-previous-error                                   "Previous")
+    ("<" flycheck-first-error                                       "First")
+    (">"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+    ("q"  nil))
+  :bind
+  ("M-g f" . hydra-flycheck/body))
 
-;; magit
-(defun my-magit-mode-hook ()
-  (progn
-    (setq magit-commit-ask-to-stage "verbose")
-    (setq magit-diff-refine-hunk "all")))
-(add-hook 'magit-mode-hook 'my-magit-mode-hook)
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
-(global-magit-file-mode)
+(use-package flycheck-color-mode-line
+  :after flycheck
+  :config
+  (flycheck-color-mode-line-mode))
 
-;; ivy/counsel/swiper
+(use-package magit
+  :config
+  (setq magit-commit-ask-to-stage "verbose")
+  (setq magit-diff-refine-hunk "all")
+  (global-magit-file-mode)
+  :bind
+  ("C-x g" . magit-status)
+  ("C-x M-g" . magit-dispatch-popup))
+
+(use-package magit-svn
+  :after magit)
+
 (use-package ivy
   :defer 0.1
   :diminish
@@ -972,14 +971,18 @@ characters C1 and C2 belong to the same 'class'."
   (setq projectile-use-git-grep t)
   (projectile-global-mode))
 
-;; yasnippet
-(require 'yasnippet)
-(yas-global-mode 1)
-(define-key yas-minor-mode-map [tab] nil)
-(define-key yas-minor-mode-map (kbd "TAB") nil)
-(global-set-key (kbd "C-c y") 'yas-expand)
-(global-set-key (kbd "C-c i") 'yas-insert-snippet)
-(yas/reload-all)
+(use-package yasnippet
+  :config
+  (yas-global-mode 1)
+  (yas/reload-all)
+  :bind (("C-c y" . yas-expand)
+	 ("C-c i" . yas-insert-snippet)
+	 :map yas-minor-mode-map
+         ([tab] . nil)
+	 ("TAB" . nil)))
+
+(use-package yasnippet-snippets
+  :after yasnippet)
 
 ;;;; hydras
 
