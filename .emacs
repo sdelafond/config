@@ -212,10 +212,9 @@ prefix argument."
 (defun my-autoload (&rest modes)
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
-(my-autoload "id" "ace-jump-mode" "align" "company-mode"
-	     "gitignore-mode" "gitconfig-mode"
-	     "python-mode" "multi-mode" "org" "time-stamp" "pf-mode"
-	     "ruby-mode" "gtags" "outdent" "vcl-mode")
+(my-autoload "id" "ace-jump-mode" "align"
+	     "multi-mode" "org" "time-stamp" "pf-mode"
+	     "gtags" "outdent" "vcl-mode")
 
 (defun add-function-to-hooks (fun modes-hooks)
   "Add a call to FUN to each mode-hook listed in MODES-HOOKS."
@@ -246,14 +245,11 @@ prefix argument."
                       async
                       avy
                       clojure-mode
-                      company
                       dash
 		      dockerfile-mode
 		      docker-compose-mode
                       epl
                       git-gutter
-                      gitconfig-mode
-                      gitignore-mode
                       ht
                       hydra
                       json-mode
@@ -263,7 +259,6 @@ prefix argument."
 		      org-super-agenda
                       pkg-info
 		      puppet-mode
-                      python-mode
                       smartparens
 		      use-package
                       ;; vcl-mode
@@ -763,46 +758,6 @@ characters C1 and C2 belong to the same 'class'."
   (setq left-margin 2))
 (add-hook 'change-log-mode-hook 'my-change-log-hook)
 
-;; (defun my-ruby-mode-hook ()
-;;   ;; (local-set-key "\r" 'newline-and-indent)
-;;   (outline-minor-mode)
-;;   (define-key outline-minor-mode-map "\C-c\C-e" 'outline-toggle-children)
-;;   (define-key outline-minor-mode-map "\C-c\C-a" 'hide-body)
-;;   (setq outline-regexp " *\\(def \\|class\\|module\\|#.*Main\\)"))
-;; (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
-
-(defun my-python-mode-hook ()
-  (local-set-key "\r" 'newline)
-  (local-set-key "\C-i" 'indent-for-tab-command)
-  ;; (require 'ipython)
-  ;; (require 'anything)
-  ;; (require 'anything-ipython)
-  ;; (when (require 'anything-show-completion nil t)
-  ;;   (use-anything-show-completion 'anything-ipython-complete
-  ;;                                 '(length initial-pattern)))
-  ;; (define-key py-mode-map (kbd "M-TAB") 'anything-ipython-complete)
-  ;; (define-key py-mode-map (kbd "M-BACKTAB") 'anything-ipython-import-modules-from-buffer)
-  ;; (require 'pymacs)
-  ;; (pymacs-load "ropemacs" "rope-")
-  ;; (ropemacs-mode)
-  ;; (define-key ropemacs-local-keymap "\C-cd" 'rope-show-doc)
-  ;; (define-key ropemacs-local-keymap "M-\?" 'rope-code-assist)
-  ;; (require 'outdent)
-  ;; (outdent-mode t)
-  ;; (turn-off-auto-fill)
-  ;; (defun py-outline-level ()
-  ;;   (let (buffer-invisibility-spec)
-  ;;     (save-excursion
-  ;;       (skip-chars-forward "[:space:]")
-  ;;       (current-column))))
-  ;; (setq outline-regexp "[^ \t]\\|[ \t]*\\(def\\|class\\) ")
-  ;; (setq outline-level 'py-outline-level)
-  ;; (outline-minor-mode)
-  ;; (define-key outline-minor-mode-map "\C-c\C-e" 'outline-toggle-children)
-  ;; (define-key outline-minor-mode-map "\C-c\C-a" 'hide-body)
-)
-(add-hook 'python-mode-hook 'my-python-mode-hook)
-
 (defun my-no-electric-indent-hook ()
   (local-set-key (kbd "C-j") 'newline)
   (local-set-key (kbd "C-m") 'newline))
@@ -910,6 +865,9 @@ characters C1 and C2 belong to the same 'class'."
 (use-package magit-svn
   :after magit)
 
+(use-package gitconfig-mode)
+(use-package gitignore-mode)
+
 (use-package ivy
   :defer 0.1
   :diminish
@@ -984,6 +942,25 @@ characters C1 and C2 belong to the same 'class'."
 
 (use-package yasnippet-snippets
   :after yasnippet)
+
+(use-package python-mode)
+
+(use-package ruby-mode
+  :mode "\\(\\.rb$\\|Capfile\\|Rakefile\\)")
+
+(use-package puppet-mode
+  :mode "\\.pp$")
+
+(use-package company
+  :config (setq company-begin-commands '(self-insert-command))
+  :hook ((puppet-mode . company-mode)
+	 (python-mode . company-mode)
+	 (ruby-mode . company-mode)
+	 (lisp-mode . company-mode)
+	 (jsp-mode . company-mode)
+	 (html-mode . company-mode)
+	 (xml-mode . company-mode)
+	 (sh-mode . company-mode)))
 
 ;;;; hydras
 
@@ -1327,7 +1304,6 @@ _b_   _f_   _o_k        _y_ank
 (setq uniquify-buffer-name-style 'post-forward)
 
 ;; various variables
-(setq company-begin-commands '(self-insert-command))
 (setq tramp-mode nil)
 (setq indent-tabs-mode nil)
 (setq browse-url-browser-function 'my-browse-url-tab)
@@ -1341,7 +1317,6 @@ _b_   _f_   _o_k        _y_ank
 (setq python-indent 2)
 (setq perl-indent-level 2)
 (setq lua-indent-level 2)
-(setq ruby-indent-level 2)
 (setq sh-basic-offset 2)
 (setq sh-indentation 2)
 (setq standard-indent 2)
@@ -1379,22 +1354,9 @@ _b_   _f_   _o_k        _y_ank
 ;; associate file patterns and modes
 (setq auto-mode-alist 
       (append '(("\\.texi$" 		      	      . texi-outline)
-                ("\\.[jp]y$" 		      	      . python-mode)
                 ("\\.emacs" 		      	      . lisp-mode)
                 ("Dockerfile.*"                       . dockerfile-mode)
                 ("docker-compose.*"                   . docker-compose-mode)
-                ("\\.rb$" 		      	      . (lambda () (progn
-                                                           (ruby-mode)
-                                                           (company-mode))))
-                ("Capfile" 		      	      . (lambda () (progn
-                                                           (ruby-mode)
-                                                           (company-mode))))
-                ("Rakefile" 		      	      . (lambda () (progn
-                                                             (ruby-mode)
-                                                             (company-mode))))
-                ("\\.pp$" 		      	      . (lambda () (progn
-                                                           (puppet-mode)
-                                                           (company-mode))))
                 ("pf\\.conf" 		      	      . pf-mode)
                 ("\\.md" 		      	      . markdown-mode)
                 ("\\.properties$" 		      . conf-mode)
@@ -1403,33 +1365,14 @@ _b_   _f_   _o_k        _y_ank
                 ("/\.mutt" 		      	      . muttrc-mode)
                 ("/\.md$" 		      	      . markdown-mode)
                 ("\\.vcl$" 		      	      . vcl-mode)
-                ("\\.\\(el\\|clj\\)$"                 . (lambda () (progn
-                                                                     (lisp-mode)
-                                                                     (company-mode))))
                 ("^/tmp/mutt"                         . my-mutt-hook)
                 ("^\\(.*/\\.followup\\|\\.article\\)" . my-mutt-hook)
                 ("DSA-"                               . flyspell-mode)
                 ("\.json"                             . json-mode)
                 ("\.jsx"                              . js-mode)
                 ("CVE/list$"                          . debian-cvelist-mode)
-                ("\\.org$"                            . (lambda () (progn
-                                                                     (org-mode)
-                                        ;(flyspell-mode)
-                                                                     )))
-                ("\\.\\(todo\\|csv\\)$"               . (lambda () (progn
-								     (org-mode))))
-                ("\\.jsp$" 		      	      . (lambda () (progn
-                                                           (jsp-mode)
-                                                           (company-mode))))
-                ("\\.html$" 		      	      . (lambda () (progn
-                                                             (html-mode)
-                                                             (company-mode))))
-                ("\\.xml$" 		      	      . (lambda () (progn
-                                                           (xml-mode)
-                                                           (company-mode))))
-                ("\\.z" 		      	      . (lambda () (progn
-                                                         (sh-mode)
-                                                         (company-mode)))))
+                ("\\.\\(org\\|todo\\|csv\\)$"         . org-mode)
+                ("\\.z" 		      	      . sh-mode))
               auto-mode-alist))
 
 
