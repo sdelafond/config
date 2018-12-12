@@ -213,7 +213,7 @@ prefix argument."
   "Autoload each mode listed in MODES."
   (loop for mode in modes do (autoload (intern mode) mode nil t)))
 (my-autoload "id" "ace-jump-mode" "align" "company-mode"
-	     "gitignore-mode" "gitconfig-mode" "ivy" "projectile"
+	     "gitignore-mode" "gitconfig-mode"
 	     "python-mode" "multi-mode" "org" "time-stamp" "pf-mode"
 	     "ruby-mode" "gtags" "outdent" "vcl-mode")
 
@@ -895,13 +895,13 @@ characters C1 and C2 belong to the same 'class'."
 (use-package flycheck-color-mode-line
   :after flycheck
   :config
-  (flycheck-color-mode-line-mode))
+  (flycheck-color-mode-line-mode t))
 
 (use-package magit
   :config
   (setq magit-commit-ask-to-stage "verbose")
   (setq magit-diff-refine-hunk "all")
-  (global-magit-file-mode)
+  (global-magit-file-mode t)
   :bind
   ("C-x g" . magit-status)
   ("C-x M-g" . magit-dispatch-popup))
@@ -918,31 +918,33 @@ characters C1 and C2 belong to the same 'class'."
   (ivy-count-format "(%d/%d) ")
   (ivy-use-virtual-buffers t)
   :config
+  (setq ivy-height 20) ;; number result lines to display
+  (setq ivy-initial-inputs-alist nil) ;; no regexp by default
   (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
   (setq split-height-threshold nil)
   (setq enable-recursive-minibuffers t)
-  (ivy-mode))
+  (ivy-mode t))
+
+(use-package ivy-hydra
+  :after ivy)
 
 (use-package ivy-rich
-  :after ivy
-  :custom
-  (ivy-virtual-abbreviate 'full
-                          ivy-rich-switch-buffer-align-virtual-buffer t
-                          ivy-rich-path-style 'abbrev)
+  :after (:all ivy counsel)
+  :init
+  (setq ivy-rich-path-style 'abbrev)
+  (setq ivy-virtual-abbreviate 'full)
   :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer))
+  (ivy-rich-mode t))
 
 (use-package swiper
   :after ivy
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)))
+  :bind (("C-s" . counsel-grep-or-swiper)
+         ("C-r" . counsel-grep-or-swiper)))
 
 (use-package counsel
   :after ivy
   :config 
-  (counsel-mode)
-  (counsel-projectile-mode)
+  (counsel-mode t)
   :bind (("M-x" . counsel-M-x)
 	 ("C-x C-f" . counsel-find-file)
 	 ("C-c g" . counsel-git)
@@ -961,19 +963,17 @@ characters C1 and C2 belong to the same 'class'."
   :config
   (setq projectile-use-git-grep t)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-global-mode))
+  (projectile-global-mode t))
 
 (use-package counsel-projectile
-  :after
-  projectile
-  counsel
+  :after (:all projectile counsel)
   :config
   (setq projectile-use-git-grep t)
-  (projectile-global-mode))
+  (counsel-projectile-mode t))
 
 (use-package yasnippet
   :config
-  (yas-global-mode 1)
+  (yas-global-mode t)
   (yas/reload-all)
   :bind (("C-c y" . yas-expand)
 	 ("C-c i" . yas-insert-snippet)
@@ -1100,7 +1100,7 @@ Goto:
 ^Char/Line^         ^Word^                ^org^                    ^search^
 ^^^^^^^^--------------------------------------------------------------------------------------
 _c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: ivy-occur
-_C_: char           _W_: some word        _?_: FIXME               _s_: search forward
+_C_: char           _W_: some word        ^ ^: FIXME               _s_: search forward
 _L_: char in line   _,_: subword by char  ^ ^                      _r_: search backward
 _l_: avy-goto-line  _._: some subword     ^ ^                      _S_: search forward regex
 ^ ^                 ^ ^                   ^ ^                      _R_: search backward regex
@@ -1128,6 +1128,7 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("R" isearch-backward-regexp)
 
   ("g" projectile-grep)
+  ("j" counsel-projectile-grep)
 
   ("i" ace-window)
 
@@ -1467,7 +1468,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-separator "")
  '(package-selected-packages
    (quote
-    (counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (ivy-rich counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
