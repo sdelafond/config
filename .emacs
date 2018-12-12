@@ -898,6 +898,7 @@ characters C1 and C2 belong to the same 'class'."
   (flycheck-color-mode-line-mode t))
 
 (use-package magit
+  :mode ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)" . git-commit-mode)
   :config
   (setq magit-commit-ask-to-stage "verbose")
   (setq magit-diff-refine-hunk "all")
@@ -1411,11 +1412,6 @@ _b_   _f_   _o_k        _y_ank
                 ("\.json"                             . json-mode)
                 ("\.jsx"                              . js-mode)
                 ("CVE/list$"                          . debian-cvelist-mode)
-                ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)"  . (lambda () (progn
-                                                                                 (git-commit-mode)
-                                                                                 (flyspell-mode)
-                                                                                 (remove-hook 'kill-buffer-query-functions
-                                                                                              'git-commit-kill-buffer-noop t))))
                 ("\\.org$"                            . (lambda () (progn
                                                                      (org-mode)
                                         ;(flyspell-mode)
