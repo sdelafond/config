@@ -279,13 +279,11 @@ prefix argument."
 
 ;; _____________________________________________________________________
 ;; Hooks
-(defun my-mutt-hook ()
+(defun seb/mutt-hook ()
   (progn 
     (mail-mode)
-    (flyspell-mode)
     (turn-on-orgtbl)
     (turn-on-orgstruct)
-    (choose-dict-automatically)
     (local-set-key "\C-ci" 'format-email-body)))
 
 (defun my-org-mode-hook ()
@@ -643,101 +641,6 @@ _h_tml    ^ ^        _A_SCII:
 (add-hook 'org-load-hook 'my-org-mode-hook)
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
-;; flyspell
-(eval-after-load "flyspell" ;; yeah, we wish there was a flyspell-hook...
-  '(progn
-     (defun my-flyspell-ignore-uppercase (beg end &rest rest)
-       (while (and (< beg end)
-                   (let ((c (char-after beg)))
-                     (not (= c (downcase c)))))
-         (setq beg (1+ beg)))
-       (= beg end))
-     (add-hook 'flyspell-incorrect-hook 'my-flyspell-ignore-uppercase)
-
-     (defun change-dict (dict)
-       (interactive)
-       (message (concat "Changing dict to: " dict))
-       (ispell-change-dictionary dict)
-       (flyspell-buffer))
-     (defun is-buffer-french ()
-       "Check if the buffer contains french text."
-       (progn
-         (goto-char (point-min))
-         (save-excursion
-           (re-search-forward " \\(je\\|tu\\|il\\|que\\|et\\|les?\\|des?\\) " nil t))))
-     (defun guess-dict () 
-       (if (is-buffer-french) (change-dict "francais")
-	 (change-dict "american")))
-     (defun choose-dict-automatically ()
-       (if (zerop (buffer-size))
-           (change-dict "francais") ;; default to french
-	 (guess-dict))) ;; if non-empty, try to identify the language...
-     (set-face-foreground 'flyspell-incorrect-face "yellow3")
-
-     (setq my-flyspell-regular-letters
-           (let ((l "abcdefghijklmnoprstuvwxyz"))
-             (split-string (concat l (upcase l)) "" t)))
-
-     (defun flyspell-same-class-p (c1 c2)
-       "Non exhaustive function aiming at figuring out if
-characters C1 and C2 belong to the same 'class'."
-       (let ((a '("a" "â" "à" "á" "ä"))
-             (c '("c" "ç"))
-             (e '("e" "ê" "è" "é" "ë"))
-             (i '("i" "î" "ì" "í" "ï"))
-             (o '("o" "ô" "ò" "ó" "ö"))
-             (u '("u" "û" "ù" "ú" "ü")))
-         (loop for tuple in (list a c e i o u) do
-               (if (member c1 tuple)
-                   (return (member c2 tuple))
-                 (if (member c2 tuple)
-                     (return (member c1 tuple)))))))
-
-     (defun flyspell-word-distance (word1 word2)
-       "Difference in length between WORD1 and WORD2."
-       (abs (- (length word1) (length word2))))
-
-     (defun flyspell-word-difference (word1 word2)
-       "Different characters between WORD1 and WORD2."
-       (if (or (= (length word1) 0) (= (length word2) 0))
-           0
-         (+ (let ((c1 (substring word1 0 1))
-                  (c2 (substring word2 0 1)))
-              (if (string= c1 c2)
-                  0
-                (if (flyspell-same-class-p c1 c2) 0
-                  1)))
-            (flyspell-word-difference (substring word1 1) (substring word2 1)))))
-
-     (defun flyspell-accent-count (word)
-       (let ((count 0))
-         (dolist (x (split-string word "" t) count)
-           (when (not (member x my-flyspell-regular-letters))
-             (setq count (1+ count))))))
-
-     (defun my-flyspell-sort-corrections-function (word1 word2 word)
-       "Sort WORD1 and WORD2 as corrections of WORD: favor the
-        corrections having the same length as WORD, and use
-        number of 'special' characters, then distance from the
-        corrected word to the original, as additional criteria."
-       (let ((distance1 (flyspell-word-distance word1 word))
-             (distance2 (flyspell-word-distance word2 word)))
-         (if (= distance1 distance2)
-             (let ((dif1 (flyspell-word-difference word1 word))
-                   (dif2 (flyspell-word-difference word2 word)))
-               (if (= dif1 dif2)
-                   (let ((accents-count1 (flyspell-accent-count word1))
-                         (accents-count2 (flyspell-accent-count word2)))
-                     (>= accents-count1 accents-count2))
-                 (< dif1 dif2)))
-           (< distance1 distance2))))
-
-     (setq flyspell-sort-corrections-function 'my-flyspell-sort-corrections-function)
-     (setq flyspell-sort-corrections t)
-     (global-set-key "\C-cf" (make-interactive-fun 'change-dict "francais"))
-     (global-set-key "\C-ce" (make-interactive-fun 'change-dict "american"))
-     (global-set-key "\C-c," 'flyspell-goto-next-error)))
-
 (defun my-recentf-mode-hook ()
   (setq recentf-save-file (concat my-emacsd "recentf"))
   (setq recentf-max-saved-items 500)
@@ -963,6 +866,97 @@ characters C1 and C2 belong to the same 'class'."
 	 (html-mode . company-mode)
 	 (xml-mode . company-mode)
 	 (sh-mode . company-mode)))
+
+;; flyspell
+(use-package flyspell
+  :bind (("C-c f" . (lambda() (interactive) (seb/flyspell/change-dict "francais")))
+	 ("C-c e" . (lambda() (interactive) (seb/flyspell/change-dict "american")))
+	 ("C-c ," . flyspell-goto-next-error))
+  :hook ((flyspell-incorrect . seb/flyspell/ignore-uppercase)
+	 (mail-mode . flyspell-mode)
+	 (mail-mode . seb/flyspell/choose-dict-automatically))
+  :mode ("DSA-" . flyspell-mode)
+  :config
+  (set-face-foreground 'flyspell-incorrect-face "yellow3")
+  (setq flyspell-sort-corrections-function 'seb/flyspell/sort-corrections-function)
+  (setq flyspell-sort-corrections t)
+  (setq seb/flyspell/regular-letters
+	(let ((l "abcdefghijklmnoprstuvwxyz"))
+	  (split-string (concat l (upcase l)) "" t)))
+  (defun seb/flyspell/ignore-uppercase (beg end &rest rest)
+    (while (and (< beg end)
+		(let ((c (char-after beg)))
+		  (not (= c (downcase c)))))
+      (setq beg (1+ beg)))
+    (= beg end))
+  (defun seb/flyspell/change-dict (dict)
+    (interactive)
+    (message (concat "Changing dict to: " dict))
+    (ispell-change-dictionary dict)
+    (flyspell-buffer))
+  (defun seb/flyspell/is-buffer-french ()
+    "Check if the buffer contains french text."
+    (progn
+      (goto-char (point-min))
+      (save-excursion
+	(re-search-forward " \\(je\\|tu\\|il\\|que\\|et\\|les?\\|des?\\) " nil t))))
+  (defun seb/flyspell/guess-dict () 
+    (seb/flyspell/change-dict (if (seb/flyspell/is-buffer-french) "francais"
+				"american")))
+  (defun seb/flyspell/choose-dict-automatically ()
+    (if (zerop (buffer-size))
+	(seb/flyspell/change-dict "francais") ;; default to french
+      (seb/flyspell/guess-dict))) ;; if non-empty, try to identify the language...
+  (defun seb/flyspell/same-class-p (c1 c2)
+    "Non exhaustive function aiming at figuring out if
+characters C1 and C2 belong to the same 'class'."
+    (let ((a '("a" "â" "à" "á" "ä"))
+	  (c '("c" "ç"))
+	  (e '("e" "ê" "è" "é" "ë"))
+	  (i '("i" "î" "ì" "í" "ï"))
+	  (o '("o" "ô" "ò" "ó" "ö"))
+	  (u '("u" "û" "ù" "ú" "ü")))
+      (loop for tuple in (list a c e i o u) do
+	    (if (member c1 tuple)
+		(return (member c2 tuple))
+	      (if (member c2 tuple)
+		  (return (member c1 tuple)))))))
+  (defun seb/flyspell/word-distance (word1 word2)
+    "Difference in length between WORD1 and WORD2."
+    (abs (- (length word1) (length word2))))
+  (defun seb/flyspell/word-difference (word1 word2)
+    "Different characters between WORD1 and WORD2."
+    (if (or (= (length word1) 0) (= (length word2) 0))
+	0
+      (+ (let ((c1 (substring word1 0 1))
+	       (c2 (substring word2 0 1)))
+	   (if (string= c1 c2)
+	       0
+	     (if (flyspell-same-class-p c1 c2) 0
+	       1)))
+	 (seb/flyspell/word-difference (substring word1 1) (substring word2 1)))))
+  (defun seb/flyspell-accent-count (word)
+    (let ((count 0))
+      (dolist (x (split-string word "" t) count)
+	(when (not (member x seb/flyspell/regular-letters))
+	  (setq count (1+ count))))))
+  (defun seb/flyspell-sort-corrections-function (word1 word2 word)
+    "Sort WORD1 and WORD2 as corrections of WORD: favor the
+     corrections having the same length as WORD, and use
+     number of 'special' characters, then distance from the
+     corrected word to the original, as additional criteria."
+    (let ((distance1 (seb/flyspell/word-distance word1 word))
+	  (distance2 (seb/flyspell/word-distance word2 word)))
+      (if (= distance1 distance2)
+	  (let ((dif1 (seb/flyspell/word-difference word1 word))
+		(dif2 (seb/flyspell/word-difference word2 word)))
+	    (if (= dif1 dif2)
+		(let ((accents-count1 (seb/flyspell/accent-count word1))
+		      (accents-count2 (seb/flyspell/accent-count word2)))
+		  (>= accents-count1 accents-count2))
+	      (< dif1 dif2)))
+	(< distance1 distance2))))
+  (flyspell-mode t))
 
 ;;;; hydras
 
@@ -1367,9 +1361,8 @@ _b_   _f_   _o_k        _y_ank
                 ("/\.mutt" 		      	      . muttrc-mode)
                 ("/\.md$" 		      	      . markdown-mode)
                 ("\\.vcl$" 		      	      . vcl-mode)
-                ("^/tmp/mutt"                         . my-mutt-hook)
-                ("^\\(.*/\\.followup\\|\\.article\\)" . my-mutt-hook)
-                ("DSA-"                               . flyspell-mode)
+                ("^/tmp/mutt"                         . seb/mutt-hook)
+                ("^\\(.*/\\.followup\\|\\.article\\)" . seb/mutt-hook)
                 ("\.json"                             . json-mode)
                 ("\.jsx"                              . js-mode)
                 ("CVE/list$"                          . debian-cvelist-mode)
