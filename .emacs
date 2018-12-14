@@ -902,7 +902,9 @@ characters C1 and C2 belong to the same 'class'."
 
 (use-package counsel
   :after ivy
-  :config 
+  :init
+  (setq counsel-grep-base-command "grep -P -n -i -e %s %s")
+  :config
   (counsel-mode t)
   :bind (("M-x" . counsel-M-x)
 	 ("C-x C-f" . counsel-find-file)
