@@ -1264,16 +1264,6 @@ _b_   _f_   _o_k        _y_ank
                                 'mode-line-mule-info
                                 mode-line-format))
 
-;; accents  
-(unless (or (featurep 'xemacs)
-	    (>= emacs-major-version 22))
-  (setq current-language-environment "Latin-1")
-  (set-terminal-coding-system 'latin-1)
-  (standard-display-european 1)
-  (set-input-mode (car (current-input-mode))
-		  (nth 1 (current-input-mode))
-		  0))
-
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1)) ;; no toolbar
 ;; no electric-indent-mode
 (if (fboundp 'electric-indent-mode) (electric-indent-mode -1))
