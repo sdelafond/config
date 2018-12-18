@@ -842,7 +842,11 @@ _h_tml    ^ ^        _A_SCII:
 (use-package yasnippet-snippets
   :after yasnippet)
 
-(use-package python-mode)
+(use-package python-mode
+  :config
+  (setq py-indent-offset 2)
+  (setq python-shell-interpreter "ipython")
+  (setq python-shell-interpreter-args "--simple-prompt -i"))
 
 (use-package ruby-mode
   :mode "\\(\\.rb$\\|Capfile\\|Rakefile\\)")
@@ -1293,8 +1297,6 @@ _b_   _f_   _o_k        _y_ank
 (setq inhibit-startup-message t)
 (setq line-move-visual nil) 
 (menu-bar-mode -1)
-(setq py-indent-offset 2)
-(setq python-indent 2)
 (setq perl-indent-level 2)
 (setq lua-indent-level 2)
 (setq sh-basic-offset 2)
