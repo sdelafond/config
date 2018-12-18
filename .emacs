@@ -648,11 +648,6 @@ _h_tml    ^ ^        _A_SCII:
   (setq recentf-exclude '("/tmp/.*")))
 (add-hook 'recentf-load-hook 'my-recentf-mode-hook)
 
-(defun my-align-hook ()
-  (setq align-to-tab-stop nil)
-  (setq align-c++-modes '(c++-mode c-mode java-mode jde-mode python-mode ruby-mode)))
-(add-hook 'align-load-hook 'my-align-hook)
-
 (defun my-time-stamp-hook ()
   (time-stamp-format "%3a, %02d %3b %Y %02H:%02M:%02S %z"))
 (add-hook 'time-stamp-hook 'my-time-stamp-hook)
