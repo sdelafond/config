@@ -130,13 +130,6 @@ prefix argument."
       (when (or revert auto-revert-check-vc-info)
         (vc-find-file-hook)))))
 
-(defun complete-or-indent ()
-  (interactive)
-  (if (company-manual-begin)
-      (company-complete-common)
-    (indent-according-to-mode)))
-(global-set-key "\C-ci" 'complete-or-indent)
-
 (defun format-email-body ()
   "Format email body, respecting (or at least trying to) quote levels."
   (interactive)
@@ -855,7 +848,14 @@ _h_tml    ^ ^        _A_SCII:
   :mode "\\.pp$")
 
 (use-package company
-  :config (setq company-begin-commands '(self-insert-command))
+  :config
+  (setq company-begin-commands '(self-insert-command))
+  (defun complete-or-indent ()
+    (interactive)
+    (if (company-manual-begin)
+	(company-complete-common)
+      (indent-according-to-mode)))
+  :bind (("C-c i" . complete-or-indent))
   :hook ((puppet-mode . company-mode)
 	 (python-mode . company-mode)
 	 (ruby-mode . company-mode)
