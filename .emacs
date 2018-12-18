@@ -248,7 +248,6 @@ prefix argument."
                       json-mode
 		      markdown-mode
 		      multiple-cursors
-                      ;; ipython
 		      org-super-agenda
                       pkg-info
 		      puppet-mode
@@ -838,8 +837,11 @@ _h_tml    ^ ^        _A_SCII:
 (use-package python-mode
   :config
   (setq py-indent-offset 2)
-  (setq python-shell-interpreter "ipython")
-  (setq python-shell-interpreter-args "--simple-prompt -i"))
+  (setq py-shell-toggle-1 "ipython")
+  (setq py-shell-toggle-2 "ipython3")
+  (setq py-shell-name "ipython3")
+  (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+  (setq py-force-py-shell-name-p t))
 
 (use-package ruby-mode
   :mode "\\(\\.rb$\\|Capfile\\|Rakefile\\)")
