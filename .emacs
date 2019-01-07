@@ -932,15 +932,15 @@ characters C1 and C2 belong to the same 'class'."
 	       (c2 (substring word2 0 1)))
 	   (if (string= c1 c2)
 	       0
-	     (if (flyspell-same-class-p c1 c2) 0
+	     (if (seb/flyspell/same-class-p c1 c2) 0
 	       1)))
 	 (seb/flyspell/word-difference (substring word1 1) (substring word2 1)))))
-  (defun seb/flyspell-accent-count (word)
+  (defun seb/flyspell/accent-count (word)
     (let ((count 0))
       (dolist (x (split-string word "" t) count)
 	(when (not (member x seb/flyspell/regular-letters))
 	  (setq count (1+ count))))))
-  (defun seb/flyspell-sort-corrections-function (word1 word2 word)
+  (defun seb/flyspell/sort-corrections-function (word1 word2 word)
     "Sort WORD1 and WORD2 as corrections of WORD: favor the
      corrections having the same length as WORD, and use
      number of 'special' characters, then distance from the
