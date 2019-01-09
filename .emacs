@@ -130,13 +130,6 @@ prefix argument."
       (when (or revert auto-revert-check-vc-info)
         (vc-find-file-hook)))))
 
-(defun complete-or-indent ()
-  (interactive)
-  (if (company-manual-begin)
-      (company-complete-common)
-    (indent-according-to-mode)))
-(global-set-key "\C-ci" 'complete-or-indent)
-
 (defun format-email-body ()
   "Format email body, respecting (or at least trying to) quote levels."
   (interactive)
@@ -255,7 +248,6 @@ prefix argument."
                       json-mode
 		      markdown-mode
 		      multiple-cursors
-                      ;; ipython
 		      org-super-agenda
                       pkg-info
 		      puppet-mode
@@ -648,11 +640,6 @@ _h_tml    ^ ^        _A_SCII:
   (setq recentf-exclude '("/tmp/.*")))
 (add-hook 'recentf-load-hook 'my-recentf-mode-hook)
 
-(defun my-align-hook ()
-  (setq align-to-tab-stop nil)
-  (setq align-c++-modes '(c++-mode c-mode java-mode jde-mode python-mode ruby-mode)))
-(add-hook 'align-load-hook 'my-align-hook)
-
 (defun my-time-stamp-hook ()
   (time-stamp-format "%3a, %02d %3b %Y %02H:%02M:%02S %z"))
 (add-hook 'time-stamp-hook 'my-time-stamp-hook)
@@ -811,7 +798,6 @@ _h_tml    ^ ^        _A_SCII:
   (counsel-mode t)
   :bind (("M-x" . counsel-M-x)
 	 ("C-x C-f" . counsel-find-file)
-	 ("C-c g" . counsel-git)
 	 ("C-c j" . counsel-git-grep)
 	 ("C-x l" . counsel-locate)
 	 :map help-map
@@ -848,7 +834,14 @@ _h_tml    ^ ^        _A_SCII:
 (use-package yasnippet-snippets
   :after yasnippet)
 
-(use-package python-mode)
+(use-package python-mode
+  :config
+  (setq py-indent-offset 2)
+  (setq py-shell-toggle-1 "ipython")
+  (setq py-shell-toggle-2 "ipython3")
+  (setq py-shell-name "ipython3")
+  (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+  (setq py-force-py-shell-name-p t))
 
 (use-package ruby-mode
   :mode "\\(\\.rb$\\|Capfile\\|Rakefile\\)")
@@ -857,7 +850,14 @@ _h_tml    ^ ^        _A_SCII:
   :mode "\\.pp$")
 
 (use-package company
-  :config (setq company-begin-commands '(self-insert-command))
+  :config
+  (setq company-begin-commands '(self-insert-command))
+  (defun complete-or-indent ()
+    (interactive)
+    (if (company-manual-begin)
+	(company-complete-common)
+      (indent-according-to-mode)))
+  :bind (("C-c i" . complete-or-indent))
   :hook ((puppet-mode . company-mode)
 	 (python-mode . company-mode)
 	 (ruby-mode . company-mode)
@@ -1264,16 +1264,6 @@ _b_   _f_   _o_k        _y_ank
                                 'mode-line-mule-info
                                 mode-line-format))
 
-;; accents  
-(unless (or (featurep 'xemacs)
-	    (>= emacs-major-version 22))
-  (setq current-language-environment "Latin-1")
-  (set-terminal-coding-system 'latin-1)
-  (standard-display-european 1)
-  (set-input-mode (car (current-input-mode))
-		  (nth 1 (current-input-mode))
-		  0))
-
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1)) ;; no toolbar
 ;; no electric-indent-mode
 (if (fboundp 'electric-indent-mode) (electric-indent-mode -1))
@@ -1309,8 +1299,6 @@ _b_   _f_   _o_k        _y_ank
 (setq inhibit-startup-message t)
 (setq line-move-visual nil) 
 (menu-bar-mode -1)
-(setq py-indent-offset 2)
-(setq python-indent 2)
 (setq perl-indent-level 2)
 (setq lua-indent-level 2)
 (setq sh-basic-offset 2)
