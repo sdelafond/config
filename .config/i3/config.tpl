@@ -383,7 +383,7 @@ assign [class="(?i)dia"] T8
 assign [class="(?i)darktable"] T8
 
 # sound
-assign [class="(?i)gmpc"] 9
+assign [class="(?i)gmpc"] T9
 for_window [class="(?i)spotify"] move window to workspace T9
 
 # comm
