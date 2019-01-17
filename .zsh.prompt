@@ -40,10 +40,10 @@ setTerminalTitle() {
         terminalTitle="$terminalTitle@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       else
         if [[ -n "${vcs_info_msg_1_}" ]] ; then
-            terminalTitle="${terminalTitle}${vcs_info_msg_1_}"
+          terminalTitle="${terminalTitle}${vcs_info_msg_1_}"
 	fi
         if [[ -n "${cmd}" ]] ; then
-            terminalTitle="${terminalTitle}|${cmd}"
+          terminalTitle="${terminalTitle}|${cmd}"
         fi
       fi
       if [[ $TERM != (screen|tmux)* ]] ; then

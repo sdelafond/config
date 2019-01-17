@@ -591,5 +591,8 @@ source ~/.zsh.prompt
 local hostFile=~/.zsh_$HOST
 [[ -f $hostFile ]] && source $hostFile
 
+# update prompt
+setTerminalTitle
+
 # reload config on USR1
 trap 'zreload-do' USR1
