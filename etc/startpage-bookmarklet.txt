@@ -1,0 +1,1 @@
+javascript:window.location='https://startpage.com/do/search?q='+window.location.href.substring(window.location.href.indexOf('=') + 1)

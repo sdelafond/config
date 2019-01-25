@@ -1,8 +1,13 @@
 ## macros
 
 # GPG decrypt
-macro attach  d	  "<pipe-message> gpg --quiet --decrypt | less\n" "decrypt with GnuPG"
-macro attach  e	  "<pipe-message> emacs-wrapper.sh -\n" "edit in emacs"
+macro attach d "<pipe-message> gpg --quiet --decrypt | less\n" "decrypt with GnuPG"
+macro attach e "\
+<enter-command>unset wait_key<enter>\
+<shell-escape>rm -f /tmp/mutt-attach<enter>\
+<save-entry><kill-line>/tmp/mutt-attach<enter>\
+<shell-escape>emacs-wrapper.sh /tmp/mutt-attach &<enter>\
+"
 
 # general emacs-like behavior for history
 bind editor \Cp history-up
