@@ -830,8 +830,10 @@ _h_tml    ^ ^        _A_SCII:
   :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after (:all projectile counsel)
   :config
-  (setq projectile-use-git-grep t)
-  (counsel-projectile-mode t))
+  (counsel-projectile-mode t)
+  :bind (:map projectile-mode-map
+	 ("C-c p f" . counsel-projectile-find-file)
+	 ("C-c p p" . counsel-projectile-switch-project)))
 
 (use-package yasnippet
   :config
