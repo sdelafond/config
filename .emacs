@@ -820,6 +820,7 @@ _h_tml    ^ ^        _A_SCII:
 	 ("C-r" . counsel-minibuffer-history)))
 
 (use-package projectile
+  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :config
   (setq projectile-use-git-grep t)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
