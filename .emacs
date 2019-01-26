@@ -231,8 +231,12 @@ prefix argument."
          (format "gnutls-cli --x509cafile %s -p %%p %%h" trustfile))))
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 ;;			 ("marmalade" . "http://marmalade-repo.org/packages/")
-;;			 ("melpa" . "https://melpa.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")))
+(setq package-archive-priorities '(("melpa-stable" . 10)
+				   ("gnu"          . 5)
+				   ("melpa"        . 0)))
+
 (let ((package-list '(ace-window
                       ag
                       async
@@ -268,6 +272,7 @@ prefix argument."
 ;; use-package
 (require 'use-package)
 (setq use-package-always-ensure t)
+(setq use-package-always-pin "melpa-stable")
 
 ;; _____________________________________________________________________
 ;; Hooks
@@ -759,6 +764,7 @@ _h_tml    ^ ^        _A_SCII:
 (use-package gitignore-mode)
 
 (use-package ivy
+  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :defer 0.1
   :diminish
   :bind (("C-c C-r" . ivy-resume)
@@ -775,9 +781,11 @@ _h_tml    ^ ^        _A_SCII:
   (ivy-mode t))
 
 (use-package ivy-hydra
+  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after ivy)
 
 (use-package ivy-rich
+  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after (:all ivy counsel)
   :init
   (setq ivy-rich-path-style 'abbrev)
@@ -786,11 +794,13 @@ _h_tml    ^ ^        _A_SCII:
   (ivy-rich-mode t))
 
 (use-package swiper
+  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after ivy
   :bind (("C-s" . counsel-grep-or-swiper)
          ("C-r" . counsel-grep-or-swiper)))
 
 (use-package counsel
+  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after ivy
   :init
   (setq counsel-grep-base-command "grep -P -n -i -e %s %s")
@@ -816,6 +826,7 @@ _h_tml    ^ ^        _A_SCII:
   (projectile-global-mode t))
 
 (use-package counsel-projectile
+  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after (:all projectile counsel)
   :config
   (setq projectile-use-git-grep t)
