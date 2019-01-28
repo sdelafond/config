@@ -1,20 +1,18 @@
 [alias]
+	a = add
+	aa = add -all
         bl2 = log --graph --branches --abbrev-commit --pretty=oneline --decorate=full
         bl = log --graph --branches --pretty=format:'%C(magenta)%h%C(reset) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
         bl1 = log --graph --pretty=format:'%C(magenta)%h%C(reset) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
         b = branch
-        br = branch
-        bra = branch -a
-        brl = branch -l
-        brr = branch -r
+        ba = branch -a
+        bl = branch -l
+        br = branch -r
 	co = checkout
-        c = commit --verbose
-        ca = commit --verbose --all
-        cam = commit --verbose --amend
-        camn = commit --verbose --amend --no-edit
-        cm = commit --verbose
-        comm = commit --verbose
-        commit = commit --verbose
+        c = commit
+        ca = commit --all
+        cam = commit --amend
+        camn = commit --amend --no-edit
         cp = cherry-pick
         d = diff
         dc = diff --cached
@@ -26,20 +24,18 @@
         g = grep
 	l1 = log --pretty=oneline
 	l = log
-	lo = log
 	m = merge
 	ma = merge --abort
         p = pull
 	pr = pull --rebase
 	r = rebase
+	re = remote
 	ra = rebase --abort
 	rc = rebase --continue
 	rh = reset --hard
 	ri = rebase --interactive
 	sst = show --stat
 	s = status
-	st = status
-        stat = status	
 [branch]
         autosetupmerge = always
 #        autosetuprebase = always
@@ -63,6 +59,7 @@
         untracked = cyan bold
 [commit]
         template = ~/.gittemplate
+	verbose = true
 [core]
 	excludesfile = ~/.gitignore
         warnambiguousrefs = false
