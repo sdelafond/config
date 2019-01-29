@@ -35,7 +35,11 @@ setTerminalTitle() {
   case $TERM in
     rxvt*|xterm*|screen*|tmux*)
       local cmd="$1"
-      terminalTitle="$(getTmuxWindowIndex):"
+      if env | G -q TMUX= ; then
+	terminalTitle="$(getTmuxWindowIndex):"
+      else
+	terminalTitle="_:"
+      fi
       if [[ $HOST_SHORT != $(hostname -s) ]] || [[ -z "$STY$TMUX" ]] ; then
         terminalTitle="$terminalTitle@${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
       else
