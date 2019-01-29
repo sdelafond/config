@@ -307,7 +307,7 @@ bindsym --whole-window $mod+button5 exec $app.volume down
 
 # terminals
 assign [class="^URxvt$" title="o.mine.nu$"] 4
-%IF(%SYS(hostname -s) == x1)assign [class="^URxvt$" title="a.mine.nu$"] 3
+%IF(%SYS(hostname -s) == x1)assign [class="^URxvt$" title="a.mine.nu$"] 6
 assign [class="^URxvt$" title="hetz"] 4
 assign [class="^URxvt$" title="jmt"] 4
 
