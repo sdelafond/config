@@ -33,7 +33,7 @@ case $HOST in
     I3_SCREEN_2="DP-2"
     I3_SCREEN_3=$I3_SCREEN_1
     xrandr --output $I3_SCREEN_1 --primary --auto --output $I3_SCREEN_2 --auto --right-of $I3_SCREEN_1 ;;
-  centurion)
+  centurion|hulk)
     I3_SCREEN_1="DP-4"
     I3_SCREEN_2="DVI-D-0"
     I3_SCREEN_3="HDMI-0"
