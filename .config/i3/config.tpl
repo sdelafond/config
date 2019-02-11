@@ -385,6 +385,7 @@ assign [class="(?i)mplayer"] T8
 assign [class="(?i)gimp"] T8
 assign [class="(?i)dia"] T8
 assign [class="(?i)darktable"] T8
+assign [class="(?i)gthumb"] T8
 
 # sound
 assign [class="(?i)gmpc"] T9
