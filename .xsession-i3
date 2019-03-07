@@ -61,7 +61,7 @@ esac
 export I3_SCREEN_1 I3_SCREEN_2 I3_SCREEN_3
 
 # pulse
-pgrep -u $USER pulseaudio || pulseaudio &
+pactl list sinks > /dev/null 2>&1 || { pkill pulseaudio ; sleep 2 pulseaudio ; } &
 
 # systray
 pasystray > /dev/null 2>&1 &
