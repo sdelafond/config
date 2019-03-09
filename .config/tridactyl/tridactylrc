@@ -1,1 +1,3 @@
 unbind <C-f>
+
+set editorcmd /home/seb/bin/emacs-wrapper.sh
