@@ -7,10 +7,11 @@ xkbset m
 xkbset exp "=m"
 
 # emulate middle button
-XINPUT_POINTER=$(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/i' | tail -1)
-xinput set-prop $XINPUT_POINTER "Evdev Middle Button Emulation" 1
-xinput set-prop $XINPUT_POINTER "libinput Middle Emulation Enabled" 1
-xinput set-prop $XINPUT_POINTER "Evdev Middle Button Timeout" 50
+for id in $(xinput | perl -nle 'print $1 if m/id=(\d+).+pointer/i') ; do
+  xinput set-prop $id "Evdev Middle Button Emulation" 1
+  xinput set-prop $id "libinput Middle Emulation Enabled" 1
+  xinput set-prop $id "Evdev Middle Button Timeout" 50
+done
 
 # mouse acceleration
 xset m 4 10
