@@ -357,12 +357,14 @@ assign [class="(?i)office" ] 8
 
 # browsers
 for_window [class="(?i)firefox$" title="^New Window"] move window to workspace F1
+for_window [class="(?i)irefox$" title="^Google"] move window to workspace F2
+assign [class="(?i)chromium$"] F2
 for_window [class="(?i)irefox$" title="^Untangle"] move window to workspace F3
 for_window [class="(?i)irefox$" title="^Etal"] move window to workspace F5
 for_window [class="(?i)irefox$" title="^Debian"] move window to workspace F6
 for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
 for_window [class="(?i)irefox$" title="exia"] move window to workspace F8
-assign [class="(?i)chromium$"] F2
+for_window [class="(?i)irefox$" title="^MLB"] move window to workspace T8
 
 # VNC & co
 assign [class="(?i)rdp"] T5
