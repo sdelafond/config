@@ -26,13 +26,13 @@
    "Keymap for `debian-cvelist-mode'.")
 
 (defvar debian-cvelist-font-lock-keywords
-  '(("^CVE-[0-9]\\{4\\}-[0-9X]\\{4,7\\}" . font-lock-function-name-face)
+  '(("^CVE-[0-9]\\{4\\}-[0-9X]\\{4,7\\}" (0 font-lock-function-name-face) ;; face for CVE keyword
+     ("(\\(.+\\))$" nil nil (1 font-lock-warning-face))) ;; face for the rest of the line
     ("D[LS]A-[0-9]\\{4,5\\}-[0-9]" . font-lock-function-name-face)
     ("#[0-9]\\{1,7\\}" . font-lock-type-face)
     ("^\tNOTE:" . font-lock-comment-delimiter-face)
     ("^\tTODO:" . font-lock-warning-face)
     ("^\t\\(RESERVED\\|NOT-FOR-US\\|REJECTED\\)" . font-lock-keyword-face)
-    ("^CVE-[0-9]\\{4\\}-[0-9X]\\{4,7\\}" "[\\[(]\\(.+?\\).$" nil nil (1 font-lock-variable-name-face))
     ("\\<unfixed\\|undetermined\\>" . font-lock-warning-face)
     ("\\<end-of-life\\|not-affected\\|no-dsa\\|ignored\\|postponed\\>" . font-lock-constant-face))
   "Keyword highlighting for `debian-cvelist-mode'")
@@ -52,6 +52,7 @@
 (define-derived-mode debian-cvelist-mode fundamental-mode "debian-cvelist"
   "A major mode for editing data/CVE/list in the Debian secure-testing repo."
   (setq-local font-lock-defaults '(debian-cvelist-font-lock-keywords nil))
+  (setq font-lock-keywords-only t)
   (setq indent-line-function 'debian-cvelist-indent-line))
 
 (provide 'debian-cvelist)
