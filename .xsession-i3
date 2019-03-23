@@ -44,7 +44,7 @@ case $HOST in
     I3_SCREEN_2=$I3_SCREEN_1
     I3_SCREEN_3=$I3_SCREEN_1
     # single-finger scrolling only
-    XINPUT_TP="SynPS/2 Synaptics TouchPad"
+    XINPUT_TP="Synaptics TM3072-003"
     xinput set-prop "$XINPUT_TP" "Synaptics ClickPad" 0
     xinput set-prop "$XINPUT_TP" "Synaptics Edges" 0 0 0 4807
     xinput set-prop "$XINPUT_TP" "Synaptics Edge Scrolling" 1 1 0
