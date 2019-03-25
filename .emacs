@@ -627,7 +627,7 @@ _h_tml    ^ ^        _A_SCII:
 
   (local-set-key (kbd "<M-RET>") 'org-meta-return)
 
-  (defhydra hydra-org-timestamp-change (:color amaranth :hint nil)
+  (defhydra hydra-org-timestamp (:color amaranth :hint nil)
     ("a" (let ((current-prefix-arg '(16)))
            (call-interactively 'org-time-stamp))
      "active")
@@ -639,7 +639,7 @@ _h_tml    ^ ^        _A_SCII:
     ("p" (org-timestamp-change -1 'day) "-1d")
     ("n" (org-timestamp-change 1 'day) "+1d")
     ("q" nil "quit" :color blue))
-  (key-chord-define org-mode-map "hh" 'hydra-org-timestamp-change/body))
+  (key-chord-define org-mode-map "hh" 'hydra-org-timestamp/body))
 
 (add-hook 'org-load-hook 'my-org-mode-hook)
 (add-hook 'org-mode-hook 'my-org-mode-hook)
