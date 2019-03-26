@@ -571,7 +571,7 @@ source ~/.zsh.alias
 source ~/.zsh.function
 source ~/.zsh.function.d/*
 
-# maybe overloaded later
+# (maybe overloaded later)
 [[ $HOST == *puppet-master* ]] || set-git-info sdelafond@gmail.com "Sébastien Delafond"
 
 # ... but only some of these
@@ -590,6 +590,13 @@ source ~/.zsh.prompt
 
 local hostFile=~/.zsh_$HOST
 [[ -f $hostFile ]] && source $hostFile
+
+# virtualenv
+local vew="/usr/share/virtualenvwrapper/virtualenvwrapper.sh"
+if [ -f $vew ] ; then
+  export WORKON_HOME=~/.virtualenvs 
+  source $vew
+fi
 
 # update prompt
 setTerminalTitle
