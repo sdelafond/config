@@ -25,7 +25,6 @@ xset r 108
 
 # screen sleep
 xscreensaver -nosplash &
-xss-lock -l -- xscreensaver-command --lock &
 xset dpms 0 0 0
 xset s off
 case $HOST in
@@ -40,6 +39,7 @@ case $HOST in
     I3_SCREEN_3="HDMI-0"
     xrandr --output $I3_SCREEN_1 --primary --mode 2560x1440 --output $I3_SCREEN_2 --auto --right-of DP-4 --output $I3_SCREEN_3 --auto --left-of DP-4 ;;
   x1)
+    xss-lock -l -- xscreensaver-command --lock &
     I3_SCREEN_1="eDP-1"
     I3_SCREEN_2=$I3_SCREEN_1
     I3_SCREEN_3=$I3_SCREEN_1
