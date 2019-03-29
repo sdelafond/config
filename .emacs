@@ -363,6 +363,7 @@ prefix argument."
 ;; (setq org-icalendar-include-todo t)
   (setq org-deadline-warning-days 0)
   (setq org-default-priority 67)
+  (setq org-duration-format (quote h:mm))
 ;; (setq org-fast-tag-selection-single-key 'expert)
   (setq org-fast-tag-selection-single-key t)
   (setq org-return-follows-link t)
