@@ -179,7 +179,7 @@ gitseb() {
   local d reload
   local -a commands
   commands=(${(s:, :)@})
-  for d in ~/.config-*(N) ~/etc ~/org ; do
+  for d in ~/.config-*(N) ~/etc ~/org ~/vcs/4* ; do
     [[ -d $d ]] || continue
     echo "\e[1m## $(basename ${d//.config-})\e[0m"
     pushd $d
