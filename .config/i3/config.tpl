@@ -180,6 +180,9 @@ bindsym $mod+Shift+w exec /home/seb/bin/i3-write.py
 # urgent WS
 bindsym $mod+u [urgent=latest] focus
 
+# sticky
+bindsym $mod+y floating enable; sticky enable
+
 # sound
 bindsym XF86AudioRaiseVolume exec $app.volume up
 bindsym XF86AudioLowerVolume exec $app.volume down
