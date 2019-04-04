@@ -305,7 +305,7 @@ bindsym $mod+a workspace back_and_forth
 
 ## Mouse bindings
 # FIXME
-bindsym --whole-window $mod+button3 exec $app.volume mute
+bindsym --whole-window $mod+button2 exec $app.volume mute
 bindsym --whole-window $mod+button4 exec $app.volume up
 bindsym --whole-window $mod+button5 exec $app.volume down
 
