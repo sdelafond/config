@@ -170,6 +170,7 @@ bar {
 }
 
 ## Focus settings
+focus_follows_mouse yes
 focus_on_window_activation none
 focus_wrapping force
 mouse_warping none
