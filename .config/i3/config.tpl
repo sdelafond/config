@@ -169,9 +169,10 @@ bar {
   }
 }
 
-## Settings
+## Focus settings
 focus_on_window_activation none
 focus_wrapping force
+mouse_warping none
 
 ## Keyboard bindings
 
