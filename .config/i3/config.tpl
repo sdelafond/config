@@ -171,6 +171,7 @@ bar {
 
 ## Settings
 focus_on_window_activation none
+focus_wrapping force
 
 ## Keyboard bindings
 
