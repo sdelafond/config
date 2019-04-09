@@ -30,3 +30,4 @@ Keybase
 autostart
 keybase
 *.buildinfo
+.ipynb_checkpoints
