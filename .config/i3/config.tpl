@@ -169,8 +169,11 @@ bar {
   }
 }
 
-## Settings
+## Focus settings
+focus_follows_mouse yes
 focus_on_window_activation none
+focus_wrapping force
+mouse_warping none
 
 ## Keyboard bindings
 
@@ -179,6 +182,9 @@ bindsym $mod+Shift+w exec /home/seb/bin/i3-write.py
 
 # urgent WS
 bindsym $mod+u [urgent=latest] focus
+
+# sticky
+bindsym $mod+y floating enable; sticky enable
 
 # sound
 bindsym XF86AudioRaiseVolume exec $app.volume up
@@ -299,7 +305,7 @@ bindsym $mod+a workspace back_and_forth
 
 ## Mouse bindings
 # FIXME
-bindsym --whole-window $mod+button3 exec $app.volume mute
+bindsym --whole-window $mod+button2 exec $app.volume mute
 bindsym --whole-window $mod+button4 exec $app.volume up
 bindsym --whole-window $mod+button5 exec $app.volume down
 
@@ -322,6 +328,7 @@ assign [class="^URxvt$" title="beastie$"] 5
 %IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
+assign [class="^URxvt$" title=".data"] 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
