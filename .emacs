@@ -1301,6 +1301,9 @@ _b_   _f_   _o_k        _y_ank
 ;; cvelist
 (autoload 'debian-cvelist-mode "debian-cvelist.el" "Major mode for debian CVE lists" t)
 
+;; no annoying automatic py-help-at-point
+(global-eldoc-mode -1)
+
 ;; git-gutter
 (require 'git-gutter)
 ;;(global-git-gutter-mode t)
