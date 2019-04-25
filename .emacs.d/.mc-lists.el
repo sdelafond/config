@@ -6,13 +6,15 @@
 	dabbrev-expand
 	helm-M-x
 	hydra-multiple-cursors/nil
-	hydra-org-timestamp/body
 	hydra-org-timestamp-change/body
 	hydra-org-timestamp-change/lambda-b
 	hydra-org-timestamp-change/lambda-f
 	hydra-org-timestamp-change/lambda-n
 	hydra-org-timestamp-change/lambda-p
 	hydra-org-timestamp-change/nil
+	hydra-org-timestamp/body
+	hydra-org-timestamp/lambda-n
+	hydra-org-timestamp/lambda-p
 	hydra-org-timestamp/nil
 	org-beginning-of-line
 	org-cycle
