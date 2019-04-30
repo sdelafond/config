@@ -16,6 +16,7 @@ application/vnd.oasis.opendocument.text; unoconv -f html --stdout '%s' | elinks 
 application/msword; unoconv -f html --stdout '%s' | elinks
 application/msword; unoconv -f html --stdout '%s' | elinks -dump; copiousoutput
 
+application/pdf; mupdf '%s' &; test=test -n "$DISPLAY"; needsterminal
 application/pdf; pdftotext -layout /dev/stdin -; copiousoutput
 
 # application/vnd.sun.xml.writer;/usr/bin/soffice %s
