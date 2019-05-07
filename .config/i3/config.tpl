@@ -368,6 +368,7 @@ for_window [class="(?i)irefox$" title="^Google"] move window to workspace F2
 assign [class="(?i)chromium$"] F2
 for_window [class="(?i)irefox$" title="^Untangle"] move window to workspace F3
 for_window [class="(?i)irefox$" title="^Etal"] move window to workspace F5
+for_window [class="(?i)irefox$" title="^Data"] move window to workspace F5
 for_window [class="(?i)irefox$" title="^Debian"] move window to workspace F6
 for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
 for_window [class="(?i)irefox$" title="exia"] move window to workspace F8
