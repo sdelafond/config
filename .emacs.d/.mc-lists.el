@@ -13,6 +13,7 @@
 	hydra-org-timestamp-change/lambda-p
 	hydra-org-timestamp-change/nil
 	hydra-org-timestamp/body
+	hydra-org-timestamp/lambda-b
 	hydra-org-timestamp/lambda-n
 	hydra-org-timestamp/lambda-p
 	hydra-org-timestamp/nil
