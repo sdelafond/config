@@ -8,6 +8,6 @@ done
 manpath=(/usr/share/man /usr/local/man /usr/X11R6/man /opt/vmware/man $manpath)
 fpath=(~/.zsh/functions $fpath)
 export LD_LIBRARY_PATH=/usr.local/lib:$LD_LIBRARY_PATH
-export XTERM="urxvt -T $HOST &"
+export XTERM="urxvt &"
 
 #export TZ=Europe/Paris

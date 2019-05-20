@@ -39,7 +39,9 @@ alias aptsh='apt-cache show'
 alias aptshp='apt-cache showpkg'
 alias cp='cp -i'
 alias co='connect'
-alias com='connect-mosh'
+alias com='connect -m'
+alias cot='connect-tmux'
+alias comt='connect-tmux -m'
 alias d='dirs -v'
 alias decodebase64='python -c "import base64, sys ; print base64.decodestring(sys.argv[1])"'
 alias dict='dict.sh'
@@ -60,7 +62,6 @@ alias ll='ls -hl'
 alias ls='ls -F'
 alias m='mount'
 alias more=$PAGER
-#alias mutt='xpop /usr/bin/mutt "mutt@`hostname`"'
 alias mv='mv -i'
 alias perlx='perl -Dtls'
 alias psall='ps aux -w -w'
@@ -93,9 +94,6 @@ alias zreload-do='source ~/.zshenv ; source ~/.zshrc ; echo "reloaded zshrc"'
 
 # logging
 alias apachelogparser='logparser /var/www/logs/access_log ~/bin/apachelogparser.pl'
-alias apachelog='xpop apachelogparser apachelog -geometry 140x15 -sh 100'
-alias syslog2='xpop "logparser /var/log/syslog ~/bin/syslogparser.pl" syslog -geometry 140x6+0-0 -sh 100 -tint white'
-alias syslog='xpop "sudo ~/bin/syslog.sh" syslog -fade 0 -geometry 140x25+0-0 -sh 100 -tint white'
 
 case $OSTYPE in
   linux*)

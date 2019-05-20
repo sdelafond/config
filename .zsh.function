@@ -71,14 +71,42 @@ conv() {
   esac
 }
 
-connect() { # pops an ssh windows if under x, or simple ssh if not
-#  setopt localoptions xtrace
-  local host=$argv[-1]
-  xpop "ssh -Y $*" "$host"
+connect() {
+  setopt localoptions xtrace
+
+  local transport="ssh -t"
+  while getopts m OPTION ; do
+    case $OPTION in
+      m) transport="mosh" ;;
+    esac
+  done
+  
+  shift $[ $OPTIND - 1 ]
+
+  local host=$1
+  shift
+
+  if [[ "$transport" == "mosh" ]] ; then
+    xpop -t $host $transport $host -- $@
+  else
+    xpop -t $host $=transport $host \""$@"\"
+  fi
 }
-connect-mosh() {
-  local host=$argv[-1]
-  xpop "mosh $*" "$host"
+
+connect-tmux() {
+  setopt localoptions xtrace
+
+  local transport=""
+  while getopts m OPTION ; do
+    case $OPTION in
+      m) transport="-m" ;;
+    esac
+  done
+  
+  shift $[ $OPTIND - 1 ]
+
+  local remoteCmd="source .zshrc ; sc $2"
+  connect $transport $1 zsh -i -c "$remoteCmd"
 }
 
 cp-other() {
@@ -387,27 +415,6 @@ round() {
   echo "scale=${2:-2};${1}/1" | bc
 }
 
-run() { # remotely run
-  while getopts c OPTION ; do
-    case $OPTION in
-      c) local CONSOLE=1 ;;
-      *) echo "blah" $OPTION ; return 1 ;;
-    esac
-  done
-
-  shift $[ $OPTIND - 1 ]
-
-  local host=$1
-  local command=$2
-  shift ; shift
-
-  if [[ -n "${CONSOLE}" ]] ; then
-    ssh -X -t $host $command
-  else
-    xpop "ssh -t $@ $host \"$command\"" "RemoteExec@$host: $command"
-  fi
-}
-
 s() { # smarter sudo
   [[ $1 = -d ]] && setopt localoptions xtrace && shift
 
@@ -548,41 +555,23 @@ setup-env() {
   [ -n "$1" ] && _setup-env $1
 }
 
-xpop() { # my precious :)
-#  setopt localoptions xtrace
-  set -A commandAndArgs ${=1} # split $1 as if SH_WORD_SPLIT was set
-  shift
+xpop() {
+  setopt localoptions xtrace
 
-  local c=$commandAndArgs[1]
-  shift 1 commandAndArgs
+  while getopts t: OPTION ; do
+    case $OPTION in
+      t) local title="-T $OPTARG" ;;
+    esac
+  done
+  
+  shift $[ $OPTIND - 1 ]
 
-  evaluate-command $c # result is returned in $reply
-  if [[ $? != 0 ]] ; then
-    echo "$c not found"
-    return 1
-  fi
-  set -A command $reply "$commandAndArgs[@]" # add args
-  set -A expandedCommand $~command # nice trick to do expansion on an array
-  unset reply
-
-  local name=$1
-  shift
-
-  if [ -n "${DISPLAY}" ] ; then
-    ${=XTERM/&/} $@ -T "$name" -e zsh -c "$expandedCommand" &
-  else
-    zsh -c "$expandedCommand"
-  fi
+  ${=XTERM/&/} $=title -e $@ &
 }
 
 xs() {
 #  setopt localoptions xtrace
-  #${=XTERM/&} -e zsh -i -c "sc $1" &
   local name=$1
   local title=${name}@$HOSTNAME
-  if [[ -f ~/.tmuxp/${name}.yaml ]] ; then
-    xpop "unset TMUX ; tmuxp load $name" $title
-  else
-    xpop "sc $name" ${title}
-  fi
+  xpop -t $title sc $name
 }
