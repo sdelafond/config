@@ -72,8 +72,7 @@ conv() {
 }
 
 connect() {
-  setopt localoptions xtrace
-
+#  setopt localoptions xtrace
   local transport="ssh -t"
   while getopts m OPTION ; do
     case $OPTION in
@@ -94,8 +93,7 @@ connect() {
 }
 
 connect-tmux() {
-  setopt localoptions xtrace
-
+#  setopt localoptions xtrace
   local transport=""
   while getopts m OPTION ; do
     case $OPTION in
@@ -556,8 +554,7 @@ setup-env() {
 }
 
 xpop() {
-  setopt localoptions xtrace
-
+#  setopt localoptions xtrace
   while getopts t: OPTION ; do
     case $OPTION in
       t) local title="-T $OPTARG" ;;
