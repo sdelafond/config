@@ -72,7 +72,7 @@ conv() {
 }
 
 connect() {
-  setopt localoptions xtrace
+#  setopt localoptions xtrace
   local transport="ssh -t"
   # list most common ssh options
   while getopts i:J:o:p:vm OPTION ; do
