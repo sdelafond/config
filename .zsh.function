@@ -75,22 +75,24 @@ connect() {
 #  setopt localoptions xtrace
   local transport="ssh -t"
   # list most common ssh options
-  while getopts i:J:o:p:Avm OPTION ; do
+  while getopts i:J:o:p:T:Avm OPTION ; do
     case $OPTION in
       m) transport="mosh" ;;
+      T) title="$OPTARG" ;;
       *) transport="$transport -$OPTION $OPTARG"
     esac
   done
   
   shift $[ $OPTIND - 1 ]
 
+  [[ -z "$title" ]] && local title=$1
   local host=$1
   shift
 
   if [[ "$transport" == "mosh" ]] ; then
-    xpop -t $host $transport $host -- $@
+    xpop -t $title $transport $host -- $@
   else
-    xpop -t $host $=transport $host \""$@"\"
+    xpop -t $title $=transport $host \""$@"\"
   fi
 }
 
@@ -107,7 +109,7 @@ connect-tmux() {
   shift $[ $OPTIND - 1 ]
 
   local remoteCmd="source .zshrc ; sc $2"
-  connect $transport $1 zsh -i -c "$remoteCmd"
+  connect -T @2@$1 $transport ${1} zsh -i -c "$remoteCmd"
 }
 
 cp-other() {
