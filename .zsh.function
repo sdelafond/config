@@ -75,7 +75,7 @@ connect() {
 #  setopt localoptions xtrace
   local transport="ssh -t"
   # list most common ssh options
-  while getopts i:J:o:p:vm OPTION ; do
+  while getopts i:J:o:p:Avm OPTION ; do
     case $OPTION in
       m) transport="mosh" ;;
       *) transport="$transport -$OPTION $OPTARG"
@@ -98,7 +98,7 @@ connect-tmux() {
 #  setopt localoptions xtrace
   local transport=""
   # list most common ssh options
-  while getopts i:J:o:p:vm OPTION ; do
+  while getopts i:J:o:p:Avm OPTION ; do
     case $OPTION in
       m) transport="-m" ;;
     esac
