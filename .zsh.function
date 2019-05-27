@@ -575,5 +575,5 @@ xs() {
 #  setopt localoptions xtrace
   local name=$1
   local title=${name}@$HOSTNAME
-  xpop -t $title zsh -i -c "sc $name"0
+  xpop -t $title zsh -i -c "sc $name"
 }
