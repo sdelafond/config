@@ -34,8 +34,9 @@
 	rc = rebase --continue
 	rh = reset --hard
 	ri = rebase --interactive
-	sst = show --stat
 	s = status
+	sh = show
+	sst = show --stat
 [branch]
         autosetupmerge = always
 #        autosetuprebase = always
