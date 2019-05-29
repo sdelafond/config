@@ -1436,6 +1436,7 @@ _b_   _f_   _o_k        _y_ank
  '(avy-lead-face ((t (:background "color-21" :foreground "white"))))
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
  '(hydra-face-red ((t (:foreground "color-136" :weight bold))))
+ '(ledger-occur-xact-face ((t (:background "color-235"))))
  '(org-agenda-date ((t (:foreground "color-117" :weight bold :inverse-video t))))
  '(org-agenda-date-today ((t (:inherit org-agenda-date :foreground "color-228" :inverse-video t :underline t :slant italic :weight bold))))
  '(org-agenda-date-weekend ((t (:inherit org-agenda-date))))
