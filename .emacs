@@ -1420,7 +1420,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-separator "")
  '(package-selected-packages
    (quote
-    (ox-pandoc ivy-rich counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (ledger-mode ox-pandoc ivy-rich counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
