@@ -862,14 +862,15 @@ prefix argument."
 (use-package yasnippet-snippets
   :after yasnippet)
 
-(use-package python-mode
+(use-package elpy
+  :ensure t
+  :defer t
   :config
-  (setq py-indent-offset 2)
-  (setq py-shell-toggle-1 "ipython")
-  (setq py-shell-toggle-2 "ipython3")
-  (setq py-shell-name "ipython3")
-  (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-  (setq py-force-py-shell-name-p t))
+  (setq elpy-rpc-python-command "python3")
+  (setq python-shell-interpreter "ipython3")
+  (setq python-shell-interpreter-args "-i --simple-prompt")
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 
 (use-package ruby-mode
   :mode "\\(\\.rb$\\|Capfile\\|Rakefile\\)")
