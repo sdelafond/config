@@ -469,9 +469,10 @@ prefix argument."
 
   ;; links
   (setq org-link-abbrev-alist '(("debian-bug" . "https://bugs.debian.org/%s")
-                                ("debian-dp" . "https://packages.debian.org/%s")
+                                ("debian-dp"  . "https://packages.debian.org/%s")
                                 ("debian-dsp" . "https://tracker.debian.org/%s")
-                                ("debian-dst" . "https://security-tracker.debian.org/tracker/%s")))
+                                ("debian-dst" . "https://security-tracker.debian.org/tracker/%s")
+                                ("salsa-dt-mr" . "https://salsa.debian.org/qa/distro-tracker/merge_requests/%")))
 
   ;; *** [[url][desc]] :tag1:tag2: -> url #tag1,tag2#
   (defun org-convert-entry-to-irc ()
