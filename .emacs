@@ -469,9 +469,10 @@ prefix argument."
 
   ;; links
   (setq org-link-abbrev-alist '(("debian-bug" . "https://bugs.debian.org/%s")
-                                ("debian-dp" . "https://packages.debian.org/%s")
+                                ("debian-dp"  . "https://packages.debian.org/%s")
                                 ("debian-dsp" . "https://tracker.debian.org/%s")
-                                ("debian-dst" . "https://security-tracker.debian.org/tracker/%s")))
+                                ("debian-dst" . "https://security-tracker.debian.org/tracker/%s")
+                                ("salsa-dt-mr" . "https://salsa.debian.org/qa/distro-tracker/merge_requests/%")))
 
   ;; *** [[url][desc]] :tag1:tag2: -> url #tag1,tag2#
   (defun org-convert-entry-to-irc ()
@@ -861,14 +862,15 @@ prefix argument."
 (use-package yasnippet-snippets
   :after yasnippet)
 
-(use-package python-mode
+(use-package elpy
+  :ensure t
+  :defer t
   :config
-  (setq py-indent-offset 2)
-  (setq py-shell-toggle-1 "ipython")
-  (setq py-shell-toggle-2 "ipython3")
-  (setq py-shell-name "ipython3")
-  (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-  (setq py-force-py-shell-name-p t))
+  (setq elpy-rpc-python-command "python3")
+  (setq python-shell-interpreter "ipython3")
+  (setq python-shell-interpreter-args "-i --simple-prompt")
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 
 (use-package ruby-mode
   :mode "\\(\\.rb$\\|Capfile\\|Rakefile\\)")
@@ -1420,7 +1422,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-separator "")
  '(package-selected-packages
    (quote
-    (ox-pandoc ivy-rich counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+    (ledger-mode ox-pandoc ivy-rich counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
@@ -1434,12 +1436,9 @@ _b_   _f_   _o_k        _y_ank
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(avy-lead-face ((t (:background "color-21" :foreground "white"))))
- '(helm-ff-symlink ((t (:foreground "color-33"))))
- '(helm-grep-file ((t (:foreground "color-50" :underline t))))
- '(helm-match ((t (:foreground "color-83"))))
- '(helm-selection ((t (:background "color-239" :distant-foreground "black"))))
  '(hydra-face-blue ((t (:foreground "color-33" :weight bold))))
  '(hydra-face-red ((t (:foreground "color-136" :weight bold))))
+ '(ledger-occur-xact-face ((t (:background "color-235"))))
  '(org-agenda-date ((t (:foreground "color-117" :weight bold :inverse-video t))))
  '(org-agenda-date-today ((t (:inherit org-agenda-date :foreground "color-228" :inverse-video t :underline t :slant italic :weight bold))))
  '(org-agenda-date-weekend ((t (:inherit org-agenda-date))))

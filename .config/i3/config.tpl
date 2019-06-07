@@ -360,7 +360,7 @@ assign [class="^URxvt$" title="home$"] 1
 assign [class="^URxvt$" ] 1
 
 # office
-assign [class="(?i)office" ] 8
+assign [class="(?i)office" ] 7
 
 # browsers
 for_window [class="(?i)firefox$" title="^New Window"] move window to workspace F1
