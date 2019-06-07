@@ -1,3 +1,5 @@
+uncolor index "*"
+
 color attachment  white          brightcolor091
 color bold        green          default # ..
 color error       red            default # global
@@ -62,17 +64,9 @@ color body color213 default '^--.*'
 color index 	  color252   	 default ~R
 color index       color154	 default ~O # Old
 
-color index 	  color141       default '(~L (maudet\|lbrowne\|bouchare\|stanley\|415\-?conseil\|metavize\|untangle\|gorry\|regnie\|jurica))'
-color index 	  color034       default '(~L @.*(debian\|debconf))'
-color index 	  color210       default '(~L @.*(mappy\|ysance))'
-color index 	  color196       default '~((~C (security\.debian\.org\|vendor-sec\|buildd\+logs-security)) | (~s rt\.debian\.org) | ~h "Delivered-To:.*team@security.debian.org")'
+# if you use other colors in a separate, private file, make sure you
+# paste the next 3 lines at the end
 
-color index       brightcolor154 default ~N # New
-color index 	  brightcolor141 default '~N (~L (maudet\|lbrowne\|bouchare\|stanley\|415\-?conseil\|metavize\|untangle\|hsbc\|gorry\|regnie\|jurica))'
-color index 	  brightcolor034 default '~N (~L @.*debian)'
-color index 	  brightcolor209 default '~N (~L @.*(mappy\|ysance))'
-color index 	  brightcolor196 default '~N ~((~C (security\.debian\.org\|vendor-sec\|buildd\+logs-security)) | (~s rt\.debian\.org))'
-
-color index       brightcolor230 default  ~F # Flagged
-color index       default        color021 ~T # Tagged
-color index       color139       default  ~D # Deleted
+# color index       brightcolor230 default  ~F # Flagged
+# color index       default        color021 ~T # Tagged
+# color index       color139       default  ~D # Deleted
