@@ -774,6 +774,9 @@ prefix argument."
 (use-package magit-svn
   :after magit)
 
+(use-package forge
+  :after magit)
+
 (use-package gitconfig-mode)
 (use-package gitignore-mode)
 
