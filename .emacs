@@ -346,7 +346,7 @@ prefix argument."
   (org-super-agenda-mode t)
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 'year)
-  (setq org-agenda-start-day "-6m")
+  (setq org-agenda-start-day "-4m")
   (setq org-agenda-show-all-dates nil)
   (setq org-agenda-show-log nil)
   (setq org-agenda-show-future-repeats 'next)
