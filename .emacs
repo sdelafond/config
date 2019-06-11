@@ -869,6 +869,7 @@ prefix argument."
   :ensure t
   :defer t
   :config
+  (setq python-indent-offset 4)
   (setq elpy-rpc-python-command "python3")
   (setq python-shell-interpreter "ipython3")
   (setq python-shell-interpreter-args "-i --simple-prompt")
