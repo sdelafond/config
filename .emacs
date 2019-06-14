@@ -738,6 +738,11 @@ prefix argument."
   (setq key-chord-one-keys-delay 0.1)
   (setq key-chord-two-key-delay 0.2))
 
+(use-package ledger-mode
+  :defer t
+  :config
+  (setq ledger-use-iso-dates t))
+
 (use-package flycheck
   :config
   (setq flycheck-keymap-prefix "\C-c ~")
