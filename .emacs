@@ -740,6 +740,7 @@ prefix argument."
 
 (use-package ledger-mode
   :defer t
+  :mode "\\.ledger$"
   :config
   (setq ledger-use-iso-dates t))
 
