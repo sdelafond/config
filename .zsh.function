@@ -74,6 +74,7 @@ conv() {
 connect() {
 #  setopt localoptions xtrace
   local transport="ssh -t"
+  local title
   # list most common ssh options
   while getopts i:J:o:p:T:Avm OPTION ; do
     case $OPTION in
@@ -85,7 +86,7 @@ connect() {
   
   shift $[ $OPTIND - 1 ]
 
-  [[ -z "$title" ]] && local title=$1
+  [[ -z "$title" ]] && title=$1
   local host=$1
   shift
 
