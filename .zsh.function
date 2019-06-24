@@ -463,7 +463,13 @@ s() { # smarter sudo
 sc() {
   name=${1:-"main"}
   if whence tmux &> /dev/null ; then
-    tmux -2 attach -d -t $name || tmux -2 new-session -s $name
+    if [[ -f ~/.tmuxp/${name}.yaml ]] ; then
+      TMUX="" tmuxp load $name
+    else
+      tmux -2 attach -d -t $name || tmux -2 new-session -s $name
+    fi
+
+
   elif whence screen &> /dev/null ; then
     screen -R $name -D -A
   fi
