@@ -60,7 +60,7 @@ alias jed='echo use "e"'
 alias kb='setxkbmap -layout us ; xset m $MOUSE_ACCEL $MOUSE_THRESHOLD ; xkbset m ; xkbset exp =m ; xmodmap ~/.xmodmaprc'
 alias la='ls -a'
 alias ll='ls -hl'
-alias ls='ls -F'
+alias ls='ls -F -N'
 alias m='mount'
 alias more=$PAGER
 alias mv='mv -i'
@@ -100,7 +100,7 @@ case $OSTYPE in
   linux*)
     apts() { apt-cache search -- $@ | sort }
 #    [[ -x /usr/bin/aptitude ]] && alias apt-get=aptitude
-    alias ls='ls --color=auto -F'
+    alias ls='ls --color=auto -F -N'
 #    alias r='s apt-get remove --purge'
     alias top='top -d 1' ;;
   openbsd*)
