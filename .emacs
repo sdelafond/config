@@ -827,6 +827,7 @@ prefix argument."
   :after ivy
   :init
   (setq counsel-grep-base-command "grep -P -n -i -e %s %s")
+  (setq counsel-git-grep-cmd-function #'counsel-git-grep-cmd-function-ignore-order)
   :config
   (counsel-mode t)
   :bind (("M-x" . counsel-M-x)
