@@ -35,9 +35,3 @@ case $1 in
     amixer $AMIXER_OPTS_MUTE set $MIXER mute > /dev/null
     STRING="mute" ;;
 esac
-
-killall osd_cat 2> /dev/null
-
-#echo "Sound Volume: $STRING" | osd_cat -d 1 -p bottom -A left -c green&
-awesome-notify.sh "$STRING" "sound"
-

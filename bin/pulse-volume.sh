@@ -13,6 +13,3 @@ case $1 in
     pactl set-sink-mute $SINK 1
     STRING="mute" ;;
 esac
-
-awesome-notify.sh "$STRING" "sound"
-
