@@ -33,6 +33,7 @@ netdata {
 }
 
 net_rate {
+  color = "#00CCFF"
   format = "{down}↓{up}↑"
 }
 
