@@ -863,6 +863,7 @@ prefix argument."
   :config
   (yas-global-mode t)
   (yas/reload-all)
+  (key-chord-define-global "yy" 'yas-expand)
   :bind (("C-c y" . yas-expand)
 	 ("C-c i" . yas-insert-snippet)
 	 :map yas-minor-mode-map
