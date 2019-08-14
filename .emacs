@@ -593,6 +593,11 @@ prefix argument."
   (define-key org-mode-map "\C-c " 'nil)
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-c/" 'org-sparse-tree)
+
+  (key-chord-define org-mode-map "uu" '(lambda ()
+					 (interactive)
+					 (let ((current-prefix-arg t))
+					   (org-ctrl-c-ctrl-c))))
   
 ;;   (defun hot-expand (str)
 ;;     "Expand org template."
