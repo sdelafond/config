@@ -740,8 +740,8 @@ prefix argument."
 (use-package key-chord
   :config
   (key-chord-mode 1)
-  (setq key-chord-one-key-delay 0.1)
-  (setq key-chord-two-keys-delay 0.2))
+  (setq key-chord-one-key-delay 0.2)
+  (setq key-chord-two-keys-delay 0.1))
 
 (use-package ledger-mode
   :defer t
