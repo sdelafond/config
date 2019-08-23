@@ -274,6 +274,11 @@ prefix argument."
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa-stable")
 
+;; use-package extensions
+(use-package use-package-chords
+  :ensure t
+  :config (key-chord-mode 1))
+
 ;; _____________________________________________________________________
 ;; Hooks
 (defun seb/mutt-hook ()
@@ -868,7 +873,7 @@ prefix argument."
   :config
   (yas-global-mode t)
   (yas/reload-all)
-  (key-chord-define-global "yy" 'yas-expand)
+  :chords (("yy" . yas-expand))
   :bind (("C-c y" . yas-expand)
 	 ("C-c i" . yas-insert-snippet)
 	 :map yas-minor-mode-map
@@ -1437,9 +1442,9 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-header-separator "")
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
- ;; '(package-selected-packages
- ;;   (quote
- ;;    (ledger-mode ox-pandoc ivy-rich counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+ '(package-selected-packages
+   (quote
+    (use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode ox-pandoc org-super-agenda multiple-cursors magit-svn ledger-mode key-chord json-mode ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter forge flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
