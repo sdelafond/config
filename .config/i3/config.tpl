@@ -201,8 +201,10 @@ bindsym $mod+o exec $app.screen_off
 bindsym $mod+Escape exec $app.screen_off
 
 # selection -> web
-bindsym $mod+F1 exec $app.selection default
-bindsym $mod+F2 exec $app.selection default chromium
+bindsym $mod+F1 exec $app.selection
+bindsym $mod+F2 exec $app.selection search
+bindsym $mod+F3 exec $app.selection image
+bindsym $mod+F4 exec $app.selection map
 
 # keyboard layout
 bindsym $mod+F12 exec $app.keyboard_layout
