@@ -1,6 +1,6 @@
 #! /usr/bin/env zsh
 
-set -x
+#set -x
 exec > /tmp/ew.log 2>&1
 
 # Copyright (C) 2008-2017 Sebastien Delafond (sdelafond@gmail.com)
