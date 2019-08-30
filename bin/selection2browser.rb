@@ -40,7 +40,7 @@ def extractURLs(selection, searchEngine, mode)
       }
     when /^CVE-\d+-\d+/
       urls << "https://security-tracker.debian.org/tracker/#{selection}"
-    when /^#\d+/
+    when /^#\d+{6,}/
       urls << "https://bugs.debian.org/#{selection}"
     end
   end
