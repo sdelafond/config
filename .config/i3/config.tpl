@@ -142,7 +142,7 @@ set $app.terminal xsc
 set $app.terminal_without_screen xterm
 set $app.screen_lock bash -c "xset dpms force off && xscreensaver-command -lock"
 set $app.screen_off bash -c "sleep 1 && xset dpms force off"
-set $app.selection ~/bin/browser-maybe-selection.rb
+set $app.selection ~/bin/selection2browser.rb
 set $app.keyboard_layout ~/bin/keyboard-layout.sh
 set $app.volume ~/bin/pulse-volume.sh
 set $app.backlight ~/bin/xbacklight.sh
@@ -201,8 +201,10 @@ bindsym $mod+o exec $app.screen_off
 bindsym $mod+Escape exec $app.screen_off
 
 # selection -> web
-bindsym $mod+F1 exec $app.selection default
-bindsym $mod+F2 exec $app.selection default chromium
+bindsym $mod+F1 exec $app.selection
+bindsym $mod+F2 exec $app.selection search
+bindsym $mod+F3 exec $app.selection image
+bindsym $mod+F4 exec $app.selection map
 
 # keyboard layout
 bindsym $mod+F12 exec $app.keyboard_layout

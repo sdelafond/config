@@ -274,6 +274,11 @@ prefix argument."
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa-stable")
 
+;; use-package extensions
+(use-package use-package-chords
+  :ensure t
+  :config (key-chord-mode 1))
+
 ;; _____________________________________________________________________
 ;; Hooks
 (defun seb/mutt-hook ()
@@ -346,7 +351,7 @@ prefix argument."
   (org-super-agenda-mode t)
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 'year)
-  (setq org-agenda-start-day "-4m")
+  (setq org-agenda-start-day "-2m")
   (setq org-agenda-show-all-dates nil)
   (setq org-agenda-show-log nil)
   (setq org-agenda-show-future-repeats 'next)
@@ -593,6 +598,11 @@ prefix argument."
   (define-key org-mode-map "\C-c " 'nil)
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-c/" 'org-sparse-tree)
+
+  (key-chord-define org-mode-map "uu" '(lambda ()
+					 (interactive)
+					 (let ((current-prefix-arg t))
+					   (org-ctrl-c-ctrl-c))))
   
 ;;   (defun hot-expand (str)
 ;;     "Expand org template."
@@ -735,8 +745,8 @@ prefix argument."
 (use-package key-chord
   :config
   (key-chord-mode 1)
-  (setq key-chord-one-keys-delay 0.1)
-  (setq key-chord-two-key-delay 0.2))
+  (setq key-chord-one-key-delay 0.2)
+  (setq key-chord-two-keys-delay 0.1))
 
 (use-package ledger-mode
   :defer t
@@ -863,7 +873,7 @@ prefix argument."
   :config
   (yas-global-mode t)
   (yas/reload-all)
-  (key-chord-define-global "yy" 'yas-expand)
+  :chords (("yy" . yas-expand))
   :bind (("C-c y" . yas-expand)
 	 ("C-c i" . yas-insert-snippet)
 	 :map yas-minor-mode-map
@@ -1432,9 +1442,9 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-header-separator "")
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
- ;; '(package-selected-packages
- ;;   (quote
- ;;    (ledger-mode ox-pandoc ivy-rich counsel counsel-projectile ivy ivy-hydra swiper docker-compose-mode org-super-agenda yasnippet-snippets go-mode markdown-mode puppet-mode multiple-cursors magit magit-svn dockerfile-mode yasnippet json-mode key-chord yaml-mode smartparens hydra gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line company clojure-mode ag ace-window ace-jump-mode)))
+ '(package-selected-packages
+   (quote
+    (use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode ox-pandoc org-super-agenda multiple-cursors magit-svn ledger-mode key-chord json-mode ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter forge flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote

@@ -43,12 +43,20 @@ case $HOST in
     I3_SCREEN_1="eDP-1"
     I3_SCREEN_2=$I3_SCREEN_1
     I3_SCREEN_3=$I3_SCREEN_1
-    # single-finger scrolling only
+
+    ## single-finger scrolling only for touchpad
     XINPUT_TP="Synaptics TM3072-003"
-    xinput set-prop "$XINPUT_TP" "Synaptics ClickPad" 0
-    xinput set-prop "$XINPUT_TP" "Synaptics Edges" 0 0 0 4807
+    # force 2-finger scrolling
+    xinput set-prop "$XINPUT_TP" "Synaptics Two-Finger Pressure" 0
+    xinput set-prop "$XINPUT_TP" "Synaptics Two-Finger Width" 0
     xinput set-prop "$XINPUT_TP" "Synaptics Edge Scrolling" 1 1 0
     xinput set-prop "$XINPUT_TP" "Synaptics Palm Detection" 1
+    # no clicking
+    xinput set-prop "$XINPUT_TP" "Synaptics ClickPad" 0
+    # original values for edges: "77, 1863, 57, 1005", so ignore ~ 450
+    # right-most area to avoid scrolling while typing
+    xinput set-prop "$XINPUT_TP" "Synaptics Area" 77, 1400, 57, 1005
+
     # # trackpoint
     # xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
     # # mouse acceleration
