@@ -462,6 +462,8 @@ s() { # smarter sudo
 
 sc() {
   name=${1:-"main"}
+  export TERM_TITLE_PREFIX="${name}@"
+  setTerminalTitle
   if whence tmux &> /dev/null ; then
     tmux -2 attach -d -t $name || tmux -2 new-session -s $name
   elif whence screen &> /dev/null ; then

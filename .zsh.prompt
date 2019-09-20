@@ -51,7 +51,7 @@ setTerminalTitle() {
         fi
       fi
       if [[ $TERM != (screen|tmux)* ]] ; then
-        terminalTitle="${hostnicks[$HOST_SHORT]:-$HOST_SHORT}"
+        terminalTitle="${TERM_TITLE_PREFIX}${hostnicks[$HOST_SHORT]:-$HOST_SHORT}${TERM_TITLE_SUFFIX}"
       fi
 
       [[ -z $terminalTitle ]] && terminalTitle=" "
@@ -63,6 +63,10 @@ setTerminalTitle() {
 precmd() {
   # for the next line, check out the *vcs stuff in .zshrc
   vcs_stuff 2> /dev/null
+  # those 2 are only set once, by sc(), to add the tmux/screen session
+  # name; when detaching, they need to be reset
+  unset TERM_TITLE_PREFIX
+  unset TERM_TITLE_SUFFIX
   # just strip previous title from cmd marker
   terminalTitle=${terminalTitle/\|*}
   _setTerminalTitle "$terminalTitle"
