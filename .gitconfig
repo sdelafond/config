@@ -9,6 +9,7 @@
         bl = branch -l
         br = branch -r
 	co = checkout
+        cb = checkout -b
         c = commit
         ca = commit --all
         cam = commit --amend
