@@ -86,3 +86,6 @@
 	signingkey = 0x91AD581ADAF6CE93
 [gitlab "salsa.debian.org/api/v4"]
 	user = seb
+[rerere]
+	enabled = true
+	autoupdate = true
