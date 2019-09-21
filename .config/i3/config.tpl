@@ -319,7 +319,6 @@ assign [class="^URxvt$" title="o.mine.nu$"] 4
 assign [class="^URxvt$" title="hetz"] 4
 assign [class="^URxvt$" title="jmt"] 4
 
-%IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="mail@"] move window to workspace T4
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="mail@"] move window to workspace T4
 
 assign [class="^URxvt$" title="lanner$"] 2
@@ -327,7 +326,6 @@ assign [class="^URxvt$" title="omnia"] 2
 
 assign [class="^URxvt$" title="bpi"] 5
 assign [class="^URxvt$" title="beastie$"] 5
-%IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
 assign [class="^URxvt$" title=".data"] 5
@@ -337,14 +335,15 @@ assign [class="^URxvt$" title="ngfw@"] 3
 assign [class="^URxvt$" title="exia"] 8
 assign [class="^URxvt$" title="mfw@"] 9
 
-%IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 
 assign [class="^URxvt$" title="debian.org"] 6
-%IF(%SYS(hostname -s) == centurion)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
+
+%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="xian@"] move window to workspace 6
+%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="xian@"] move window to workspace 6
 
 assign [class="^URxvt$" title="recette-"] 3
 assign [class="^URxvt$" title="qt-"] 3
