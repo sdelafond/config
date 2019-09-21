@@ -342,8 +342,8 @@ assign [class="^URxvt$" title="debian.org"] 6
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
 
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="xian@"] move window to workspace 6
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="xian@"] move window to workspace 6
+%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="xian@"] move window to workspace 8
+%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="xian@"] move window to workspace 8
 
 assign [class="^URxvt$" title="recette-"] 3
 assign [class="^URxvt$" title="qt-"] 3
