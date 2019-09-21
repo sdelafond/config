@@ -68,6 +68,8 @@ precmd() {
   unset TERM_TITLE_PREFIX
   unset TERM_TITLE_SUFFIX
   # just strip previous title from cmd marker
+  unset TERM_TITLE_PREFIX
+  unset TERM_TITLE_SUFFIX
   terminalTitle=${terminalTitle/\|*}
   _setTerminalTitle "$terminalTitle"
 }
