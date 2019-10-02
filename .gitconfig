@@ -6,6 +6,7 @@
         bl1 = log --graph --pretty=format:'%C(magenta)%h%C(reset) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
         b = branch
         ba = branch -a
+        bac = branch -a --contains
         bd = branch -d
         bl = branch -l
         br = branch -r
