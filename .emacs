@@ -777,7 +777,14 @@ prefix argument."
   :config
   (flycheck-color-mode-line-mode t))
 
+(use-package transient
+  :pin "melpa")
+
+(use-package closql
+  :pin "melpa")
+
 (use-package magit
+  :pin "melpa"
   :mode ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)" . git-commit-mode)
   :config
   (setq magit-commit-ask-to-stage "verbose")
@@ -788,6 +795,7 @@ prefix argument."
   ("C-x M-g" . magit-dispatch-popup))
 
 (use-package forge
+  :pin "melpa"
   :after magit)
 
 (use-package gitconfig-mode)
