@@ -235,7 +235,7 @@ prefix argument."
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")))
 (setq package-archive-priorities '(("melpa-stable" . 10)
 				   ("gnu"          . 5)
-				   ("melpa"        . 0)))
+				   ("melpa"        . 1)))
 
 (let ((package-list '(ace-window
                       ag
@@ -786,9 +786,6 @@ prefix argument."
   :bind
   ("C-x g" . magit-status)
   ("C-x M-g" . magit-dispatch-popup))
-
-(use-package magit-svn
-  :after magit)
 
 (use-package forge
   :after magit)
@@ -1444,7 +1441,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-separator "")
  '(package-selected-packages
    (quote
-    (use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode ox-pandoc org-super-agenda multiple-cursors magit-svn ledger-mode key-chord json-mode ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter forge flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode)))
+    (use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode ox-pandoc org-super-agenda multiple-cursors ledger-mode key-chord json-mode ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode)))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    (quote
