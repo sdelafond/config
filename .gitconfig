@@ -93,3 +93,5 @@
 	autoupdate = true
 [github]
 	user = sdelafond
+[gitlab]
+	user = sdelafond
