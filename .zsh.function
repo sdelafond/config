@@ -179,7 +179,7 @@ find() { # filter out .svn
   [ $# -gt 0 ] && shift
   local printArg
   [[ "$@" == *-print* ]] || printArg="-print" 
-  command find "$dir" -path '*/.svn' -prune -o -path '*/.git' -prune -o $@ $printArg
+  command find -L "$dir" -path '*/.svn' -prune -o -path '*/.git' -prune -o $@ $printArg
 }
 
 findN() {
