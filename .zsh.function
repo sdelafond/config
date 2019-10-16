@@ -339,6 +339,26 @@ preexec() {
 
   setTerminalTitle "$cmd"
 
+  refresh-ssh-agent-info
+}
+
+psc() {
+  ps --cols=1000 --sort='-%cpu,uid,pgid,ppid,pid' -e \
+     -o user,pid,ppid,pgid,stime,stat,wchan,time,pcpu,pmem,vsz,rss,sz,args |
+     sed 's/^/ /' | less
+}
+
+psm() {
+  ps --cols=1000 --sort='-vsz,uid,pgid,ppid,pid' -e \
+     -o user,pid,ppid,pgid,stime,stat,wchan,time,pcpu,pmem,vsz,rss,sz,args |
+     sed 's/^/ /' | less
+}
+
+psg() {
+  psall | grep -v "grep -iE $1" | grep -iE "$1"
+}
+
+refresh-ssh-agent-info() {
 #  if [[ -n "$KRB5CCNAME" ]] && /usr/bin/klist -5 -s ; then
 #  else
 #    local -a krb5files
@@ -359,22 +379,6 @@ preexec() {
     fi
   fi
   have gpg-connect-agent && export SSH_AUTH_SOCK=$(gpgconf --list-dirs | awk -F: '/^agent-socket:/ {print $2 ".ssh"}') && update-gpg-agent-tty 2> /dev/null
-}
-
-psc() {
-  ps --cols=1000 --sort='-%cpu,uid,pgid,ppid,pid' -e \
-     -o user,pid,ppid,pgid,stime,stat,wchan,time,pcpu,pmem,vsz,rss,sz,args |
-     sed 's/^/ /' | less
-}
-
-psm() {
-  ps --cols=1000 --sort='-vsz,uid,pgid,ppid,pid' -e \
-     -o user,pid,ppid,pgid,stime,stat,wchan,time,pcpu,pmem,vsz,rss,sz,args |
-     sed 's/^/ /' | less
-}
-
-psg() {
-  psall | grep -v "grep -iE $1" | grep -iE "$1"
 }
 
 remove-host() { 
