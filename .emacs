@@ -192,6 +192,14 @@ prefix argument."
   (kill-new (file-truename buffer-file-name)))
 (global-set-key "\C-cz" 'show-file-name)
 
+(defun update-ssh-agent-info ()
+  "Update SSH_AUTH_SOCK"
+  (interactive)
+  (let* ((cmd ". ~/.zsh.function ; refresh-ssh-agent-info ; echo -n $SSH_AUTH_SOCK")
+	 (new (shell-command-to-string cmd)))
+    (setenv "SSH_AUTH_SOCK" new)
+    (message (concat "SSH_AUTH_SOCK=" new))))
+
 (defun my-backup-enable-predicate (filename)
   "Do not create backups for certain files."
   (when (normal-backup-enable-predicate filename)
