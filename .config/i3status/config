@@ -68,9 +68,12 @@ whatismyip { # py3status
 
 battery_level {
   notification = true
+  notify_low_level = true
   color_charging = "#FFFF80"
   color_degraded = "#FFA0A0"
   color_bad = "#FF3300"
+  threshold_bad = 8
+  threshold_degraded = 15
   format = "{icon} {percent}% {time_remaining}"
 }
 
