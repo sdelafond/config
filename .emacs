@@ -858,6 +858,7 @@ prefix argument."
 	 ("C-x C-f" . counsel-find-file)
 	 ("C-c j" . counsel-git-grep)
 	 ("C-x l" . counsel-locate)
+	 ("M-y" . counsel-yank-pop)
 	 :map help-map
 	 ("f" . counsel-describe-function)
 	 ("v" . counsel-describe-variable)
@@ -1181,10 +1182,8 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
  (defhydra hydra-yank-pop ()
   "yank"
   ("C-y" yank nil)
-  ("M-y" yank-pop nil)
   ("y" (yank-pop 1) "next")
   ("Y" (yank-pop -1) "prev")))
-(global-set-key (kbd "M-y") #'hydra-yank-pop/yank-pop)
 (global-set-key (kbd "C-y") #'hydra-yank-pop/yank)
 
 ;; (global-set-key
