@@ -23,6 +23,7 @@ debian/files
 fish
 .emacs.d/url
 core
+!core/
 .jnewsrc-lock
 .jnewsrc.as
 *history
