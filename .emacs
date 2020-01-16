@@ -801,7 +801,8 @@ prefix argument."
   (global-magit-file-mode t)
   :bind
   ("C-x g" . magit-status)
-  ("C-x M-g" . magit-dispatch-popup))
+  ("C-x M-g" . magit-dispatch-popup)
+  :chords (("kk" . magit-status)))
 
 (use-package forge
   :pin "melpa"
