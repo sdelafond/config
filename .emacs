@@ -310,9 +310,20 @@ prefix argument."
   (setq org-babel-python-command "python3")
   (require 'ob-js)
   (require 'ob-ditaa)
-  (defun my-org-confirm-babel-evaluate (lang body)
-    (not (string= lang "ditaa")))  ; don't ask for ditaa
-  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+  ;; (defun my-org-confirm-babel-evaluate (lang body)
+  ;;   (not (string= lang "ditaa")))  ; don't ask for ditaa
+  ;; (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+  (setq org-confirm-babel-evaluate nil
+        org-babel-min-lines-for-block-output 1
+        org-babel-default-header-args
+        (cons '(:noweb . "yes")
+              (assq-delete-all :noweb org-babel-default-header-args))
+        org-babel-default-header-args
+        (cons '(:exports . "both")
+              (assq-delete-all :exports org-babel-default-header-args))
+        org-babel-default-header-args
+        (cons '(:results . "output verbatim replace")
+              (assq-delete-all :results org-babel-default-header-args)))
   (require 'ob-shell)
   (require 'ob-sql)
   (require 'ob-emacs-lisp)
