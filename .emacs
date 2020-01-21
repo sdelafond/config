@@ -922,6 +922,8 @@ prefix argument."
   (advice-add 'python-mode :before 'elpy-enable))
 
 (use-package ruby-mode
+  :config
+  (setq ruby-insert-encoding-magic-comment nil)
   :mode "\\(\\.rb$\\|Capfile\\|Rakefile\\)")
 
 (use-package puppet-mode
