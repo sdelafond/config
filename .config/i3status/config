@@ -29,12 +29,12 @@ order += "volume master"
 order += "tztime local"
 
 netdata {
-  format = "{down}↓ {up}↑"
+  format = "↓{down} ↑{up}"
 }
 
 net_rate {
   color = "#00CCFF"
-  format = "{down}↓{up}↑"
+  format = "↓{down} ↑{up}"
 }
 
 sysdata {
