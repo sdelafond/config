@@ -22,7 +22,7 @@ def getUrl(query, searchEngine, mode)
   q = "#{params[:default]}=#{query}"
   url = "#{se[:url]}/?#{q}"
 
-  url = "#{url}&#{extraParams}" unless mode == 'search'
+  url = "#{url}&#{params[mode.to_sym]}" unless mode == 'search'
 
   return url
 end
@@ -45,7 +45,7 @@ def extractURLs(selection, searchEngine, mode)
     end
   end
 
-  urls << getUrl(selection, searchEngine, "search") if urls.empty?
+  urls << getUrl(selection, searchEngine, mode) if urls.empty?
 
   return urls
 end
