@@ -833,7 +833,7 @@ prefix argument."
   (ivy-use-virtual-buffers t)
   :config
   (setq ivy-height 20) ;; number result lines to display
-  (setq ivy-initial-inputs-alist nil) ;; no regexp by default
+  (setq ivy-initial-inputs-alist nil) ;; no anchor by default
   (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
   (setq split-height-threshold nil)
   (setq enable-recursive-minibuffers t)
@@ -866,6 +866,7 @@ prefix argument."
   (setq counsel-git-grep-cmd-function #'counsel-git-grep-cmd-function-ignore-order)
   :config
   (counsel-mode t)
+  (setq ivy-initial-inputs-alist nil)
   :bind (("M-x" . counsel-M-x)
 	 ("C-x C-f" . counsel-find-file)
 	 ("C-c j" . counsel-git-grep)
