@@ -612,12 +612,13 @@ prefix argument."
                  "* TODO %? %U\n  Source: %u, %c\n  %i"))))
 
   ;; bindings
-  (define-key org-mode-map "\C-ca" 'org-agenda)
-  (define-key org-mode-map "\C-cl" 'org-store-link)
-  (define-key org-mode-map "\C-c/" 'org-sparse-tree)
-  (define-key org-mode-map "\C-c " 'nil)
-  (define-key global-map "\C-cc" 'org-capture)
-  (define-key global-map "\C-c/" 'org-sparse-tree)
+  (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+  (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+  (define-key org-mode-map (kbd "C-c /") 'org-sparse-tree)
+  (define-key org-mode-map (kbd "C-c C-x C-r") 'org-clock-report)
+  (define-key org-mode-map (kbd "C-c SPC") 'nil)
+  (define-key global-map (kbd "C-c c") 'org-capture)
+  (define-key global-map (kbd "C-c /") 'org-sparse-tree)
 
   (key-chord-define org-mode-map "uu" '(lambda ()
 					 (interactive)
@@ -709,13 +710,11 @@ prefix argument."
 ;; General preferences
 
 ;; No more "C-x C-s C-x #' (server-mode)
-(define-key global-map "\C-xj" '(lambda ()
-                                  (interactive)
-                                  (save-buffer)
-                                  (if (and (fboundp 'server-running-p)
-                                           (server-running-p))
-                                      (server-edit)
-                                  (kill-emacs))))
+(define-key global-map (kbd "C-x j") '(lambda ()
+                                        (if (and (fboundp 'server-running-p)
+                                                 (server-running-p))
+                                            (server-edit)
+                                          (kill-emacs))))
 
 ;; ace-window/avy
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
@@ -1412,9 +1411,9 @@ _b_   _f_   _o_k        _y_ank
 ;(add-hook 'grep-mode-hook (lambda () (toggle-truncate-lines 1)))
 
 ;; key mappings for predefined functions
-(global-set-key "\C-cg" 'goto-line)
-(global-set-key "\C-x/" 'revert-buffer)
-(global-set-key "\C-ca" 'align)
+(global-set-key (kbd "C-c g") 'goto-line)
+(global-set-key (kbd "C-x /") 'revert-buffer)
+(global-set-key (kbd "C-c a") 'align)
 (global-set-key (kbd "M-k") 'kill-whole-line)
 
 ;; associate file patterns and modes
