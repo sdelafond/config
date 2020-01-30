@@ -711,6 +711,7 @@ prefix argument."
 
 ;; No more "C-x C-s C-x #' (server-mode)
 (define-key global-map (kbd "C-x j") '(lambda ()
+					(interactive)
                                         (if (and (fboundp 'server-running-p)
                                                  (server-running-p))
                                             (server-edit)
