@@ -622,7 +622,7 @@ prefix argument."
 
   (key-chord-define org-mode-map "uu" '(lambda ()
 					 (interactive)
-					 (let ((current-prefix-arg t))
+					 (let ((prefix-arg last-prefix-arg))
 					   (org-ctrl-c-ctrl-c))))
   
 ;;   (defun hot-expand (str)
