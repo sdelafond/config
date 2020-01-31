@@ -155,11 +155,11 @@ prefix argument."
 (defun insert-sig-fr ()
   (interactive)
   (insert (concat "Bien cordialement," "\n\n" "-- \nSD\n")))
-(global-set-key "\C-cs" 'insert-sig-fr)
+(global-set-key (kbd "C-c s") 'insert-sig-fr)
 (defun insert-sig-en ()
   (interactive)
   (insert (concat "Cheers," "\n\n" "-- \nSeb\n")))
-(global-set-key "\C-cS" 'insert-sig-en)
+(global-set-key (kbd "C-c S") 'insert-sig-en)
 
 (defun system-short-name ()
   (car (split-string system-name "\\.")))
@@ -183,14 +183,14 @@ prefix argument."
 (defun kill-to-eof ()
   (interactive)
   (kill-region (point) (point-max)))
-(global-set-key "\C-ck" 'kill-to-eof)
+(global-set-key (kbd "C-c k") 'kill-to-eof)
 
 (defun show-file-name ()
   "Show the full path file name in the minibuffer"
   (interactive)
   (message (buffer-file-name))
   (kill-new (file-truename buffer-file-name)))
-(global-set-key "\C-cz" 'show-file-name)
+(global-set-key (kbd "C-c z") 'show-file-name)
 
 (defun update-ssh-agent-info ()
   "Update SSH_AUTH_SOCK"
@@ -294,7 +294,7 @@ prefix argument."
     (mail-mode)
     (turn-on-orgtbl)
     (turn-on-orgstruct)
-    (local-set-key "\C-ci" 'format-email-body)))
+    (local-set-key ("C-c i") 'format-email-body)))
 
 (defun my-org-mode-hook ()
 ;;   (require 'org-expiry)
@@ -776,7 +776,7 @@ prefix argument."
 
 (use-package flycheck
   :config
-  (setq flycheck-keymap-prefix "\C-c ~")
+  (setq flycheck-keymap-prefix (kbd "C-c ~"))
   (global-flycheck-mode)
   (defhydra hydra-flycheck
     (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
