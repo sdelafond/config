@@ -768,6 +768,15 @@ prefix argument."
   (setq key-chord-one-key-delay 0.2)
   (setq key-chord-two-keys-delay 0.1))
 
+(use-package edit-server
+  :defer 2
+  :config
+  (setq edit-server-new-frame nil)
+  (if (and (fboundp 'server-running-p)
+	   (server-running-p)
+	   (string= server-name "main"))
+	(edit-server-start)))
+
 (use-package ledger-mode
   :defer t
   :mode "\\.ledger$"
