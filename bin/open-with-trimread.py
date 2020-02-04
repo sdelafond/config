@@ -17,5 +17,3 @@ if not resp.status_code == 200:
 
 link = re.search(fr'({URL}/articles/\d+)', resp.text).group(1)
 print(link)
-
-
