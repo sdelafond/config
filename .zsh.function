@@ -206,6 +206,10 @@ gg() {
   done
 }
 
+gh() {
+  grep -${grepSwitch} "$@" $HISTFILE
+}
+
 gitseb() {
 #  setopt localoptions xtrace
   local d reload
