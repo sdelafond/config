@@ -712,11 +712,13 @@ prefix argument."
 
 ;; No more "C-x C-s C-x #' (server-mode)
 (define-key global-map (kbd "C-x j") '(lambda ()
-					(interactive)
-                                        (if (and (fboundp 'server-running-p)
-                                                 (server-running-p))
-                                            (server-edit)
-                                          (kill-emacs))))
+                                        (interactive)
+                                        (progn
+                                          (save-buffer)
+                                          (if (and (fboundp 'server-running-p)
+                                                   (server-running-p))
+                                              (server-edit)
+                                            (kill-emacs)))))
 
 ;; ace-window/avy
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
