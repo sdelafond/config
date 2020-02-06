@@ -232,6 +232,7 @@ prefix argument."
   (load-file (concat my-emacsd "/23/package.el")))
 (setq tls-checktrust t)
 (setq gnutls-verify-error t)
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (let ((trustfile "/etc/ssl/certs/ca-certificates.crt"))
   (setq gnutls-trustfiles (list trustfile))
   (setq tls-program
