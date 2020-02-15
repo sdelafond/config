@@ -57,7 +57,7 @@ alias dos2unix="perl -i -pe 's/\r$//'"
 alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 alias e='emacs-wrapper.sh'
 alias feh='feh -Z -F -p'
-alias fzf='fzf --bind="alt-v:page-up,ctrl-v:page-down" --multi'
+alias fzf='fzf --bind="alt-v:page-up,ctrl-v:page-down" --multi --ansi --tabstop=4'
 alias g='git'
 alias geoip='python3 ~/bin/ip2city.py'
 alias gitup='git svn fetch --all && git svn rebase'
