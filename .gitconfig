@@ -8,7 +8,7 @@
         ba = branch -a
         bac = branch -a --contains
         bd = branch -d
-        bD = branch -D
+        bdd = branch -D
         bl = branch -l
         br = branch -r
 	co = checkout
