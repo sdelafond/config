@@ -1,5 +1,8 @@
 #! /usr/bin/ruby
 
+require 'json'
+require 'net/http'
+require 'net/https'
 require 'shellwords'
 require 'uri'
 
@@ -15,8 +18,29 @@ SEARCH_ENGINES = { "duckduckgo" => { :url => 'https://duckduckgo.com',
                                                   :image => 'tbm=isch',
                                                   :map => 'um=1' } } }
 
+TRIMREAD_URL = 'https://beta.trimread.com/'
+TRIMREAD_URI = URI.parse(TRIMREAD_URL)
+TRIMREAD_HTTPS = Net::HTTP.start(TRIMREAD_URI.host, TRIMREAD_URI.port, :use_ssl => true)
+
 ## functions
+def doTrimreadPost(url)
+  req = Net::HTTP::Post.new(TRIMREAD_URI.path)
+  req.set_form_data({'url' => url})
+  response = TRIMREAD_HTTPS.request(req)
+  exit(1) unless response.code == '200'
+  return response.body
+end
+
+def trimreadUrl(body)
+  body =~ %r'(#{TRIMREAD_URL}articles/\d+)'
+  return $1
+end
+
 def getUrl(query, searchEngine, mode)
+  if mode == 'trimread'
+    return trimreadUrl(doTrimreadPost(query))
+  end
+
   se = SEARCH_ENGINES[searchEngine]
   params = se[:params]
   q = "#{params[:default]}=#{query}"
