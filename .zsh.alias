@@ -58,6 +58,7 @@ alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 alias e='emacs-wrapper.sh'
 alias feh='feh -Z -F -p'
 alias fzf='fzf --bind="alt-v:page-up,ctrl-v:page-down" --multi --ansi --tabstop=4'
+alias fzfp='fzf --preview "batcat --style=numbers --color=always {} | head -500"'
 alias g='git'
 alias geoip='python3 ~/bin/ip2city.py'
 alias gitup='git svn fetch --all && git svn rebase'
