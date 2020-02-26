@@ -3,20 +3,25 @@
 require 'json'
 require 'net/http'
 require 'net/https'
+require 'optparse'
 require 'shellwords'
 require 'uri'
 
 ## constants
 URL_SCHEMES = ['http', 'ftp', 'https']
 HTTP_REGEX = URI.regexp(URL_SCHEMES)
-SEARCH_ENGINES = { "duckduckgo" => { :url => 'https://duckduckgo.com',
-                                     :params => { :default => 'q',
-                                                  :image => 'ia=images&iax=images',
-                                                  :map => 'iaxm=maps' } },
-                   "google"     => { :url => 'https://google.com',
-                                     :params => { :default => 'q',
-                                                  :image => 'tbm=isch',
-                                                  :map => 'um=1' } } }
+SEARCH_ENGINES = { "ddg"    => { :url => 'https://duckduckgo.com',
+                                 :params => { :default => 'q',
+                                              :image => 'ia=images&iax=images',
+                                              :map => 'iaxm=maps' } },
+                   "osm"    => { :url => 'https://www.openstreetmap.org/search',
+                                 :params => { :default => 'query',
+                                              :image => nil,
+                                              :map => '' } },
+                   "google" => { :url => 'https://google.com',
+                                 :params => { :default => 'q',
+                                              :image => 'tbm=isch',
+                                              :map => 'um=1' } } }
 
 TRIMREAD_URL = 'https://beta.trimread.com/'
 TRIMREAD_URI = URI.parse(TRIMREAD_URL)
@@ -52,11 +57,9 @@ def getUrl(query, searchEngine, mode)
 end
 
 def extractURLs(selection, searchEngine, mode)
-  selection.gsub!(/\n\+/m, '') # handle mutt wrap markers
-
   urls = []
 
-  if mode == nil or mode == "" then
+  if mode.nil? or mode.empty? then
     case selection
     when HTTP_REGEX
       URI::extract(selection, URL_SCHEMES).each { |url|
@@ -69,6 +72,7 @@ def extractURLs(selection, searchEngine, mode)
     end
   end
 
+  # use search engine if nothing was extracted
   urls << getUrl(selection, searchEngine, mode) if urls.empty?
 
   return urls
@@ -78,20 +82,39 @@ def openInBrowser(url, browser)
   system("#{browser} #{url.shellescape}")
 end
 
-## main
+def parseArgs(options)
+  parser = OptionParser.new do|opts|
+    opts.on('-b', '--browser b') { |b| options[:browser] = b }
+    opts.on('-m', '--mode m') { |m| options[:mode] = m }
+    opts.on('-s', '--search-engine s') { |s| options[:searchEngine] = s }
+    opts.on('-h', '--help') { puts opts ; exit }
+  end
 
-# FIXME: --browser, --search-engine
-browser = 'firefox'
-searchEngine = 'duckduckgo'
+  parser.parse!
 
-selection = `xclip -o`
-mode = ARGV[0]
-
-if selection.index("BEGIN PGP MESSAGE") then
-  decoded = `echo '#{selection}' | gpg2 -d 2> /dev/null`.chomp
-  selection = decoded unless decoded.empty?
+  return options
 end
 
-extractURLs(selection, searchEngine, mode).each do |url|
-  openInBrowser(url, browser)
+def decrypt(text)
+  decoded = `echo '#{text}' | gpg2 -d 2> /dev/null`.chomp
+  return decoded.empty? ? text : decoded
+end
+
+## main
+
+# CLI args
+options = { :browser => 'firefox',
+            :searchEngine => 'ddg',
+            :mode => 'search' }
+options = parseArgs(options)
+
+# selection from clipboard
+selection = `xclip -o`
+selection.gsub!(/\n\+/m, '') # handle mutt wrap markers
+
+# try decoding
+selection = decrypt(selection) if selection.index("BEGIN PGP MESSAGE")
+
+extractURLs(selection, options[:searchEngine], options[:mode]).each do |url|
+  openInBrowser(url, options[:browser])
 end

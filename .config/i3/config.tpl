@@ -202,10 +202,10 @@ bindsym $mod+Escape exec $app.screen_off
 
 # selection -> web
 bindsym $mod+F1 exec $app.selection
-bindsym $mod+F2 exec $app.selection search
-bindsym $mod+F3 exec $app.selection image
-bindsym $mod+F4 exec $app.selection map
-bindsym $mod+F5 exec $app.selection trimread
+bindsym $mod+F2 exec $app.selection -m search
+bindsym $mod+F3 exec $app.selection -m image
+bindsym $mod+F4 exec $app.selection -s osm -m map
+bindsym $mod+F5 exec $app.selection -m trimread
 
 # keyboard layout
 bindsym $mod+F12 exec $app.keyboard_layout
