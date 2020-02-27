@@ -74,7 +74,7 @@ end
 def extractURLs(selection, searchEngine, mode)
   urls = []
 
-  if mode.nil? or mode.empty? then
+  if mode == 'url' then
     case selection
     when HTTP_REGEX
       URI::extract(selection, URL_SCHEMES).each { |url|
@@ -120,15 +120,15 @@ end
 # CLI args
 options = { :browser => 'firefox',
             :searchEngine => 'ddg',
-            :mode => 'search' }
+            :mode => 'url' }
 options = parseArgs(options)
 
-if ! ARGV[0].empty? then
-  selection = ARGV[0]
-else
+if ARGV[0].nil? || ARGV[0].empty? then
   # selection from clipboard
   selection = `xclip -o`
   selection.gsub!(/\n\+/m, '') # handle mutt wrap markers
+else
+  selection = ARGV[0]
 end
 
 # try decoding
