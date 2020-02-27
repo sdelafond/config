@@ -109,7 +109,7 @@ end
 # CLI args
 options = { :browser => 'firefox',
             :searchEngine => 'ddg',
-            :mode => 'search' }
+            :mode => nil }
 options = parseArgs(options)
 
 # selection from clipboard
