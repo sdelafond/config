@@ -14,14 +14,18 @@ SEARCH_ENGINES = { "ddg"    => { :url => 'https://duckduckgo.com',
                                  :params => { :default => 'q',
                                               :image => 'ia=images&iax=images',
                                               :map => 'iaxm=maps' } },
+                   "mappy"  => { :url => 'https://fr.mappy.com/#/3/M2/TSearch/S',
+                                 :params => { :default => nil,
+                                              :image => nil,
+                                              :map => '' } },
                    "osm"    => { :url => 'https://www.openstreetmap.org/search',
                                  :params => { :default => 'query',
                                               :image => nil,
-                                              :map => '' } },
+                                              :map => nil } },
                    "vm"     => { :url => 'https://www.viamichelin.com/web/Maps',
                                  :params => { :default => 'address',
                                               :image => nil,
-                                              :map => '' } },
+                                              :map => nil } },
                    "google" => { :url => 'https://google.com',
                                  :params => { :default => 'q',
                                               :image => 'tbm=isch',
@@ -52,10 +56,17 @@ def getUrl(query, searchEngine, mode)
 
   se = SEARCH_ENGINES[searchEngine]
   params = se[:params]
-  q = "#{params[:default]}=#{query}"
-  url = "#{se[:url]}/?#{q}"
 
-  url = "#{url}&#{params[mode.to_sym]}" unless mode == 'search'
+  url = se[:url]
+
+  default = params[:default]
+  if ! default.nil? then
+    url += "/?#{default}="
+  end
+
+  url += query
+
+  url += "&#{params[mode.to_sym]}" unless mode == 'search'
 
   return url
 end
@@ -109,16 +120,21 @@ end
 # CLI args
 options = { :browser => 'firefox',
             :searchEngine => 'ddg',
-            :mode => nil }
+            :mode => 'search' }
 options = parseArgs(options)
 
-# selection from clipboard
-selection = `xclip -o`
-selection.gsub!(/\n\+/m, '') # handle mutt wrap markers
+if ! ARGV[0].empty? then
+  selection = ARGV[0]
+else
+  # selection from clipboard
+  selection = `xclip -o`
+  selection.gsub!(/\n\+/m, '') # handle mutt wrap markers
+end
 
 # try decoding
 selection = decrypt(selection) if selection.index("BEGIN PGP MESSAGE")
 
 extractURLs(selection, options[:searchEngine], options[:mode]).each do |url|
+  puts url
   openInBrowser(url, options[:browser])
 end
