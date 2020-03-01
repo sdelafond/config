@@ -206,6 +206,7 @@ bindsym $mod+F2 exec $app.selection -m search
 bindsym $mod+F3 exec $app.selection -m image
 bindsym $mod+F4 exec $app.selection -s osm -m map
 bindsym $mod+F5 exec $app.selection -s vm -m map
+bindsym $mod+F6 exec $app.selection -s gmaps -m map
 bindsym $mod+F8 exec $app.selection -m trimread
 
 # keyboard layout

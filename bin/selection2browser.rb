@@ -26,10 +26,13 @@ SEARCH_ENGINES = { "ddg"    => { :url => 'https://duckduckgo.com',
                                  :params => { :default => 'address',
                                               :image => nil,
                                               :map => nil } },
+                   "gmaps"  => { :url => 'https://maps.google.com',
+                                 :params => { :default => 'q',
+                                              :image => nil,
+                                              :map => nil } },
                    "google" => { :url => 'https://google.com',
                                  :params => { :default => 'q',
-                                              :image => 'tbm=isch',
-                                              :map => 'um=1' } } }
+                                              :image => 'tbm=isch' } } }
 
 TRIMREAD_URL = 'https://beta.trimread.com/'
 TRIMREAD_URI = URI.parse(TRIMREAD_URL)
