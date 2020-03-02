@@ -309,6 +309,21 @@ if [[ -f $f ]] ; then
   ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=red,bold'
 fi
 
+# fzf
+# FZF_DEFAULT_COMMAND='fd --type f'
+FZF_DEFAULT_OPTS='--bind="alt-v:page-up,ctrl-v:page-down" --multi --ansi --tabstop=4'
+
+source /usr/share/doc/fzf/examples/key-bindings.zsh 2DN
+FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+# FZF_CTRL_T_OPTS to pass additional options
+# FZF_CTRL_R_OPTS to pass additional options
+# FZF_ALT_C_COMMAND to override the default command
+# FZF_ALT_C_OPTS to pass additional options
+
+source /usr/share/doc/fzf/examples/completion.zsh 2DN
+# FZF_COMPLETION_TRIGGER='**' # default
+# FZF_COMPLETION_OPTS    (default: empty)
+
 ###################################
 # Completion settings
 ###################################

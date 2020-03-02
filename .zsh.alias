@@ -2,23 +2,23 @@ alias -g DN='> /dev/null'
 alias -g 2DN='2> /dev/null'
 alias -g ADN='&> /dev/null'
 alias -g 2nd='DISPLAY=:0.1'
-
-alias -g AA='ANSIBLE_STDOUT_CALLBACK=actionable'
-alias -g AD='ANSIBLE_STDOUT_CALLBACK=debug'
-alias -g AY='ANSIBLE_STDOUT_CALLBACK=yaml'
+alias -g FF='| fzf'
+alias -g FP='| fzfp'
 
 alias A='ag'
+alias AA='ANSIBLE_STDOUT_CALLBACK=actionable'
+alias AD='ANSIBLE_STDOUT_CALLBACK=debug'
+alias AY='ANSIBLE_STDOUT_CALLBACK=yaml'
 alias C='curl -L -O'
 alias CD='curl -w@/home/seb/.curl-format -v -s -o /dev/null'
+alias D="diff"
 alias F='find'
-
 grep -P foo /dev/null 2> /dev/null
 if [ $? = 2 ] ; then
   grepSwitch="E"
 else
   grepSwitch="P"
 fi
-alias D="diff"
 alias G="grep -${grepSwitch}"
 alias Gi="grep -i${grepSwitch}"
 alias Gv="grep -v${grepSwitch}"
@@ -57,7 +57,6 @@ alias dos2unix="perl -i -pe 's/\r$//'"
 alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 alias e='emacs-wrapper.sh'
 alias feh='feh -Z -F -p'
-alias fzf='fzf --bind="alt-v:page-up,ctrl-v:page-down" --multi --ansi --tabstop=4'
 alias fzfp='fzf --preview "batcat --style=numbers --color=always {} | head -500"'
 alias g='git'
 alias geoip='python3 ~/bin/ip2city.py'
