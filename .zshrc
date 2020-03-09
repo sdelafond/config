@@ -385,6 +385,7 @@ bind-git-helper() {
   done
 }
 bind-git-helper f b t h r
+unset -f bind-git-helper
 
 ###################################
 # Completion settings
