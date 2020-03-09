@@ -6,9 +6,9 @@ alias -g FF='| fzf'
 alias -g FP='| fzfp'
 
 alias A='ag'
-alias AA='ANSIBLE_STDOUT_CALLBACK=actionable'
-alias AD='ANSIBLE_STDOUT_CALLBACK=debug'
-alias AY='ANSIBLE_STDOUT_CALLBACK=yaml'
+alias AAP='ANSIBLE_STDOUT_CALLBACK=actionable ansible-playbook'
+alias ADP='ANSIBLE_STDOUT_CALLBACK=debug ansible-playbook'
+alias AYP='ANSIBLE_STDOUT_CALLBACK=yaml ansible-playbook'
 alias C='curl -L -O'
 alias CD='curl -w@/home/seb/.curl-format -v -s -o /dev/null'
 alias D="diff"
