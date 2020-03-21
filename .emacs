@@ -787,20 +787,21 @@ prefix argument."
   (setq ledger-use-iso-dates t))
 
 (use-package flycheck
+  :defer 2
+  :init
+  (global-flycheck-mode t)
   :config
   (setq flycheck-keymap-prefix (kbd "C-c ~"))
-  (global-flycheck-mode)
   (defhydra hydra-flycheck
     (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
-     :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
-     :hint nil)
+     :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*")))
     "Errors"
     ("f"  flycheck-error-list-set-filter                            "Filter")
     ("n"  flycheck-next-error                                       "Next")
     ("p"  flycheck-previous-error                                   "Previous")
     ("<" flycheck-first-error                                       "First")
     (">"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
-    ("q"  nil))
+    ("q"  nil                                                       "quit"))
   :bind
   ("M-g f" . hydra-flycheck/body))
 
@@ -927,6 +928,8 @@ prefix argument."
   :ensure t
   :defer t
   :config
+  (flymake-mode nil)
+  (remove-hook 'elpy-modules 'elpy-module-flymake)
   (setq python-indent-offset 4)
   (setq elpy-rpc-python-command "python3")
   (setq python-shell-interpreter "ipython3")
