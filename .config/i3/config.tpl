@@ -234,9 +234,9 @@ workspace 4 output $screen3
 workspace T2 output $screen3
 workspace T3 output $screen3
 workspace T4 output $screen3
-workspace T9 output $screen3
 workspace T5 output $screen3
 workspace T8 output $screen3
+workspace T9 output $screen3
 
 bindsym Ctrl+1 workspace 1
 bindsym Ctrl+2 workspace 2
@@ -322,7 +322,7 @@ assign [class="^URxvt$" title="o.mine.nu$"] 4
 assign [class="^URxvt$" title="hetz"] 4
 assign [class="^URxvt$" title="jmt"] 4
 
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="mail@"] move window to workspace T4
+%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="services@"] move window to workspace T4
 
 assign [class="^URxvt$" title="lanner$"] 2
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="lanner$"] move window to workspace 2
