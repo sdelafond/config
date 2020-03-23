@@ -69,7 +69,7 @@ autoload -Uz vcs_info && {
     remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
       --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
 
-    if [[ -n "${remote}" ]] && [[ ! $remote =~ (origin|alioth)/${hook_com[branch]} ]] && [[ ! $remote =~ refs/heads ]] ; then
+    if [[ -n "${remote}" ]] && [[ ! $remote =~ (origin|salsa|salsa-freexian)/${hook_com[branch]} ]] && [[ ! $remote =~ refs/heads ]] ; then
       hook_com[branch]="${hook_com[branch]}→${remote}"
     fi
   }
