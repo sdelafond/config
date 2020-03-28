@@ -313,14 +313,14 @@ fi
 # FZF_DEFAULT_COMMAND='fd --type f'
 FZF_DEFAULT_OPTS='--no-mouse --bind="alt-v:page-up,ctrl-v:page-down" --multi --ansi --tabstop=4'
 
-source /usr/share/doc/fzf/examples/key-bindings.zsh 2DN
+source /usr/share/doc/fzf/examples/key-bindings.zsh /usr/local/share/examples/fzf/shell/key-bindings.zsh 2> /dev/null
 FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 FZF_CTRL_T_OPTS='--preview "batcat --style=numbers --color=always {} | head -500"'
 # FZF_CTRL_R_OPTS to pass additional options
 # FZF_ALT_C_COMMAND to override the default command
 # FZF_ALT_C_OPTS to pass additional options
 
-source /usr/share/doc/fzf/examples/completion.zsh 2DN
+source /usr/share/doc/fzf/examples/completion.zsh /usr/local/share/examples/fzf/shell/completion.zsh 2> /dev/null
 # FZF_COMPLETION_TRIGGER='**' # default
 # FZF_COMPLETION_OPTS    (default: empty)
 
@@ -593,7 +593,7 @@ export HOST_SHORT=${HOST/.*}
 if [[ $TERM == tmux-256color ]] && [[ ! -f /usr/share/terminfo/t/tmux-256color ]] ; then
   export TERM="screen-256color"
 fi
-infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}
+[[ $OSTYPE != "linux" ]] || infocmp $TERM > /dev/null 2>&1 || export TERM=${TERM/-256color}
 
 # to be handily copied to remote machines
 ZSH_CONFIG_FILES=(~/.z(log|sh)^(_*|*~)(.,@) ~/.zsh)

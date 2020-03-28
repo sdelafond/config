@@ -110,6 +110,8 @@ case $OSTYPE in
     alias ls='ls --color=auto -F -N'
 #    alias r='s apt-get remove --purge'
     alias top='top -d 1' ;;
+  freebsd*)
+    alias ls='ls -F' ;;
   openbsd*)
     pkgFile=~/openbsd-packages-`machine`-`uname -r`.txt
 #    [ -f $pkgFile ] || ( curl -o $pkgFile ftp://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine`/index.txt && perl -i -npe 's/.*i386\/(.*?gz).*/$1/' $pkgFile )
