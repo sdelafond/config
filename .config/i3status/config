@@ -59,7 +59,6 @@ ethernet _first_ {
 
 whatismyip { # py3status
   format = "{ip} {country}"
-  url_geo = "http://ip-api.com/json"
 }
 
 # battery all {
