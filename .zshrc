@@ -381,7 +381,7 @@ bind-git-helper() {
   for c in $@; do
     eval "fzf-git-$c-widget() { is_in_git_repo || return ; local result=\$(fzf_git_$c | join-lines); zle reset-prompt; LBUFFER+=\$result }"
     eval "zle -N fzf-git-$c-widget"
-    eval "bindkey '^g^$c' fzf-git-$c-widget"
+    eval "bindkey '^x^$c' fzf-git-$c-widget"
   done
 }
 bind-git-helper f b t h r
