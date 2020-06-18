@@ -70,7 +70,7 @@ esac
 export I3_SCREEN_1 I3_SCREEN_2 I3_SCREEN_3
 
 # pulse
-pactl list sinks > /dev/null 2>&1 || { pkill pulseaudio ; sleep 2 pulseaudio ; } &
+pactl list sinks > /dev/null 2>&1 || { pkill pulseaudio ; sleep 2 ; pulseaudio ; } &
 ~/bin/pulse-volume.sh mute
 
 # systray
