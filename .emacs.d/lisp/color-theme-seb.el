@@ -35,6 +35,7 @@ widget, custom, latex, ediff."
      (info-xref ((t (:foreground "yellow" :bold t))))
      (ace-jump-face-foreground ((t (:foreground "yellow" :bold t))))
      (diary-face ((t (:foreground "orange"))))
+     (ledger-occur-xact-face ((t (:foreground "orange"))))
      (calendar-today-face ((t (:underline t))))
      (company-tooltip ((t (:background "color-249" :foreground "black"))))
      (makefile-space-face ((t (:background "hotpink"))))
