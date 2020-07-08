@@ -96,3 +96,5 @@
 	user = sdelafond
 [gitlab]
 	user = sdelafond
+[pull]
+	rebase = true
