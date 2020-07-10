@@ -313,7 +313,13 @@ fi
 # FZF_DEFAULT_COMMAND='fd --type f'
 FZF_DEFAULT_OPTS='--no-mouse --bind="alt-v:page-up,ctrl-v:page-down" --multi --ansi --tabstop=4'
 
+# use fzf-provided widgets, but change their bindings
 source /usr/share/doc/fzf/examples/key-bindings.zsh /usr/local/share/examples/fzf/shell/key-bindings.zsh 2> /dev/null
+bindkey '^t' transpose-chars
+bindkey '\ec' capitalize-word
+bindkey '^x^i' fzf-file-widget
+bindkey '^x^d' fzf-cd-widget
+
 FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 FZF_CTRL_T_OPTS='--preview "batcat --style=numbers --color=always {} | head -500"'
 # FZF_CTRL_R_OPTS to pass additional options
