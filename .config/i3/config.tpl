@@ -197,8 +197,10 @@ bindsym XF86MonBrightnessDown exec $app.backlight -dec
 
 # screen lock/off
 bindsym $mod+l exec $app.screen_lock
+bindsym Scroll_Lock exec $app.screen_lock
 bindsym $mod+o exec $app.screen_off
 bindsym $mod+Escape exec $app.screen_off
+bindsym Pause exec $app.screen_off
 
 # selection -> web
 bindsym $mod+F1 exec $app.selection
