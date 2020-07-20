@@ -184,7 +184,7 @@ bindsym $mod+Shift+w exec /home/seb/bin/i3-write.py
 bindsym $mod+u [urgent=latest] focus
 
 # sticky
-bindsym $mod+y floating enable; sticky enable
+bindsym $mod+y floating toggle; sticky toggle
 
 # sound
 bindsym XF86AudioRaiseVolume exec $app.volume up
