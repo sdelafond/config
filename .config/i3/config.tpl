@@ -420,8 +420,8 @@ assign [class="(?i)gmpc"] T9
 for_window [class="(?i)spotify"] move window to workspace T9
 
 # comm
-%IF(%SYS(hostname -s) == hulk)assign [class="(?i)signal" title="lab@"] 4
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="lab@"] T3
+%IF(%SYS(hostname -s) == hulk)assign [class="Signal"] 4
+%IF(%SYS(hostname -s) == x1)assign [class="Signal"] T3
 
 # misc
 assign [class="(?i)keybase"] T2
