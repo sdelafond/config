@@ -26,6 +26,7 @@
 	fo = fetch origin
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
         g = grep
+        gi = grep -i
 	l1 = log --pretty=oneline
 	l = log
 	m = merge
