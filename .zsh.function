@@ -473,7 +473,7 @@ sc() {
   export TERM_TITLE_PREFIX="${name}@"
   setTerminalTitle
   if whence tmux &> /dev/null ; then
-    tmux -2 attach -d -t $name || tmux -2 new-session -s $name
+    tmux -2 attach -d -t $name || tmuxp load $name
   elif whence screen &> /dev/null ; then
     screen -R $name -D -A
   fi
@@ -586,5 +586,6 @@ xs() {
 #  setopt localoptions xtrace
   local name=$1
   local title=${name}@$HOSTNAME
+  unset TMUX TMUX_PANE
   xpop -t $title zsh -i -c "sc $name"
 }
