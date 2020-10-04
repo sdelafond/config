@@ -325,6 +325,7 @@ assign [class="^URxvt$" title="hetz"] 4
 assign [class="^URxvt$" title="jmt"] 4
 
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="services@"] move window to workspace T4
+%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="u50"] move window to workspace T4
 
 assign [class="^URxvt$" title="lanner$"] 2
 %IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="lanner$"] move window to workspace 2
