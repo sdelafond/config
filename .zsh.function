@@ -586,6 +586,5 @@ xs() {
 #  setopt localoptions xtrace
   local name=$1
   local title=${name}@$HOSTNAME
-  unset TMUX TMUX_PANE
-  xpop -t $title zsh -i -c "sc $name"
+  TMUX= TMUX_PANE= xpop -t $title zsh -i -c "sc $name"
 }
