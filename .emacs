@@ -503,13 +503,15 @@ prefix argument."
   ;; *** [[url][desc]] :tag1:tag2: -> url #tag1,tag2#
   (defun org-convert-entry-to-irc ()
     (interactive)
-    (let ((link (save-excursion
-                  (org-back-to-heading)
-                  (search-forward " ")
-                  (org-element-link-parser)))
-          (tags (mapconcat 'identity (org-get-tags) ","))
+    (let* ((link (save-excursion
+		   (org-back-to-heading)
+		   (search-forward " ")
+		   (org-element-link-parser)))
+	   (tags (delete "todo_gcu" (org-get-tags)))
+	   (irctags (mapconcat 'identity (delete "todo_gcu" (org-get-tags)) ","))
           (delim "#"))
-      (message (concat (org-element-property :raw-link link) " " delim tags delim))))
+      (org-set-tags tags)
+      (message (concat (org-element-property :raw-link link) " " delim irctags delim))))
 
   ;; spelling
   (defadvice org-mode-flyspell-verify (after org-mode-flyspell-verify-hack activate)
