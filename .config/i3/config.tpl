@@ -231,6 +231,7 @@ workspace F5 output $screen2
 workspace F6 output $screen2
 workspace F7 output $screen2
 workspace F8 output $screen2
+workspace T1 output $screen2
 
 workspace 4 output $screen3
 workspace T2 output $screen3
