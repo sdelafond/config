@@ -71,6 +71,7 @@
 [core]
 	excludesfile = ~/.gitignore
         warnambiguousrefs = false
+	attributesfile = /home/seb/.gitattributes
 [diff "odf"]
         textconv=odt2txt
 [gc]
