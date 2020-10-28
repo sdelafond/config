@@ -918,6 +918,8 @@ prefix argument."
   :config
   (yas-global-mode t)
   (yas/reload-all)
+  (loop for dir in (directory-files my-home t "\.config-.+$")
+	do (setq yas-snippet-dirs (append yas-snippet-dirs (list (concat dir "/.emacs.d/snippets")))))
   :chords (("yy" . yas-expand))
   :bind (("C-c y" . yas-expand)
 	 ("C-c i" . yas-insert-snippet)
