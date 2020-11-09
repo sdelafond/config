@@ -1314,6 +1314,7 @@ _b_   _f_   _o_k        _y_ank
 (key-chord-define lisp-mode-map "LL" 'hydra-lisp-eval/body)
 
 (key-chord-define-global "CC" 'calc)
+(key-chord-define-global "WW" 'browse-url-at-point)
 
 ;; numbering
 (line-number-mode t)
