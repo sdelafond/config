@@ -76,7 +76,7 @@ connect() {
   local transport="ssh -t"
   local title
   # list most common ssh options
-  while getopts i:J:o:p:T:R:L:Avm OPTION ; do
+  while getopts i:J:o:p:T:R:L:AvmXY OPTION ; do
     case $OPTION in
       m) transport="mosh" ;;
       T) title="$OPTARG" ;;
