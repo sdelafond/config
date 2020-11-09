@@ -57,7 +57,7 @@ alias dos2unix="perl -i -pe 's/\r$//'"
 alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 alias e='emacs-wrapper.sh'
 alias feh='feh -Z -F -p'
-alias fzf='fzf --bind=ctrl-e:accept'
+alias fzf='fzf --bind=ctrl-e:accept,enter:ignore,ctrl-j:ignore'
 alias fzfp='fzf --preview "batcat --style=numbers --color=always {} | head -500"'
 alias g='git'
 alias geoip='python3 ~/bin/ip2city.py'
