@@ -69,9 +69,9 @@
         template = ~/.gittemplate
 	verbose = true
 [core]
+	attributesfile = ~/.gitattributes
 	excludesfile = ~/.gitignore
         warnambiguousrefs = false
-	attributesfile = /home/seb/.gitattributes
 [diff "odf"]
         textconv=odt2txt
 [gc]
