@@ -86,9 +86,9 @@
 	line-numbers-left-style = blue
 	line-numbers-right-style = blue
 [delta "decorations"]
-	commit-style = bold yellow # ul # box
+	commit-style = raw # bold yellow # ul # box
 	commit-decoration-style = # bold yellow ul # box
-	file-style = bold yellow ul
+	file-style = "#999999 ul" # bold
 	file-decoration-style = none
 	hunk-header-style = bold cyan
 	hunk-header-decoration-style =
