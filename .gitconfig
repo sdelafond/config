@@ -90,7 +90,7 @@
 [delta "decorations"]
 	commit-style = raw # bold yellow # ul # box
 	commit-decoration-style = # bold yellow ul # box
-	file-style = "#999999 ul" # bold
+	file-style = "yellow ul" # bold
 	file-decoration-style = none
 	hunk-header-style = bold cyan
 	hunk-header-decoration-style =
