@@ -330,6 +330,7 @@ prefix argument."
   (require 'ob-emacs-lisp)
   (setq org-src-fontify-natively t)
 
+  (require 'org-inlinetask)
   (require 'org-protocol)
 
   (require 'org-tempo)
