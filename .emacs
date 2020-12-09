@@ -331,6 +331,10 @@ prefix argument."
   (setq org-src-fontify-natively t)
 
   (require 'org-inlinetask)
+  (setq org-inlinetask-default-state "TODO")
+  (setq org-inlinetask-min-level 8)
+  (define-key org-mode-map "\C-c\C-xt" 'org-inlinetask-insert-task)
+
   (require 'org-protocol)
 
   (require 'org-tempo)
