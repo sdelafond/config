@@ -159,7 +159,7 @@ client.focused #4c7899 $color.focused #ffffff #2e9ef4  #285577
 ## i3bar with py3status
 bar {
 #  status_command i3status
-  status_command py3status -c ~/.config/i3status/config -l /dev/null
+  status_command py3status -c ~/.config/i3status/config -l ~/.xsession-errors
   position top
   tray_output primary
   colors {
