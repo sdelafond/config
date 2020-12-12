@@ -76,6 +76,7 @@ bind <C-x><C-u>52 winopen -private
 bind --mode=normal g fillcmdline open
 bind --mode=normal <C-u>0g current_url open
 bind --mode=normal <C-u>g fillcmdline tabopen
+bind --mode=normal <C-t> fillcmdline tabopen
 
 " Selection
 bind --mode=normal <C-Space> hint -h
