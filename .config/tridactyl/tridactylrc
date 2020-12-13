@@ -3,3 +3,4 @@ unbind <C-f>
 set editorcmd /home/seb/bin/emacs-wrapper.sh
 
 source ~/.config/tridactyl/emacs_bindings
+source ~/.config/tridactyl/prefs
