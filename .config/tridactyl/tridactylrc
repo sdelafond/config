@@ -1,2 +1,2 @@
-source ~/.config/emacs_bindings
+source ~/.config/tridactyl/emacs_bindings
 source ~/.config/tridactyl/prefs
