@@ -1,5 +1,4 @@
 set editorcmd /home/seb/bin/emacs-wrapper.sh
 set tabopenpos last
 
-bind <C-t> tabopen
-
+bind <C-t> fillcmdline tabopen
