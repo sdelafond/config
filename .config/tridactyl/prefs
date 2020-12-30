@@ -1,4 +1,5 @@
 set editorcmd /home/seb/bin/emacs-wrapper.sh
+set modeindicator false
 set tabopenpos last
 
 unbind k
