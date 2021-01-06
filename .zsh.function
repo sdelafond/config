@@ -344,6 +344,8 @@ preexec() {
   setTerminalTitle "$cmd"
 
   refresh-ssh-agent-info
+
+  cmd_start_ts="$SECONDS"
 }
 
 psc() {

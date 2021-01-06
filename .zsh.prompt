@@ -8,7 +8,7 @@ else # default for older terminals
   hostColor=cyan
 fi
 
-PROMPT=$'${PSEXTRA}%F{green}%80<...<%~%f%(1j.%F{cyan} %j&%f.)%(?..%B%F{red} %??%b%f) # '
+PROMPT=$'${PSEXTRA}%F{green}%80<...<%~%f%(1j.%F{cyan} %j&%f.) %F{33}${elapsed_str}%f%(?..%B%F{red} %??%b%f) # '
 RPROMPT=$'[%B%F{'${usernameColor}'}%n%f%b %B%U%F{'${hostColor}'}'${hostnicks[$HOST_SHORT]:-$HOST_SHORT}$'%f%u%b]'
 
 case $TERM in
@@ -61,6 +61,10 @@ setTerminalTitle() {
 }
 
 precmd() {
+  # REPORTTIME=10
+  local elapsed=$(( SECONDS - cmd_start_ts ))
+  elapsed_str=$(printf "%02d:%02d" $(( ${elapsed} / 60 )) $(( ${elapsed} % 60 )))
+
   # for the next line, check out the *vcs stuff in .zshrc
   vcs_stuff 2> /dev/null
   # those 2 are only set once, by sc(), to add the tmux/screen session
