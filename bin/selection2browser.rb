@@ -36,13 +36,13 @@ SEARCH_ENGINES = { "ddg"    => { :url => 'https://duckduckgo.com',
 
 TRIMREAD_URL = 'https://beta.trimread.com/'
 TRIMREAD_URI = URI.parse(TRIMREAD_URL)
-TRIMREAD_HTTPS = Net::HTTP.start(TRIMREAD_URI.host, TRIMREAD_URI.port, :use_ssl => true)
 
 ## functions
 def doTrimreadPost(url)
   req = Net::HTTP::Post.new(TRIMREAD_URI.path)
   req.set_form_data({'url' => url})
-  response = TRIMREAD_HTTPS.request(req)
+  trimread_https = Net::HTTP.start(TRIMREAD_URI.host, TRIMREAD_URI.port, :use_ssl => true)
+  response = trimread_https.request(req)
   exit(1) unless response.code == '200'
   return response.body
 end
@@ -136,7 +136,6 @@ end
 
 # try decoding
 selection = decrypt(selection) if selection.index("BEGIN PGP MESSAGE")
-
 extractURLs(selection, options[:searchEngine], options[:mode]).each do |url|
   puts url
   openInBrowser(url, options[:browser])
