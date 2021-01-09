@@ -342,6 +342,11 @@ prefix argument."
   (use-package org-ql
     :ensure t)
 
+  (use-package org-roam
+    :ensure t
+    :config
+    (setq org-roam-directory "~/vcs/roam"))
+
   ;; adapted from
   ;; https://github.com/ag91/ag91.github.io/blob/source/blog/LeadYourFutureWithOrg.org
   (defun seb/org/get-tasks (todo-tag from &optional tag to files category)
