@@ -339,6 +339,27 @@ prefix argument."
 
   (require 'org-tempo)
 
+  (use-package org-ql
+    :ensure t)
+
+  ;; adapted from
+  ;; https://github.com/ag91/ag91.github.io/blob/source/blog/LeadYourFutureWithOrg.org
+  (defun seb/org/get-tasks (todo-tag from &optional tag to files category)
+    "Get stats for tasks of last week with TODO-TAG TAG FROM optionally define TO date and source FILES to use."
+    (org-ql-query
+     :from (or files (org-agenda-files))
+     :where
+     `(and (todo ,todo-tag)
+	   (if ,tag (tags ,tag) t)
+	   (if ,category (category ,category) t)
+	   (ts :from ,from :to ,(or to 'today)))))
+
+  (defun seb/org/get-stats-tasks (todo-tag from &optional tag to files category)
+    "Get stats for tasks of last week with TODO-TAG TAG FROM optionally define TO date and source FILES to use."
+    (let ((tasks (seb/org/get-stats-tasks todo-tag from tag to files category))
+      `((tasks . ,(length tasks))
+	(tasks-per-day . ,(/ (length tasks) (abs from)))))))
+
   (require 'ox-confluence)
   (require 'ox-beamer)
   (require 'ox-md)
@@ -373,6 +394,8 @@ prefix argument."
   (setq org-speed-commands-user (quote (("S" . widen))))
 
   ;; agenda
+  (use-package org-super-agenda
+    :ensure t)
   (org-super-agenda-mode t)
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 'year)
