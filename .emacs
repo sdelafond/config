@@ -404,8 +404,8 @@ prefix argument."
 
   ;; agenda
   (use-package org-super-agenda
-    :ensure t)
-  (org-super-agenda-mode t)
+    :config
+    (org-super-agenda-mode t))
   (setq org-agenda-include-diary nil)
   (setq org-agenda-span 'year)
   (setq org-agenda-start-day "-4m")
