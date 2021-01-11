@@ -851,14 +851,7 @@ prefix argument."
   :config
   (flycheck-color-mode-line-mode t))
 
-(use-package transient
-  :pin "melpa")
-
-(use-package closql
-  :pin "melpa")
-
 (use-package magit
-  :pin "melpa"
   :mode ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)" . git-commit-mode)
   :config
   (setq magit-commit-ask-to-stage "verbose")
@@ -878,7 +871,6 @@ prefix argument."
 (use-package gitignore-mode)
 
 (use-package ivy
-  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :defer 0.1
   :diminish
   :bind (("C-c C-r" . ivy-resume)
@@ -895,11 +887,9 @@ prefix argument."
   (ivy-mode t))
 
 (use-package ivy-hydra
-  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after ivy)
 
 (use-package ivy-rich
-  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after (:all ivy counsel)
   :init
   (setq ivy-rich-path-style 'abbrev)
@@ -908,13 +898,11 @@ prefix argument."
   (ivy-rich-mode t))
 
 (use-package swiper
-  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after ivy
   :bind (("C-s" . counsel-grep-or-swiper)
          ("C-r" . counsel-grep-or-swiper)))
 
 (use-package counsel
-  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after ivy
   :init
   (setq counsel-grep-base-command "grep -P -n -i -e %s %s")
@@ -937,14 +925,12 @@ prefix argument."
 	 ("C-r" . counsel-minibuffer-history)))
 
 (use-package projectile
-  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :config
   (setq projectile-use-git-grep t)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-global-mode t))
 
 (use-package counsel-projectile
-  :pin "melpa" ;; FIXME: temporary fix for https://github.com/ericdanan/counsel-projectile/issues/118
   :after (:all projectile counsel)
   :config
   (counsel-projectile-mode t)
