@@ -1,12 +1,16 @@
 \n
-Request Details:\n
-            url: %{url_effective}\n
-  num_redirects: %{num_redirects}\n
-   content_type: %{content_type}\n
-  response_code: %{response_code}\n
-      remote_ip: %{remote_ip}\n
+Request details:\n
+		 url: %{url_effective}\n
+       num_redirects: %{num_redirects}\n
+	content_type: %{content_type}\n
+       response_code: %{response_code}\n
+	   remote_ip: %{remote_ip}\n
 \n
-Timing Analysis:\n
+Reply detail:\n
+         size_header: %{size_header}\n
+       size_download: %{size_download}\n
+\n
+Timing analysis:\n
      time_namelookup: %{time_namelookup}\n
         time_connect: %{time_connect}\n
      time_appconnect: %{time_appconnect}\n
