@@ -396,11 +396,16 @@ resolve-binary-path() {
 }
 
 rgrep() {
-  # recursive grep, bash-compatible (in zsh, a simple grep $1 $2/**/* does it)
   local -a grep_opts ; grep_opts=$argv[1,-3]
   local pattern=$argv[-2]
   local dir=$argv[-1]
-  # define rgrepLocal if not already defined
+
+  if whence rg > /dev/null ; then # use rg if available
+   rgrepLocal() { 
+     rg --no-ignore --hidden --no-heading $grep_opts "$1" "$2"
+   }
+  fi
+
   whence rgrepLocal > /dev/null || case $OSTYPE in
     solaris*) # retarded :\
       rgrepLocal() {
@@ -418,7 +423,7 @@ rgrep() {
       } ;;
   esac
 
-  rgrepLocal "$pattern" "$dir" | grep -v \\.svn
+  rgrepLocal "$pattern" "$dir"
 }
 
 rmmod() {
