@@ -644,8 +644,6 @@ prefix argument."
   (setq org-capture-templates
         (quote (("h" "Home" entry (file+olp "~/org/home.todo" "Home" "Inbox")
                  "* TODO %?\n  DEADLINE: %t")
-                ("T" "Today" entry (file+olp "~/org/home.todo" "Home" "Today")
-                 "* TODO %?\n  DEADLINE: %t")
                 ("l" "Link" entry (file+olp "~/org/links.org" "URLs" "Inbox")
                  "* %?\n  %U")
                 ("L" "Link from FF" entry (file+olp "~/org/links.org" "URLs" "Inbox")
