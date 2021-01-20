@@ -852,9 +852,8 @@ prefix argument."
 (use-package magit
   :mode ("\\(svn-commit\\|COMMIT_EDITMSG\\|MERGE_MSG\\)" . git-commit-mode)
   :config
-  (setq magit-commit-ask-to-stage "verbose")
+  (setq magit-commit-ask-to-stage "stage")
   (setq magit-diff-refine-hunk "all")
-  (global-magit-file-mode t)
   :bind
   ("C-x g" . magit-status)
   ("C-x M-g" . magit-dispatch-popup)
