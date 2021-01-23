@@ -40,6 +40,8 @@ case $HOST in
     xrandr --output $I3_SCREEN_1 --primary --mode 2560x1440 --output $I3_SCREEN_2 --auto --right-of DP-4 --output $I3_SCREEN_3 --auto --left-of DP-4 ;;
   x1)
     xss-lock -l -- xscreensaver-command --lock &
+    nm-applet &
+
     I3_SCREEN_1="eDP-1"
     I3_SCREEN_2=$I3_SCREEN_1
     I3_SCREEN_3=$I3_SCREEN_1
