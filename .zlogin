@@ -12,7 +12,7 @@ export LOGIN_HOST=${${=wai}[5]//[()]}
 if [[ -z "$LOGIN_HOST" ]] || [[ $LOGIN_HOST != $HOST ]] ; then
   echo $DISPLAY >| ~/.remote-display
   # start tmux or screen if possible
-  if [[ -n "$TERM" && $TERM != (tmux*|screen*|vt100) && $HOST_SHORT != (x1|seb-debian) ]] ; then 
+  if [[ -n "$TERM" && $TERM != (tmux*|screen*|vt100) && $HOST_SHORT != (g8|x1|seb-debian) ]] ; then 
     source ~/.zsh.function && sc
   fi
 fi
