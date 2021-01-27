@@ -38,7 +38,7 @@ case $HOST in
     I3_SCREEN_2="DVI-D-0"
     I3_SCREEN_3="HDMI-0"
     xrandr --output $I3_SCREEN_1 --primary --mode 2560x1440 --output $I3_SCREEN_2 --auto --right-of DP-4 --output $I3_SCREEN_3 --auto --left-of DP-4 ;;
-  x1)
+  x1|g8)
     xss-lock -l -- xscreensaver-command --lock &
     nm-applet &
 
@@ -47,7 +47,11 @@ case $HOST in
     I3_SCREEN_3=$I3_SCREEN_1
 
     ## single-finger scrolling only for touchpad
-    XINPUT_TP="Synaptics TM3072-003"
+    if [[ $HOST == x1 ]] ; then
+      XINPUT_TP="Synaptics TM3072-003"
+    else
+      XINPUT_TP="SYNA8006:00 06CB:CD8B Touchpad"
+    fi
     # force 2-finger scrolling
     xinput set-prop "$XINPUT_TP" "Synaptics Two-Finger Pressure" 0
     xinput set-prop "$XINPUT_TP" "Synaptics Two-Finger Width" 0
