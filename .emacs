@@ -340,7 +340,18 @@ prefix argument."
   (require 'org-tempo)
 
   (use-package org-ql
-    :ensure t)
+    :ensure t
+    :config
+    (require 'org-ql-view)
+    (add-to-list 'org-ql-views
+    		 '("TODO"
+		   :buffers-files
+		   org-agenda-files
+    		   :query
+    		   (ts-active :from today :to 7)
+    		   :sort
+    		   (date priority)
+    		   :narrow nil :super-groups org-super-agenda-groups :title "TODO")))
 
   (use-package org-roam
     :ensure t
