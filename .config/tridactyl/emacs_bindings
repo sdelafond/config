@@ -52,7 +52,6 @@ bind <A-N> tabmove +1
 bind <A-P> tabmove -1
 bind <C-x>b fillcmdline buffer
 bind <C-x>k tabclose
-bind <C-x>0 tabclose
 bind q tabclose
 bind <C-x>0 tabclose
 bind <C-x>1 tabonly
