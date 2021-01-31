@@ -348,7 +348,7 @@ prefix argument."
 		   :buffers-files
 		   org-agenda-files
     		   :query
-    		   (ts-active :from today :to 7)
+    		   (ts-active :from today :to 4)
     		   :sort
     		   (date priority)
     		   :narrow nil :super-groups org-super-agenda-groups :title "TODO")))
