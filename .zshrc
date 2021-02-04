@@ -311,7 +311,7 @@ fi
 
 # fzf
 # FZF_DEFAULT_COMMAND='fd --type f'
-FZF_DEFAULT_OPTS=' --bind=ctrl-a:accept,ctrl-e:accept,enter:ignore,ctrl-j:ignore --no-mouse --bind="alt-v:page-up,ctrl-v:page-down" --multi --ansi --tabstop=4'
+export FZF_DEFAULT_OPTS='--bind=ctrl-a:accept,ctrl-e:accept,enter:ignore,ctrl-j:ignore --no-mouse --bind="alt-v:page-up,ctrl-v:page-down" --multi --ansi --tabstop=4 --color "fg+:italic,bg+:26:reverse,hl:178:underline,hl+:190:reverse:underline:bold"'
 
 # use fzf-provided widgets, but change their bindings
 source /usr/share/doc/fzf/examples/key-bindings.zsh /usr/local/share/examples/fzf/shell/key-bindings.zsh 2> /dev/null
