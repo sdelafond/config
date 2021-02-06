@@ -960,7 +960,10 @@ prefix argument."
 
 (use-package eglot
   :hook ((python-mode . eglot-ensure)
-	 (python-mode . (lambda() (setq eglot-workspace-configuration '((:pyls . (:plugins (:jedi_completion (:include_params t))))))))))
+	 (python-mode . (lambda() (setq eglot-workspace-configuration '((:pyls . (:plugins (:jedi_completion (:include_params t))))))))
+	 (go-mode . eglot-ensure)))
+
+(use-package go-mode)
 
 (use-package elpy
   :ensure t
