@@ -950,13 +950,17 @@ prefix argument."
   (yas/reload-all)
   :chords (("yy" . yas-expand))
   :bind (("C-c y" . yas-expand)
-	 ("C-c i" . yas-insert-snippet)
+	 ("C-c C-i" . yas-insert-snippet)
 	 :map yas-minor-mode-map
          ([tab] . nil)
 	 ("TAB" . nil)))
 
 (use-package yasnippet-snippets
   :after yasnippet)
+
+(use-package eglot
+  :hook ((python-mode . eglot-ensure)
+	 (python-mode . (lambda() (setq eglot-workspace-configuration '((:pyls . (:plugins (:jedi_completion (:include_params t))))))))))
 
 (use-package elpy
   :ensure t
