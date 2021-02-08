@@ -965,6 +965,8 @@ prefix argument."
 
 (use-package go-mode)
 
+(use-package cider)
+
 (use-package elpy
   :ensure t
   :defer t
