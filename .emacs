@@ -376,10 +376,6 @@ prefix argument."
       `((tasks . ,(length tasks))
 	(tasks-per-day . ,(/ (length tasks) (abs from)))))))
 
-  (use-package org-trello
-    :ensure t)
-  (require 'org-trello)
-
   (require 'ox-confluence)
   (require 'ox-beamer)
   (require 'ox-md)
@@ -1526,7 +1522,6 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-header-separator "")
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
- '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
     (org-ql jinja2-mode use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode ox-pandoc org-super-agenda multiple-cursors ledger-mode key-chord json-mode ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode)))
