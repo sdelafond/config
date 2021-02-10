@@ -250,7 +250,6 @@ prefix argument."
                       ag
                       async
                       avy
-                      clojure-mode
                       dash
 		      dockerfile-mode
 		      docker-compose-mode
@@ -965,6 +964,7 @@ prefix argument."
 
 (use-package go-mode)
 
+(use-package clojure-mode)
 (use-package cider)
 
 (use-package elpy
