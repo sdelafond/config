@@ -293,7 +293,6 @@ prefix argument."
   (progn 
     (mail-mode)
     (turn-on-orgtbl)
-    (turn-on-orgstruct)
     (local-set-key ("C-c i") 'format-email-body)))
 
 (defun my-org-mode-hook ()
@@ -1492,7 +1491,7 @@ _b_   _f_   _o_k        _y_ank
                 ("/\.mutt" 		      	      . muttrc-mode)
                 ("/\.md$" 		      	      . markdown-mode)
                 ("\\.vcl$" 		      	      . vcl-mode)
-                ("^/tmp/mutt"                         . seb/mutt-hook)
+                ("/tmp/mutt"                         . seb/mutt-hook)
                 ("^\\(.*/\\.followup\\|\\.article\\)" . seb/mutt-hook)
                 ("\.json"                             . json-mode)
                 ("\.jsx"                              . js-mode)
