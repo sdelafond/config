@@ -91,7 +91,7 @@ connect() {
   shift
 
   if [[ "$transport" == "mosh" ]] ; then
-    xpop -t $title $transport $host -- $@
+    xpop -t $title mosh --family=prefer-inet6 $host -- $@
   else
     xpop -t $title $=transport $host \""$@"\"
   fi
