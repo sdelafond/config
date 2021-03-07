@@ -707,6 +707,15 @@ prefix argument."
 
   (local-set-key (kbd "<M-RET>") 'org-meta-return)
 
+  (defun seb/org-previous-timestamp ()
+    (save-excursion
+      (org-previous-visible-heading 2)
+      (forward-line 1)
+      (back-to-indentation)
+      (org-kill-line)
+      (yank)
+      (current-kill 0 t)))
+
   (defhydra hydra-org-timestamp (:color amaranth :hint nil)
     ("a" (let ((current-prefix-arg '(16)))
            (call-interactively 'org-time-stamp))
@@ -718,6 +727,7 @@ prefix argument."
      "inactive")
     ("I" (insert (format-time-string "[%F %a]"))
      "inactive (date-only")
+    ("l" (insert (seb/org-previous-timestamp)) "last timestamp")
     ("b" (org-timestamp-change -1 'hour) "-1h")
     ("f" (org-timestamp-change 1 'hour) "+1h")
     ("p" (org-timestamp-change -1 'day) "-1d")
