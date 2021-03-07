@@ -1520,25 +1520,22 @@ _b_   _f_   _o_k        _y_ank
  '(ecb-options-version "2.21")
  '(jde-ant-enable-find t)
  '(jde-global-classpath
-   (quote
-    ("." "/usr/share/java/jde.jar" "/opt/tomcat/common/lib/servlet.jar" "/usr/share/java/junit.jar")))
- '(jde-jdk-registry (quote (("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun"))))
+   '("." "/usr/share/java/jde.jar" "/opt/tomcat/common/lib/servlet.jar" "/usr/share/java/junit.jar"))
+ '(jde-jdk-registry '(("1.5.0_10" . "/usr/lib/jvm/java-1.5.0-sun")))
  '(json-reformat:indent-width 2)
  '(load-home-init-file t t)
- '(org-export-exclude-tags (quote ("noexport" "archive")))
- '(org-export-html-use-infojs (quote when-configured))
+ '(org-export-exclude-tags '("noexport" "archive"))
+ '(org-export-html-use-infojs 'when-configured)
  '(org-super-agenda-header-separator "")
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
  '(package-selected-packages
-   (quote
-    (org-ql jinja2-mode use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode ox-pandoc org-super-agenda multiple-cursors ledger-mode key-chord json-mode ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode)))
+   '(org-ql jinja2-mode use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode ox-pandoc org-super-agenda multiple-cursors ledger-mode key-chord json-mode ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
-   (quote
-    ((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos)
+   '((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos)
      (buffer-file-coding-system-explicit utf-8-dos . utf-8-dos)
-     (buffer-file-coding-system-explicit . utf-8-dos)))))
+     (buffer-file-coding-system-explicit . utf-8-dos))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
