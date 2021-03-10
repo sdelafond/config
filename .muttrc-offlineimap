@@ -5,12 +5,6 @@ source ~/.mutt/ignores
 source ~/.mutt/sendhooks
 source ~/.mutt/folderhooks
 
-set alias_file=.mutt-private/aliases
-source ~/.mutt-private/aliases
-source ~/.mutt-private/identities
-source ~/.mutt-private/msghooks
-source ~/.mutt-private/savehooks
-
 set abort_unmodified=no
 set autoedit=yes
 set beep_new=yes
@@ -70,4 +64,10 @@ charset-hook windows-1256  cp1256
 charset-hook windows-1257  cp1257
 charset-hook windows-1258  cp1258
 
+set alias_file=.mutt-private/aliases
+source ~/.mutt-private/aliases
 source ~/.mutt-private/offlineimap-sec
+source ~/.mutt-private/identities
+source ~/.mutt-private/msghooks
+source ~/.mutt-private/savehooks
+
