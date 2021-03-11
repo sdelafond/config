@@ -291,15 +291,15 @@ bindsym $mod+Ctrl+7 workspace T7
 bindsym $mod+Ctrl+8 workspace T8
 bindsym $mod+Ctrl+9 workspace T9
 
-bindsym $mod+CtrlShift+1 move container to workspace T1
-bindsym $mod+CtrlShift+2 move container to workspace T2
-bindsym $mod+CtrlShift+3 move container to workspace T3
-bindsym $mod+CtrlShift+4 move container to workspace T4
-bindsym $mod+CtrlShift+5 move container to workspace T5
-bindsym $mod+CtrlShift+6 move container to workspace T6
-bindsym $mod+CtrlShift+7 move container to workspace T7
-bindsym $mod+CtrlShift+8 move container to workspace T8
-bindsym $mod+CtrlShift+9 move container to workspace T9
+bindsym $mod+Ctrl+Shift+1 move container to workspace T1
+bindsym $mod+Ctrl+Shift+2 move container to workspace T2
+bindsym $mod+Ctrl+Shift+3 move container to workspace T3
+bindsym $mod+Ctrl+Shift+4 move container to workspace T4
+bindsym $mod+Ctrl+Shift+5 move container to workspace T5
+bindsym $mod+Ctrl+Shift+6 move container to workspace T6
+bindsym $mod+Ctrl+Shift+7 move container to workspace T7
+bindsym $mod+Ctrl+Shift+8 move container to workspace T8
+bindsym $mod+Ctrl+Shift+9 move container to workspace T9
 
 bindsym $mod+Ctrl+h workspace F1; workspace 4; workspace 1
 bindsym $mod+Ctrl+d workspace F6; workspace 6
