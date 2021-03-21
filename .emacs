@@ -342,14 +342,23 @@ prefix argument."
     :config
     (require 'org-ql-view)
     (add-to-list 'org-ql-views
-    		 '("TODO"
+		 '("TODO"
 		   :buffers-files
 		   org-agenda-files
+		   :query
+		   (and (not (done)) (ts-active :from today :to 4))
+		   :sort
+		   (date priority)
+		   :narrow nil :super-groups org-super-agenda-groups :title "TODO"))
+    (add-to-list 'org-ql-views
+    		 '("NO DEADLINE"
+		   :buffers-files
+		   (lambda () (cons "~/org/links.org" org-agenda-files))
     		   :query
-    		   (and (not (done)) (ts-active :from today :to 4))
+    		   (and (todo) (not (deadline)))
     		   :sort
     		   (date priority)
-    		   :narrow nil :super-groups org-super-agenda-groups :title "TODO")))
+    		   :narrow nil :super-groups org-super-agenda-groups :title "NO DEADLINE")))
 
   (use-package org-roam
     :ensure t
