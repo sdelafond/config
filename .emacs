@@ -6,6 +6,7 @@
 ;; _____________________________________________________________________
 ;; custom path
 (setq my-home (expand-file-name (concat "~" (or (getenv "SUDO_USER") (getenv "USER")))))
+(setq my-name "Sébastien Delafond")
 (setq my-emacsd (concat my-home "/.emacs.d/"))
 (loop for file in (directory-files my-emacsd t ".*.el$")
       do (load-file file))
@@ -150,7 +151,7 @@ prefix argument."
 
 (defun id ()
   (interactive)
-  (insert (concat "Sébastien Delafond <" my-email ">")))
+  (insert (concat my-name " <" my-email ">")))
 
 (defun insert-sig-fr ()
   (interactive)
@@ -890,6 +891,49 @@ prefix argument."
 
 (use-package gitconfig-mode)
 (use-package gitignore-mode)
+
+
+(use-package gnus
+  :defer t
+  :config
+  (setq user-mail-address my-email)
+  (setq user-full-name my-name)
+
+  (setq gnus-select-method '(nntp "news.gmane.io"))
+  (setq gnus-secondary-select-methods '((nntp "localhost" 8119)))
+
+  (setq smtpmail-smtp-server "localhost")
+
+  (setq gnus-thread-ignore-subject t)
+  (setq gnus-thread-hide-subtree t)
+
+  (setq gnus-summary-line-format "%U%R %z {%5L} [%-35,35n] %&user-date;   %t %B%-80,80S\n"
+        gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+        gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+        gnus-sum-thread-tree-false-root ""
+        gnus-sum-thread-tree-indent " "
+        gnus-sum-thread-tree-leaf-with-other "├► "
+        gnus-sum-thread-tree-root ""
+        gnus-sum-thread-tree-single-leaf "╰► "
+        gnus-sum-thread-tree-vertical "│")
+
+  (gnus-add-configuration
+   '(article
+     (horizontal 1.0
+           (vertical 50
+         (group 1.0))
+           (vertical 1.0
+         (summary 0.40 point)
+         (article 1.0)))))
+  (gnus-add-configuration
+   '(summary
+     (horizontal 1.0
+           (vertical 50
+         (group 1.0))
+           (vertical 1.0
+         (summary 1.0 point)))))
+
+  (add-hook 'gnus-group-mode-hook 'gnus-topic-mode))
 
 (use-package ivy
   :defer 0.1
