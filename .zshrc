@@ -501,7 +501,7 @@ extensions[debian]="build changes dsc ${literal}changelog ${literal}control ${li
 extensions[docs]="calendar chm conf csv doc docx dvi emacs html ics odf ods odt org pdf pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xlsx xml"
 extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg firmware ear exe gz img ipk iso jar lzh lzma ova pgdump qcow qcow2 rar raw rootfs rpm squashfs tar taz tgz udeb udf vmdk war xpi xz z zip"
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm webm wmv xvid yuv"
-extensions[audio]="au mp3 ogg ogv wav wma"
+extensions[audio]="aac au mp3 ogg ogv wav wma"
 extensions[pics]="bmp dng gif jpeg jpg pbm png ppm tga tif xbm xcf xpm"
 extensions[code]="${literal}Makefile a bash c c++ class cpp debdiff diff el elz h hs jacl java js json jy ko lua o out patch pl pm py pyc pyo rb sh so sql tcl zsh"
 
