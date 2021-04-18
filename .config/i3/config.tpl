@@ -422,6 +422,7 @@ assign [class="(?i)vlc"] T8
 for_window [title="(?i)^qiv"] floating enable, move window to workspace T8
 for_window [class="(?i)feh"] floating enable, move window to workspace T8
 assign [class="(?i)geeqie"] T8
+assign [class="(?i)mpv"] T8
 assign [class="(?i)mplayer"] T8
 assign [class="(?i)gimp"] T8
 assign [class="(?i)dia"] T8
