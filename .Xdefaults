@@ -1,5 +1,5 @@
-XTerm.cutchars: `"'()*,;<>[]{|}
-URxvt.cutchars: `"'()*,;<>[]{|}
+XTerm.cutchars: "`'()*,;<>[]{|}
+URxvt.cutchars: `'()*,;<>[]{|}│"
 
 URxvt.iso14755: false
 
