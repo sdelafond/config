@@ -1,0 +1,38 @@
+add_newline = false
+
+[character]
+success_symbol = '#'
+error_symbol = '[#](bold red)'
+
+[cmd_duration]
+min_time = 1000
+format = '[\($duration\)](bold 33)'
+
+[directory]
+style = 'green'
+
+[git_branch]
+format = '[$symbol$branch]($style) '
+
+[git_status]
+ahead = '↑${count}'
+behind = '↓${count}'
+diverged = '↑${ahead_count}/↓${behind_count}'
+untracked = '!'
+modified = '↯'
+staged = '↺'
+format = '[($ahead_behind )](bold fg:141)[($all_status )](bold yellow)'
+
+[hostname]
+ssh_only = false
+format =  '[$hostname](bold underline 243) '
+
+[jobs]
+disabled = false
+
+[line_break]
+disabled = false
+
+[status]
+map_symbol = false
+disabled = false
