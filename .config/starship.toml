@@ -9,7 +9,7 @@ min_time = 1000
 format = '[\($duration\)](bold 33)'
 
 [directory]
-style = 'green'
+style = 'underline green'
 
 [git_branch]
 format = '[$symbol$branch]($style) '
@@ -24,8 +24,8 @@ staged = '↺'
 format = '[($ahead_behind )](bold fg:141)[($all_status )](bold yellow)'
 
 [hostname]
-ssh_only = false
-format =  '[$hostname](bold underline 243) '
+ssh_only = true
+format =  '[@$hostname](bold underline 114) '
 
 [jobs]
 disabled = false

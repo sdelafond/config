@@ -136,7 +136,9 @@ fi
 getTmuxWindowIndex() {
   local windowShortcuts=(0 1 2 3 4 5 6 7 8 9 j k l a b)
   let index="$(tmux display-message -p '#{window_index}') + 1"
-  echo $windowShortcuts[$index]
+  if [ "$index" -gt 10 ] ; then
+    echo $windowShortcuts[$index]
+  fi
 }
 
 case $TERM in
