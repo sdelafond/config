@@ -9,7 +9,7 @@ min_time = 1000
 format = '[\($duration\)](bold 33)'
 
 [directory]
-style = 'bold green'
+style = 'bold underline 34'
 
 [git_branch]
 format = '[$symbol$branch]($style) '
@@ -40,3 +40,14 @@ disabled = false
 [username]
 format = '[$user]($style) '
 style_user = 'yellow'
+
+# languages
+
+[python]
+disabled = true
+
+[ruby]
+disabled = true
+
+[golang]
+disabled = true
