@@ -43,6 +43,9 @@ style_user = 'yellow'
 
 # languages
 
+[perl]
+disabled = true
+
 [python]
 disabled = true
 
