@@ -1,105 +1,112 @@
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' disable bzr cdv cvs darcs mtn tla hg p4 svk
+zstyle ':vcs_info:*' enable cvs svn git
+
+# show symbol
+function +vi-symbol() {
+  case ${hook_com[vcs_orig]} in
+    "git") hook_com[vcs]="±" ;;
+    "cvs") hook_com[vcs]="❌" ;;
+    "svn") hook_com[vcs]="®" ;;
+    "git-svn") hook_com[vcs]="±®" ;;
+  esac
+}
+
+# show local repository name
+function +vi-git-localname() {
+  local old_base_name="${hook_com[base-name]}"
+  local new_base_name="${REPOSITORIES[$old_base_name]}"
+  if [[ -n "${new_base_name}" ]] ; then
+    hook_com[base-name]="${new_base_name}"
+  else
+    hook_com[base-name]="${old_base_name}"
+  fi      
+}
+
 if which starship > /dev/null ; then
   unset RPROMPT
   eval "$(starship init zsh)"
+
+  zstyle ':vcs_info:git+set-message:*' hooks symbol git-localname
+  zstyle ':vcs_info:*' formats              "[%s%b%m%c%u]" "%s%r"
+ 
+  vcs_stuff() { vcs_info }
 else
-  # vcs-info
-  autoload -Uz vcs_info && {
-    # note that you'll also need to "setopt prompt_subst", as below
-    zstyle ':vcs_info:*' disable bzr cdv cvs darcs mtn tla hg p4 svk
-    zstyle ':vcs_info:*' enable cvs svn git
+  # note that you'll also need to "setopt prompt_subst", as below
 
-    ### git: Show +N/-N when your local branch is ahead-of or behind remote HEAD.
-    function +vi-git-st() {
-      local ahead behind
-      local -a gitstatus
+  ### git: Show +N/-N when your local branch is ahead-of or behind remote HEAD.
+  function +vi-git-st() {
+    local ahead behind
+    local -a gitstatus
 
-      # for git prior to 1.7
-      # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
-      ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-      (( $ahead )) && gitstatus+=( "(↑${ahead})" )
+    # for git prior to 1.7
+    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+    (( $ahead )) && gitstatus+=( "(↑${ahead})" )
 
-      # for git prior to 1.7
-      # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
-      behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
-      (( $behind )) && gitstatus+=( "(↓${behind})" )
+    # for git prior to 1.7
+    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+    (( $behind )) && gitstatus+=( "(↓${behind})" )
 
-      hook_com[misc]+=${(j:/:)gitstatus}
-    }
+    hook_com[misc]+=${(j:/:)gitstatus}
+  }
 
-    function +vi-git-stash() {
-      local stashed
-      stashed=$(git stash list | wc -l)
-      (( $stashed )) && hook_com[misc]+="%{${fg_bold[white]}%}⚑%{${fg_no_bold[default]}%} "
-    }
+  ### git: stashes present?
+  function +vi-git-stash() {
+    local stashed
+    stashed=$(git stash list | wc -l)
+    (( $stashed )) && hook_com[misc]+="%{${fg_bold[white]}%}⚑%{${fg_no_bold[default]}%} "
+  }
 
-    ### Show symbol
-    function +vi-symbol() {
-      case ${hook_com[vcs_orig]} in
-	"git") hook_com[vcs]="±" ;;
-	"cvs") hook_com[vcs]="❌" ;;
-	"svn") hook_com[vcs]="®" ;;
-	"git-svn") hook_com[vcs]="±®" ;;
-      esac
-    }
+  ### git: show remote branch name for remote-tracking branches
+  function +vi-git-remotebranch() {
+    local remote
 
-    ### git: Show remote branch name for remote-tracking branches
-    function +vi-git-remotebranch() {
-      local remote
+    # Are we on a remote-tracking branch?
+    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+      --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
 
-      # Are we on a remote-tracking branch?
-      remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
-	--symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+    if [[ -n "${remote}" ]] && [[ ! $remote =~ "(origin|salsa|salsa-freexian)/${hook_com[branch]/+/\+}" ]] && [[ ! $remote =~ refs/heads ]] ; then
+      hook_com[branch]="${hook_com[branch]}→${remote}"
+    fi
+  }
 
-      if [[ -n "${remote}" ]] && [[ ! $remote =~ "(origin|salsa|salsa-freexian)/${hook_com[branch]/+/\+}" ]] && [[ ! $remote =~ refs/heads ]] ; then
-	hook_com[branch]="${hook_com[branch]}→${remote}"
-      fi
-    }
+  function +vi-git-untracked() {
+    blacklisted-vcs-dir && return 0
+    if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]] ; then
+      hook_com[unstaged]+="%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}"
+    fi
+  }
 
-    function +vi-git-localname() {
-      local old_base_name="${hook_com[base-name]}"
-      local new_base_name="${REPOSITORIES[$old_base_name]}"
-      if [[ -n "${new_base_name}" ]] ; then
-	hook_com[base-name]="${new_base_name}"
-      else
-	hook_com[base-name]="${old_base_name}"
-      fi      
-    }
+  function blacklisted-vcs-dir() {
+    local d
+    local -a blacklisted_dirs
+    blacklisted_dirs=( "dd-wrt/src" "dd-wrt/firmware-mod-kit" "src/router" "kernel" "dd-wrt-github" "openwrt-github" "vcs/linux")
+    for d in ${blacklisted_dirs}; do
+      [[ ${PWD}/ == */${d}/* ]] && return 0
+    done
+    return 1
+  }
 
-    function +vi-git-untracked() {
-      blacklisted-vcs-dir && return 0
-      if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]] ; then
-	hook_com[unstaged]+="%{${fg_bold[yellow]}%}!%{${fg_no_bold[default]}%}"
-      fi
-    }
+  zstyle -e ':vcs_info:*' check-for-changes 'blacklisted-vcs-dir && reply=(false) || reply=(true)'
+  zstyle ':vcs_info:*' stagedstr            "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
+  zstyle ':vcs_info:*' unstagedstr          "%{${fg_bold[yellow]}%}↯%{${fg_no_bold[default]}%}"
+  zstyle ':vcs_info:*' formats              "[%s%b%m%c%u]" "%s%r"
+  zstyle ':vcs_info:*' actionformats        "[%s%b %m|%a%c%u]" "%s%r"
+  zstyle ':vcs_info:svn*+set-message:*'     hooks symbol
+  zstyle ':vcs_info:cvs*+set-message:*'     hooks symbol
+  zstyle ':vcs_info:git-svn+set-message:*'  hooks symbol git-st git-untracked git-localname git-stash
+  zstyle ':vcs_info:git+set-message:*'      hooks symbol git-st git-untracked git-remotebranch git-localname git-stash
 
-    function blacklisted-vcs-dir() {
-      local d
-      local -a blacklisted_dirs
-      blacklisted_dirs=( "dd-wrt/src" "dd-wrt/firmware-mod-kit" "src/router" "kernel" "dd-wrt-github" "openwrt-github" "vcs/linux")
-      for d in ${blacklisted_dirs}; do
-	[[ ${PWD}/ == */${d}/* ]] && return 0
-      done
-      return 1
-    }
-
-    zstyle -e ':vcs_info:*' check-for-changes 'blacklisted-vcs-dir && reply=(false) || reply=(true)'
-    zstyle ':vcs_info:*' stagedstr            "%{${fg_bold[yellow]}%}↺%{${fg_no_bold[default]}%}"
-    zstyle ':vcs_info:*' unstagedstr          "%{${fg_bold[yellow]}%}↯%{${fg_no_bold[default]}%}"
-    zstyle ':vcs_info:*' formats              "[%s%b%m%c%u]" "%s%r"
-    zstyle ':vcs_info:*' actionformats        "[%s%b %m|%a%c%u]" "%s%r"
-    zstyle ':vcs_info:svn*+set-message:*'     hooks symbol
-    zstyle ':vcs_info:cvs*+set-message:*'     hooks symbol
-    zstyle ':vcs_info:git-svn+set-message:*'  hooks symbol git-st git-untracked git-localname git-stash
-    zstyle ':vcs_info:git+set-message:*'      hooks symbol git-st git-untracked git-remotebranch git-localname git-stash
-
-    vcs_stuff() {
-      vcs_info
-      if [[ -n $vcs_info_msg_0_ ]] ; then
-	PSEXTRA="%{${fg_bold[magenta]}%}${vcs_info_msg_0_}%{${fg_no_bold[default]}%} "
-      else
-	unset PSEXTRA
-      fi
-    }
+  vcs_stuff() {
+    vcs_info
+    if [[ -n $vcs_info_msg_0_ ]] ; then
+      PSEXTRA="%{${fg_bold[magenta]}%}${vcs_info_msg_0_}%{${fg_no_bold[default]}%} "
+    else
+      unset PSEXTRA
+    fi
   }
 
   local terminalColors=$(echotc Co)
@@ -126,11 +133,7 @@ else
     elapsed_str=$(printf "%02d:%02d" $(( ${elapsed} / 60 )) $(( ${elapsed} % 60 )))
   }
 
-  precmd_vcs() {
-    vcs_stuff 2> /dev/null
-  }
-
-  precmd_functions+=(precmd_elapsed precmd_vcs)
+  precmd_functions+=(precmd_elapsed)
 fi
 
 getTmuxWindowIndex() {
@@ -183,6 +186,12 @@ setTerminalTitle() {
       _setTerminalTitle "$terminalTitle"
   esac
 }
+
+precmd_vcs() {
+  vcs_stuff 2> /dev/null
+}
+
+precmd_functions+=(precmd_vcs)
 
 precmd_window_title() {
   # those 2 are only set once, by sc(), to add the tmux/screen session
