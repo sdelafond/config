@@ -717,6 +717,8 @@ prefix argument."
 
   (local-set-key (kbd "<M-RET>") 'org-meta-return)
 
+  (setq org-priority-faces '((65 :foreground "color-81" :weight bold)))
+
   (defun seb/org-previous-timestamp ()
     (save-excursion
       (org-previous-visible-heading 2)
