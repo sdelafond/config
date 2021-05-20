@@ -38,7 +38,7 @@ case $HOST in
     I3_SCREEN_2="DVI-D-0"
     I3_SCREEN_3="HDMI-0"
     xrandr --output $I3_SCREEN_1 --primary --mode 2560x1440 --output $I3_SCREEN_2 --auto --right-of DP-4 --output $I3_SCREEN_3 --auto --left-of DP-4 ;;
-  g8)
+  g8|x1|x230)
     echo 2000 | sudo tee /sys/class/backlight/intel_backlight/brightness
     xss-lock -l -- xscreensaver-command --lock &
     nm-applet &
@@ -48,11 +48,12 @@ case $HOST in
     I3_SCREEN_3=$I3_SCREEN_1
 
     ## single-finger scrolling only for touchpad
-    if [[ $HOST == x1 ]] ; then
-      XINPUT_TP="Synaptics TM3072-003"
-    else
-      XINPUT_TP="SYNA8006:00 06CB:CD8B Touchpad"
-    fi
+    case $HOST in
+      x1) XINPUT_TP="Synaptics TM3072-003" ;;
+      g8) XINPUT_TP="SYNA8006:00 06CB:CD8B Touchpad" ;;
+      x230) XINPUT_TP="SynPS/2 Synaptics TouchPad" ;;
+    esac
+
     # force 2-finger scrolling
     xinput set-prop "$XINPUT_TP" "Synaptics Two-Finger Pressure" 0
     xinput set-prop "$XINPUT_TP" "Synaptics Two-Finger Width" 0
@@ -70,6 +71,7 @@ case $HOST in
     # echo 100 | sudo tee /sys/devices/platform/i8042/serio1/serio2/sensitivity
     ;;
   *)
+    nm-applet &
     I3_SCREEN_1=$(xrandr -q | awk '/connected/ {print $1;exit}') # first connected
     I3_SCREEN_2=$I3_SCREEN_1
     I3_SCREEN_3=$I3_SCREEN_1 ;;
