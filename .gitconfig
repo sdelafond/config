@@ -17,6 +17,7 @@
         ca = commit --all
         cam = commit --amend
         camn = commit --amend --no-edit
+	cl = clean -f -d
         cp = cherry-pick
         cpa = cherry-pick --abort
         d = diff
