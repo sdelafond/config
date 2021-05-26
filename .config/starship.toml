@@ -58,3 +58,5 @@ disabled = true
 [ruby]
 disabled = true
 
+[java]
+disabled = true
