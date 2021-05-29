@@ -4,4 +4,4 @@ set tabopenpos last
 
 unbind k
 unbind j
-bind <C-t> fillcmdline tabopen
+
