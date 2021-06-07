@@ -37,27 +37,21 @@ bindsym $mod+t exec urxvt
 bindsym $mod+space kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+p focus left
-bindsym $mod+n focus right
-bindsym $mod+Shift+p focus up
-bindsym $mod+Shift+n focus down
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # focus outputs
 bindsym $mod+f focus output right
 bindsym $mod+b focus output left
-
-# # alternatively, you can use the cursor keys:
-# bindsym $mod+Left focus left
-# bindsym $mod+Down focus down
-# bindsym $mod+Up focus up
-# bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
@@ -96,10 +90,10 @@ bindsym $mod+e layout toggle split
 #bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+j focus parent
+bindsym $mod+p focus parent
 
 # focus the child container
-bindsym $mod+k focus child
+bindsym $mod+n focus child
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -196,7 +190,7 @@ bindsym XF86MonBrightnessUp exec $app.backlight -inc
 bindsym XF86MonBrightnessDown exec $app.backlight -dec
 
 # screen lock/off
-bindsym $mod+l exec $app.screen_lock
+bindsym $mod+. exec $app.screen_lock
 bindsym Scroll_Lock exec $app.screen_lock
 bindsym $mod+o exec $app.screen_off
 bindsym $mod+Escape exec $app.screen_off
