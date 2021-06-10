@@ -315,7 +315,6 @@ bindsym --whole-window $mod+button5 exec $app.volume down
 
 # terminals
 assign [class="^URxvt$" title="o.mine.nu$"] 4
-%IF(%SYS(hostname -s) == x1)assign [class="^URxvt$" title="a.mine.nu$"] 6
 %IF(%SYS(hostname -s) == g8)assign [class="^URxvt$" title="a.mine.nu$"] 6
 assign [class="^URxvt$" title="hetz"] 4
 assign [class="^URxvt$" title="jmt"] 4
@@ -325,17 +324,7 @@ assign [class="^URxvt$" title="jmt"] 4
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="vim3"] move window to workspace T4
 
 assign [class="^URxvt$" title="lanner$"] 2
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="lanner$"] move window to workspace 2
 %IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="lanner$"] move window to workspace 2
-assign [class="^URxvt$" title="omnia"] 2
-
-assign [class="^URxvt$" title="bpi"] 5
-assign [class="^URxvt$" title="beastie$"] 5
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="lab@"] move window to workspace 5
-assign [class="^URxvt$" title=".data"] 5
-assign [class="^URxvt$" title="consult"] 5
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
@@ -343,27 +332,25 @@ assign [class="^URxvt$" title="exia"] 8
 assign [class="^URxvt$" title="mfw@"] 9
 
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
 %IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
+
+assign [class="^URxvt$" title="omnia"] 5
+assign [class="^URxvt$" title="bpi"] 5
+assign [class="^URxvt$" title="beastie$"] 5
+assign [class="^URxvt$" title="rpi"] 5
+assign [class="^URxvt$" title="vim3"] 5
 
 assign [class="^URxvt$" title="debian.org"] 6
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
 %IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
 
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="main@hulk"] move window to workspace 6
 %IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="main@hulk"] move window to workspace 6
 
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="xian@"] move window to workspace 8
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="xian@"] move window to workspace 8
 %IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="xian@"] move window to workspace 8
 %IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="kali"] move window to workspace 8
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="kali"] move window to workspace 8
 %IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="kali"] move window to workspace 8
 
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="mfw@"] move window to workspace 9
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="mfw@"] move window to workspace 9
-%IF(%SYS(hostname -s) == x1)for_window [class="^URxvt$" title="mfw@"] move window to workspace 9
 %IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="mfw@"] move window to workspace 9
 
 assign [class="^URxvt$" title="recette-"] 3
@@ -390,12 +377,10 @@ for_window [class="(?i)firefox$" title="^New Window"] move window to workspace F
 for_window [class="(?i)irefox$" title="^Google"] move window to workspace F2
 assign [class="(?i)chromium$"] F2
 for_window [class="(?i)irefox$" title="^Untangle"] move window to workspace F3
-for_window [class="(?i)irefox$" title="^Etal"] move window to workspace F5
-for_window [class="(?i)irefox$" title="^Data"] move window to workspace F5
+for_window [class="(?i)irefox$" title="^MLB"] move window to workspace F5
 for_window [class="(?i)irefox$" title="^Debian"] move window to workspace F6
 for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
 for_window [class="(?i)irefox$" title="exia"] move window to workspace F8
-for_window [class="(?i)irefox$" title="^MLB"] move window to workspace T8
 
 # VNC & co
 assign [class="(?i)rdp"] T5
@@ -417,6 +402,7 @@ for_window [title="(?i)^qiv"] floating enable, move window to workspace T8
 for_window [class="(?i)feh"] floating enable, move window to workspace T8
 assign [class="(?i)geeqie"] T8
 assign [class="(?i)mpv"] T8
+%IF(%SYS(hostname -s) == g8)assign [class="(?i)mpv"] F8
 assign [class="(?i)mplayer"] T8
 assign [class="(?i)gimp"] T8
 assign [class="(?i)dia"] T8
@@ -430,7 +416,6 @@ for_window [class="(?i)spotify"] move window to workspace T9
 
 # comm
 %IF(%SYS(hostname -s) == hulk)assign [class="Signal"] 4
-%IF(%SYS(hostname -s) == x1)assign [class="Signal"] T3
 %IF(%SYS(hostname -s) == g8)assign [class="Signal"] T3
 
 # misc
