@@ -141,9 +141,9 @@ set $app.keyboard_layout ~/bin/keyboard-layout.sh
 set $app.volume ~/bin/pulse-volume.sh
 set $app.backlight ~/bin/xbacklight.sh
 # screens will be overridden on a per-host basis
-set $screen1 %ENV(I3_SCREEN_1)
-set $screen2 %ENV(I3_SCREEN_2)
-set $screen3 %ENV(I3_SCREEN_3)
+set $screen1 {{ env.I3_SCREEN_1 }}
+set $screen2 {{ env.I3_SCREEN_2 }}
+set $screen3 {{ env.I3_SCREEN_3 }}
 set $color.focused #78acd2
 
 ## Colors
@@ -315,24 +315,31 @@ bindsym --whole-window $mod+button5 exec $app.volume down
 
 # terminals
 assign [class="^URxvt$" title="o.mine.nu$"] 4
-%IF(%SYS(hostname -s) == g8)assign [class="^URxvt$" title="a.mine.nu$"] 6
+{% if env.HOSTNAME == 'g8' %}
+assign [class="^URxvt$" title="a.mine.nu$"] 6
+{% endif %}
 assign [class="^URxvt$" title="hetz"] 4
 assign [class="^URxvt$" title="jmt"] 4
 
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="services@"] move window to workspace T4
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="u50"] move window to workspace T4
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="vim3"] move window to workspace T4
+{% if env.HOSTNAME == 'hulk' %}
+for_window [class="^URxvt$" title="services@"] move window to workspace T4
+for_window [class="^URxvt$" title="u50"] move window to workspace T4
+for_window [class="^URxvt$" title="vim3"] move window to workspace T4
+{% endif %}
 
 assign [class="^URxvt$" title="lanner$"] 2
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="lanner$"] move window to workspace 2
+{% if env.HOSTNAME == 'g8' %}
+for_window [class="^URxvt$" title="lanner$"] move window to workspace 2
+{% endif %}
 
 assign [class="^URxvt$" title="untangle"] 3
 assign [class="^URxvt$" title="ngfw@"] 3
 assign [class="^URxvt$" title="exia"] 8
 assign [class="^URxvt$" title="mfw@"] 9
 
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
+{% if env.HOSTNAME in ('hulk', 'g8') %}
+for_window [class="^URxvt$" title="ngfw@"] move window to workspace 3
+{% endif %}
 
 assign [class="^URxvt$" title="omnia"] 5
 assign [class="^URxvt$" title="bpi"] 5
@@ -341,17 +348,19 @@ assign [class="^URxvt$" title="rpi"] 5
 assign [class="^URxvt$" title="vim3"] 5
 
 assign [class="^URxvt$" title="debian.org"] 6
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="debian@"] move window to workspace 6
+{% if env.HOSTNAME == 'g8' %}
+for_window [class="^URxvt$" title="main@hulk"] move window to workspace 6
+{% endif %}
 
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="main@hulk"] move window to workspace 6
+{% if env.HOSTNAME in ('hulk', 'g8') %}
+for_window [class="^URxvt$" title="debian@"] move window to workspace 6
+for_window [class="^URxvt$" title="xian@"] move window to workspace 8
+for_window [class="^URxvt$" title="kali"] move window to workspace 8
+{% endif %}
 
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="xian@"] move window to workspace 8
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="xian@"] move window to workspace 8
-%IF(%SYS(hostname -s) == hulk)for_window [class="^URxvt$" title="kali"] move window to workspace 8
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="kali"] move window to workspace 8
-
-%IF(%SYS(hostname -s) == g8)for_window [class="^URxvt$" title="mfw@"] move window to workspace 9
+{% if env.HOSTNAME == 'g8' %}
+for_window [class="^URxvt$" title="mfw@"] move window to workspace 9
+{% endif %}
 
 assign [class="^URxvt$" title="recette-"] 3
 assign [class="^URxvt$" title="qt-"] 3
@@ -401,8 +410,8 @@ assign [class="(?i)vlc"] T8
 for_window [title="(?i)^qiv"] floating enable, move window to workspace T8
 for_window [class="(?i)feh"] floating enable, move window to workspace T8
 assign [class="(?i)geeqie"] T8
-assign [class="(?i)mpv"] T8
-%IF(%SYS(hostname -s) == g8)assign [class="(?i)mpv"] F8
+assign [class="(?i)mpv"] {% if env.HOSTNAME == 'g8' %}F8{% else %}T8{% endif %}
+
 assign [class="(?i)mplayer"] T8
 assign [class="(?i)gimp"] T8
 assign [class="(?i)dia"] T8
@@ -415,8 +424,8 @@ assign [class="(?i)gmpc"] T9
 for_window [class="(?i)spotify"] move window to workspace T9
 
 # comm
-%IF(%SYS(hostname -s) == hulk)assign [class="Signal"] 4
-%IF(%SYS(hostname -s) == g8)assign [class="Signal"] T3
+assign [class="Signal"] {% if env.HOSTNAME == 'g8' %}T3{% else %}4{% endif %}
+
 
 # misc
 assign [class="(?i)keybase"] T2
