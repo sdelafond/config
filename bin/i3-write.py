@@ -35,7 +35,7 @@ def process(line):
       if eval(s):
         return MACRO_RO.sub("", line)
       else:
-        return "#%s" % line
+        return ""
   else:
     return line
 
