@@ -1542,6 +1542,8 @@ _b_   _f_   _o_k        _y_ank
 (global-set-key (kbd "C-x /") 'revert-buffer)
 (global-set-key (kbd "C-c a") 'align)
 (global-set-key (kbd "M-k") 'kill-whole-line)
+(global-set-key (kbd "M-B") (make-interactive-fun 'forward-whitespace -1))
+(global-set-key (kbd "M-F") 'forward-whitespace)
 
 ;; associate file patterns and modes
 (setq auto-mode-alist 
