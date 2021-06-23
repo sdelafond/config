@@ -162,7 +162,7 @@ setTerminalTitle() {
   case $TERM in
     rxvt*|xterm*|screen*|tmux*)
       local cmd="$1"
-      if env | G -q TMUX= ; then
+      if env | grep -q TMUX= ; then
 	terminalTitle="$(getTmuxWindowIndex):"
       else
 	terminalTitle="_:"
