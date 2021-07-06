@@ -889,7 +889,6 @@ prefix argument."
            ("KK" . magit-file-dispatch)))
 
 (use-package forge
-  :pin "melpa"
   :after magit)
 
 (use-package gitconfig-mode)
