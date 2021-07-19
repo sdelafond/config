@@ -49,6 +49,7 @@
 	wip = wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 [branch]
         autosetupmerge = always
+	sort = authordate
 #        autosetuprebase = always
 #        master.rebase = true
 [color]
