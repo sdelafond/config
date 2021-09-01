@@ -557,8 +557,9 @@ prefix argument."
     (interactive)
     (let* ((org-link (nth 4 (org-heading-components)))
 	   (link (progn
-		   (string-match org-link-bracket-re org-link)
-		   (org-link-decode (match-string 1 org-link))))
+		   (if (string-match org-link-bracket-re org-link)
+		       (org-link-decode (match-string 1 org-link))
+		     org-link)))
            (tags (delete "todo_gcu" (org-get-tags nil t)))
            (irctags (mapconcat 'identity tags ","))
            (delim "#"))
