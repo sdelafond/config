@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# from https://www.mattcutts.com/files/mutt_bgrun
+
+prog=$(basename $0)
+
+if [ "$#" -lt "2" ] ; then
+  echo "usage: $prog viewer [viewer options] file" >&2
+  exit 1
+fi
+
+cmd=""
+while [ "$#" -gt "1" ] ; do
+  cmd="$cmd $1"
+  shift
+done
+
+file=$1
+
+umask 077
+tmp_dir=$(mktemp -d -p /var/tmp mutt-bgrun-XXXXXXXX)
+tmp_file="${tmp_dir}/$(basename $file)"
+
+cp "$file" "$tmp_file"
+
+{ $cmd "$tmp_file" ; rm -fr "$tmp_dir" ; } &
+
