@@ -1,23 +1,25 @@
-#! /bin/sh
+#!/bin/bash
 
+# constants
 DIR=/sys/class/backlight/intel_backlight
+STEP=10 # in percent
 
-actual=$(cat $DIR/actual_brightness)
+## main
 
+# CLI
 case $1 in
   -inc) op="+" ;;
   -dec) op="-" ;;
+  *) exit 1 ;;
 esac
 
-if [[ -z "$2" ]] && [[ $actual -gt 100 ]] ; then
-  step=25
-elif [[ $actual -gt 75 ]] ; then
-  step=15
-elif [[ $actual -gt 50 ]] ; then
-  step=10
-else
-  step=5
+max=$(cat $DIR/max_brightness)
+actual=$(cat $DIR/actual_brightness)
+
+new=$(bc -l <<< "$actual $op ($max * $STEP / 100)")
+new=${new%%.*} 
+if [[ $new -gt $max ]] ; then
+  new=$max
 fi
 
-new=$(( $actual $op $step ))
 echo $new | sudo tee $DIR/brightness
