@@ -193,14 +193,16 @@ precmd_vcs() {
 
 precmd_functions+=(precmd_vcs)
 
-precmd_window_title() {
-  # those 2 are only set once, by sc(), to add the tmux/screen session
-  # name; when detaching, they need to be reset
-  unset TERM_TITLE_PREFIX
-  unset TERM_TITLE_SUFFIX
-  # just strip previous title from cmd marker
-  terminalTitle=${terminalTitle/\|*}
-  _setTerminalTitle "$terminalTitle"
-}
+if [[ -z "$is_console" ]] ; then
+  precmd_window_title() {
+    # those 2 are only set once, by sc(), to add the tmux/screen session
+    # name; when detaching, they need to be reset
+    unset TERM_TITLE_PREFIX
+    unset TERM_TITLE_SUFFIX
+    # just strip previous title from cmd marker
+    terminalTitle=${terminalTitle/\|*}
+    _setTerminalTitle "$terminalTitle"
+  }
 
-precmd_functions+=(precmd_window_title)
+  precmd_functions+=(precmd_window_title)
+fi

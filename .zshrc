@@ -585,7 +585,7 @@ if [ -f $vew ] ; then
 fi
 
 # update prompt
-setTerminalTitle
+[[ -n "$is_console" ]] || setTerminalTitle
 
 # reload config on USR1
 trap 'zreload-do' USR1
