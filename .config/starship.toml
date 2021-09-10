@@ -43,10 +43,13 @@ style_user = 'yellow'
 
 # languages
 
-[nodejs]
+[golang]
 disabled = true
 
-[golang]
+[lua]
+disabled = true
+
+[nodejs]
 disabled = true
 
 [perl]
