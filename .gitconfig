@@ -30,6 +30,7 @@
         g = grep
         gi = grep -i
 	l1 = log --pretty=oneline
+	l1s = log --pretty=oneline -n 10
 	l = log
 	m = merge
 	ma = merge --abort
