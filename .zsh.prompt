@@ -205,4 +205,6 @@ if [[ -z "$is_console" ]] ; then
   }
 
   precmd_functions+=(precmd_window_title)
+else
+  setTerminalTitle() { : }
 fi
