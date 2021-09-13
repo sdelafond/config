@@ -43,7 +43,13 @@ style_user = 'yellow'
 
 # languages
 
+[dotnet]
+disabled = true
+
 [golang]
+disabled = true
+
+[java]
 disabled = true
 
 [lua]
@@ -59,7 +65,4 @@ disabled = true
 disabled = true
 
 [ruby]
-disabled = true
-
-[java]
 disabled = true
