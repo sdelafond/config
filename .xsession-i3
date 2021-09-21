@@ -99,4 +99,5 @@ autocutsel -selection PRIMARY -fork
 # WM
 /usr/bin/feh --bg-center ~/.config/i3/background.png
 /home/seb/bin/i3-write.py
+~/vcs/i3wm-configuration/bin/i3-companion --debug &
 exec i3
