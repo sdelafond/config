@@ -43,6 +43,9 @@ style_user = 'yellow'
 
 # languages
 
+[cmake]
+disabled = true
+
 [dotnet]
 disabled = true
 
