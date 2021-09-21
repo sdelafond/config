@@ -22,6 +22,8 @@
         cpa = cherry-pick --abort
         d = diff
         dc = diff --cached
+        dcs = diff --cached --stat
+	ds = diff --stat
 	dst = diff --stat
 	f = fetch
 	fa = fetch --all
