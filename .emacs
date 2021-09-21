@@ -1445,6 +1445,9 @@ _b_   _f_   _o_k        _y_ank
 ;; (require 'smartparens-config)
 ;; (smartparens-global-mode t)
 
+;; disable cursor blinking
+(setq visible-cursor nil)
+
 ;; region highlighting
 (transient-mark-mode t)
 
