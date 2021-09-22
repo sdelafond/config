@@ -45,6 +45,7 @@ bind M current_url bmark
 bind <C-x>rj fillcmdline bmarks
 bind <C-u><C-x>rj fillcmdline bmarks -t
 bind <C-x>rm current_url bmark
+bind <C-x>l js location.href='org-protocol://capture?template=L&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)+'&body='+encodeURIComponent(window.getSelection())
 
 " Tabs
 bind <A-n> tabnext
