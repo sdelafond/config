@@ -21,7 +21,7 @@ macro compose \ct '<edit-type><kill-line>text/html; charset=utf-8<Enter><edit-he
 
 # reload
 macro generic \c. ':source ~/.muttrc<enter>' 'Reload preferences'
-macro generic n	  ':source ~/.muttrc<enter>' 'Reload preferences'
+macro generic n ':source ~/.muttrc<enter>' 'Reload preferences'
 
 # tag
 macro pager   ';' 'q<tag-prefix>'
