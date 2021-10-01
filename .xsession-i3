@@ -40,7 +40,7 @@ case $HOST in
     xrandr --output $I3_SCREEN_1 --primary --mode 2560x1440 --output $I3_SCREEN_2 --auto --right-of DP-4 --output $I3_SCREEN_3 --auto --left-of DP-4 ;;
   g8|x1|x230)
     echo 2000 | sudo tee /sys/class/backlight/intel_backlight/brightness
-    xss-lock -l -- xscreensaver-command --lock &
+#    xss-lock -l -- dm-tool lock &
     nm-applet &
 
     I3_SCREEN_1="eDP-1"
