@@ -24,6 +24,7 @@ staged = '↺'
 format = '[($ahead_behind )](bold fg:141)[($all_status )](bold yellow)'
 
 [hostname]
+disabled = true
 ssh_only = true
 format =  '[$hostname](bold underline 114) '
 
@@ -38,6 +39,7 @@ map_symbol = false
 disabled = false
 
 [username]
+disabled = true
 format = '[$user]($style) '
 style_user = 'yellow'
 
