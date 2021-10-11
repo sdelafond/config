@@ -215,6 +215,7 @@ bindsym $mod+F12 exec $app.keyboard_layout
 workspace 1 output $screen1
 workspace 2 output $screen1
 workspace 3 output $screen1
+workspace 5 output $screen1
 workspace 6 output $screen1
 workspace 7 output $screen1
 workspace 8 output $screen1
@@ -394,15 +395,15 @@ for_window [class="(?i)irefox$" title="^Mapp"] move window to workspace F7
 for_window [class="(?i)irefox$" title="exia"] move window to workspace F8
 
 # VNC & co
-assign [class="(?i)rdp"] T5
-assign [class="(?i)vnc"] T5
-assign [class="(?i)rdesktop"] T5
+assign [class="(?i)rdp"] 5
+assign [class="(?i)vnc"] 5
+assign [class="(?i)rdesktop"] 5
 
 # VM
-assign [class="(?i)qemu"] T5
-assign [class="(?i)kvm"] T5
-assign [class="(?i)virtualbox"] T5
-assign [class="(?i)virt-manager"] T5
+assign [class="(?i)qemu"] 5
+assign [class="(?i)kvm"] 5
+assign [class="(?i)virtualbox"] 5
+assign [class="(?i)virt-manager"] 5
 
 assign [class="(?i)flightgear"] T6
 assign [class="(?i)steam"] T7
