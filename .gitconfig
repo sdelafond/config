@@ -21,6 +21,7 @@
         cp = cherry-pick
         cpa = cherry-pick --abort
         d = diff
+        dh = diff --diff-algorithm=histogram
         dc = diff --cached
         dcs = diff --cached --stat
 	ds = diff --stat
