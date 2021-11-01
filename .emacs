@@ -409,7 +409,7 @@ prefix argument."
           ("@" "\\alert{%s}" nil)))
 
   ;; clock
-  (setq org-clock-into-drawer nil)
+  (setq org-clock-into-drawer t)
   ;; (setq org-clock-clocktable-default-properties '(:maxlevel 5 :formula "$7='(org-clock-time% @2$2 $2..$6);%1.f" :narrow 80!))
   (setq org-clock-clocktable-default-properties '(:maxlevel 5 :formula % :narrow 80!))
 
@@ -450,6 +450,7 @@ prefix argument."
   (setq org-hide-leading-stars t)
   (setq org-id-locations-file (concat my-emacsd "org-id-locations"))
   (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
   (setq org-lowest-priority 69)
   (setq org-popup-calendar-for-date-prompt nil)
   (setq org-reverse-note-order nil)
