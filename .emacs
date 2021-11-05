@@ -363,6 +363,8 @@ prefix argument."
 
   (use-package org-roam
     :ensure t
+    :init
+    (setq org-roam-v2-ack t)
     :config
     (setq org-roam-directory "~/vcs/roam"))
 
