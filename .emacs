@@ -1602,7 +1602,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
  '(package-selected-packages
-   '(org-ql jinja2-mode use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode ox-pandoc org-super-agenda multiple-cursors ledger-mode key-chord json-mode ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode))
+   '(org-ql jinja2-mode use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode multiple-cursors ledger-mode key-chord ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ag ace-window ace-jump-mode))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    '((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos)
