@@ -402,7 +402,7 @@ rgrep() {
 
   if whence rg > /dev/null ; then # use rg if available
    rgrepLocal() { 
-     rg --no-ignore --hidden --no-heading $grep_opts "$1" "$2"
+     rg --no-ignore --follow --hidden --no-heading $grep_opts "$1" "$2"
    }
   fi
 
