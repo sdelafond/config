@@ -401,12 +401,12 @@ typeset -xA extensions # this dictionary is also used by the lst() function
 extensions=()
 extensions[backup]="${literal}~ ${literal}# bak ${literal}svn-commit.tmp"
 extensions[debian]="build changes dsc ${literal}changelog ${literal}control ${literal}rules ${literal}compat ${literal}config ${literal}copyright ${literal}dirs ${literal}files ${literal}watch ${literal}postinst ${literal}postrm ${literal}preinst ${literal}prerm postinst preinst postrm prerm links ${literal}links ${literal}docs docs ${literal}templates templates"
-extensions[docs]="calendar chm conf csv doc docx dvi emacs html ics odf ods odt org pdf pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xlsx xml"
-extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg firmware ear exe gz img ipk iso jar lzh lzma ova pgdump qcow qcow2 rar raw rootfs rpm squashfs tar taz tgz udeb udf vmdk war xpi xz z zip"
+extensions[docs]="calendar chm conf csv doc docx dvi emacs html ics odf ods odt org pdf pgn pps ppt pptx ps reg rtf sub srt tex txt todo vcf xls xlsx xml"
+extensions[archives]="7z ace apk arj bin bundle bz2 cab cdr dat deb dmg firmware ear exe gz img ipk iso jar lzh lzma otf ova pgdump qcow qcow2 rar raw rootfs rpm squashfs tar taz tgz ttf udeb udf vmdk war xpi xz z zip"
 extensions[video]="3gp asf avi divx flv ifo m1v m2v mkv mov mp2 mp4 mpe mpeg mpg ram rm webm wmv xvid yuv"
 extensions[audio]="aac au mp3 ogg ogv wav wma"
-extensions[pics]="bmp dng gif jpeg jpg pbm png ppm tga tif xbm xcf xpm"
-extensions[code]="${literal}Makefile a bash c c++ class cpp debdiff diff el elz h hs jacl java js json jy ko lua o out patch pl pm py pyc pyo rb sh so sql tcl zsh"
+extensions[pics]="bmp dng gif jpeg jpg pbm png ppm svg tga tif xbm xcf xpm"
+extensions[code]="${literal}Makefile a bash c c++ class cpp debdiff diff dtb el elz h hs jacl java js json jy ko lua o out patch pl pm py pyc pyo rb sh so sql tcl yaml yml zsh"
 
 # add the uppercase extensions too
 for key in ${(k)extensions[@]} ; do
@@ -415,15 +415,15 @@ done
 
 local -A colors
 colors=()
-colors[backup]="04;90"
-colors[debian]="03;33"
-colors[docs]="03;37"
-colors[archives]="01;31"
+colors[backup]="04;38;5;71"
+colors[debian]="03;38;5;38"
+colors[docs]="03;38;5;71"
+colors[archives]="01;38;5;202"
 colors[video]="01;33"
 colors[audio]="00;36"
 colors[pics]="00;32"
-colors[code]="01;35"
-LS_COLORS='ex=01;35:no=00:fi=00;37:di=01;36:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=04;31'
+colors[code]="01;38;5;200"
+LS_COLORS="ex=${colors[code]}:no=00:fi=00;37:di=01;36:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=04;38;5;154"
 #  LS_COLORS='no=00:fi=00;37:di=01;02;36:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=04;31'
 for key in ${(k)extensions[@]} ; do
   color=${colors[$key]}
