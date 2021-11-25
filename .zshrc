@@ -423,7 +423,7 @@ colors[video]="01;33"
 colors[audio]="00;36"
 colors[pics]="00;32"
 colors[code]="01;38;5;200"
-LS_COLORS="ex=${colors[code]}:no=00:fi=00;37:di=01;36:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=04;38;5;154"
+LS_COLORS="ex=${colors[code]}:no=00:fi=00;37:di=01;38;50:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=04;38;5;154"
 #  LS_COLORS='no=00:fi=00;37:di=01;02;36:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=04;31'
 for key in ${(k)extensions[@]} ; do
   color=${colors[$key]}
