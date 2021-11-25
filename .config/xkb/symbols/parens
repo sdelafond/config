@@ -1,6 +1,6 @@
 partial alphanumeric_keys
 
-xkb_symbols "accents" {
+xkb_symbols "basic" {
   key <AD11> { [ parenleft, braceleft ] };
   key <AD12> { [ parenright, braceright ] };
 

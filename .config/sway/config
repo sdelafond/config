@@ -25,6 +25,12 @@ exec pasystray
 exec blueman-applet
 # FIXME: background
 
+bindsym Print seat - cursor press button2
+bindsym --release Print seat - cursor release button2
+
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -188,9 +194,9 @@ bindsym XF86AudioRaiseVolume exec $app.volume up
 bindsym XF86AudioLowerVolume exec $app.volume down
 bindsym XF86AudioMute exec $app.volume mute
 
-# brightness
-bindsym XF86MonBrightnessUp exec $app.backlight -inc
-bindsym XF86MonBrightnessDown exec $app.backlight -dec
+# # brightness
+# bindsym XF86MonBrightnessUp exec $app.backlight -inc
+# bindsym XF86MonBrightnessDown exec $app.backlight -dec
 
 # screen lock/off
 bindsym $mod+period exec $app.screen_lock
