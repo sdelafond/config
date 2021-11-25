@@ -1,0 +1,24 @@
+partial alphanumeric_keys
+
+xkb_symbols "accents" {
+  key <AD01> { [ q, Q, acircumflex, Acircumflex ] };
+  key <AD03> { [ e, E, eacute, Eacute ] };
+  key <AD04> { [ r, R, egrave, Egrave ] };
+
+  key <AD07> { [ u, U, ucircumflex, Ucircumflex ] };
+  key <AD08> { [ i, I, icircumflex, Icircumflex ] };
+  key <AD09> { [ o, O, ocircumflex, Ocircumflex ] };
+
+  key <AC01> { [ a, A, agrave, Agrave ] };
+  key <AC02> { [ s, S, adiaeresis, Adiaeresis ] };
+  key <AC03> { [ d, D, ediaeresis, Ediaeresis ] };
+  key <AC04> { [ f, F, ecircumflex, Ecircumflex ] };
+  key <AC06> { [ h, H, ugrave, Ugrave ] };
+  key <AC07> { [ j, J, udiaeresis, Udiaeresis ] };
+  key <AC08> { [ k, K, idiaeresis, Idiaeresis ] };
+  key <AC09> { [ l, L, odiaeresis, odiaeresis ] };
+
+  key <AB01> { [ z, Z, guillemotleft ] };
+  key <AB02> { [ x, X, guillemotright ] };
+  key <AB03> { [ c, C, ccedilla, Ccedilla ] };
+};

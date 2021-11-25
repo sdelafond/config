@@ -1,0 +1,15 @@
+// seb
+
+default partial alphanumeric_keys
+
+xkb_symbols "basic" {
+  include "us"
+
+  include "caps-ctrl-multi"
+  include "accents"
+  include "parens"
+  include "backspace"
+  include "paste"
+
+  name[Group1] = "seb";
+};

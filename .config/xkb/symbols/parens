@@ -1,0 +1,9 @@
+partial alphanumeric_keys
+
+xkb_symbols "accents" {
+  key <AD11> { [ parenleft, braceleft ] };
+  key <AD12> { [ parenright, braceright ] };
+
+  key <AE09> { [ 9, bracketleft ] };
+  key <AE10> { [ 0, bracketright ] };
+}

@@ -1,0 +1,6 @@
+default partial alphanumeric_keys
+
+xkb_symbols "basic" {
+  key <INS> { [ Pointer_EnableKeys ] };
+  key <PRSC> { [ Pointer_Button2 ] };
+};
