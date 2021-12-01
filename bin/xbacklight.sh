@@ -12,4 +12,4 @@ case $1 in
   *) exit 1 ;;
 esac
 
-brightnessctl set -n ${op}${STEP}
+brightnessctl set -n ${STEP}${op}
