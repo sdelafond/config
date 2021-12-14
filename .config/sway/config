@@ -23,7 +23,8 @@ exec dunst
 exec nm-applet --indicator
 exec pasystray
 exec blueman-applet
-# FIXME: background
+
+output "*" bg ~/.config/i3/background.png center
 
 bindsym Print seat - cursor press button2
 bindsym --release Print seat - cursor release button2
@@ -32,6 +33,8 @@ bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 set $mod Mod4
+
+bindsym $mod+t exec /home/seb/.cargo/bin/alacritty
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -53,7 +56,7 @@ font pango:DejaVu Sans Mono Bold 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+t exec urxvt
+#bindsym $mod+t exec urxvt
 
 # kill focused window
 bindsym $mod+space kill
