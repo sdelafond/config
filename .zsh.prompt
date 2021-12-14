@@ -145,7 +145,7 @@ getTmuxWindowIndex() {
 }
 
 case $TERM in
-  rxvt*|xterm*)
+  rxvt*|xterm*|alacritty)
     TITLE_ESCAPE_BEGIN="\e]0;"
     TITLE_ESCAPE_END="\a" ;;
   sun*|vt*|screen*|tmux*|linux)
@@ -160,7 +160,7 @@ _setTerminalTitle() {
 setTerminalTitle() {
 #  setopt localoptions xtrace
   case $TERM in
-    rxvt*|xterm*|screen*|tmux*)
+    rxvt*|xterm*|screen*|tmux*|alacritty)
       local cmd="$1"
       if env | grep -q TMUX= ; then
 	terminalTitle="$(getTmuxWindowIndex):"
