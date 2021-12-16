@@ -586,12 +586,12 @@ xpop() {
   
   shift $[ $OPTIND - 1 ]
 
-  ${=XTERM/&/} $=title -e $@ &
+  ${=XTERM/&/} $=title -e "$@" &
 }
 
 xs() {
 #  setopt localoptions xtrace
   local name=$1
   local title=${name}@$HOSTNAME
-  TMUX= TMUX_PANE= xpop -t $title zsh -i -c "sc $name"
+  xpop -t "$title" zsh -i -c "unset TMUX ; unset TMUX_PANE ; sc $name"
 }
