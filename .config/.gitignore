@@ -5,7 +5,8 @@ epdfview
 geeqie
 gmpc
 gtk-2.0
-gtk-3.0
+gtk-3.0/*
+!gtk-3.0/settings.ini
 vlc
 transmission
 enchant
