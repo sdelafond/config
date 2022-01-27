@@ -1,3 +1,6 @@
+" Source
+bind <C-x><C-u> viewsource
+
 " Unbinding keys used both emacs and vim
 unbind w
 unbind <C-u>
