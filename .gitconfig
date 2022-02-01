@@ -110,6 +110,7 @@
 	diffFilter = delta --color-only
 [merge]
 	conflictstyle = diff3
+	renamelimit = 10000
 #[push]
 #        default = upstream
 [push]
@@ -124,8 +125,8 @@
 [gitlab "salsa.debian.org/api/v4"]
 	user = seb
 [rerere]
-	enabled = true
-	autoupdate = true
+	enabled = false
+ 	autoupdate = true
 [github]
 	user = sdelafond
 [gitlab]
