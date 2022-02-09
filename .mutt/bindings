@@ -61,6 +61,8 @@ bind  index   \cv   next-page
 bind  index   "\ev" previous-page
 bind  index   "\eu" next-new
 
+bind  index   V     collapse-thread
+
 ## arrows, just in case
 bind  pager   <up>     previous-line
 bind  pager   <down>   next-line
