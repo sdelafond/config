@@ -32,8 +32,8 @@
 #        ps = log --pretty=oneline $(git push -n |& tail -1 | nth 1)
         g = grep
         gi = grep -i
-	l1 = log --pretty=oneline
-	l1s = log --pretty=oneline -n 10
+	l1 = log --pretty=format:'%C(magenta)%h%C(reset) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
+	l1s = l1 -n 10
 	l = log
 	m = merge
 	ma = merge --abort
