@@ -4,10 +4,10 @@ URxvt.cutchars: `'()*,;<>[]{|}│"
 URxvt.iso14755: false
 
 URxvt.letterSpace: 0
-URxvt.font: xft:DejaVuSansMono Nerd Font:pixelsize=13:antialias=true,xft:DejaVu Sans Mono:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.boldFont: xft:DejaVuSansMono Nerd Font:style=Bold:pixelsize=13:antialias=true,xft:DejaVu Sans Mono:style=bold:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.italicFont: xft:DejaVuSansMono Nerd Font:style=Oblique:pixelsize=13:antialias=true,xft:DejaVu Sans Mono:style=oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
-URxvt.boldItalicFont: xft:DejaVuSansMono Nerd Font:style=Bold Oblique:pixelsize=13:antialias=true,xft:DejaVu Sans Mono:style=bold oblique:pixelsize=13:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=9:antialias=false
+URxvt.font: xft:DejaVuSansMono Nerd Font:pixelsize=15:antialias=true,xft:DejaVu Sans Mono:pixelsize=15:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=11:antialias=false
+URxvt.boldFont: xft:DejaVuSansMono Nerd Font:style=Bold:pixelsize=15:antialias=true,xft:DejaVu Sans Mono:style=bold:pixelsize=15:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=11:antialias=false
+URxvt.italicFont: xft:DejaVuSansMono Nerd Font:style=Oblique:pixelsize=15:antialias=true,xft:DejaVu Sans Mono:style=oblique:pixelsize=15:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=11:antialias=false
+URxvt.boldItalicFont: xft:DejaVuSansMono Nerd Font:style=Bold Oblique:pixelsize=15:antialias=true,xft:DejaVu Sans Mono:style=bold oblique:pixelsize=15:antialias=true,xft:Android Emoji:style=Regular:antialias=false,xft:Symbola:pixelsize=11:antialias=false
 
 URxvt.background: black
 URxvt.foreground: lightgrey
@@ -27,6 +27,7 @@ URxvt.keysym.C-Down:   font-size:decrease
 URxvt.keysym.C-S-Up:   font-size:incglobal
 URxvt.keysym.C-S-Down: font-size:decglobal
 URxvt.keysym.C-equal:  font-size:reset
+URxvt.keysym.C-slash:  builtin-string:
 
 Xft*antialias:          true
 Xft*dpi:                96
@@ -34,8 +35,8 @@ Xft*dpi:                96
 *customization: -color
 XTerm*termName:  xterm-256color
 
-XTerm*faceName: xft:DejaVu Sans Mono:pixelsize=13:antialias=true
-XTerm*faceNameDoubleSize: DejaVu Sans Mono:pixelsize=13:antialias=true
+XTerm*faceName: xft:DejaVu Sans Mono:pixelsize=15:antialias=true
+XTerm*faceNameDoubleSize: DejaVu Sans Mono:pixelsize=15:antialias=true
 XTerm*faceSize: 13
 XTerm*background: black
 XTerm*foreground: lightgrey
