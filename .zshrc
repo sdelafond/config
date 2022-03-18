@@ -584,6 +584,8 @@ if [ -f $vew ] ; then
   source $vew
 fi
 
+export LIBVIRT_DEFAULT_URI=qemu:///system
+
 # update prompt
 [[ -n "$is_console" ]] || setTerminalTitle
 
