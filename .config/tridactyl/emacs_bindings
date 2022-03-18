@@ -30,15 +30,25 @@ bind <C-s> fillcmdline find
 bind --mode=ex <C-s> findnext 1
 bind --mode=ex <C-r> findnext -1
 
-" Hinting and navigation
+" Hinting
 bind f hint
-bind <C-u>f hint -b
-bind <C-u><C-u>f hint -t
+" new bg tab
+bind <C-x>f hint -b
+" new fg tab
+bind <C-u>f hint -t
+" new bg tabs until explicitely quitting hint mode
+bind <C-u><C-x>f hint -qb
 bind --mode=hint <C-g> hint.reset
-bind c hint -y
-bind w clipboard yank
+
+" Navigation
 bind <C-c><C-n> followpage next
 bind <C-c><C-p> followpage prev
+
+" Clipboard
+" copy link target
+bind c hint -y
+" copy current url
+bind w clipboard yank
 
 " History
 bind F forward
