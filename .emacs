@@ -1278,7 +1278,7 @@ _L_: char in line   _,_: subword by char  ^ ^                      _r_: search b
 _l_: avy-goto-line  _._: some subword     ^ ^                      _S_: search forward regex
 ^ ^                 ^ ^                   ^ ^                      _R_: search backward regex
 -----------------------------------------------------------------------------------------------
-_g_: projectile-grep    _j_: counsel-projectile-grep
+_g_: counsel-git    _j_: counsel-git-grep
 _i_: ace-window
 _n_: Navigate           _;_: mark position _/_: jump to mark
 "
@@ -1300,8 +1300,8 @@ _n_: Navigate           _;_: mark position _/_: jump to mark
   ("S" isearch-forward-regexp)
   ("R" isearch-backward-regexp)
 
-  ("g" projectile-grep)
-  ("j" counsel-projectile-grep)
+  ("g" counsel-git)
+  ("j" counsel-git-grep)
 
   ("i" ace-window)
 
