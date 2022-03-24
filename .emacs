@@ -1064,6 +1064,7 @@ prefix argument."
 (use-package pkg-info)
 (use-package puppet-mode)
 (use-package smartparens)
+(use-package wgrep)
 (use-package yaml-mode)
 
 ;; flyspell
@@ -1596,7 +1597,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
  '(package-selected-packages
-   '(egloqqt htmlize dpkg-dev-el dh-elpa devscripts yasnippet-snippets use-package-chords smartparens puppet-mode ox-pandoc org-roam org-ql multiple-cursors ledger-mode json-mode jinja2-mode ivy-rich ivy-hydra go-mode gitignore-mode gitconfig-mode git-gutter forge flycheck-color-mode-line elpy eglot edit-server dockerfile-mode docker-compose-mode counsel-projectile cider browse-kill-ring ace-window ace-jump-mode))
+   '(wgrep htmlize dpkg-dev-el dh-elpa devscripts yasnippet-snippets use-package-chords smartparens puppet-mode ox-pandoc org-roam org-ql multiple-cursors ledger-mode json-mode jinja2-mode ivy-rich ivy-hydra go-mode gitignore-mode gitconfig-mode git-gutter forge flycheck-color-mode-line elpy eglot edit-server dockerfile-mode docker-compose-mode counsel-projectile cider browse-kill-ring ace-window ace-jump-mode))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    '((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos)
