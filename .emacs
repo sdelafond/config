@@ -246,31 +246,13 @@ prefix argument."
 				   ("gnu"          . 5)
 				   ("melpa"        . 1)))
 
-(let ((package-list '(ace-window
-                      avy
-                      dash
-		      dockerfile-mode
-		      docker-compose-mode
-                      epl
-                      hydra
-                      json-mode
-		      markdown-mode
-		      multiple-cursors
-		      org-super-agenda
-                      pkg-info
-		      puppet-mode
-                      smartparens
-		      use-package
-                      yaml-mode
-		      )))
-  (package-initialize)
-  ;; fetch the list of packages available
-  (unless package-archive-contents
-    (package-refresh-contents))
-  ;; install the missing packages
-  (dolist (package package-list)
-    (unless (package-installed-p package)
-      (package-install package))))
+(package-initialize)
+;; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+;; install the missing packages
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
 ;; use-package
 (require 'use-package)
@@ -1068,6 +1050,22 @@ prefix argument."
 	 (xml-mode . company-mode)
 	 (sh-mode . company-mode)))
 
+(use-package ace-window)
+(use-package avy)
+(use-package dash)
+(use-package dockerfile-mode)
+(use-package docker-compose-mode)
+(use-package epl)
+(use-package hydra)
+(use-package json-mode)
+(use-package markdown-mode)
+(use-package multiple-cursors)
+(use-package org-super-agenda)
+(use-package pkg-info)
+(use-package puppet-mode)
+(use-package smartparens)
+(use-package yaml-mode)
+
 ;; flyspell
 (use-package flyspell
   :bind (("C-c f" . (lambda() (interactive) (seb/flyspell/change-dict "francais")))
@@ -1598,7 +1596,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
  '(package-selected-packages
-   '(org-ql jinja2-mode use-package-chords tabbar session pod-mode muttrc-mode mutt-alias initsplit htmlize graphviz-dot-mode folding eproject dpkg-dev-el diminish dh-elpa devscripts csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yasnippet-snippets use-package smartparens python-mode puppet-mode multiple-cursors ledger-mode key-chord ivy-rich ivy-hydra helm-projectile helm-ag gitignore-mode gitconfig-mode git-gutter flycheck-color-mode-line elpy dockerfile-mode docker-compose-mode counsel-projectile clojure-mode ace-window ace-jump-mode))
+   '(egloqqt htmlize dpkg-dev-el dh-elpa devscripts yasnippet-snippets use-package-chords smartparens puppet-mode ox-pandoc org-roam org-ql multiple-cursors ledger-mode json-mode jinja2-mode ivy-rich ivy-hydra go-mode gitignore-mode gitconfig-mode git-gutter forge flycheck-color-mode-line elpy eglot edit-server dockerfile-mode docker-compose-mode counsel-projectile cider browse-kill-ring ace-window ace-jump-mode))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    '((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos)
