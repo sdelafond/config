@@ -1451,6 +1451,7 @@ _b_   _f_   _o_k        _y_ank
 (global-auto-revert-mode t)
 (defalias 'auto-revert-handler 'my-auto-revert-handler)
 (setq global-auto-revert-mode-text " ARev")
+(setq dired-auto-revert-buffer t)
 
 ;; mode-line
 (defvar my-mode-line-coding-format
