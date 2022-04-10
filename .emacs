@@ -362,7 +362,7 @@ prefix argument."
       `((tasks . ,(length tasks))
 	(tasks-per-day . ,(/ (length tasks) (abs from)))))))
 
-  (require 'ox-confluence)
+  ;; (require 'ox-confluence)
   (require 'ox-beamer)
   (require 'ox-md)
   (require 'ox-pandoc)
