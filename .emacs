@@ -364,7 +364,8 @@ prefix argument."
   ;; (require 'ox-confluence)
   (require 'ox-beamer)
   (require 'ox-md)
-  (require 'ox-pandoc)
+
+  (use-package ox-pandoc)
 
   (setq org-ellipsis " ▼")
   (setq org-footnote-auto-adjust t)
