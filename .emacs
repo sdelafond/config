@@ -270,7 +270,9 @@ prefix argument."
   (progn 
     (mail-mode)
     (turn-on-orgtbl)
-    (local-set-key ("C-c i") 'format-email-body)))
+    (local-set-key (kbd "C-c n i") 'org-footnote-new)
+    (local-set-key (kbd "C-c n p") 'org-mark-ring-goto)
+    (local-set-key (kbd "C-c i") 'format-email-body)))
 
 (defun my-org-mode-hook ()
 ;;   (require 'org-expiry)
@@ -368,6 +370,7 @@ prefix argument."
   (require 'ox-pandoc)
 
   (setq org-ellipsis " ▼")
+  (setq org-footnote-auto-adjust t)
 
   (toggle-word-wrap)
 
