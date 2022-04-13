@@ -261,7 +261,6 @@ prefix argument."
 
 ;; use-package extensions
 (use-package use-package-chords
-  :ensure t
   :config (key-chord-mode 1))
 
 ;; _____________________________________________________________________
@@ -317,7 +316,6 @@ prefix argument."
   (require 'org-tempo)
 
   (use-package org-ql
-    :ensure t
     :config
     (require 'org-ql-view)
     (add-to-list 'org-ql-views
@@ -340,7 +338,6 @@ prefix argument."
     		   :narrow nil :super-groups org-super-agenda-groups :title "NO DEADLINE")))
 
   (use-package org-roam
-    :ensure t
     :init
     (setq org-roam-v2-ack t)
     :config
@@ -1015,7 +1012,6 @@ prefix argument."
 (use-package cider)
 
 (use-package elpy
-  :ensure t
   :defer t
   :config
   (flymake-mode nil)
