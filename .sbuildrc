@@ -4,6 +4,26 @@ $build_source = 1;
 $apt_upgrade = 0;
 $apt_distupgrade = 0;
 
+$lintian_opts = ['-I'];
+
+# run autopkgtest inside the schroot
+$run_autopkgtest = 1;
+
+# tell sbuild to use autopkgtest as a chroot
+$chroot_mode = 'autopkgtest';
+
+# # tell autopkgtest to use qemu
+# $autopkgtest_virt_server = 'qemu';
+# # tell autopkgtest-virt-qemu the path to the image
+# # use --debug there to show what autopkgtest is doing
+# $autopkgtest_virt_server_options = [ '--', '/srv/sbuild/qemu/%r-%a.img' ];
+# # tell plain autopkgtest to use qemu, and the right image
+# $autopkgtest_opts = [ '--', 'qemu', '/srv/sbuild/qemu/%r-%a.img' ];
+# # no need to cleanup the chroot after build, we run in a completely clean VM
+# $purge_build_deps = 'never';
+# # no need for sudo
+# $autopkgtest_root_args = '';
+
 # don't remove this, Perl needs it:
 1;
 
