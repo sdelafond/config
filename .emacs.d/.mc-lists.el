@@ -16,6 +16,7 @@
 	hydra-org-timestamp/lambda-b
 	hydra-org-timestamp/lambda-f
 	hydra-org-timestamp/lambda-i
+	hydra-org-timestamp/lambda-l
 	hydra-org-timestamp/lambda-n
 	hydra-org-timestamp/lambda-p
 	hydra-org-timestamp/nil
