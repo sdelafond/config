@@ -23,5 +23,4 @@ tmp_file="${tmp_dir}/$(basename $file)"
 
 cp "$file" "$tmp_file"
 
-{ $cmd "$tmp_file" ; rm -fr "$tmp_dir" ; } &
-
+{ $cmd "$tmp_file" 2> /dev/null ; rm -fr "$tmp_dir" ; } &
