@@ -6,12 +6,16 @@ $apt_distupgrade = 0;
 
 $lintian_opts = ['-I'];
 
-# autopkgtests
-$run_autopkgtest = 1;
+# use autopkgtest chroot mode
 $chroot_mode = 'autopkgtest';
 $autopkgtest_virt_server = 'schroot';
-$autopkgtest_virt_server_options = ['%r-%a-sbuild'];
+$autopkgtest_virt_server_options = ['--', '%r-%a-sbuild'];
+
+# run autopkgtests
+$run_autopkgtest = 1;
+$autopkgtest_opts = ['--', 'schroot', '%r-%a-sbuild'];
 $autopkgtest_root_args = '';
+$purge_build_deps = 'never';
 
 # don't remove this, Perl needs it:
 1;
