@@ -8,6 +8,7 @@ text/html; /usr/bin/elinks -dump -eval "set document.codepage.assume=%{charset}"
 text/*; /usr/bin/less '%s'
 
 image/gif; mutt_bgrun qiv '%s'; nametemplate=%s.png; test=test -n "$DISPLAY"
+image/jpg; mutt_bgrun qiv '%s'; nametemplate=%s.jpg; test=test -n "$DISPLAY"
 image/jpeg; mutt_bgrun qiv '%s'; nametemplate=%s.jpg; test=test -n "$DISPLAY"
 image/pjpeg; mutt_bgrun qiv '%s'; nametemplate=%s.jpg; test=test -n "$DISPLAY"
 image/png; mutt_bgrun qiv '%s'; nametemplate=%s.png; test=test -n "$DISPLAY"
