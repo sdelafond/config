@@ -424,6 +424,8 @@ prefix argument."
   (setq org-default-priority 67)
   (setq org-duration-format (quote h:mm))
 ;; (setq org-fast-tag-selection-single-key 'expert)
+
+  (setq org-adapt-indentation t)
   (setq org-fast-tag-selection-single-key t)
   (setq org-return-follows-link t)
   (setq org-hide-leading-stars t)
