@@ -1,3 +1,6 @@
+" Set external editor command
+set editorcmd emacsclient -a \"\" -c -e '(progn (find-file "%f") (forward-line (1- %l)) (forward-char %c))'
+
 " Source
 bind <C-c><C-u> viewsource
 
@@ -9,7 +12,7 @@ unbind <C-g>
 unbind <C-Space>
 
 " Ctrl-g is your friend (and hardcoded <C-,> of course)
-bind --mode=browser <C-g> composite escapehatch | clearsearchhighlight
+bind --mode=browser <C-g> escapehatch
 
 " Navigation
 bind <C-v> scrollpage 1
@@ -20,6 +23,14 @@ bind <A-<> scrollto 0
 bind <C-n> scrollline 10
 bind <C-p> scrollline -10
 bind <C-u><C-Space> jumpprev
+bind n followpage next
+bind p followpage prev
+" bindings below remains same for
+" backward compatibility reasons.
+" should be removed some day
+bind <C-c><C-n> followpage next
+bind <C-c><C-p> followpage prev
+
 
 " Commands
 bind <A-x> fillcmdline_notrail
@@ -32,6 +43,13 @@ bind --mode=ex <C-r> findnext -1
 
 " Hinting
 bind f hint
+bind w clipboard yank
+bind --mode=hint <C-g> hint.reset
+bind --mode=hint <C-n> hint.focusBottomHint
+bind --mode=hint <C-p> hint.focusTopHint
+bind --mode=hint <C-f> hint.focusRightHint
+bind --mode=hint <C-b> hint.focusLeftHint
+
 " new bg tab
 bind <C-x>f hint -b
 " new fg tab
@@ -52,7 +70,11 @@ bind w clipboard yank
 
 " History
 bind F forward
+bind r forward
 bind B back
+bind l back
+bind u urlparent
+bind t urlroot
 
 " Bookmarks
 bind M current_url bmark
@@ -69,12 +91,11 @@ bind <A-N> tabmove +1
 bind <A-P> tabmove -1
 bind <C-x>b fillcmdline buffer
 bind <C-x>k tabclose
-bind <C-t> fillcmdline tabopen
 bind q tabclose
-bind <C-x>0 tabclose
 bind <C-x>1 tabonly
 bind <C-x>tp pin
 bind <C-x>tm mute toggle
+bind <A-g>a tabaudio
 bind <C-x>u undo
 bind <C-/> undo
 
@@ -126,6 +147,10 @@ bind --mode=visual <C-f> js document.getSelection().modify("extend","forward","c
 bind --mode=visual <A-f> js document.getSelection().modify("extend","forward","word")
 bind --mode=visual <A-b> js document.getSelection().modify("extend","backward","character"); document.getSelection().modify("extend","backward","word"); document.getSelection().modify("extend","forward","character")
 bind --mode=visual <A-w> composite js document.getSelection().toString() | clipboard yank
+
+" Edit field in external editor
+bind --mode=insert <C-c><C-c> editor
+bind --mode=input <C-c><C-c> editor
 
 " Help
 bind <C-h><h> help
