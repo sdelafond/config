@@ -18,6 +18,7 @@ set beep_new=yes
 set bounce_delivered=no
 set charset="utf-8"
 set collapse_unread=yes
+set cursor_overlay=yes
 set confirmappend=no
 set date_format="%d/%m %H:%M"
 set edit_headers=no

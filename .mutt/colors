@@ -4,6 +4,7 @@ color attachment  white          brightcolor091
 color bold        green          default # ..
 color error       red            default # global
 color indicator   default        color030 # index
+color indicator   underline default default # index
 color markers     red            default # index
 color message     black	         brightcolor29
 color signature   brightcolor193 default
