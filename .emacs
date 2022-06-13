@@ -892,6 +892,10 @@ prefix argument."
   (setq gnus-thread-ignore-subject t)
   (setq gnus-thread-hide-subtree t)
 
+  (setq gnus-startup-file (concat my-emacsd "/gnus/.newsrc"))
+  (setq gnus-dribble-directory (concat my-emacsd "/gnus"))
+  (setq gnus-always-read-dribble-file t)
+
   (setq gnus-summary-line-format "%U%R %z {%5L} [%-35,35n] %&user-date;   %t %B%-80,80S\n"
         gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
         gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
