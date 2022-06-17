@@ -1242,36 +1242,6 @@ position ('l', 'r', 'm')"
    ("q" nil "cancel")
    ("k" nil "cancel")))
 
-;; git-gutter
-(global-set-key
- (kbd "M-g g")
- (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1) :hint nil)
-  "
-Git gutter:
-  _n_: next hunk        _s_tage hunk     _q_uit
-  _p_: previous hunk    _r_evert hunk    _Q_uit and deactivate git-gutter
-  ^ ^                   _p_opup hunk
-  _a_: first hunk
-  _e_: last hunk        set start _R_evision
-"
-  ("n" git-gutter:next-hunk)
-  ("p" git-gutter:previous-hunk)
-  ("a" (progn (goto-char (point-min))
-              (git-gutter:next-hunk 1)))
-  ("e" (progn (goto-char (point-min))
-              (git-gutter:previous-hunk 1)))
-  ("s" git-gutter:stage-hunk)
-  ("r" git-gutter:revert-hunk)
-  ("p" git-gutter:popup-hunk)
-  ("R" git-gutter:set-start-revision)
-  ("q" nil :color blue)
-  ("Q" (progn (git-gutter-mode -1)
-              ;; git-gutter-fringe doesn't seem to
-              ;; clear the markup right away
-              (sit-for 0.1)
-              (git-gutter:clear))
-       :color blue)))
-
 (global-set-key
  (kbd "M-g j")
  (defhydra hydra-goto (:color blue :hint nil)
@@ -1490,15 +1460,6 @@ _b_   _f_   _o_k        _y_ank
 ;; no annoying automatic py-help-at-point
 (global-eldoc-mode -1)
 
-;; git-gutter
-(require 'git-gutter)
-;;(global-git-gutter-mode t)
-(setq git-gutter:disabled-modes '(org-mode))
-(setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
-(setq git-gutter:modified-sign "↯")
-(setq git-gutter:separator-sign "|")
-(set-face-foreground 'git-gutter:modified "yellow")
-
 ;; unique buffer names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
@@ -1604,7 +1565,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
  '(package-selected-packages
-   '(wgrep htmlize dpkg-dev-el dh-elpa devscripts yasnippet-snippets use-package-chords smartparens puppet-mode ox-pandoc org-roam org-ql multiple-cursors ledger-mode json-mode jinja2-mode ivy-rich ivy-hydra go-mode gitignore-mode gitconfig-mode git-gutter forge flycheck-color-mode-line elpy eglot edit-server dockerfile-mode docker-compose-mode counsel-projectile cider browse-kill-ring ace-window ace-jump-mode))
+   '(wgrep htmlize dpkg-dev-el dh-elpa devscripts yasnippet-snippets use-package-chords smartparens puppet-mode ox-pandoc org-roam org-ql multiple-cursors ledger-mode json-mode jinja2-mode ivy-rich ivy-hydra go-mode gitignore-mode gitconfig-mode forge flycheck-color-mode-line elpy eglot edit-server dockerfile-mode docker-compose-mode counsel-projectile cider browse-kill-ring ace-window ace-jump-mode))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    '((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos)
