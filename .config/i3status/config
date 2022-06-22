@@ -13,6 +13,8 @@ general {
 }
 
 #order += "ipv6"
+#order += "async_script"
+order += "external_script"
 order += "load"
 order += "sysdata"
 #order += "disk /"
@@ -27,6 +29,13 @@ order += "backlight"
 order += "battery_level"
 order += "volume master"
 order += "tztime local"
+
+external_script {
+  color = "#ffff00"
+  cache_timeout = 5
+  format = "{output}"
+  script_path = "/home/seb/bin/home/maildir-new.py"
+}
 
 netdata {
   format = "↓{down} ↑{up}"
