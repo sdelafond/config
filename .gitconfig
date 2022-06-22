@@ -20,6 +20,7 @@
 	cl = clean -f -d
         cp = cherry-pick
         cpa = cherry-pick --abort
+        cpc = cherry-pick --continue
         d = diff
         dh = diff --diff-algorithm=histogram
         dc = diff --cached
