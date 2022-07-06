@@ -51,6 +51,8 @@
 	s = status
 	sh = show
 	sst = show --stat
+	st = stash
+	stp = stash pop
 	wip = wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 [branch]
         autosetupmerge = always
