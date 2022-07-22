@@ -35,3 +35,4 @@ keybase
 .env
 BraveSoftware
 configstore
+.sync_*.db
