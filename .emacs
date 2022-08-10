@@ -1530,6 +1530,7 @@ _b_   _f_   _o_k        _y_ank
                 ("^\\(.*/\\.followup\\|\\.article\\)" . seb/mutt-hook)
                 ("\.json"                             . json-mode)
                 ("\.jsx"                              . js-mode)
+                ("\.xml"                              . html-mode)
                 ("CVE/list$"                          . debian-cvelist-mode)
                 ("\\.\\(org\\|todo\\|csv\\)$"         . org-mode)
                 ("\\.z" 		      	      . sh-mode))
