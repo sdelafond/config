@@ -74,7 +74,7 @@ widget, custom, latex, ediff."
      (font-lock-string-face ((t (:foreground "color-210"))))
      (font-lock-keyword-face ((t (:foreground "color-33"))))
      (font-lock-builtin-face ((t (:foreground "color-84"))))
-     (font-lock-function-name-face ((t (:foreground "color-117" :bold t))))
+     (font-lock-function-name-face ((t (:foreground "color-117")))) ;; :bold t))))
      (font-lock-variable-name-face ((t (:foreground "yellow"))))
      (font-lock-type-face ((t (:foreground "color-119"))))
      (font-lock-constant-face ((t (:foreground "color-172"))))

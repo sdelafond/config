@@ -1013,6 +1013,20 @@ prefix argument."
 	 (python-mode . (lambda() (setq eglot-workspace-configuration '((:pyls . (:plugins (:jedi_completion (:include_params t))))))))
 	 (go-mode . eglot-ensure)))
 
+(use-package tree-sitter
+  :ensure t
+  :config
+  ;; activate tree-sitter on any buffer containing code for which it has a
+  ;; parser available
+  (global-tree-sitter-mode)
+  ;; you can easily see the difference tree-sitter-hl-mode makes by switching
+  ;; on and off
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
+
 (use-package go-mode)
 
 (use-package clojure-mode)
@@ -1566,7 +1580,7 @@ _b_   _f_   _o_k        _y_ank
  '(org-super-agenda-mode t)
  '(org-super-agenda-separator "")
  '(package-selected-packages
-   '(wgrep htmlize dpkg-dev-el dh-elpa devscripts yasnippet-snippets use-package-chords smartparens puppet-mode ox-pandoc org-roam org-ql multiple-cursors ledger-mode json-mode jinja2-mode ivy-rich ivy-hydra go-mode gitignore-mode gitconfig-mode forge flycheck-color-mode-line elpy eglot edit-server dockerfile-mode docker-compose-mode counsel-projectile cider browse-kill-ring ace-window ace-jump-mode))
+   '(tree-sitter-langs wgrep htmlize dpkg-dev-el dh-elpa devscripts yasnippet-snippets use-package-chords smartparens puppet-mode ox-pandoc org-roam org-ql multiple-cursors ledger-mode json-mode jinja2-mode ivy-rich ivy-hydra go-mode gitignore-mode gitconfig-mode forge flycheck-color-mode-line elpy eglot edit-server dockerfile-mode docker-compose-mode counsel-projectile cider browse-kill-ring ace-window ace-jump-mode))
  '(puppet-indent-level 2)
  '(safe-local-variable-values
    '((buffer-file-coding-system-explicit iso-8859-15-dos . iso-8859-15-dos)
