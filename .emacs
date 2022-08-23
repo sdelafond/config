@@ -877,6 +877,7 @@ prefix argument."
 (use-package gitconfig-mode)
 (use-package gitignore-mode)
 
+(use-package notmuch)
 
 (use-package gnus
   :defer t
