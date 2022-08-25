@@ -6,7 +6,7 @@ alias -g FF='| fzf'
 alias -g FP='| fzfp'
 
 alias A='ag'
-alias AAP='ANSIBLE_STDOUT_CALLBACK=actionable ansible-playbook'
+alias AAP='ANSIBLE_STDOUT_CALLBACK=default ANSIBLE_DISPLAY_SKIPPED_HOSTS=no ANSIBLE_DISPLAY_OK_HOSTS=no ansible-playbook'
 alias ADP='ANSIBLE_STDOUT_CALLBACK=debug ansible-playbook -v'
 alias AYP='ANSIBLE_STDOUT_CALLBACK=yaml ansible-playbook'
 alias C='curl -L -O'
