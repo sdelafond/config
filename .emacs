@@ -881,7 +881,47 @@ prefix argument."
 (use-package gitconfig-mode)
 (use-package gitignore-mode)
 
-(use-package notmuch)
+(use-package notmuch
+  :config
+    (setq notmuch-saved-searches '((:name "inbox" :query "tag:inbox" :key "i")
+				   (:name "unread" :query "tag:unread" :key "u")
+				   (:name "flagged" :query "tag:flagged" :key "F")
+				   (:name "sent" :query "tag:sent" :key "s")
+				   (:name "drafts" :query "tag:draft" :key "d")
+				   (:name "all mail" :query "*" :key "a")))
+
+    (setq notmuch-show-tag-macro-alist
+      (list
+       '("u" "-unread")
+       ;; '("n" "+notmuch::patch" "+notmuch::needs-review" "-notmuch::pushed")
+       ;; '("o" "+notmuch::patch" "+notmuch::obsolete"
+       ;; 	     "-notmuch::needs-review" "-notmuch::moreinfo")
+       ;; '("p" "-notmuch::pushed" "-notmuch::needs-review"
+       ;; 	 "-notmuch::moreinfo" "+pending")
+       ;; '("P" "-pending" "-notmuch::needs-review" "-notmuch::moreinfo" "+notmuch::pushed")
+       ;; '("r" "-notmuch::patch" "+notmuch::review")
+       ;; '("s" "+notmuch::patch" "-notmuch::obsolete" "-notmuch::needs-review" "-notmuch::moreinfo" "+notmuch::stale")
+       ;; '("t" "+notmuch::patch" "-notmuch::needs-review" "+notmuch::trivial")
+       '("w" "+notmuch::patch" "+notmuch::wip" "-notmuch::needs-review")))
+
+    (defun notmuch-show-apply-tag-macro (key)
+      (interactive "k")
+      (let ((macro (assoc key notmuch-show-tag-macro-alist)))
+	(apply 'notmuch-show-tag-message (cdr macro))
+	(notmuch-refresh-this-buffer)))
+
+    (defun notmuch-search-apply-tag-macro (key)
+      (interactive "k")
+      (let ((macro (assoc key notmuch-show-tag-macro-alist)))
+	(apply 'notmuch-search-tag (mapcar 'list (cdr macro)))
+	(notmuch-refresh-this-buffer)))
+
+    (eval-after-load 'notmuch-show
+      '(define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro))
+
+    (eval-after-load 'notmuch-search
+      '(define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro))
+)
 
 (use-package gnus
   :defer t
