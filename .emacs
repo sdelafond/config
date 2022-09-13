@@ -892,7 +892,7 @@ prefix argument."
 
     (setq notmuch-show-tag-macro-alist
       (list
-       '("u" "-unread")
+       '("u" "-unread" "+test")
        ;; '("n" "+notmuch::patch" "+notmuch::needs-review" "-notmuch::pushed")
        ;; '("o" "+notmuch::patch" "+notmuch::obsolete"
        ;; 	     "-notmuch::needs-review" "-notmuch::moreinfo")
@@ -913,7 +913,7 @@ prefix argument."
     (defun notmuch-search-apply-tag-macro (key)
       (interactive "k")
       (let ((macro (assoc key notmuch-show-tag-macro-alist)))
-	(apply 'notmuch-search-tag (mapcar 'list (cdr macro)))
+	(apply 'notmuch-search-tag (list (cdr macro)))
 	(notmuch-refresh-this-buffer)))
 
     (eval-after-load 'notmuch-show
